@@ -7,6 +7,5 @@ cd /d "%~dp0%relative_folder%"
 
 echo meow :3 > CON
 npm i > nul
-npm run css:build > nul
 
 endlocal
