@@ -12,35 +12,35 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl('/chathub')
     .build();
 class MessageData {
-    constructor(_action = 'JoinGroup', _group = '', _sender = '', _message = null) {
-        this._action = _action;
-        this._group = _group;
-        this._sender = _sender;
-        this._message = _message;
+    constructor(action = 'JoinGroup', group = '', sender = '', message = null) {
+        this.action = action;
+        this.group = group;
+        this.sender = sender;
+        this.message = message;
     }
-    get action() {
-        return this._action;
+    get Action() {
+        return this.action;
     }
-    set action(value) {
-        this._action = value;
+    set Action(value) {
+        this.action = value;
     }
-    get group() {
-        return this._group;
+    get Group() {
+        return this.group;
     }
-    set group(value) {
-        this._group = value;
+    set Group(value) {
+        this.group = value;
     }
-    get sender() {
-        return this._sender;
+    get Sender() {
+        return this.sender;
     }
-    set sender(value) {
-        this._sender = value;
+    set Sender(value) {
+        this.sender = value;
     }
-    get message() {
-        return this._message;
+    get Message() {
+        return this.message;
     }
-    set message(value) {
-        this._message = value;
+    set Message(value) {
+        this.message = value;
     }
 }
 const sendButton = document.getElementById('send-button');
@@ -61,7 +61,7 @@ connection
     joinGroupButton.disabled = false;
     group = 'all';
     const data = new MessageData();
-    data.action = 'JoinGroup';
+    data.Action = 'JoinGroup';
     connection.invoke('JoinGroup', JSON.stringify(data));
 })
     .catch((reason) => {
@@ -72,11 +72,7 @@ const messageInput = document.getElementById('message-input');
 sendButton.onclick = (event) => {
     const user = userInput.value;
     const message = messageInput.value;
-    const data = {
-        Group: group,
-        Sender: user,
-        Message: message,
-    };
+    const data = '';
     connection
         .invoke('SendMessageToGroup', JSON.stringify(data))
         .catch((reason) => {

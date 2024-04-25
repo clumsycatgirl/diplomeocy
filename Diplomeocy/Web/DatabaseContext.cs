@@ -4,7 +4,8 @@ using Web.Models;
 
 namespace Web;
 
-public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options) {
+public class DatabaseContext : DbContext {
+	public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 	public DbSet<User> Users { get; set; } = default!;
 }
 

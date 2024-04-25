@@ -89,7 +89,7 @@ sendButton.onclick = (event: Event) => {
 	const user: string = userInput.value;
 	const message: string = messageInput.value;
 
-	const data = ;
+	const data = '';
 	connection
 		.invoke('SendMessageToGroup', JSON.stringify(data))
 		.catch((reason) => {
