@@ -5,7 +5,7 @@
 
 **Cat-tastic Graphics:** Immerse yourself in a world where diplomacy intertwines with adorable feline motifs <br>
 **Potential Voice Chat:** Maybe we'll add a voice chat system if we're in the mood <br>
-**Rule Reference:** Check out the Diplomacy Rules for quick reference
+**Rule Reference:** Check out the [Diplomacy Rules](rules.pdf) for quick reference
 
 *Join the fray, sharpen your claws, and conquer the game board with your diplomatic finesse! Meow :3*
 
