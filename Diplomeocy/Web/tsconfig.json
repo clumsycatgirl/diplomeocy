@@ -3,12 +3,15 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
+    "noImplicitReturns": true,
     "removeComments": false,
     "sourceMap": true,
     "target": "es6",
-    "outDir": "wwwroot/js"
+    "outDir": "wwwroot/js",
+    "moduleResolution": "Node",
+    "esModuleInterop": true
   },
   "include": [
     "Scripts/**/*"
-  ]
+  ],
 }
