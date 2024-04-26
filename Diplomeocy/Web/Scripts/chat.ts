@@ -13,7 +13,7 @@ class MessageData {
 		private message: string | null = null,
 	) {}
 
-	public get Action(): string {
+	public get Action(): MessageDataAction {
 		return this.action;
 	}
 	public set Action(value: MessageDataAction) {
