@@ -12,6 +12,7 @@
 
 <div style="font-size: 5px; line-height: 4px">
 €0.99 will automatically be taken from your bank account... which one? all of them!<br>
-everything you say will be used against you on the deplomeocy table<br>
+everything you say will be used against you on the diplomeocy table<br>
 by playing this game you agree cats are just better<br>
+btw... <span title="communism">we</span> own you
 </div>
