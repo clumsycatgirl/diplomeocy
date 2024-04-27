@@ -1,0 +1,6 @@
+# Added for tailwind
+**/node_modules
+Diplomeocy/Web/wwwroot/css/styles.css
+
+**/bin/**
+**/obj/**
