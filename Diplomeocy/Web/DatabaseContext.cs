@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using Web.Models;
+using Microsoft.Extensions.Options;
 
 namespace Web;
 
-public class DatabaseContext : DbContext {
-	public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-	public DbSet<User> Users { get; set; } = default!;
+public class DatabaseContext : DbContext
+{
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
+    public DbSet<Models.User> Users { get; set; } = default!;
 }
-
-

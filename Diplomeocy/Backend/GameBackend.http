@@ -1,6 +1,0 @@
-@GameBackend_HostAddress = http://localhost:5083
-
-GET {{GameBackend_HostAddress}}/api/Users/
-Accept: application/json
-
-###

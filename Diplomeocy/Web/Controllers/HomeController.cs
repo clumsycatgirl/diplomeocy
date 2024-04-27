@@ -1,33 +1,32 @@
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Web.Models;
 
-using Frontend.Models;
+namespace Web.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
 
-using Microsoft.AspNetCore.Mvc;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-namespace Frontend.Controllers;
-public class HomeController : Controller {
-	private readonly ILogger<HomeController> logger;
-	private readonly HttpClient httpClient;
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-	public HomeController(ILogger<HomeController> logger, HttpClient httpClient) {
-		this.logger = logger;
-		this.httpClient = httpClient;
-	}
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-	public IActionResult Index() {
-		return View();
-	}
-
-	public IActionResult Privacy() {
-		return View();
-	}
-
-	public IActionResult Chat() {
-		return View();
-	}
-
-	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-	public IActionResult Error() {
-		return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-	}
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }
