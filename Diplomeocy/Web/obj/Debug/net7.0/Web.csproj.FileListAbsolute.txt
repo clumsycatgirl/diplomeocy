@@ -37,3 +37,6 @@ C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Newt
 C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\Web.csproj.CopyComplete
 C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\libman.json
+C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Scripts\package-lock.json
+C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Scripts\package.json
+C:\Users\in5b11\Documents\GitHub\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Scripts\tsconfig.json

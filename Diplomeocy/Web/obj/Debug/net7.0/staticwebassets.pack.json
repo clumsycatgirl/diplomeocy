@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
       "Id": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\js\\app-client.js",
+      "PackagePath": "staticwebassets\\js\\app-client.js"
     },
     {
       "Id": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\js\\site.js",

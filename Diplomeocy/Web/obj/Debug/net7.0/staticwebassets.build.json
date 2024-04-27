@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W+I0z7JrG3FBLJKgeIsvs0DU0EMiozGLHuvXDWR/NtI=",
+  "Hash": "IimrxW3IilzF1zXC4gE4t6gM6l1+BzFSNL6z34/nT8g=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\styles.css",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "css/styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\styles.css"
+    },
+    {
       "Identity": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\favicon.ico",
       "SourceId": "Web",
       "SourceType": "Discovered",
@@ -83,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\js\\app-client.js",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "js/app-client.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\app-client.js"
     },
     {
       "Identity": "C:\\Users\\in5b11\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\js\\site.js",
