@@ -41,3 +41,8 @@ C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\refint\We
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\Web.pdb
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\Web.genruntimeconfig.cache
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\ref\Web.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Diplomeocy\Web\obj\Debug\net7.0\Web.MvcApplicationPartsAssemblyInfo.cs
