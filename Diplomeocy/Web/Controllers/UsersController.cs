@@ -44,9 +44,29 @@ namespace Web.Controllers
 
             return View(user);
         }
+		// GET: Users/LogIn/5
+		public IActionResult LogIn() {
 
-        // GET: Users/Create
-        public IActionResult Create()
+			return View();
+		}
+		// POST: Users/LogIn
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> LogIn(String? Username, String? Password) {
+			if (Username == "" || Password == "" || _context.Users == null) {
+				return NotFound();
+			}
+			var user = await _context.Users
+			   .FirstOrDefaultAsync(m => m.Username == Username && m.Password==Password);
+			if (user == null) {
+				return NotFound();
+			}
+			Console.WriteLine("Meow");
+			return View(user);
+		}
+
+		// GET: Users/Create
+		public IActionResult Create()
         {
             return View();
         }

@@ -10852,24 +10852,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vi\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Corrado\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
-      "packagesPath": "C:\\Users\\Vi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Diplomeocy\\Web\\obj\\",
+      "projectPath": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+      "packagesPath": "C:\\Users\\Corrado\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Vi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Corrado\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10877,7 +10872,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10947,7 +10941,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }
