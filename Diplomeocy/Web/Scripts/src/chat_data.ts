@@ -1,9 +1,9 @@
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr'
 import { MessageData, MessageDataAction } from './message_data'
 
-const chatUrl: string = '/textchat'
+export const chatUrl: string = '/textchat'
 
-class ChatData {
+export class ChatData {
 	public user: string
 	public group: string
 	public connection: HubConnection
