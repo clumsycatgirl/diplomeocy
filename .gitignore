@@ -1,12 +1,12 @@
 # Added for tailwind
 **/node_modules
-# Diplomeocy/Web/wwwroot/css/styles.css
+Diplomeocy/Web/wwwroot/css/styles.css
 
-# Diplomeocy/Web/bin
-# Diplomeocy/Web/obj
+Diplomeocy/Web/bin
+Diplomeocy/Web/obj
 
-# Diplomeocy/Backend/bin
-# Diplomeocy/Backend/obj
+Diplomeocy/Backend/bin
+Diplomeocy/Backend/obj
 
 .vs
 Diplomeocy/.vs
