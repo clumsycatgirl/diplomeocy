@@ -2,11 +2,11 @@
 **/node_modules
 Diplomeocy/Web/wwwroot/css/styles.css
 
-Diplomeocy/Web/bin
-Diplomeocy/Web/obj
+Diplomeocy\Game\bin
+Diplomeocy\Game\obj
 
-Diplomeocy/Backend/bin
-Diplomeocy/Backend/obj
+Diplomeocy\Web\bin
+Diplomeocy\Web\obj
 
 .vs
 Diplomeocy/.vs
