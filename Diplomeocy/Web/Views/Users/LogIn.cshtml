@@ -7,20 +7,27 @@
 <h1>Log In</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 " >
         <form asp-action="LogIn">
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <label asp-for="Username" class="block text-sm font-medium leading-6 text-gray-900"></label>
+                <div class="mt-2">
+                    <input asp-for="Username" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                </div>
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password" class="block text-sm font-medium leading-6 text-gray-900 italics"></label>
+                <label asp-for="Password" class="block text-sm font-medium leading-6 text-gray-900 italics"></label>
+                <div class="mt-2">
+                    <input asp-for="Password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="LogIn" class="btn btn-primary" />
+                <input type="submit" value="Log In" class="btn btn-primary" />
             </div>
             
         </form>
@@ -34,3 +41,4 @@
 @section Scripts {
    
 }
+
