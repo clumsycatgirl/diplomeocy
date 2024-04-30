@@ -21,6 +21,11 @@ Action debug = () => {
 	});
 	Console.WriteLine();
 };
+Action step = () => {
+	debug();
+	game.ResolveOrderResolutionPhase();
+	debug();
+};
 
 
 germany.Orders.AddRange(new Orders  {
@@ -44,9 +49,7 @@ russia.Orders.AddRange(new Orders {
 	}
 });
 
-debug();
-game.ResolveOrderResolutionPhase();
-debug();
+step();
 
 Order order = new MoveOrder {
 	Unit = germany.Unit(Territories.Berlin),
@@ -71,6 +74,4 @@ russia.Orders.AddRange(new Orders {
 	}
 });
 
-debug();
-game.ResolveOrderResolutionPhase();
-debug();
+step();

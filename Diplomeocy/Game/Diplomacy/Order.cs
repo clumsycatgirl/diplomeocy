@@ -2,7 +2,16 @@
 
 public abstract class Order {
 	public Unit Unit { get; set; }
-	public Territory Target { get; set; }
+	private Territory target;
+	public Territory Target {
+		get => target;
+		set {
+			if (value is null || !Unit.Location.AdjacentTerritories.Contains(value)) {
+				throw new InvalidOperationException($"wtf physics says you can't go from london to moscow in one turn sowwy");
+			}
+			target = value;
+		}
+	}
 
 	protected string ToString(string type) => $"({Unit?.Type} in {Unit?.Location?.Name})  {type} to ({Target?.Name})";
 	public override string ToString() => ToString("*order*");
