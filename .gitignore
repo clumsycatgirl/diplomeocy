@@ -6,7 +6,7 @@ Diplomeocy/Game/bin
 Diplomeocy/Game/obj
 
 Diplomeocy/Web/bin
-Diplomeocy/Web/obj
+# Diplomeocy/Web/obj
 
 .vs
 Diplomeocy/.vs
