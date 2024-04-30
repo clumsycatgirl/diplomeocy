@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -53,16 +54,15 @@ namespace Web.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> LogIn(String? Username, String? Password) {
-			if (Username == "" || Password == "" || _context.Users == null) {
+			if (Username == "" || Password == "" || _context.Users is null) {
 				return NotFound();
 			}
 			var user = await _context.Users
 			   .FirstOrDefaultAsync(m => m.Username == Username && m.Password==Password);
-			if (user == null) {
+			if (user is null) {
 				return NotFound();
 			}
-			Console.WriteLine("Meow");
-			return View(user);
+			return RedirectToAction(nameof(Index));
 		}
 
 		// GET: Users/Create

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj": {}
+    "C:\\Users\\in5b18\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj": {
+    "C:\\Users\\in5b18\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+        "projectUniqueName": "C:\\Users\\in5b18\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
         "projectName": "Web",
-        "projectPath": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
-        "packagesPath": "C:\\Users\\Corrado\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\obj\\",
+        "projectPath": "C:\\Users\\in5b18\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+        "packagesPath": "C:\\Users\\in5b18\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\in5b18\\Documents\\GitHub\\diplomeocy\\Diplomeocy\\Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Corrado\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\in5b18\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
