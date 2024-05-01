@@ -4,7 +4,7 @@ using Diplomacy;
 
 using Orders = System.Collections.Generic.List<Diplomacy.Order>;
 
-Console.WriteLine("meow");
+Console.WriteLine("meow\n");
 
 Game game = new();
 game.StartGame();
@@ -153,20 +153,39 @@ germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia))
 germany.Unit(Territories.Kiel).Move(game.Board.Territory(Territories.BalticSea));
 russia.Unit(Territories.Moscow).Move(game.Board.Territory(Territories.Kiel));
 
+germany.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Berlin),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Kiel),
+		Target = game.Board.Territory(Territories.Berlin),
+	}
+});
+
+step();
+
 order = new MoveOrder {
 	Unit = germany.Unit(Territories.Berlin),
 	Target = game.Board.Territory(Territories.Prussia),
 };
 germany.Orders.AddRange(new Orders {
 	order,
-	//new SupportOrder {
-		//Unit = germany.Unit(Territories.Silesia),
-		//SupportedOrder = order,
-	//},
-	//new SupportOrder {
-		//Unit = germany.Unit(Territories.BalticSea),
-		//SupportedOrder = order,
-	//},
+	new SupportOrder {
+		Unit = germany.Unit(Territories.Silesia),
+		SupportedOrder = order,
+	},
+	new SupportOrder {
+		Unit = germany.Unit(Territories.BalticSea),
+		SupportedOrder = order,
+	},
 });
 russia.Orders.AddRange(new Orders {
 	new MoveOrder {

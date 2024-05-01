@@ -1,7 +1,9 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
+
 
 namespace Diplomacy;
+
+using Utils;
 
 public class Game {
 	public List<Player> Players { get; private set; } = new();
@@ -289,8 +291,6 @@ public class Game {
 		 *	    unless they're convoyed
 		 */
 
-		Debug.WriteLine("\n");
-
 		List<Order> orders = Players
 			.SelectMany(player => player.Orders)
 			.ToList();
@@ -298,7 +298,6 @@ public class Game {
 		Dictionary<Unit, Territory> destinations = new();
 
 		// handle support orderse
-		Debug.WriteLine("--calculating support orders--");
 		Parallel.ForEach(
 			  orders
 				.OfType<SupportOrder>()
@@ -311,11 +310,11 @@ public class Game {
 				 supportOrder.Status = OrderStatus.Succeeded;
 			 });
 
-		Debug.WriteLine("--calculated support orders--");
+		Log.WriteLine("--support orders--");
 		orders
 			.Where(order => order.Strength != 1)
 			.ToImmutableList()
-			.ForEach(order => Debug.WriteLine($"support: {order} -> {order.Strength}"));
+			.ForEach(order => Log.WriteLine($"support: {order} -> {order.Strength}"));
 
 		// find dependency graph
 		/*
@@ -344,12 +343,11 @@ public class Game {
 				}
 			});
 
-		Debug.WriteLine("--dependency graph--");
+		Log.WriteLine("--dependency graph--");
 		dependencyGraph
-			.ToImmutableList()
 			.Where(kvp => kvp.Value.Any())
 			.ToImmutableList()
-			.ForEach(kvp => Debug.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
+			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
 		while (orders.Any(order => !order.Resolved)) {
 			for (int i = 0; i < orders.Count; i++) {
@@ -357,9 +355,9 @@ public class Game {
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
 				if (order.Resolved) continue;
-				Debug.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph[order])}");
+				//Log.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph[order])}");
 
-				// orders trying to get to the same territory
+				// multiple orders trying to get to the same territory
 				List<Order> conflictingDependencies = dependencies
 					.Where(dependency => dependency is MoveOrder moveOrder && moveOrder.Target == order.Target)
 					.ToList();
@@ -405,6 +403,8 @@ public class Game {
 				Order? forwardDependency = dependencies
 						.AsParallel()
 						.FirstOrDefault(deps => deps.Unit.Location == order.Target);
+				// check whether the forward dependency has been resolved
+				// if yes resolve current order
 				if (forwardDependency is not null && forwardDependency.Resolved) {
 					if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
 						order.Status = OrderStatus.Succeeded;
@@ -424,7 +424,19 @@ public class Game {
 				}
 			});
 
+		Log.WriteLine("--orders review--");
+		orders
+			.OfType<SupportOrder>()
+			.ToImmutableList()
+			.ForEach(supportOrder => Log.WriteLine(supportOrder));
+		dependencyGraph
+			.Where(kvp => kvp.Value.Any())
+			.ToImmutableList()
+			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
+
 		Parallel.ForEach(Players, player => player.Orders.Clear());
+
+		Log.WriteLine("\n");
 	}
 }
 
@@ -432,18 +444,18 @@ public class Game {
 // rember to fix double checks
 //Players.ForEach(player =>
 //	player.Orders.ForEach(order => {
-//		Debug.WriteLine(order);
+//		Log.WriteLine(order);
 //		if (order is MoveOrder moveOrder) {
 //			destinations[moveOrder.Unit] = moveOrder.Target ?? throw new InvalidOperationException();
 //		} else if (order is SupportOrder supportOrder && Players.Any(player => player.Orders.Contains(supportOrder.SupportedOrder))) {
-//			Debug.WriteLine("adding support for " + supportOrder.Unit);
+//			Log.WriteLine("adding support for " + supportOrder.Unit);
 //			supportCounts[supportOrder.SupportedOrder.Unit] = supportCounts.GetValueOrDefault(supportOrder.SupportedOrder.Unit, 0) + 1;
 //		}
 //	}));
 
-//Debug.WriteLine("\n--Calculated supports--");
-//supportCounts.ToList().ForEach(pair => Debug.WriteLine($"support: {pair.Key} -> {pair.Value}"));
-//Debug.WriteLine("");
+//Log.WriteLine("\n--Calculated supports--");
+//supportCounts.ToList().ForEach(pair => Log.WriteLine($"support: {pair.Key} -> {pair.Value}"));
+//Log.WriteLine("");
 //destinations.ToList().ForEach(pair => {
 //	Unit unit = pair.Key;
 //	Territory territory = pair.Value;
@@ -454,12 +466,12 @@ public class Game {
 //		return;
 //	}
 
-//	Debug.WriteLine($"contesting {territory}");
+//	Log.WriteLine($"contesting {territory}");
 //	List<KeyValuePair<Unit, Territory>> attackingUnits = destinations
 //		.Where(pair => pair.Value == territory)
 //		.ToList();
 
-//	attackingUnits.ToList().ForEach(kvp => Debug.WriteLine($"{kvp.Key}: {kvp.Value} with support {supportCounts.GetValueOrDefault(kvp.Key, 0)}"));
+//	attackingUnits.ToList().ForEach(kvp => Log.WriteLine($"{kvp.Key}: {kvp.Value} with support {supportCounts.GetValueOrDefault(kvp.Key, 0)}"));
 
 //	KeyValuePair<Unit, int> maxSupportUnit = attackingUnits
 //		.Select(unit => new KeyValuePair<Unit, int>(unit.Key, supportCounts.GetValueOrDefault(unit.Key, 0)))

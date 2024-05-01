@@ -1,0 +1,54 @@
+------ [logs] ------
+--- [project configuration] ---
+ - Name: 'Game'
+ - Version: '1.0.0.0'
+ - Author: 'Game'
+ - Build: 'Debug'
+
+
+--support orders--
+--dependency graph--
+--orders review--
+
+
+--support orders--
+--dependency graph--
+[Pending] (Army in Warsaw) moves to (Prussia): 
+	[Pending] (Army in Berlin) moves to (Prussia)
+[Pending] (Army in Berlin) moves to (Prussia): 
+	[Pending] (Army in Warsaw) moves to (Prussia)
+	[Pending] (Army in Kiel) moves to (Berlin)
+[Pending] (Army in Kiel) moves to (Berlin): 
+	[Pending] (Army in Berlin) moves to (Prussia)
+--orders review--
+[Failed] (Army in Warsaw) moves to (Prussia): 
+	[Failed] (Army in Berlin) moves to (Prussia)
+[Failed] (Army in Berlin) moves to (Prussia): 
+	[Failed] (Army in Warsaw) moves to (Prussia)
+	[Failed] (Army in Kiel) moves to (Berlin)
+[Failed] (Army in Kiel) moves to (Berlin): 
+	[Failed] (Army in Berlin) moves to (Prussia)
+
+
+--support orders--
+support: [Pending] (Army in Berlin) moves to (Prussia) -> 3
+--dependency graph--
+[Pending] (Army in Warsaw) moves to (Prussia): 
+	[Pending] (Army in Berlin) moves to (Prussia)
+[Pending] (Army in Berlin) moves to (Prussia): 
+	[Pending] (Army in Warsaw) moves to (Prussia)
+	[Pending] (Army in Kiel) moves to (Berlin)
+[Pending] (Army in Kiel) moves to (Berlin): 
+	[Pending] (Army in Berlin) moves to (Prussia)
+--orders review--
+[Succeeded] (Army in Silesia) supports to () supported ([Succeeded] (Army in Prussia) moves to (Prussia))
+[Succeeded] (Army in BalticSea) supports to () supported ([Succeeded] (Army in Prussia) moves to (Prussia))
+[Failed] (Army in Warsaw) moves to (Prussia): 
+	[Succeeded] (Army in Prussia) moves to (Prussia)
+[Succeeded] (Army in Prussia) moves to (Prussia): 
+	[Failed] (Army in Warsaw) moves to (Prussia)
+	[Succeeded] (Army in Berlin) moves to (Berlin)
+[Succeeded] (Army in Berlin) moves to (Berlin): 
+	[Succeeded] (Army in Prussia) moves to (Prussia)
+
+
