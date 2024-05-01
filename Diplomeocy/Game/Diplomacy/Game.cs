@@ -296,6 +296,9 @@ public class Game {
 		Debug.WriteLine("\n--Calculated supports--");
 		supportCounts.ToList().ForEach(pair => Debug.WriteLine($"support: {pair.Key} -> {pair.Value}"));
 
+		// resolve conflits
+
+
 		// rember to fix double checks
 		Debug.WriteLine("");
 		destinations.ToList().ForEach(pair => {

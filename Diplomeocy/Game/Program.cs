@@ -1,4 +1,6 @@
-﻿using Diplomacy;
+﻿using System.Diagnostics;
+
+using Diplomacy;
 
 using Orders = System.Collections.Generic.List<Diplomacy.Order>;
 
@@ -11,6 +13,7 @@ Player germany = game.Players[1];
 Player russia = game.Players[game.Players.Count - 1];
 List<Player> players = new() { germany, russia };
 
+// log debug data
 Action debug = () => {
 	players.ForEach(player => {
 		Console.WriteLine($"--{player.Countries[0].Name}: Units--");
@@ -21,13 +24,22 @@ Action debug = () => {
 	});
 	Console.WriteLine();
 };
+// advance -> log
 Action step = () => {
+	Console.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
+	Debug.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
 	debug();
 	game.ResolveOrderResolutionPhase();
+	game.GameTurn.Phase = GamePhase.AdvanceTurn;
+	game.AdvanceTurn();
+	game.GameTurn.Phase = GamePhase.OrderResolution;
 	debug();
 };
 
+step();
 
+// test movement 1
+#if false
 germany.Orders.AddRange(new Orders  {
 	new MoveOrder {
 		Unit = germany.Unit(Territories.Berlin),
@@ -110,5 +122,27 @@ russia.Orders.AddRange(new Orders {
 		SupportedOrder = order,
 	},
 });
+#endif
+
+// test movement 2
+// multiple blocked units will block each other
+#if true
+germany.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Berlin),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Munich),
+		Target = game.Board.Territory(Territories.Berlin),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+});
+#endif
 
 step();
