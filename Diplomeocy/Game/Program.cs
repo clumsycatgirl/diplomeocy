@@ -36,7 +36,7 @@ germany.Orders.AddRange(new Orders  {
 	new MoveOrder {
 		Unit = germany.Unit(Territories.Munich),
 		Target = game.Board.Territory(Territories.Silesia),
-	}
+	},
 });
 russia.Orders.AddRange(new Orders {
 	new MoveOrder {
@@ -46,7 +46,11 @@ russia.Orders.AddRange(new Orders {
 	new MoveOrder {
 		Unit = russia.Unit(Territories.Moscow),
 		Target = game.Board.Territory(Territories.Livonia),
-	}
+	},
+	new MoveOrder {
+		Unit = russia.Unit(Territories.SaintPetersburg),
+		Target = game.Board.Territory(Territories.GulfOfBothania),
+	},
 });
 
 step();
@@ -60,7 +64,7 @@ germany.Orders.AddRange(new Orders {
 	new SupportOrder {
 		Unit = germany.Unit(Territories.Silesia),
 		SupportedOrder = order,
-	}
+	},
 });
 order = new MoveOrder {
 	Unit = russia.Unit(Territories.Warsaw),
@@ -71,7 +75,40 @@ russia.Orders.AddRange(new Orders {
 	new SupportOrder {
 		Unit = russia.Unit(Territories.Livonia),
 		SupportedOrder = order,
-	}
+	},
+	new MoveOrder {
+		Unit = russia.Unit(Territories.GulfOfBothania),
+		Target = game.Board.Territory(Territories.BalticSea),
+	},
+});
+
+step();
+
+order = new MoveOrder {
+	Unit = germany.Unit(Territories.Berlin),
+	Target = game.Board.Territory(Territories.Prussia),
+};
+germany.Orders.AddRange(new Orders {
+	order,
+	new SupportOrder{
+		Unit = germany.Unit(Territories.Silesia),
+		SupportedOrder = order,
+	},
+});
+order = new MoveOrder {
+	Unit = russia.Unit(Territories.Warsaw),
+	Target = game.Board.Territory(Territories.Prussia),
+};
+russia.Orders.AddRange(new Orders {
+	order,
+	new SupportOrder {
+		Unit = russia.Unit(Territories.Livonia),
+		SupportedOrder = order,
+	},
+	new SupportOrder {
+		Unit = russia.Unit(Territories.BalticSea),
+		SupportedOrder = order,
+	},
 });
 
 step();

@@ -253,29 +253,29 @@ public class Game {
 
 	public void ResolveOrderResolutionPhase() {
 		/*
-        1. all units have the same strength
-        2. there can only be one unit in a province at a time
-        3. equal strength units trying to occupy the same province will cause all those units to remain in their original provinces
-        4. a standoff does not dislodge a unit already in the province where the standoff took place
-        5. one unit not moving can stop a series of other units from moving
-        6. units cannot trade places without the use of a convoy
-        7. three or more units can rotate provinces during a turn provided none directly trade places
-        8. a unit not ordered to move can be supported by a support order that only mentions its province
-        9. a unit ordered to move can only be supported by a support order that matches the move the unit is trying to make
-        10. a dislodged unit even with support has no effect on the province that dislodged it
-        11. a country cannot dislodge or support the dislodgment of one of its own units even if that dislodgmenet is unexpected
-        12. a country cannot dislodge or support the dislodgment of one of its own units even if that dislodgmenet is unexpected
-        13. support is cut if the unit giving support is attacked from any province exc ept the one where support is being given
-        14. support is cut if the supporting unit is dislodged
-        15. a unit being dislodged by one province can still cut support in another
-        16. an attack by a country on one of its own units does not cut support
-        17. a dislodgement of a fleet necessary to a convoy causes that convoy to fail
-        18. a convoy that causes the convoyed army to standoff at its destination results in that army remaining in its original province
-        19. two units can exchange places if either or both are convoyed (this is the exception to rule 6)
-        20. an army convoyed using alternate convoy orders reaches its destination as long as at least one convoy route remains open
-        21. a convoyed army does not cut the support of a unit supporting an attack against one of the fleets necessary for the army to convoy (this supersedes rule 13)
-        22. an army with at least one successful convoy route will cut the support given by a unit in the destination province that is supporting an attack on a fleet in an alternate route in that convoy (this supersedes rule 21)
-        */
+		1.  all units have the same strength
+		2.  there can only be one unit in a province at a time
+		3.  equal strength units trying to occupy the same province will cause all those units to remain in their original provinces
+		4.  a standoff does not dislodge a unit already in the province where the standoff took place
+		5.  one unit not moving can stop a series of other units from moving
+		6.  units cannot trade places without the use of a convoy
+		7.  three or more units can rotate provinces during a turn provided none directly trade places
+		8. a unit not ordered to move can be supported by a support order that only mentions its province
+		9. a unit ordered to move can only be supported by a support order that matches the move the unit is trying to make
+		10. a dislodged unit even with support has no effect on the province that dislodged it
+		11. a country cannot dislodge or support the dislodgment of one of its own units even if that dislodgmenet is unexpected
+		12. a country cannot dislodge or support the dislodgment of one of its own units even if that dislodgmenet is unexpected
+		13. support is cut if the unit giving support is attacked from any province exc ept the one where support is being given
+		14. support is cut if the supporting unit is dislodged
+		15. a unit being dislodged by one province can still cut support in another
+		16. an attack by a country on one of its own units does not cut support
+		17. a dislodgement of a fleet necessary to a convoy causes that convoy to fail
+		18. a convoy that causes the convoyed army to standoff at its destination results in that army remaining in its original province
+		19. two units can exchange places if either or both are convoyed (this is the exception to rule 6)
+		20. an army convoyed using alternate convoy orders reaches its destination as long as at least one convoy route remains open
+		21. a convoyed army does not cut the support of a unit supporting an attack against one of the fleets necessary for the army to convoy (this supersedes rule 13)
+		22. an army with at least one successful convoy route will cut the support given by a unit in the destination province that is supporting an attack on a fleet in an alternate route in that convoy (this supersedes rule 21)
+		*/
 
 		Debug.WriteLine("\n");
 
@@ -296,7 +296,7 @@ public class Game {
 		Debug.WriteLine("\n--Calculated supports--");
 		supportCounts.ToList().ForEach(pair => Debug.WriteLine($"support: {pair.Key} -> {pair.Value}"));
 
-
+		// rember to fix double checks
 		Debug.WriteLine("");
 		destinations.ToList().ForEach(pair => {
 			Unit unit = pair.Key;
@@ -329,6 +329,6 @@ public class Game {
 			}
 		});
 
-		Players.ForEach(p => p.Orders.Clear());
+		Parallel.ForEach(Players, player => player.Orders.Clear());
 	}
 }
