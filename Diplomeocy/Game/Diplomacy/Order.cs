@@ -1,9 +1,16 @@
 ﻿namespace Diplomacy;
 
+public enum OrderStatus {
+	Pending, Succeeded, Failed, Disbanded, Retired
+}
+
 public abstract class Order {
-	public Unit Unit { get; set; }
-	private Territory target;
-	public Territory Target {
+	public required Unit Unit { get; set; }
+	public int Strength { get; set; } = 1;
+	public OrderStatus Status { get; set; } = OrderStatus.Pending;
+
+	private Territory? target = null;
+	public Territory? Target {
 		get => target;
 		set {
 			if (value is null || !Unit.Location.AdjacentTerritories.Contains(value)) {
@@ -13,7 +20,9 @@ public abstract class Order {
 		}
 	}
 
-	protected string ToString(string type) => $"({Unit?.Type} in {Unit?.Location?.Name})  {type} to ({Target?.Name})";
+	public bool Resolved => Status != OrderStatus.Pending;
+
+	protected string ToString(string type) => $"[{Status}] ({Unit?.Type} in {Unit?.Location?.Name})  {type} to ({Target?.Name})";
 	public override string ToString() => ToString("*order*");
 }
 

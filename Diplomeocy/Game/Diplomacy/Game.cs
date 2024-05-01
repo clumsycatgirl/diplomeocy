@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Immutable;
+using System.Diagnostics;
 
 namespace Diplomacy;
 
@@ -277,61 +278,200 @@ public class Game {
 		22. an army with at least one successful convoy route will cut the support given by a unit in the destination province that is supporting an attack on a fleet in an alternate route in that convoy (this supersedes rule 21)
 		*/
 
+		/*
+		 * - execute all support orders
+		 * - find dependences for all orders
+		 * - reserve resolve orders by least to most dependences
+		 *	- start with the ones that have no dependences
+		 *	- then move out to ones that depend on those
+		 *	- repeat until all orders are resolved
+		 *	  - if 2 orders depends on each other recursively they both fail
+		 *	    unless they're convoyed
+		 */
+
 		Debug.WriteLine("\n");
 
+		List<Order> orders = Players
+			.SelectMany(player => player.Orders)
+			.ToList();
+
 		Dictionary<Unit, Territory> destinations = new();
-		Dictionary<Unit, int> supportCounts = new();
 
-		Players.ForEach(player =>
-			player.Orders.ForEach(order => {
-				Debug.WriteLine(order);
-				if (order is MoveOrder moveOrder) {
-					destinations[moveOrder.Unit] = moveOrder.Target;
-				} else if (order is SupportOrder supportOrder && player.Orders.Contains(supportOrder.SupportedOrder)) {
-					Debug.WriteLine("adding support for " + supportOrder.Unit);
-					supportCounts[supportOrder.SupportedOrder.Unit] = supportCounts.GetValueOrDefault(supportOrder.SupportedOrder.Unit, 0) + 1;
+		// handle support orderse
+		Debug.WriteLine("--calculating support orders--");
+		Parallel.ForEach(
+			  orders
+				.OfType<SupportOrder>()
+				.Where(supportOrder => orders.Contains(supportOrder!.SupportedOrder))
+				.ToImmutableList(),
+			 supportOrder => {
+				 lock (supportOrder!.SupportedOrder) {
+					 supportOrder!.SupportedOrder.Strength++;
+				 }
+				 supportOrder.Status = OrderStatus.Succeeded;
+			 });
+
+		Debug.WriteLine("--calculated support orders--");
+		orders
+			.Where(order => order.Strength != 1)
+			.ToImmutableList()
+			.ForEach(order => Debug.WriteLine($"support: {order} -> {order.Strength}"));
+
+		// find dependency graph
+		/*
+		 * - get an order
+		 * - find order it depends on aka
+		 *	- orders that interact in any way with the same target territory
+		 *	- orders that interact with order unit's current territory
+		 */
+		Dictionary<Order, List<Order>> dependencyGraph = new();
+		orders
+			.AsParallel()
+			.Where(order => order is not SupportOrder)
+			.ForAll(order => {
+				List<Order> dependencies = orders
+					.AsParallel()
+					.Where(o => o != order
+						&& (o.Target == order.Target
+						|| o.Unit.Location == order.Unit.Location
+						|| o.Unit.Location == order.Target
+						|| o.Target == order.Unit.Location))
+					.ToList();
+
+				lock (dependencyGraph) {
+					if (dependencies.Count != 0)
+						dependencyGraph.Add(order, dependencies);
 				}
-			}));
+			});
 
-		Debug.WriteLine("\n--Calculated supports--");
-		supportCounts.ToList().ForEach(pair => Debug.WriteLine($"support: {pair.Key} -> {pair.Value}"));
+		Debug.WriteLine("--dependency graph--");
+		dependencyGraph
+			.ToImmutableList()
+			.Where(kvp => kvp.Value.Any())
+			.ToImmutableList()
+			.ForEach(kvp => Debug.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
-		// resolve conflits
+		while (orders.Any(order => !order.Resolved)) {
+			for (int i = 0; i < orders.Count; i++) {
+				Order order = orders[i];
+				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
+				if (order.Resolved) continue;
+				Debug.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph[order])}");
 
-		// rember to fix double checks
-		Debug.WriteLine("");
-		destinations.ToList().ForEach(pair => {
-			Unit unit = pair.Key;
-			Territory territory = pair.Value;
+				// orders trying to get to the same territory
+				List<Order> conflictingDependencies = dependencies
+					.Where(dependency => dependency is MoveOrder moveOrder && moveOrder.Target == order.Target)
+					.ToList();
+				if (conflictingDependencies.Any()) {
+					int highestStrength = Math.Max(
+						conflictingDependencies.Max(dependency => dependency.Strength),
+						order.Strength);
 
-			if (destinations.Count(kvp => kvp.Value == territory) == 1) {
-				unit.Location = territory;
-				territory.OccupyingUnit = unit;
-				return;
+					// get the winner of the movement using the strengh property
+					int highStrengthOrderCount = 0;
+					if (order.Strength == highestStrength) highStrengthOrderCount++;
+
+					// find all other orders we depend on that have the same strength
+					int numberOfOrdersWithHighStrength = conflictingDependencies
+						.Count(dependency => dependency.Strength == highestStrength);
+					if (numberOfOrdersWithHighStrength >= 1) highStrengthOrderCount += numberOfOrdersWithHighStrength;
+
+					List<Order> totalConflictingOrders = conflictingDependencies
+						.Concat(new[] { order })
+						.ToList();
+					if (highStrengthOrderCount == 1) {
+						// find winner and set it to success everything else fails
+
+						Order winner = totalConflictingOrders
+							.OrderByDescending(dependency => dependency.Strength)
+							.First();
+						winner.Status = OrderStatus.Succeeded;
+
+						totalConflictingOrders
+							.Where(order => order != winner)
+							.AsParallel()
+							.ForAll(order => order.Status = OrderStatus.Failed);
+					} else {
+						// set all conflicting orders as failed
+						totalConflictingOrders
+							.AsParallel()
+							.ForAll(order => order.Status = OrderStatus.Failed);
+					}
+				}
+
+				// there should be only one of this *at all times*
+				// a unit cannot move to two different places
+				Order? forwardDependency = dependencies
+						.AsParallel()
+						.FirstOrDefault(deps => deps.Unit.Location == order.Target);
+				if (forwardDependency is not null && forwardDependency.Resolved) {
+					if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
+						order.Status = OrderStatus.Succeeded;
+					} else {
+						order.Status = OrderStatus.Failed;
+					}
+				}
 			}
+		}
 
-			Debug.WriteLine($"contesting {territory}");
-			List<KeyValuePair<Unit, Territory>> attackingUnits = destinations
-				.Where(pair => pair.Value == territory)
-				.ToList();
-
-			attackingUnits.ToList().ForEach(kvp => Debug.WriteLine($"{kvp.Key}: {kvp.Value} with support {supportCounts.GetValueOrDefault(kvp.Key, 0)}"));
-
-			KeyValuePair<Unit, int> maxSupportUnit = attackingUnits
-				.Select(unit => new KeyValuePair<Unit, int>(unit.Key, supportCounts.GetValueOrDefault(unit.Key, 0)))
-				.OrderByDescending(pair => pair.Value)
-				.First();
-
-			bool isTie = attackingUnits
-				.Any(unit => supportCounts.GetValueOrDefault(unit.Key, 0) == maxSupportUnit.Value && unit.Key != maxSupportUnit.Key);
-
-			if (!isTie && maxSupportUnit.Key == unit) {
-				unit.Location = territory;
-				territory.OccupyingUnit = unit;
-			}
-		});
+		orders
+			.AsParallel()
+			.Where(order => order.Status == OrderStatus.Succeeded)
+			.ForAll(order => {
+				if (order is MoveOrder moveOrder) {
+					moveOrder.Unit.Move(moveOrder.Target ?? throw new InvalidOperationException("moving to nowhere good job"));
+				}
+			});
 
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 	}
 }
+
+#region backups cause I'm a pussy and I don't trust git I'm sorry linus
+// rember to fix double checks
+//Players.ForEach(player =>
+//	player.Orders.ForEach(order => {
+//		Debug.WriteLine(order);
+//		if (order is MoveOrder moveOrder) {
+//			destinations[moveOrder.Unit] = moveOrder.Target ?? throw new InvalidOperationException();
+//		} else if (order is SupportOrder supportOrder && Players.Any(player => player.Orders.Contains(supportOrder.SupportedOrder))) {
+//			Debug.WriteLine("adding support for " + supportOrder.Unit);
+//			supportCounts[supportOrder.SupportedOrder.Unit] = supportCounts.GetValueOrDefault(supportOrder.SupportedOrder.Unit, 0) + 1;
+//		}
+//	}));
+
+//Debug.WriteLine("\n--Calculated supports--");
+//supportCounts.ToList().ForEach(pair => Debug.WriteLine($"support: {pair.Key} -> {pair.Value}"));
+//Debug.WriteLine("");
+//destinations.ToList().ForEach(pair => {
+//	Unit unit = pair.Key;
+//	Territory territory = pair.Value;
+
+//	if (destinations.Count(kvp => kvp.Value == territory) == 1) {
+//		unit.Location = territory;
+//		territory.OccupyingUnit = unit;
+//		return;
+//	}
+
+//	Debug.WriteLine($"contesting {territory}");
+//	List<KeyValuePair<Unit, Territory>> attackingUnits = destinations
+//		.Where(pair => pair.Value == territory)
+//		.ToList();
+
+//	attackingUnits.ToList().ForEach(kvp => Debug.WriteLine($"{kvp.Key}: {kvp.Value} with support {supportCounts.GetValueOrDefault(kvp.Key, 0)}"));
+
+//	KeyValuePair<Unit, int> maxSupportUnit = attackingUnits
+//		.Select(unit => new KeyValuePair<Unit, int>(unit.Key, supportCounts.GetValueOrDefault(unit.Key, 0)))
+//		.OrderByDescending(pair => pair.Value)
+//		.First();
+
+//	bool isTie = attackingUnits
+//		.Any(unit => supportCounts.GetValueOrDefault(unit.Key, 0) == maxSupportUnit.Value && unit.Key != maxSupportUnit.Key);
+
+//	if (!isTie && maxSupportUnit.Key == unit) {
+//		unit.Location = territory;
+//		territory.OccupyingUnit = unit;
+//	}
+//});
+#endregion

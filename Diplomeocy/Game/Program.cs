@@ -12,6 +12,7 @@ game.StartGame();
 Player germany = game.Players[1];
 Player russia = game.Players[game.Players.Count - 1];
 List<Player> players = new() { germany, russia };
+Order? order = null;
 
 // log debug data
 Action debug = () => {
@@ -126,7 +127,7 @@ russia.Orders.AddRange(new Orders {
 
 // test movement 2
 // multiple blocked units will block each other
-#if true
+#if false
 germany.Orders.AddRange(new Orders {
 	new MoveOrder {
 		Unit = germany.Unit(Territories.Berlin),
@@ -142,6 +143,40 @@ russia.Orders.AddRange(new Orders {
 		Unit = russia.Unit(Territories.Warsaw),
 		Target = game.Board.Territory(Territories.Prussia),
 	},
+});
+#endif
+
+// test movement 3
+#if true
+// cheat
+germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia));
+germany.Unit(Territories.Kiel).Move(game.Board.Territory(Territories.BalticSea));
+russia.Unit(Territories.Moscow).Move(game.Board.Territory(Territories.Kiel));
+
+order = new MoveOrder {
+	Unit = germany.Unit(Territories.Berlin),
+	Target = game.Board.Territory(Territories.Prussia),
+};
+germany.Orders.AddRange(new Orders {
+	order,
+	//new SupportOrder {
+		//Unit = germany.Unit(Territories.Silesia),
+		//SupportedOrder = order,
+	//},
+	//new SupportOrder {
+		//Unit = germany.Unit(Territories.BalticSea),
+		//SupportedOrder = order,
+	//},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Kiel),
+		Target = game.Board.Territory(Territories.Berlin),
+	}
 });
 #endif
 
