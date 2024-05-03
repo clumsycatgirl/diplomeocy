@@ -22,7 +22,7 @@ public abstract class Order {
 
 	public bool Resolved => Status != OrderStatus.Pending;
 
-	protected string ToString(string type) => $"[{Status}] ({Unit?.Type} in {Unit?.Location?.Name}) {type} to ({Target?.Name})";
+	protected string ToString(string type) => $"[{Status}] ({Unit?.Type} in {Unit?.Location.Name}) {type} to ({Target?.Name})";
 	public override string ToString() => ToString("*order*");
 }
 

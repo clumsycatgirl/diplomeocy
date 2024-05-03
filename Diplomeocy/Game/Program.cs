@@ -12,7 +12,7 @@ game.StartGame();
 Player germany = game.Players[1];
 Player russia = game.Players[game.Players.Count - 1];
 List<Player> players = new() { germany, russia };
-Order? order = null;
+Order? order;
 
 // log debug data
 Action debug = () => {
@@ -147,7 +147,7 @@ russia.Orders.AddRange(new Orders {
 #endif
 
 // test movement 3
-#if true
+#if false
 // cheat
 germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia));
 germany.Unit(Territories.Kiel).Move(game.Board.Territory(Territories.BalticSea));
@@ -197,6 +197,46 @@ russia.Orders.AddRange(new Orders {
 		Target = game.Board.Territory(Territories.Berlin),
 	}
 });
+#endif
+
+#if true
+germany.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Munich),
+		Target = game.Board.Territory(Territories.Silesia),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.SaintPetersburg),
+		Target = game.Board.Territory(Territories.Livonia),
+	}
+});
+
+step();
+
+order = new MoveOrder {
+	Unit = germany.Unit(Territories.Berlin),
+	Target = game.Board.Territory(Territories.Prussia),
+};
+germany.Orders.AddRange(new Orders {
+	order,
+	new SupportOrder {
+		Unit = germany.Unit(Territories.Silesia),
+		SupportedOrder = order,
+	}
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Silesia),
+	},
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Livonia),
+		Target = game.Board.Territory(Territories.Prussia),
+	}
+});
+
 #endif
 
 step();

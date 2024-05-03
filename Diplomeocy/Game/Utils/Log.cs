@@ -35,6 +35,7 @@ public static class Log {
 	private static readonly Lazy<string> assemblyCompany = new(() => Assembly.GetEntryAssembly()!.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company ?? "Unknown");
 
 	private static StreamWriter? writer = null;
+	private static readonly object logLock = new();
 
 	private static void Initialize() {
 		if (!Directory.Exists(LogFilesDirectory)) {
@@ -112,22 +113,24 @@ public static class Log {
 	/// <param name="data"></param>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteLine(LogLevel logLevel, params string[] data) {
-		Console.ForegroundColor = logLevel switch {
-			LogLevel.None => ConsoleColor.White,
-			LogLevel.Info => ConsoleColor.Green,
-			LogLevel.Warning => ConsoleColor.Yellow,
-			LogLevel.Error => ConsoleColor.Red,
-			_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-		};
+		lock (logLock) {
+			Console.ForegroundColor = logLevel switch {
+				LogLevel.None => ConsoleColor.White,
+				LogLevel.Info => ConsoleColor.Green,
+				LogLevel.Warning => ConsoleColor.Yellow,
+				LogLevel.Error => ConsoleColor.Red,
+				_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
+			};
 
-		foreach (string str in data) {
+			foreach (string str in data) {
 #if DEBUG
-			outputStream.WriteLine(str);
+				outputStream.WriteLine(str);
 #endif
-			writer?.WriteLine(str);
-		}
+				writer?.WriteLine(str);
+			}
 
-		writer?.Flush();
+			writer?.Flush();
+		}
 	}
 
 	/// <summary>
@@ -142,22 +145,24 @@ public static class Log {
 	/// <param name="data"></param>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteLine(LogLevel logLevel, params object[] data) {
-		Console.ForegroundColor = logLevel switch {
-			LogLevel.None => ConsoleColor.White,
-			LogLevel.Info => ConsoleColor.Green,
-			LogLevel.Warning => ConsoleColor.Yellow,
-			LogLevel.Error => ConsoleColor.Red,
-			_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-		};
+		lock (logLock) {
+			Console.ForegroundColor = logLevel switch {
+				LogLevel.None => ConsoleColor.White,
+				LogLevel.Info => ConsoleColor.Green,
+				LogLevel.Warning => ConsoleColor.Yellow,
+				LogLevel.Error => ConsoleColor.Red,
+				_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
+			};
 
-		foreach (object str in data) {
+			foreach (object str in data) {
 #if DEBUG
-			outputStream.WriteLine(str);
+				outputStream.WriteLine(str);
 #endif
-			writer?.WriteLine(str);
-		}
+				writer?.WriteLine(str);
+			}
 
-		writer?.Flush();
+			writer?.Flush();
+		}
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

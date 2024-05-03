@@ -355,7 +355,7 @@ public class Game {
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
 				if (order.Resolved) continue;
-				//Log.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph[order])}");
+				Log.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 
 				// multiple orders trying to get to the same territory
 				List<Order> conflictingDependencies = dependencies
@@ -405,12 +405,29 @@ public class Game {
 						.FirstOrDefault(deps => deps.Unit.Location == order.Target);
 				// check whether the forward dependency has been resolved
 				// if yes resolve current order
-				if (forwardDependency is not null && forwardDependency.Resolved) {
-					if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
-						order.Status = OrderStatus.Succeeded;
-					} else {
+				if (forwardDependency is not null) {
+					// set all dependencies for the cancelled support order to pending
+					if (forwardDependency is SupportOrder cancelledSupportOrder && !cancelledSupportOrder.Resolved) {
+						cancelledSupportOrder.Status = OrderStatus.Failed;
+						cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Failed;
+						cancelledSupportOrder.SupportedOrder.Strength--;
+
+						SetDependenciesToPending(cancelledSupportOrder.SupportedOrder, dependencyGraph);
+
 						order.Status = OrderStatus.Failed;
+						continue;
 					}
+
+					if (forwardDependency.Resolved) {
+						if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
+							order.Status = OrderStatus.Succeeded;
+						} else {
+							order.Status = OrderStatus.Failed;
+						}
+					} else if (forwardDependency is HoldOrder holdOrder) {
+					}
+				} else {
+					order.Status = OrderStatus.Succeeded;
 				}
 			}
 		}
@@ -420,7 +437,7 @@ public class Game {
 			.Where(order => order.Status == OrderStatus.Succeeded)
 			.ForAll(order => {
 				if (order is MoveOrder moveOrder) {
-					moveOrder.Unit.Move(moveOrder.Target ?? throw new InvalidOperationException("moving to nowhere good job"));
+					moveOrder.Unit.Move(moveOrder.Target ?? throw new InvalidOperationException("moving to nowhere good job idiot"));
 				}
 			});
 
@@ -437,6 +454,22 @@ public class Game {
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 
 		Log.WriteLine("\n");
+	}
+	private void SetDependenciesToPending(Order order, Dictionary<Order, List<Order>> dependencyGraph) {
+		if (!dependencyGraph.ContainsKey(order)) {
+			return;
+		}
+
+		order.Status = OrderStatus.Pending;
+		List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
+		dependencies
+			.AsParallel()
+			.Where(order => order.Status != OrderStatus.Pending)
+			.ForAll(dependency => {
+				Log.WriteLine($"setting {dependency} to pending");
+				dependency.Status = OrderStatus.Pending;
+				SetDependenciesToPending(dependency, dependencyGraph);
+			});
 	}
 }
 
