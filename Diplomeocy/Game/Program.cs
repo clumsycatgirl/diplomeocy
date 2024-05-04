@@ -1,18 +1,29 @@
 ﻿using Diplomacy;
+using Diplomacy.Orders;
 using Diplomacy.Utils;
 
-using Orders = System.Collections.Generic.List<Diplomacy.Order>;
+using Game.Diplomacy.Orders;
+
+using Orders = System.Collections.Generic.List<Diplomacy.Orders.Order>;
 
 Log.WriteLine(Log.LogLevel.Info, "meow\n");
 
 
-Game game = new();
+GameHandler game = new();
 game.StartGame();
 
 Player germany = game.Players[1];
 Player russia = game.Players[game.Players.Count - 1];
 List<Player> players = new() { germany, russia };
 Order? order;
+
+Action resetGame = () => {
+	game = new();
+	game.StartGame();
+	germany = game.Players[1];
+	russia = game.Players[game.Players.Count - 1];
+	players = new() { germany, russia };
+};
 
 // log debug data
 Action debug = () => {
@@ -239,7 +250,7 @@ russia.Orders.AddRange(new Orders {
 #endif
 
 // test hold 1
-#if true
+#if false
 germany.Orders.AddRange(new Orders {
 	new MoveOrder {
 		Unit = germany.Unit(Territories.Munich),
@@ -283,8 +294,79 @@ russia.Unit(Territories.Sevastopol);
 
 #endif
 
-// test hold 2
+#region rules_diagrams
+
+resetGame();
+#region diagram_4
 #if true
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_4]------");
+germany.Orders.AddRange(new List<Order> {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Berlin),
+		Target = game.Board.Territory(Territories.Silesia),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Silesia),
+	},
+});
+step();
+
+germany.Unit(Territories.Berlin);
+russia.Unit(Territories.Warsaw);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_4_done]----");
 #endif
+#endregion
+
+resetGame();
+#region diagram_5
+#if true
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_5]------");
+
+russia.Unit(Territories.Warsaw).Move(game.Board.Territory(Territories.Prussia));
+germany.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Berlin),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Kiel),
+		Target = game.Board.Territory(Territories.Berlin),
+	}
+});
+russia.Orders.Add(new HoldOrder { Unit = russia.Unit(Territories.Prussia) });
 
 step();
+
+germany.Unit(Territories.Berlin);
+germany.Unit(Territories.Kiel);
+russia.Unit(Territories.Prussia);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_5_done]----");
+#endif
+#endregion
+
+resetGame();
+#region diagram_6
+#if true
+
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_6]------");
+
+russia.Unit(Territories.Warsaw).Move(game.Board.Territory(Territories.Prussia));
+germany.Orders.Add(new MoveOrder { Unit = germany.Unit(Territories.Berlin), Target = game.Board.Territory(Territories.Prussia) });
+russia.Orders.Add(new MoveOrder { Unit = russia.Unit(Territories.Prussia), Target = game.Board.Territory(Territories.Berlin) });
+
+step();
+
+germany.Unit(Territories.Berlin);
+russia.Unit(Territories.Prussia);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_6_done]----");
+#endif
+#endregion
+#endregion
+
+//step();

@@ -24,6 +24,17 @@ public static class Log {
 		Error
 	}
 
+	public static class LogLevelHelper {
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ConsoleColor ToConsoleColor(LogLevel logLevel) => logLevel switch {
+			LogLevel.None => ConsoleColor.White,
+			LogLevel.Info => ConsoleColor.Green,
+			LogLevel.Warning => ConsoleColor.Yellow,
+			LogLevel.Error => ConsoleColor.Red,
+			_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
+		};
+	}
+
 	public static bool LogToConsole = true;
 	private static TextWriter outputStream = new VSDebugWriter();
 	public static TextWriter OutputStream {
@@ -115,13 +126,9 @@ public static class Log {
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteLine(LogLevel logLevel, params string[] data) {
 		lock (logLock) {
-			Console.ForegroundColor = logLevel switch {
-				LogLevel.None => ConsoleColor.White,
-				LogLevel.Info => ConsoleColor.Green,
-				LogLevel.Warning => ConsoleColor.Yellow,
-				LogLevel.Error => ConsoleColor.Red,
-				_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-			};
+			ConsoleColor currentColor = Console.ForegroundColor;
+			if (currentColor != LogLevelHelper.ToConsoleColor(logLevel))
+				Console.ForegroundColor = LogLevelHelper.ToConsoleColor(logLevel);
 
 			foreach (string str in data) {
 #if DEBUG
@@ -133,6 +140,9 @@ public static class Log {
 			}
 
 			writer?.Flush();
+
+			if (currentColor != LogLevelHelper.ToConsoleColor(logLevel))
+				Console.ForegroundColor = currentColor;
 		}
 	}
 
@@ -148,26 +158,7 @@ public static class Log {
 	/// <param name="data"></param>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteLine(LogLevel logLevel, params object[] data) {
-		lock (logLock) {
-			Console.ForegroundColor = logLevel switch {
-				LogLevel.None => ConsoleColor.White,
-				LogLevel.Info => ConsoleColor.Green,
-				LogLevel.Warning => ConsoleColor.Yellow,
-				LogLevel.Error => ConsoleColor.Red,
-				_ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-			};
-
-			foreach (object str in data) {
-#if DEBUG
-				outputStream.WriteLine(str);
-#endif
-				if (LogToConsole && outputStream != Console.Out) Console.WriteLine(str);
-
-				writer?.WriteLine(str);
-			}
-
-			writer?.Flush();
-		}
+		WriteLine(logLevel, data.Cast<String>());
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

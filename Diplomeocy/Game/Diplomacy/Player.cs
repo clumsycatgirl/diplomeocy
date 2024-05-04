@@ -1,5 +1,7 @@
 ﻿namespace Diplomacy;
 
+using Diplomacy.Orders;
+
 public class Player {
 	public required string Name { get; init; }
 	public List<Country> Countries { get; init; } = new();

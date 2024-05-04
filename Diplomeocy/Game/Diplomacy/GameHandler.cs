@@ -3,9 +3,13 @@
 
 namespace Diplomacy;
 
+using Game.Diplomacy.Orders;
+
+using Orders;
+
 using Utils;
 
-public class Game {
+public class GameHandler {
 	public List<Player> Players { get; private set; } = new();
 	public Board Board { get; private set; } = new();
 	public GameTurn GameTurn { get; private set; } = new();
@@ -415,36 +419,46 @@ public class Game {
 						.FirstOrDefault(deps => deps.Unit.Location == order.Target);
 				// check whether the forward dependency has been resolved
 				// if yes resolve current order
-				if (forwardDependency is not null) {
-					Log.WriteLine($"forwardDependency is {forwardDependency}");
-					// set all dependencies for the cancelled support order to pending
-					if (forwardDependency is SupportOrder cancelledSupportOrder && cancelledSupportOrder.Resolved) {
-						Log.WriteLine($"cancelling {cancelledSupportOrder}");
-						cancelledSupportOrder.Status = OrderStatus.Failed;
-						cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
-						cancelledSupportOrder.SupportedOrder.Strength--;
-
-						SetDependenciesToPending(cancelledSupportOrder.SupportedOrder, dependencyGraph);
-
-						order.Status = OrderStatus.Failed;
-						Log.WriteLine($"updating self: {order}");
-						continue;
-					} else if (forwardDependency is HoldOrder holdOrder) {
-						if (holdOrder.Strength >= order.Strength) {
-							order.Status = OrderStatus.Failed;
-						} else {
-							order.Status = OrderStatus.Succeeded;
-							holdOrder.Status = OrderStatus.Retired;
-						}
-					} else if (forwardDependency.Resolved) {
-						if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
-							order.Status = OrderStatus.Succeeded;
-						} else {
-							order.Status = OrderStatus.Failed;
-						}
-					}
-				} else {
+				if (forwardDependency is null) {
 					order.Status = OrderStatus.Succeeded;
+				}
+
+				Log.WriteLine($"forwardDependency is {forwardDependency}");
+				// set all dependencies for the cancelled support order to pending
+				if (forwardDependency is SupportOrder cancelledSupportOrder && cancelledSupportOrder.Resolved) {
+					Log.WriteLine($"cancelling {cancelledSupportOrder}");
+					cancelledSupportOrder.Status = OrderStatus.Failed;
+					cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
+					cancelledSupportOrder.SupportedOrder.Strength--;
+
+					SetDependenciesToPending(cancelledSupportOrder.SupportedOrder, dependencyGraph);
+
+					order.Status = OrderStatus.Failed;
+					Log.WriteLine($"updating self: {order}");
+					continue;
+				} else if (forwardDependency is HoldOrder holdOrder) {
+					if (holdOrder.Strength >= order.Strength) {
+						order.Status = OrderStatus.Failed;
+					} else {
+						order.Status = OrderStatus.Succeeded;
+						holdOrder.Status = OrderStatus.Retired;
+					}
+				} else if (forwardDependency is MoveOrder moveOrder) {
+					// check if the order is trying to get to the same place the current order is takign place on
+					if (order.Unit.Location == moveOrder.Target) {
+						order.Status = OrderStatus.Failed;
+						moveOrder.Status = OrderStatus.Failed;
+					} else if (moveOrder.Status == OrderStatus.Succeeded) {
+						order.Status = OrderStatus.Succeeded;
+					} else {
+						order.Status = OrderStatus.Failed;
+					}
+				} else if (forwardDependency!.Resolved) {
+					if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
+						order.Status = OrderStatus.Succeeded;
+					} else {
+						order.Status = OrderStatus.Failed;
+					}
 				}
 			}
 		}
@@ -456,8 +470,8 @@ public class Game {
 			.ForEach(supportOrder => Log.WriteLine(supportOrder));
 		dependencyGraph
 			.Where(kvp => kvp.Value.Any())
-			.ToImmutableList()
-			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
+				.ToImmutableList()
+				.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
 		orders
 			.AsParallel()
