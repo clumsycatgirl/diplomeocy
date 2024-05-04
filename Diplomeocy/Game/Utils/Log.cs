@@ -36,7 +36,7 @@ public static class Log {
 	}
 
 	public static bool LogToConsole = true;
-	private static TextWriter outputStream = new VSDebugWriter();
+	private static TextWriter outputStream = Console.Out;
 	public static TextWriter OutputStream {
 		get => outputStream;
 		set => outputStream = value ?? throw new ArgumentNullException(nameof(value));
@@ -88,7 +88,7 @@ public static class Log {
 	/// <summary>
 	/// Writes the specified string data to:
 	/// <para>
-	///	<br>- Debug.Listeneres collection if DEBUG flag is set</br>
+	///	<br>- Debug.Listeners collection if DEBUG flag is set</br>
 	///	<br>- Standard output string if CONSOLE flag is set</br>
 	///	<br>- <see cref="LogFile"/></br>
 	/// </para>

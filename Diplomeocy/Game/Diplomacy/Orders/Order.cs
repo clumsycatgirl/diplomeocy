@@ -1,4 +1,6 @@
-﻿namespace Diplomacy.Orders;
+﻿using Diplomacy.Utils;
+
+namespace Diplomacy.Orders;
 
 public enum OrderStatus {
 	Pending, Succeeded, Failed, Disbanded, Retired
@@ -22,6 +24,26 @@ public abstract class Order {
 
 	public bool Resolved => Status != OrderStatus.Pending;
 
-	protected string ToString(string type) => $"[{Status}] ({Unit?.Type} in {Unit?.Location.Name}) {type}";
+	public abstract void Resolve();
+	public abstract void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDepedency);
+
+	protected string ToString(string type) => $"[{Status}][{Strength}] ({Unit?.Type} in {Unit?.Location.Name}) {type}";
 	public override string ToString() => ToString("*order*");
+
+	protected void SetDependenciesToPending(Order order, Dictionary<Order, List<Order>> dependencyGraph) {
+		if (!dependencyGraph.ContainsKey(order)) {
+			return;
+		}
+
+		order.Status = OrderStatus.Pending;
+		List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
+		dependencies
+			.AsParallel()
+			.Where(order => order.Status != OrderStatus.Pending)
+			.ForAll(dependency => {
+				Log.WriteLine($"setting {dependency} to pending");
+				dependency.Status = OrderStatus.Pending;
+				SetDependenciesToPending(dependency, dependencyGraph);
+			});
+	}
 }
