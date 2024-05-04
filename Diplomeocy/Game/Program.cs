@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
 
 using Diplomacy;
+using Diplomacy.Utils;
+
+using Microsoft.CSharp.RuntimeBinder;
 
 using Orders = System.Collections.Generic.List<Diplomacy.Order>;
 
-Console.WriteLine("meow\n");
+Log.WriteLine("meow\n");
 
 Game game = new();
 game.StartGame();
@@ -17,17 +20,17 @@ Order? order;
 // log debug data
 Action debug = () => {
 	players.ForEach(player => {
-		Console.WriteLine($"--{player.Countries[0].Name}: Units--");
-		player.Units.ForEach(u => Console.WriteLine(u));
-		Console.WriteLine($"--{player.Countries[0].Name}: Orders--");
-		player.Orders.ForEach(o => Console.WriteLine(o));
-		Console.WriteLine();
+		Log.WriteLine($"--{player.Countries[0].Name}: Units--");
+		player.Units.ForEach(u => Log.WriteLine(u));
+		Log.WriteLine($"--{player.Countries[0].Name}: Orders--");
+		player.Orders.ForEach(o => Log.WriteLine(o));
+		Log.WriteLine("");
 	});
-	Console.WriteLine();
+	Log.WriteLine("");
 };
 // advance -> log
 Action step = () => {
-	Console.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
+	Log.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
 	Debug.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
 	debug();
 	game.ResolveOrderResolutionPhase();

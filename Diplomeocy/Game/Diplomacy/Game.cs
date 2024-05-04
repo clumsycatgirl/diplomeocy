@@ -326,7 +326,7 @@ public class Game {
 		Dictionary<Order, List<Order>> dependencyGraph = new();
 		orders
 			.AsParallel()
-			.Where(order => order is not SupportOrder)
+			//.Where(order => order is not SupportOrder)
 			.ForAll(order => {
 				List<Order> dependencies = orders
 					.AsParallel()
@@ -354,8 +354,8 @@ public class Game {
 				Order order = orders[i];
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
+				Log.WriteLine($"\nlooking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 				if (order.Resolved) continue;
-				Log.WriteLine($"looking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 
 				// multiple orders trying to get to the same territory
 				List<Order> conflictingDependencies = dependencies
@@ -370,10 +370,11 @@ public class Game {
 					int highStrengthOrderCount = 0;
 					if (order.Strength == highestStrength) highStrengthOrderCount++;
 
+
+
 					// find all other orders we depend on that have the same strength
-					int numberOfOrdersWithHighStrength = conflictingDependencies
+					highStrengthOrderCount += conflictingDependencies
 						.Count(dependency => dependency.Strength == highestStrength);
-					if (numberOfOrdersWithHighStrength >= 1) highStrengthOrderCount += numberOfOrdersWithHighStrength;
 
 					List<Order> totalConflictingOrders = conflictingDependencies
 						.Concat(new[] { order })
@@ -395,6 +396,7 @@ public class Game {
 						totalConflictingOrders
 							.AsParallel()
 							.ForAll(order => order.Status = OrderStatus.Failed);
+						continue;
 					}
 				}
 
@@ -406,15 +408,18 @@ public class Game {
 				// check whether the forward dependency has been resolved
 				// if yes resolve current order
 				if (forwardDependency is not null) {
+					Log.WriteLine($"forwardDependency is {forwardDependency}");
 					// set all dependencies for the cancelled support order to pending
-					if (forwardDependency is SupportOrder cancelledSupportOrder && !cancelledSupportOrder.Resolved) {
+					if (forwardDependency is SupportOrder cancelledSupportOrder && cancelledSupportOrder.Resolved) {
+						Log.WriteLine($"cancelling {cancelledSupportOrder}");
 						cancelledSupportOrder.Status = OrderStatus.Failed;
-						cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Failed;
+						cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
 						cancelledSupportOrder.SupportedOrder.Strength--;
 
 						SetDependenciesToPending(cancelledSupportOrder.SupportedOrder, dependencyGraph);
 
 						order.Status = OrderStatus.Failed;
+						Log.WriteLine($"updating self: {order}");
 						continue;
 					}
 
@@ -432,15 +437,6 @@ public class Game {
 			}
 		}
 
-		orders
-			.AsParallel()
-			.Where(order => order.Status == OrderStatus.Succeeded)
-			.ForAll(order => {
-				if (order is MoveOrder moveOrder) {
-					moveOrder.Unit.Move(moveOrder.Target ?? throw new InvalidOperationException("moving to nowhere good job idiot"));
-				}
-			});
-
 		Log.WriteLine("--orders review--");
 		orders
 			.OfType<SupportOrder>()
@@ -450,6 +446,11 @@ public class Game {
 			.Where(kvp => kvp.Value.Any())
 			.ToImmutableList()
 			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
+
+		orders
+			.AsParallel()
+			.Where(order => order.Status == OrderStatus.Succeeded && order is MoveOrder)
+			.ForAll(moveOrder => moveOrder.Unit.Move(moveOrder.Target ?? throw new InvalidOperationException("moving to nowhere good job idiot")));
 
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 

@@ -24,6 +24,7 @@ public static class Log {
 		Error
 	}
 
+	public static bool LogToConsole = true;
 	private static TextWriter outputStream = new VSDebugWriter();
 	public static TextWriter OutputStream {
 		get => outputStream;
@@ -126,6 +127,8 @@ public static class Log {
 #if DEBUG
 				outputStream.WriteLine(str);
 #endif
+				if (LogToConsole && outputStream != Console.Out) Console.WriteLine(str);
+
 				writer?.WriteLine(str);
 			}
 
@@ -158,6 +161,8 @@ public static class Log {
 #if DEBUG
 				outputStream.WriteLine(str);
 #endif
+				if (LogToConsole && outputStream != Console.Out) Console.WriteLine(str);
+
 				writer?.WriteLine(str);
 			}
 
