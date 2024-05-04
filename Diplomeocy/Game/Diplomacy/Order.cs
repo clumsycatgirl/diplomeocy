@@ -14,7 +14,7 @@ public abstract class Order {
 		get => target;
 		set {
 			if (value is null || !Unit.Location.AdjacentTerritories.Contains(value)) {
-				throw new InvalidOperationException($"wtf physics says you can't go from london to moscow in one turn sowwy");
+				throw new InvalidOperationException($"wtf physics says you can't go from {Unit.Location.Name} to {value!.Name} in one turn sowwy");
 			}
 			target = value;
 		}

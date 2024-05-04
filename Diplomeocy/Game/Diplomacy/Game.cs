@@ -349,13 +349,21 @@ public class Game {
 			.ToImmutableList()
 			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
+		// hold orders that didn't interact with anything will be set to success
+		// we do this to avoid having to check hold orders in the main loop
+		// when they do not interact with any other order
+		orders
+			.AsParallel()
+			.OfType<HoldOrder>()
+			.ForAll(order => order.Status = OrderStatus.Succeeded);
+
 		while (orders.Any(order => !order.Resolved)) {
 			for (int i = 0; i < orders.Count; i++) {
 				Order order = orders[i];
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
-				Log.WriteLine($"\nlooking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 				if (order.Resolved) continue;
+				Log.WriteLine($"\nlooking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 
 				// multiple orders trying to get to the same territory
 				List<Order> conflictingDependencies = dependencies
@@ -421,21 +429,18 @@ public class Game {
 						order.Status = OrderStatus.Failed;
 						Log.WriteLine($"updating self: {order}");
 						continue;
-					}
-
-					if (forwardDependency.Resolved) {
-						if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
-							order.Status = OrderStatus.Succeeded;
-						} else {
-							order.Status = OrderStatus.Failed;
-						}
 					} else if (forwardDependency is HoldOrder holdOrder) {
-						Log.WriteLine($"fucking {holdOrder} is blocking with strength {holdOrder.Strength}");
 						if (holdOrder.Strength >= order.Strength) {
 							order.Status = OrderStatus.Failed;
 						} else {
 							order.Status = OrderStatus.Succeeded;
 							holdOrder.Status = OrderStatus.Retired;
+						}
+					} else if (forwardDependency.Resolved) {
+						if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != order.Target) {
+							order.Status = OrderStatus.Succeeded;
+						} else {
+							order.Status = OrderStatus.Failed;
 						}
 					}
 				} else {
@@ -463,6 +468,7 @@ public class Game {
 
 		Log.WriteLine("\n");
 	}
+
 	private void SetDependenciesToPending(Order order, Dictionary<Order, List<Order>> dependencyGraph) {
 		if (!dependencyGraph.ContainsKey(order)) {
 			return;

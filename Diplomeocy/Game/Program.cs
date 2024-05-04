@@ -1,13 +1,10 @@
-﻿using System.Diagnostics;
-
-using Diplomacy;
+﻿using Diplomacy;
 using Diplomacy.Utils;
-
-using Microsoft.CSharp.RuntimeBinder;
 
 using Orders = System.Collections.Generic.List<Diplomacy.Order>;
 
-Log.WriteLine("meow\n");
+Log.WriteLine(Log.LogLevel.Info, "meow\n");
+
 
 Game game = new();
 game.StartGame();
@@ -20,9 +17,9 @@ Order? order;
 // log debug data
 Action debug = () => {
 	players.ForEach(player => {
-		Log.WriteLine($"--{player.Countries[0].Name}: Units--");
+		Log.WriteLine(Log.LogLevel.Info, $"--{player.Countries[0].Name}: Units--");
 		player.Units.ForEach(u => Log.WriteLine(u));
-		Log.WriteLine($"--{player.Countries[0].Name}: Orders--");
+		Log.WriteLine(Log.LogLevel.Info, $"--{player.Countries[0].Name}: Orders--");
 		player.Orders.ForEach(o => Log.WriteLine(o));
 		Log.WriteLine("");
 	});
@@ -30,8 +27,7 @@ Action debug = () => {
 };
 // advance -> log
 Action step = () => {
-	Log.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
-	Debug.WriteLine($"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
+	Log.WriteLine(Log.LogLevel.Warning, $"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
 	debug();
 	game.ResolveOrderResolutionPhase();
 	game.GameTurn.Phase = GamePhase.AdvanceTurn;
@@ -274,6 +270,21 @@ russia.Orders.AddRange(new Orders {
 		Target = game.Board.Territory(Territories.Prussia),
 	},
 });
+
+// check for errors
+// if any of these is wrong it will throw an exception
+germany.Unit(Territories.Prussia);
+germany.Unit(Territories.Silesia);
+germany.Unit(Territories.Kiel);
+russia.Unit(Territories.Moscow);
+russia.Unit(Territories.Livonia);
+russia.Unit(Territories.Warsaw);
+russia.Unit(Territories.Sevastopol);
+
+#endif
+
+// test hold 2
+#if true
 #endif
 
 step();
