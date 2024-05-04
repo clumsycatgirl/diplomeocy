@@ -389,8 +389,13 @@ public class GameHandler {
 
 		orders
 			.AsParallel()
-			.Where(order => order.Status == OrderStatus.Succeeded && order is MoveOrder)
+			.Where(order => order.Status == OrderStatus.Succeeded && (order is MoveOrder || order is HoldOrder))
 			.ForAll(moveOrder => moveOrder.Resolve());
+
+		orders
+			.AsParallel()
+			.Where(order => order.Status != OrderStatus.Succeeded)
+			.ForAll(moveOrder => moveOrder.ResolveFailed());
 
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 

@@ -12,19 +12,29 @@ Log.WriteLine(Log.LogLevel.Info, "meow\n");
 
 GameHandler game = new();
 game.StartGame();
-
+Player england = game.Players[0];
 Player germany = game.Players[1];
-Player russia = game.Players[game.Players.Count - 1];
-List<Player> players = new() { germany, russia };
+Player austria = game.Players[2];
+Player turkey = game.Players[3];
+Player france = game.Players[4];
+Player italy = game.Players[5];
+Player russia = game.Players[6];
+List<Player> players = new();
 Order? order;
 
 Action resetGame = () => {
 	game = new();
 	game.StartGame();
+	england = game.Players[0];
 	germany = game.Players[1];
-	russia = game.Players[game.Players.Count - 1];
-	players = new() { germany, russia };
+	austria = game.Players[2];
+	turkey = game.Players[3];
+	france = game.Players[4];
+	italy = game.Players[5];
+	russia = game.Players[6];
+	players = new() { germany, france, russia };
 };
+resetGame();
 
 // log debug data
 Action debug = () => {
@@ -368,6 +378,42 @@ russia.Unit(Territories.Prussia);
 Log.WriteLine(Log.LogLevel.Error, "----[diagram_6_done]----");
 #endif
 #endregion
+#endregion
+
+#region diagram_7
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_7]------");
+Log.WriteLine("implement those damned convoys coward!! stop running!!");
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_7_done]----");
+#endif
+#endregion
+
+#region diagram_8
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_8]------");
+
+germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Burgundy));
+france.Unit(Territories.Brest).Move(game.Board.Territory(Territories.Gascony));
+
+germany.Orders.AddRange(new Orders {
+	new HoldOrder {
+		Unit = germany.Unit(Territories.Burgundy),
+	},
+});
+order = new MoveOrder { Unit = france.Unit(Territories.Marseilles), Target = game.Board.Territory(Territories.Burgundy) };
+france.Orders.AddRange(new Orders {
+	order,
+	new SupportOrder {
+		Unit = france.Unit(Territories.Gascony),
+		SupportedOrder = order,
+	}
+});
+step();
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_8_done]----");
+#endif
 #endregion
 
 //step();

@@ -15,8 +15,8 @@ public abstract class Order {
 	public Territory? Target {
 		get => target;
 		set {
-			if (value is null || !Unit.Location.AdjacentTerritories.Contains(value)) {
-				throw new InvalidOperationException($"wtf physics says you can't go from {Unit.Location.Name} to {value!.Name} in one turn sowwy");
+			if (value is null || (!Unit.Location?.AdjacentTerritories.Contains(value) ?? false)) {
+				throw new InvalidOperationException($"wtf physics says you can't go from {Unit.Location?.Name} to {value?.Name} in one turn sowwy");
 			}
 			target = value;
 		}
@@ -25,9 +25,10 @@ public abstract class Order {
 	public bool Resolved => Status != OrderStatus.Pending;
 
 	public abstract void Resolve();
+	public virtual void ResolveFailed() { }
 	public abstract void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDepedency);
 
-	protected string ToString(string type) => $"[{Status}][{Strength}] ({Unit?.Type} in {Unit?.Location.Name}) {type}";
+	protected string ToString(string type) => $"[{Status}][{Strength}] ({Unit?.Type} in {Unit?.Location?.Name}) {type}{(target is null ? "" : $" targets {target}")}";
 	public override string ToString() => ToString("*order*");
 
 	protected void SetDependenciesToPending(Order order, Dictionary<Order, List<Order>> dependencyGraph) {
