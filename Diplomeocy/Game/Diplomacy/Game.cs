@@ -430,6 +430,13 @@ public class Game {
 							order.Status = OrderStatus.Failed;
 						}
 					} else if (forwardDependency is HoldOrder holdOrder) {
+						Log.WriteLine($"fucking {holdOrder} is blocking with strength {holdOrder.Strength}");
+						if (holdOrder.Strength >= order.Strength) {
+							order.Status = OrderStatus.Failed;
+						} else {
+							order.Status = OrderStatus.Succeeded;
+							holdOrder.Status = OrderStatus.Retired;
+						}
 					}
 				} else {
 					order.Status = OrderStatus.Succeeded;

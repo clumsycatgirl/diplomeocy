@@ -202,7 +202,7 @@ russia.Orders.AddRange(new Orders {
 });
 #endif
 
-#if true
+#if false
 germany.Orders.AddRange(new Orders {
 	new MoveOrder {
 		Unit = germany.Unit(Territories.Munich),
@@ -240,6 +240,40 @@ russia.Orders.AddRange(new Orders {
 	}
 });
 
+#endif
+
+// test hold 1
+#if true
+germany.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Munich),
+		Target = game.Board.Territory(Territories.Silesia),
+	},
+	new MoveOrder {
+		Unit = germany.Unit(Territories.Berlin),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.SaintPetersburg),
+		Target = game.Board.Territory(Territories.Livonia),
+	},
+});
+
+step();
+
+germany.Orders.AddRange(new Orders {
+	new HoldOrder {
+		Unit = germany.Unit(Territories.Prussia),
+	},
+});
+russia.Orders.AddRange(new Orders {
+	new MoveOrder {
+		Unit = russia.Unit(Territories.Warsaw),
+		Target = game.Board.Territory(Territories.Prussia),
+	},
+});
 #endif
 
 step();
