@@ -5,5 +5,5 @@ public class Territory {
 	public Unit? OccupyingUnit { get; set; } = null;
 	public List<Territory> AdjacentTerritories { get; set; } = new();
 
-	public override string ToString() => $"({Name} occupied by {OccupyingUnit})";
+	public override string ToString() => $"({Name} occupied by {OccupyingUnit?.ToString() ?? "none"})";
 }

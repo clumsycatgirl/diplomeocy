@@ -529,7 +529,7 @@ russia.Orders.AddRange(new Orders {
 step();
 
 germany.Unit(Territories.Berlin);
-germany.Unit(Territories.Munich);
+austria.Unit(Territories.Munich);
 austria.Unit(Territories.Tyrolia);
 russia.Unit(Territories.Prussia);
 russia.Unit(Territories.Warsaw);

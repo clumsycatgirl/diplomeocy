@@ -1,10 +1,18 @@
 ﻿using Diplomacy.Orders;
+using Diplomacy.Utils;
 
 namespace Game.Diplomacy.Orders;
 
 public class MoveOrder : Order {
 	public override void Resolve() {
 		Unit.Move(Target ?? throw new InvalidOperationException("moving to nowhere good job idiot"));
+	}
+
+	public override void ResolveFailed() {
+		if (Status == OrderStatus.Disbanded) {
+			if (Unit.Location!.OccupyingUnit == Unit) Unit.Location!.OccupyingUnit = null;
+			Unit.Location = null;
+		}
 	}
 
 	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
@@ -81,12 +89,23 @@ public class MoveOrder : Order {
 		}
 
 		if (forwardDependency is MoveOrder moveOrder) {
+			Log.WriteLine($"{this} forward dependency is {moveOrder}");
 			// check if the order is trying to get to the same place the current order is takign place on
 			if (Unit.Location == moveOrder.Target) {
 				Status = OrderStatus.Failed;
 				moveOrder.Status = OrderStatus.Failed;
 			} else if (moveOrder.Status == OrderStatus.Succeeded) {
 				Status = OrderStatus.Succeeded;
+			} else if (moveOrder.Status == OrderStatus.Failed) {
+				// forwardUnit should stay in place
+
+				// if we can win retired the forwardUnit
+				if (Strength > 1) {
+					moveOrder.Status = OrderStatus.Disbanded;
+					Status = OrderStatus.Succeeded;
+				} else {
+					Status = OrderStatus.Failed;
+				}
 			} else {
 				Status = OrderStatus.Failed;
 			}
