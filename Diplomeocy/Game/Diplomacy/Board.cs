@@ -26,7 +26,7 @@ public class Board {
 			Territory(ETerritories.Trieste),
 			Territory(ETerritories.Venice),
 			Territory(ETerritories.Albania),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 			Territory(ETerritories.Apuleia),
 		};
 		Territory(ETerritories.AegeanSea).AdjacentTerritories = new() {
@@ -35,19 +35,19 @@ public class Board {
 			Territory(ETerritories.Constantinople),
 			Territory(ETerritories.Smyrna),
 			Territory(ETerritories.EasternMediterranean),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 		};
 		Territory(ETerritories.Apuleia).AdjacentTerritories = new() {
 			Territory(ETerritories.AdriaticSea),
 			Territory(ETerritories.Venice),
 			Territory(ETerritories.Naples),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 		};
 		Territory(ETerritories.Albania).AdjacentTerritories = new() {
 			Territory(ETerritories.Trieste),
 			Territory(ETerritories.Serbia),
 			Territory(ETerritories.Greece),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 			Territory(ETerritories.AdriaticSea),
 		};
 		Territory(ETerritories.Ankara).AdjacentTerritories = new() {
@@ -163,7 +163,7 @@ public class Board {
 			Territory(ETerritories.AegeanSea),
 			Territory(ETerritories.Smyrna),
 			Territory(ETerritories.Syria),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 		};
 		Territory(ETerritories.Edinburgh).AdjacentTerritories = new() {
 			Territory(ETerritories.Clyde),
@@ -210,7 +210,7 @@ public class Board {
 			Territory(ETerritories.Bulgaria),
 			Territory(ETerritories.Serbia),
 			Territory(ETerritories.Albania),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 			Territory(ETerritories.AegeanSea),
 		};
 		Territory(ETerritories.GulfOfLyon).AdjacentTerritories = new() {
@@ -241,7 +241,7 @@ public class Board {
 			Territory(ETerritories.NorthSea),
 			Territory(ETerritories.HelgolandBight),
 		};
-		Territory(ETerritories.Ioniansea).AdjacentTerritories = new() {
+		Territory(ETerritories.IonianSea).AdjacentTerritories = new() {
 			Territory(ETerritories.AdriaticSea),
 			Territory(ETerritories.Apuleia),
 			Territory(ETerritories.Naples),
@@ -327,7 +327,7 @@ public class Board {
 		Territory(ETerritories.Naples).AdjacentTerritories = new() {
 			Territory(ETerritories.Rome),
 			Territory(ETerritories.Apuleia),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 			Territory(ETerritories.TyrrhenianSea),
 		};
 		Territory(ETerritories.NorthAfrica).AdjacentTerritories = new() {
@@ -494,7 +494,7 @@ public class Board {
 			Territory(ETerritories.NorthAfrica),
 			Territory(ETerritories.WesternMediterranean),
 			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 		};
 		Territory(ETerritories.Tuscany).AdjacentTerritories = new() {
 			Territory(ETerritories.Piedmont),
@@ -519,7 +519,7 @@ public class Board {
 			Territory(ETerritories.Tuscany),
 			Territory(ETerritories.Rome),
 			Territory(ETerritories.Naples),
-			Territory(ETerritories.Ioniansea),
+			Territory(ETerritories.IonianSea),
 		};
 		Territory(ETerritories.Ukraine).AdjacentTerritories = new() {
 			Territory(ETerritories.Warsaw),

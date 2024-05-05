@@ -32,7 +32,7 @@ Action resetGame = () => {
 	france = game.Players[4];
 	italy = game.Players[5];
 	russia = game.Players[6];
-	players = new() { germany, france, russia };
+	players = new() { germany, france, russia, italy, austria };
 };
 resetGame();
 
@@ -378,7 +378,6 @@ russia.Unit(Territories.Prussia);
 Log.WriteLine(Log.LogLevel.Error, "----[diagram_6_done]----");
 #endif
 #endregion
-#endregion
 
 #region diagram_7
 #if true
@@ -412,8 +411,133 @@ france.Orders.AddRange(new Orders {
 });
 step();
 
+france.Unit(Territories.Burgundy);
+
 Log.WriteLine(Log.LogLevel.Error, "----[diagram_8_done]----");
 #endif
+#endregion
+
+#region diagram_9
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_9]------");
+
+germany.Unit(Territories.Berlin).Move(game.Board.Territory(Territories.BalticSea));
+germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia));
+russia.Unit(Territories.Warsaw).Move(game.Board.Territory(Territories.Prussia));
+
+order = new MoveOrder { Unit = germany.Unit(Territories.Silesia), Target = game.Board.Territory(Territories.Prussia) };
+germany.Orders.AddRange(new Orders {
+	order, new SupportOrder {  SupportedOrder = order, Unit = germany.Unit(Territories.BalticSea) },
+});
+russia.Orders.Add(new HoldOrder { Unit = russia.Unit(Territories.Prussia) });
+step();
+
+germany.Unit(Territories.BalticSea);
+germany.Unit(Territories.Prussia);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_9_done]----");
+#endif
+#endregion
+
+#region diagram_10
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_10]------");
+
+france.Unit(Territories.Brest).Move(game.Board.Territory(Territories.MidAtlanticOcean));
+france.Unit(Territories.MidAtlanticOcean).Move(game.Board.Territory(Territories.WesternMediterranean));
+france.Unit(Territories.Marseilles).Move(game.Board.Territory(Territories.GulfOfLyon));
+
+order = new MoveOrder { Unit = france.Unit(Territories.GulfOfLyon), Target = game.Board.Territory(Territories.TyrrhenianSea) };
+france.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = france.Unit(Territories.WesternMediterranean) },
+});
+order = new MoveOrder { Unit = italy.Unit(Territories.Naples), Target = game.Board.Territory(Territories.TyrrhenianSea), };
+italy.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = italy.Unit(Territories.Rome) },
+});
+step();
+
+italy.Unit(Territories.Rome);
+italy.Unit(Territories.Naples);
+france.Unit(Territories.WesternMediterranean);
+france.Unit(Territories.GulfOfLyon);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_10_done]----");
+#endif
+#endregion
+
+#region diagram_11
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_11]------");
+
+italy.Unit(Territories.Naples).Move(game.Board.Territory(Territories.TyrrhenianSea));
+france.Unit(Territories.Brest).Move(game.Board.Territory(Territories.MidAtlanticOcean));
+france.Unit(Territories.MidAtlanticOcean).Move(game.Board.Territory(Territories.WesternMediterranean));
+france.Unit(Territories.Marseilles).Move(game.Board.Territory(Territories.GulfOfLyon));
+
+
+
+order = new MoveOrder { Unit = france.Unit(Territories.GulfOfLyon), Target = game.Board.Territory(Territories.TyrrhenianSea) };
+france.Orders.AddRange(new Orders {
+	order, new SupportOrder {
+		Unit = france.Unit(Territories.WesternMediterranean),
+		SupportedOrder = order,
+	},
+});
+order = new HoldOrder { Unit = italy.Unit(Territories.TyrrhenianSea) };
+italy.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = italy.Unit(Territories.Rome) },
+});
+step();
+
+italy.Unit(Territories.Rome);
+italy.Unit(Territories.TyrrhenianSea);
+france.Unit(Territories.WesternMediterranean);
+france.Unit(Territories.GulfOfLyon);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_11_done]----");
+#endif
+#endregion
+
+#region diagram_12
+#if true
+resetGame();
+Log.WriteLine(Log.LogLevel.Error, "------[diagram_12]------");
+
+russia.Unit(Territories.Warsaw).Move(game.Board.Territory(Territories.Prussia));
+russia.Unit(Territories.Moscow).Move(game.Board.Territory(Territories.Warsaw));
+austria.Unit(Territories.Trieste).Move(game.Board.Territory(Territories.Tyrolia));
+austria.Unit(Territories.Vienna).Move(game.Board.Territory(Territories.Bohemia));
+
+order = new MoveOrder { Unit = austria.Unit(Territories.Bohemia), Target = game.Board.Territory(Territories.Munich) };
+austria.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = austria.Unit(Territories.Tyrolia) },
+});
+
+order = new MoveOrder { Unit = germany.Unit(Territories.Munich), Target = game.Board.Territory(Territories.Silesia) };
+germany.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = germany.Unit(Territories.Berlin) },
+});
+
+order = new MoveOrder { Unit = russia.Unit(Territories.Warsaw), Target = game.Board.Territory(Territories.Silesia) };
+russia.Orders.AddRange(new Orders {
+	order, new SupportOrder { SupportedOrder = order, Unit = russia.Unit(Territories.Prussia) },
+});
+step();
+
+germany.Unit(Territories.Berlin);
+germany.Unit(Territories.Munich);
+austria.Unit(Territories.Tyrolia);
+russia.Unit(Territories.Prussia);
+russia.Unit(Territories.Warsaw);
+
+Log.WriteLine(Log.LogLevel.Error, "----[diagram_12_done]----");
+#endif
+#endregion
+
 #endregion
 
 //step();

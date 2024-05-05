@@ -8,5 +8,5 @@ public class Player {
 	public List<Unit> Units { get; init; } = new();
 	public List<Order> Orders { get; init; } = new();
 
-	public Unit Unit(Territories territory) => Units.First(u => u.Location.Name == territory.ToString());
+	public Unit Unit(Territories territory) => Units.First(u => u.Location?.Name == territory.ToString());
 }

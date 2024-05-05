@@ -32,7 +32,7 @@ public enum Territories {
 	GulfOfBothania,
 	HelgolandBight,
 	Holland,
-	Ioniansea,
+	IonianSea,
 	IrishSea,
 	Kiel,
 	Liverpool,
