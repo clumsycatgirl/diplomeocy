@@ -1,4 +1,4 @@
-﻿using Diplomacy.Utils;
+﻿using System.Collections.Immutable;
 
 namespace Diplomacy.Orders;
 
@@ -31,20 +31,37 @@ public abstract class Order {
 	protected string ToString(string type) => $"[{Status}][{Strength}] ({Unit?.Type} in {Unit?.Location?.Name}) {type}{(target is null ? "" : $" targets {target}")}";
 	public override string ToString() => ToString("*order*");
 
-	protected void SetDependenciesToPending(Order order, Dictionary<Order, List<Order>> dependencyGraph) {
-		if (!dependencyGraph.ContainsKey(order)) {
+	internal void SetDependenciesToPending(Dictionary<Order, List<Order>> dependencyGraph) {
+		if (!dependencyGraph.ContainsKey(this)) {
 			return;
 		}
 
-		order.Status = OrderStatus.Pending;
-		List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
+		Status = OrderStatus.Pending;
+		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 		dependencies
 			.AsParallel()
 			.Where(order => order.Status != OrderStatus.Pending)
 			.ForAll(dependency => {
-				Log.WriteLine($"setting {dependency} to pending");
+				//Log.WriteLine($"setting {dependency} to pending");
 				dependency.Status = OrderStatus.Pending;
-				SetDependenciesToPending(dependency, dependencyGraph);
+				dependency.SetDependenciesToPending(dependencyGraph);
+			});
+	}
+
+	internal void SetBackwardsDependenciesToPending(Dictionary<Order, List<Order>> depencenyGraph) {
+		if (!depencenyGraph.ContainsKey(this)) {
+			return;
+		}
+
+		Status = OrderStatus.Pending;
+		List<Order> orders = depencenyGraph.Keys.ToList();
+		orders.
+			AsParallel()
+			.Where(order => depencenyGraph[order].Contains(this) && order.Status != OrderStatus.Pending)
+			.ForAll(order => {
+				//Log.WriteLine($"setting {order} to pending");
+				order.Status = OrderStatus.Pending;
+				order.SetBackwardsDependenciesToPending(depencenyGraph);
 			});
 	}
 }

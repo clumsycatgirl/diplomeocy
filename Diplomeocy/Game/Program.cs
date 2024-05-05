@@ -10,15 +10,15 @@ using Orders = System.Collections.Generic.List<Diplomacy.Orders.Order>;
 Log.WriteLine(Log.LogLevel.Info, "meow\n");
 
 Dictionary<string, bool> tests = new Dictionary<string, bool> {
-	{ "diagram-4", true },
-	{ "diagram-5", true },
-	{ "diagram-6", true },
-	{ "diagram-7", true },
-	{ "diagram-8", true },
-	{ "diagram-9", true },
-	{ "diagram-10", true },
-	{ "diagram-11", true },
-	{ "diagram-12", true },
+	{ "diagram-4", false },
+	{ "diagram-5", false },
+	{ "diagram-6", false },
+	{ "diagram-7", false }, // todo
+	{ "diagram-8", false },
+	{ "diagram-9", false },
+	{ "diagram-10", false },
+	{ "diagram-11", false },
+	{ "diagram-12", false },
 	{ "diagram-13", true },
 };
 
@@ -44,7 +44,7 @@ Action resetGame = () => {
 	france = game.Players[4];
 	italy = game.Players[5];
 	russia = game.Players[6];
-	players = new() { germany, france, russia, italy, austria };
+	players = game.Players;
 };
 resetGame();
 
@@ -70,8 +70,14 @@ Action step = () => {
 	debug();
 };
 
-step();
+Log.WriteLine(Log.LogLevel.Warning, $"----Turn {game.GameTurn.Year} {game.GameTurn.Season}----");
+players.ForEach(player => {
+	Log.WriteLine(Log.LogLevel.Info, $"--{player.Countries[0].Name}: Units--");
+	player.Units.ForEach(u => Log.WriteLine(u));
+	Log.WriteLine("");
+});
 
+#region old-tests
 // test movement 1
 #if false
 germany.Orders.AddRange(new Orders  {
@@ -316,6 +322,7 @@ russia.Unit(Territories.Warsaw);
 russia.Unit(Territories.Sevastopol);
 
 #endif
+#endregion
 
 #region rules_diagrams
 
@@ -534,6 +541,44 @@ if (tests["diagram-12"]) {
 if (tests["diagram-13"]) {
 	resetGame();
 	Log.WriteLine(Log.LogLevel.Error, "------[diagram_13]------");
+
+	turkey.Unit(Territories.Constantinople).Move(game.Board.Territory(Territories.Bulgaria));
+
+	russia.Unit(Territories.Warsaw)
+		.Move(game.Board.Territory(Territories.Galicia))
+		.Move(game.Board.Territory(Territories.Budapest))
+		.Move(game.Board.Territory(Territories.Serbia));
+	russia.Unit(Territories.Moscow)
+		.Move(game.Board.Territory(Territories.Ukraine))
+		.Move(game.Board.Territory(Territories.Rumania));
+
+	turkey.Orders.Add(new MoveOrder {
+		Unit = turkey.Unit(Territories.Bulgaria),
+		Target = game.Board.Territory(Territories.Rumania),
+	});
+	order = new MoveOrder { Unit = russia.Unit(Territories.Rumania), Target = game.Board.Territory(Territories.Bulgaria) };
+	russia.Orders.AddRange(new Orders {
+		order, new SupportOrder {
+			SupportedOrder = order,
+			Unit = russia.Unit(Territories.Serbia),
+		},
+		new MoveOrder {
+			Unit = russia.Unit(Territories.Sevastopol),
+			Target = game.Board.Territory(Territories.Rumania),
+		},
+	});
+
+	step();
+
+	russia.Unit(Territories.Serbia);
+	russia.Unit(Territories.Rumania);
+	russia.Unit(Territories.Bulgaria);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_13_done]----");
+}
+
+if (tests["diagram-14"]) {
+
 }
 
 #endregion

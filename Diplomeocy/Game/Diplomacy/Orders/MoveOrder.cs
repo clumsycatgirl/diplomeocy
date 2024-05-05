@@ -20,7 +20,7 @@ public class MoveOrder : Order {
 
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 		List<Order> conflictingDependencies = dependencies
-					.Where(dependency => dependency is MoveOrder moveOrder && moveOrder.Target == Target)
+					.Where(dependency => dependency is MoveOrder moveOrder && moveOrder.Target == Target && moveOrder.Status == OrderStatus.Pending)
 					.ToList();
 		// multiple orders trying to get to the same territory
 		if (conflictingDependencies.Any()) {
@@ -72,7 +72,7 @@ public class MoveOrder : Order {
 			cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
 			cancelledSupportOrder.SupportedOrder.Strength--;
 
-			SetDependenciesToPending(cancelledSupportOrder.SupportedOrder, dependencyGraph!);
+			cancelledSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
 
 			Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
 			return;
@@ -91,7 +91,7 @@ public class MoveOrder : Order {
 		if (forwardDependency is MoveOrder moveOrder) {
 			Log.WriteLine($"{this} forward dependency is {moveOrder}");
 			// check if the order is trying to get to the same place the current order is takign place on
-			if (Unit.Location == moveOrder.Target) {
+			if (Unit.Location == moveOrder.Target && Strength == moveOrder.Strength) {
 				Status = OrderStatus.Failed;
 				moveOrder.Status = OrderStatus.Failed;
 			} else if (moveOrder.Status == OrderStatus.Succeeded) {
@@ -101,11 +101,14 @@ public class MoveOrder : Order {
 
 				// if we can win retired the forwardUnit
 				if (Strength > 1) {
+					moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 					moveOrder.Status = OrderStatus.Disbanded;
 					Status = OrderStatus.Succeeded;
 				} else {
 					Status = OrderStatus.Failed;
 				}
+			} else if (moveOrder.Status == OrderStatus.Disbanded) {
+				Status = OrderStatus.Succeeded;
 			} else {
 				Status = OrderStatus.Failed;
 			}

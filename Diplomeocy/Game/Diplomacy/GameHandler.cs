@@ -384,8 +384,8 @@ public class GameHandler {
 			.ForEach(supportOrder => Log.WriteLine(supportOrder));
 		dependencyGraph
 			.Where(kvp => kvp.Value.Any())
-				.ToImmutableList()
-				.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
+			.ToImmutableList()
+			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
 		orders
 			.AsParallel()

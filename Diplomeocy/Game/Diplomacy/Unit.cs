@@ -9,9 +9,10 @@ public class Unit {
 
 	public override string ToString() => $"({Type} in {Location?.Name})";
 
-	public void Move(Territory destination) {
+	public Unit Move(Territory destination) {
 		if (Location is not null) Location.OccupyingUnit = null;
 		Location = destination;
 		destination.OccupyingUnit = this;
+		return this;
 	}
 }
