@@ -1,5 +1,5 @@
 # Diplomeocy
-##### by <span title="meow meow">Sofia Elena Pujatti</span> and <span title="with a c">Michelon Eri*c*</span>
+##### by <span title="meow meow">Sofia Elena Pujatti</span> and <span title="with a c"></span>
 
 ### Welcome to **Diplomeocy**, the *purr-fect* web rendition of the game of diplomacy!
 
