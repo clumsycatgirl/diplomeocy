@@ -3,7 +3,7 @@
 namespace Diplomacy.Orders;
 
 public enum OrderStatus {
-	Pending, Succeeded, Failed, Disbanded, Retired
+	Pending, Succeeded, Failed, Dislodged, Retired
 }
 
 public abstract class Order {

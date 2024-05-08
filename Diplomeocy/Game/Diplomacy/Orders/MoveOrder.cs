@@ -1,4 +1,5 @@
-﻿using Diplomacy.Orders;
+﻿using Diplomacy;
+using Diplomacy.Orders;
 using Diplomacy.Utils;
 
 namespace Game.Diplomacy.Orders;
@@ -9,7 +10,7 @@ public class MoveOrder : Order {
 	}
 
 	public override void ResolveFailed() {
-		if (Status == OrderStatus.Disbanded) {
+		if (Status == OrderStatus.Dislodged) {
 			if (Unit.Location!.OccupyingUnit == Unit) Unit.Location!.OccupyingUnit = null;
 			Unit.Location = null;
 		}
@@ -20,7 +21,10 @@ public class MoveOrder : Order {
 
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 		List<Order> conflictingDependencies = dependencies
-					.Where(dependency => dependency is MoveOrder moveOrder && moveOrder.Target == Target && moveOrder.Status == OrderStatus.Pending)
+					.Where(dependency =>
+						dependency.Status == OrderStatus.Pending
+						&& dependency is MoveOrder moveOrder
+						&& moveOrder.Target == Target)
 					.ToList();
 		// multiple orders trying to get to the same territory
 		if (conflictingDependencies.Any()) {
@@ -61,6 +65,7 @@ public class MoveOrder : Order {
 			return;
 		}
 
+		// there's nothing so we just go
 		if (forwardDependency is null) {
 			Status = OrderStatus.Succeeded;
 			return;
@@ -88,28 +93,66 @@ public class MoveOrder : Order {
 			return;
 		}
 
+		if (Unit.Location?.Name == nameof(Territories.Rumania)) {
+			;
+		}
+
 		if (forwardDependency is MoveOrder moveOrder) {
 			Log.WriteLine($"{this} forward dependency is {moveOrder}");
 			// check if the order is trying to get to the same place the current order is takign place on
-			if (Unit.Location == moveOrder.Target && Strength == moveOrder.Strength) {
-				Status = OrderStatus.Failed;
-				moveOrder.Status = OrderStatus.Failed;
+			if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
+				if (Strength == moveOrder.Strength) {
+					Status = OrderStatus.Failed;
+					moveOrder.Status = OrderStatus.Failed;
+				} else if (Strength > moveOrder.Strength) {
+					Status = OrderStatus.Succeeded;
+					moveOrder.Status = OrderStatus.Dislodged;
+				} else {
+					Status = OrderStatus.Dislodged;
+					moveOrder.Status = OrderStatus.Succeeded;
+				}
 			} else if (moveOrder.Status == OrderStatus.Succeeded) {
+				if (moveOrder.Target != Unit.Location) {
+					Status = OrderStatus.Succeeded;
+					return;
+				}
+
+				// if the forward unit is trying to get to the same place we are
+
+				// try to dislodge them
+				if (Strength <= 1) {
+					Status = OrderStatus.Failed;
+					return;
+				}
+
+				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+				moveOrder.Status = OrderStatus.Dislodged;
 				Status = OrderStatus.Succeeded;
 			} else if (moveOrder.Status == OrderStatus.Failed) {
 				// forwardUnit should stay in place
 
-				// if we can win retired the forwardUnit
-				if (Strength > 1) {
-					moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-					moveOrder.Status = OrderStatus.Disbanded;
-					Status = OrderStatus.Succeeded;
-				} else {
+				// standoff
+				if (Strength <= 1) {
 					Status = OrderStatus.Failed;
+					return;
 				}
-			} else if (moveOrder.Status == OrderStatus.Disbanded) {
+
+				// if we can win retire the forwardUnit
+				// this means all things that tried to get to that location and failed
+				// could now succeed so set them to pending for the next iteration
+				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+				//dependencyGraph!
+				//	.ToList()
+				//	.Where(kvp => kvp.Value.Contains(moveOrder))
+				//	.ToList()
+				//	.ForEach(kvp => kvp.Key.Status = OrderStatus.Pending);
+				moveOrder.Status = OrderStatus.Dislodged;
+				Status = OrderStatus.Succeeded;
+			} else if (moveOrder.Status == OrderStatus.Dislodged) {
+				// forwardUnit is no more
 				Status = OrderStatus.Succeeded;
 			} else {
+				// idk what this means but it seems to be working so
 				Status = OrderStatus.Failed;
 			}
 			return;
