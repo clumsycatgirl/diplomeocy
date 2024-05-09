@@ -18,7 +18,13 @@ public class ConvoyOrder : Order {
 	public override void Resolve() { }
 
 	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
-		throw new Exception("fix thsi shit");
+		if (Unit.Location!.AdjacentTerritories.Contains(ConvoyedOrder.Target!)) {
+			ConvoyedOrder.Status = OrderStatus.Succeeded;
+			Status = OrderStatus.Succeeded;
+		} else {
+			ConvoyedOrder.Status = OrderStatus.Failed;
+			Status = OrderStatus.Failed;
+		}
 	}
 
 	public override string ToString() => $"{ToString("convoy")} convoyed ({ConvoyedOrder})";
