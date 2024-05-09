@@ -1,13 +1,12 @@
 ﻿using System.Collections.Immutable;
 
-
 namespace Diplomacy;
 
-using Game.Diplomacy.Orders;
-
-using Orders;
+using Diplomacy.Orders;
 
 using Utils;
+
+using ECountries = Diplomacy.Countries;
 
 public class GameHandler {
 	public List<Player> Players { get; private set; } = new();
@@ -32,14 +31,17 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.England,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.London),
 					},
 					new Unit {
+						Country = ECountries.England,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Liverpool),
 					},
 					new Unit {
+						Country = ECountries.England,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Edinburgh),
 					},
@@ -59,14 +61,17 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.Germany,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Berlin),
 					},
 					new Unit {
+						Country = ECountries.Germany,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Munich),
 					},
 					new Unit {
+						Country = ECountries.Germany,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Kiel),
 					},
@@ -86,14 +91,17 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.Austria,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Vienna),
 					},
 					new Unit {
+						Country = ECountries.Austria,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Budapest),
 					},
 					new Unit {
+						Country = ECountries.Austria,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Trieste),
 					},
@@ -113,14 +121,17 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.Turkey,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Ankara),
 					},
 					new Unit {
+						Country = ECountries.Turkey,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Constantinople),
 					},
 					new Unit {
+						Country = ECountries.Turkey,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Smyrna),
 					},
@@ -140,14 +151,17 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.France,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Paris),
 					},
 					new Unit {
+						Country = ECountries.France,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Marseilles),
 					},
 					new Unit {
+						Country = ECountries.France,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Brest),
 					},
@@ -167,21 +181,24 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.Italy,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Rome),
 					},
 					new Unit {
+						Country = ECountries.Italy,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Naples),
 					},
 					new Unit {
+						Country = ECountries.Italy,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Venice),
 					},
 				}
 			},
 			new Player {
-				Name = "Me",
+				Name = "Hatsune Miku",
 				Countries = new() {
 					new Country {
 						Name = "Russia",
@@ -195,18 +212,22 @@ public class GameHandler {
 				},
 				Units = new() {
 					new Unit {
+						Country = ECountries.Russia,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Moscow),
 					},
 					new Unit {
+						Country = ECountries.Russia,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.SaintPetersburg),
 					},
 					new Unit {
+						Country = ECountries.Russia,
 						Type = UnitType.Army,
 						Location = Board.Territory(Territories.Warsaw),
 					},
 					new Unit {
+						Country = ECountries.Russia,
 						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Sevastopol),
 					},

@@ -1,11 +1,13 @@
-﻿using Diplomacy.Orders;
-
-namespace Game.Diplomacy.Orders;
+﻿
+namespace Diplomacy.Orders;
 public class SupportOrder : Order {
 	public required Order SupportedOrder { get; set; }
 
 	public override void Resolve() {
-		lock (SupportedOrder) SupportedOrder.Strength++;
+		lock (SupportedOrder) {
+			SupportedOrder.Strength++;
+			SupportedOrder.SupportedBy.Add(this);
+		}
 		Status = OrderStatus.Succeeded;
 	}
 

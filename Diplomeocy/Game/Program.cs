@@ -2,9 +2,6 @@
 using Diplomacy.Orders;
 using Diplomacy.Utils;
 
-
-using Game.Diplomacy.Orders;
-
 using Orders = System.Collections.Generic.List<Diplomacy.Orders.Order>;
 
 Log.WriteLine(Log.LogLevel.Info, "meow\n");
@@ -27,7 +24,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-18", false },
 	{ "diagram-19", false },
 	{ "diagram-20", false },
-	{ "diagram-21", true },
+	{ "diagram-21", false },
+	{ "diagram-22", true },
 };
 
 GameHandler game = new();
@@ -972,6 +970,39 @@ if (tests["diagram-21"]) {
 	italy.Unit(Territories.Tunis);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_21_done]----");
+}
+
+if (tests["diagram-22"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_22]------");
+
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Burgundy));
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.Paris));
+
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Paris),
+		Target = game.Board.Territory(Territories.Burgundy),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = france.Unit(Territories.Marseilles),
+			SupportedOrder = order,
+		},
+		new HoldOrder {
+			Unit = france.Unit(Territories.Burgundy),
+		},
+	});
+
+	step();
+
+	france.Unit(Territories.Paris);
+	france.Unit(Territories.Marseilles);
+	france.Unit(Territories.Burgundy);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_22_done]----");
 }
 
 #endregion

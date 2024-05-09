@@ -1,7 +1,4 @@
-﻿using Diplomacy;
-using Diplomacy.Orders;
-
-namespace Game.Diplomacy.Orders;
+﻿namespace Diplomacy.Orders;
 
 public class MoveOrder : Order {
 	public override void Resolve() {
@@ -62,6 +59,28 @@ public class MoveOrder : Order {
 				.AsParallel()
 				.ForAll(order => order.Status = OrderStatus.Failed);
 			return;
+		}
+
+		int numberOfInSupportingOrders = SupportedBy.Count(supportOrder => supportOrder.Unit.Country == Unit.Country && supportOrder.Status == OrderStatus.Succeeded);
+		int strengthWithoutInSupport = Strength - numberOfInSupportingOrders;
+		// handle the case where the forward dependency is same country cause that's a bit wacky
+		if (forwardDependency is not null && forwardDependency.Unit.Country == Unit.Country) {
+			if (forwardDependency is HoldOrder sameCountryHoldOrder) {
+				if (sameCountryHoldOrder.Status == OrderStatus.Dislodged) {
+					Status = OrderStatus.Succeeded;
+					return;
+				}
+
+				if (strengthWithoutInSupport > sameCountryHoldOrder.Strength) {
+					sameCountryHoldOrder.Status = OrderStatus.Dislodged;
+					Status = OrderStatus.Succeeded;
+
+					return;
+				}
+
+				Status = OrderStatus.Failed;
+				return;
+			}
 		}
 
 		// there's nothing so we just go
@@ -172,6 +191,17 @@ public class MoveOrder : Order {
 				// standoff
 				if (Strength <= 1) {
 					Status = OrderStatus.Failed;
+					return;
+				}
+
+				if (moveOrder.Unit.Country == Unit.Country) {
+					if (strengthWithoutInSupport <= 1) {
+						Status = OrderStatus.Failed;
+						return;
+					}
+
+					moveOrder.Status = OrderStatus.Dislodged;
+					Status = OrderStatus.Succeeded;
 					return;
 				}
 

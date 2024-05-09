@@ -1,7 +1,5 @@
 ﻿using System.Collections.Immutable;
 
-using Game.Diplomacy.Orders;
-
 namespace Diplomacy.Orders;
 
 public enum OrderStatus {
@@ -11,6 +9,7 @@ public enum OrderStatus {
 public abstract class Order {
 	public required Unit Unit { get; set; }
 	public int Strength { get; set; } = 1;
+	public List<SupportOrder> SupportedBy { get; set; } = new();
 	public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
 	public bool IsConvoyed { get; set; } = false;

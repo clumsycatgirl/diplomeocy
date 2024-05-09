@@ -1,6 +1,5 @@
-﻿using Diplomacy.Orders;
-
-namespace Game.Diplomacy.Orders;
+﻿
+namespace Diplomacy.Orders;
 
 public class HoldOrder : Order {
 	public override void Resolve() { }

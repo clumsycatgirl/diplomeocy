@@ -1,7 +1,4 @@
-﻿using Diplomacy;
-using Diplomacy.Orders;
-
-namespace Game.Diplomacy.Orders;
+﻿namespace Diplomacy.Orders;
 public class ConvoyOrder : Order {
 
 #pragma warning disable CS8618
