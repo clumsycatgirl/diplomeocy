@@ -23,7 +23,10 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-14", false },
 	{ "diagram-15", false },
 	{ "diagram-16", false },
-	{ "diagram-17", true },
+	{ "diagram-17", false },
+	{ "diagram-18", true },
+	{ "diagram-19", true },
+	{ "diagram-20", true },
 };
 
 GameHandler game = new();
@@ -770,6 +773,66 @@ if (tests["diagram-17"]) {
 	russia.Unit(Territories.Silesia);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_17_done]----");
+}
+
+if (tests["diagram-18"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_18]------");
+
+	russia.Unit(Territories.Sevastopol)
+		.Move(game.Board.Territory(Territories.Rumania))
+		.Move(game.Board.Territory(Territories.Budapest))
+		.Move(game.Board.Territory(Territories.Tyrolia));
+	russia.Unit(Territories.Warsaw)
+		.Move(game.Board.Territory(Territories.Galicia))
+		.Move(game.Board.Territory(Territories.Bohemia));
+	russia.Unit(Territories.SaintPetersburg)
+		.Move(game.Board.Territory(Territories.Livonia))
+		.Move(game.Board.Territory(Territories.Prussia));
+	russia.Unit(Territories.Moscow)
+		.Move(game.Board.Territory(Territories.Warsaw))
+		.Move(game.Board.Territory(Territories.Silesia));
+
+	germany.Orders.AddRange(new Orders {
+		new HoldOrder {
+			Unit = germany.Unit(Territories.Berlin),
+		},
+		new MoveOrder {
+			Unit = germany.Unit(Territories.Munich),
+			Target = game.Board.Territory(Territories.Silesia),
+		},
+	});
+	order = new MoveOrder {
+		Unit = russia.Unit(Territories.Bohemia),
+		Target = game.Board.Territory(Territories.Munich),
+	};
+	russia.Orders.AddRange(new Orders {
+		order, new SupportOrder {
+			Unit = russia.Unit(Territories.Tyrolia),
+			SupportedOrder = order,
+		}
+	});
+	order = new MoveOrder {
+		Unit = russia.Unit(Territories.Prussia),
+		Target = game.Board.Territory(Territories.Berlin),
+	};
+	russia.Orders.AddRange(new Orders {
+		order, new SupportOrder {
+			Unit = russia.Unit(Territories.Silesia),
+			SupportedOrder = order,
+		}
+	});
+
+	step();
+
+	germany.Unit(Territories.Berlin);
+
+	russia.Unit(Territories.Munich);
+	russia.Unit(Territories.Tyrolia);
+	russia.Unit(Territories.Prussia);
+	russia.Unit(Territories.Silesia);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_18_done]----");
 }
 
 #endregion
