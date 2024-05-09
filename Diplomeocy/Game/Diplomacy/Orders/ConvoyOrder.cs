@@ -18,28 +18,17 @@ public class ConvoyOrder : Order {
 
 	public override void Resolve() { }
 
-	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
-		// Check if the convoyed order's target is reachable by sea
-		if (!Unit.Location!.AdjacentTerritories.Contains(ConvoyedOrder.Target!)) {
-			Status = OrderStatus.Failed;
-			return;
-		}
-
-		// Find all successful convoy orders
-		List<ConvoyOrder> convoyOrders = dependencyGraph!
-			.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
-			.Select(kvp => (ConvoyOrder)kvp.Key)
-			.ToList();
-
-		// Check for an unbroken chain of fleets
-		if (IsUnbrokenChainOfFleets(convoyOrders, ConvoyedOrder)) {
-			Status = OrderStatus.Succeeded;
-		} else {
-			Status = OrderStatus.Failed;
+	public override void ResolveFailed() {
+		if (Status == OrderStatus.Dislodged) {
+			if (Unit.Location!.OccupyingUnit == Unit) Unit.Location!.OccupyingUnit = null;
+			Unit.Location = null;
 		}
 	}
 
-	private bool IsUnbrokenChainOfFleets(List<ConvoyOrder> convoyOrders, MoveOrder moveOrder) {
+	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
+	}
+
+	public bool IsUnbrokenChainOfFleets(List<ConvoyOrder> convoyOrders) {
 		// Create a dictionary mapping territories to convoy orders
 		Dictionary<Territory, ConvoyOrder> territoryToOrder = convoyOrders.ToDictionary(
 			 order => order.Unit.Location!,
@@ -47,7 +36,7 @@ public class ConvoyOrder : Order {
 
 		// Create a queue for the BFS and enqueue the origin
 		Queue<Territory> queue = new();
-		queue.Enqueue(moveOrder.Unit.Location!);
+		queue.Enqueue(ConvoyedOrder.Unit.Location!);
 
 		// Create a set to keep track of visited territories
 		HashSet<Territory> visited = new();
@@ -57,7 +46,7 @@ public class ConvoyOrder : Order {
 			visited.Add(current);
 
 			// If we've reached the destination, return true
-			if (current == moveOrder.Target) {
+			if (current == ConvoyedOrder.Target) {
 				return true;
 			}
 

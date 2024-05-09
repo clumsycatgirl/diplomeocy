@@ -65,8 +65,32 @@ public class MoveOrder : Order {
 		}
 
 		// there's nothing so we just go
-		if (forwardDependency is null) {
+		if (forwardDependency is null && !IsConvoyed) {
 			Status = OrderStatus.Succeeded;
+			return;
+		}
+
+		// check if convoy allows for movement
+		if (IsConvoyed) {
+			// Check if the convoyed order's target is reachable by sea
+			if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
+				Status = OrderStatus.Failed;
+				return;
+			}
+
+			// Find all successful convoy orders
+			List<ConvoyOrder> convoyOrders = dependencyGraph!
+				.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
+				.Select(kvp => (ConvoyOrder)kvp.Key)
+				.ToList();
+
+			// Check for an unbroken chain of fleets
+			ConvoyOrder? closestConvoy = convoyOrders.FirstOrDefault(order => Unit.Location!.AdjacentTerritories.Contains(order.Unit.Location!));
+			if (closestConvoy is not null && closestConvoy.IsUnbrokenChainOfFleets(convoyOrders)) {
+				Status = OrderStatus.Succeeded;
+			} else {
+				Status = OrderStatus.Failed;
+			}
 			return;
 		}
 
@@ -174,8 +198,10 @@ public class MoveOrder : Order {
 			return;
 		}
 
-		if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded) {
-			convoyOrder.Status = OrderStatus.Failed;
+		if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded && Strength > convoyOrder.Strength) {
+			convoyOrder.Status = OrderStatus.Dislodged;
+			convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
+			Status = OrderStatus.Succeeded;
 			return;
 		}
 

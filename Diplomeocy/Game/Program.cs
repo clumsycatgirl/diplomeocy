@@ -26,7 +26,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-17", false },
 	{ "diagram-18", false },
 	{ "diagram-19", false },
-	{ "diagram-20", true },
+	{ "diagram-20", false },
+	{ "diagram-21", true },
 };
 
 GameHandler game = new();
@@ -913,6 +914,64 @@ if (tests["diagram-20"]) {
 	france.Unit(Territories.WesternMediterranean);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_20_done]----");
+}
+
+if (tests["diagram-21"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_21]------");
+
+	italy.Unit(Territories.Naples)
+		.Move(game.Board.Territory(Territories.IonianSea));
+	italy.Unit(Territories.Rome)
+		.Move(game.Board.Territory(Territories.TyrrhenianSea))
+		.Move(game.Board.Territory(Territories.Tunis));
+	france.Unit(Territories.Marseilles)
+		.Move(game.Board.Territory(Territories.GulfOfLyon))
+		.Move(game.Board.Territory(Territories.TyrrhenianSea));
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Gascony))
+		.Move(game.Board.Territory(Territories.Spain));
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.Gascony))
+		.Move(game.Board.Territory(Territories.Marseilles))
+		.Move(game.Board.Territory(Territories.GulfOfLyon));
+
+	order = new MoveOrder {
+		Unit = italy.Unit(Territories.IonianSea),
+		Target = game.Board.Territory(Territories.TyrrhenianSea),
+	};
+	italy.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = italy.Unit(Territories.Tunis),
+			SupportedOrder = order,
+		},
+	});
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Spain),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Naples),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit = france.Unit(Territories.GulfOfLyon),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new ConvoyOrder {
+			Unit = france.Unit(Territories.TyrrhenianSea),
+			ConvoyedOrder = (MoveOrder)order,
+		}
+	});
+
+	step();
+
+	france.Unit(Territories.Spain);
+	france.Unit(Territories.GulfOfLyon);
+	italy.Unit(Territories.TyrrhenianSea);
+	italy.Unit(Territories.Tunis);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_21_done]----");
 }
 
 #endregion
