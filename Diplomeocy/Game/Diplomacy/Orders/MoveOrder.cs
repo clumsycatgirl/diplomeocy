@@ -174,6 +174,11 @@ public class MoveOrder : Order {
 			return;
 		}
 
+		if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded) {
+			convoyOrder.Status = OrderStatus.Failed;
+			return;
+		}
+
 		if (forwardDependency!.Resolved) {
 			// if the one in front is done check if it's goign to a different place cause then we can go there
 			if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != Target) {

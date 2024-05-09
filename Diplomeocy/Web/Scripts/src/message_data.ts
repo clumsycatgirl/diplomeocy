@@ -2,6 +2,7 @@ export type MessageDataAction =
 	| 'JoinGroup'
 	| 'LeaveGroup'
 	| 'SendMessageToGroup'
+
 export class MessageData {
 	constructor(
 		public action: MessageDataAction,

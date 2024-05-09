@@ -357,6 +357,10 @@ public class GameHandler {
 			.AsParallel()
 			.OfType<HoldOrder>()
 			.ForAll(order => order.Status = OrderStatus.Succeeded);
+		orders
+			.AsParallel()
+			.OfType<ConvoyOrder>()
+			.ForAll(order => order.Status = OrderStatus.Succeeded);
 
 		while (orders.Any(order => !order.Resolved)) {
 			for (int i = 0; i < orders.Count; i++) {
