@@ -25,7 +25,7 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-16", false },
 	{ "diagram-17", false },
 	{ "diagram-18", false },
-	{ "diagram-19", true },
+	{ "diagram-19", false },
 	{ "diagram-20", true },
 };
 
@@ -860,6 +860,59 @@ if (tests["diagram-19"]) {
 	england.Unit(Territories.NorthSea);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_19_done]----");
+}
+
+if (tests["diagram-20"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_20]------");
+
+	england.Unit(Territories.Liverpool)
+		.Move(game.Board.Territory(Territories.NorthAtlanticOcean))
+		.Move(game.Board.Territory(Territories.MidAtlanticOcean));
+	england.Unit(Territories.Edinburgh)
+		.Move(game.Board.Territory(Territories.Liverpool))
+		.Move(game.Board.Territory(Territories.IrishSea))
+		.Move(game.Board.Territory(Territories.EnglishChannel));
+	france.Unit(Territories.Marseilles)
+		.Move(game.Board.Territory(Territories.GulfOfLyon))
+		.Move(game.Board.Territory(Territories.WesternMediterranean));
+
+	order = new MoveOrder {
+		Unit = england.Unit(Territories.London),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Tunis),
+	};
+	england.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.EnglishChannel),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.MidAtlanticOcean),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.MidAtlanticOcean),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+	});
+
+	france.Orders.AddRange(new Orders {
+		new ConvoyOrder {
+			Unit = france.Unit(Territories.WesternMediterranean),
+			ConvoyedOrder = (MoveOrder)order,
+		}
+	});
+
+	step();
+
+	england.Unit(Territories.Tunis);
+	england.Unit(Territories.MidAtlanticOcean);
+	england.Unit(Territories.EnglishChannel);
+	france.Unit(Territories.WesternMediterranean);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_20_done]----");
 }
 
 #endregion
