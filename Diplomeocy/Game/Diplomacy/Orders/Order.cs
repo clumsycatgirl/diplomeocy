@@ -13,12 +13,19 @@ public abstract class Order {
 	public int Strength { get; set; } = 1;
 	public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
+	public bool IsConvoyed { get; set; } = false;
+
 	private Territory? target = null;
 	public Territory? Target {
 		get => target;
 		set {
-			if (value is null || (!Unit.Location?.AdjacentTerritories.Contains(value) ?? false)) {
+			if (value is null) {
 				throw new InvalidOperationException($"wtf physics says you can't go from {Unit.Location?.Name} to {value?.Name} in one turn sowwy");
+			}
+			if (!Unit.Location?.AdjacentTerritories.Contains(value) ?? false) {
+				if (!IsConvoyed) {
+					throw new InvalidOperationException($"must convoy to go from {Unit.Location?.Name} to {value?.Name} this way");
+				}
 			}
 			target = value;
 		}

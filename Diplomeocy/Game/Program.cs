@@ -24,7 +24,7 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-15", false },
 	{ "diagram-16", false },
 	{ "diagram-17", false },
-	{ "diagram-18", true },
+	{ "diagram-18", false },
 	{ "diagram-19", true },
 	{ "diagram-20", true },
 };
@@ -39,7 +39,7 @@ Player france = game.Players[4];
 Player italy = game.Players[5];
 Player russia = game.Players[6];
 List<Player> players = new();
-Order? order;
+Order order;
 
 Action resetGame = () => {
 	game = new();
@@ -833,6 +833,33 @@ if (tests["diagram-18"]) {
 	russia.Unit(Territories.Silesia);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_18_done]----");
+}
+
+if (tests["diagram-19"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_20]------");
+
+	england.Unit(Territories.Edinburgh)
+		.Move(game.Board.Territory(Territories.NorthSea));
+	order = new MoveOrder {
+		Unit = england.Unit(Territories.London),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Norway),
+	};
+	england.Orders.AddRange(new Orders {
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.NorthSea),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		order,
+	});
+
+	step();
+
+	england.Unit(Territories.Norway);
+	england.Unit(Territories.NorthSea);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_19_done]----");
 }
 
 #endregion
