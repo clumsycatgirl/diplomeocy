@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 20, 2024 alle 12:58
+-- Creato il: Mag 09, 2024 alle 15:33
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -20,8 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `diplomeocy`
 --
-CREATE DATABASE IF NOT EXISTS `diplomeocy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `diplomeocy`;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `characters`
+--
+
+CREATE TABLE `characters` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(32) NOT NULL,
+  `Path` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -29,15 +39,12 @@ USE `diplomeocy`;
 -- Struttura della tabella `games`
 --
 
-DROP TABLE IF EXISTS `games`;
-CREATE TABLE IF NOT EXISTS `games` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `games` (
+  `Id` int(11) NOT NULL,
   `IdTable` int(6) NOT NULL,
   `Moves` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`Moves`)),
   `PlayerCountries` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`PlayerCountries`)),
-  `State` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`State`)),
-  PRIMARY KEY (`Id`),
-  KEY `IdTable` (`IdTable`)
+  `State` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`State`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,14 +53,10 @@ CREATE TABLE IF NOT EXISTS `games` (
 -- Struttura della tabella `players`
 --
 
-DROP TABLE IF EXISTS `players`;
-CREATE TABLE IF NOT EXISTS `players` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `players` (
+  `Id` int(11) NOT NULL,
   `IdTable` int(11) NOT NULL,
-  `IdUser` int(11) NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `IdTable` (`IdTable`),
-  KEY `IdUser` (`IdUser`)
+  `IdUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -62,11 +65,9 @@ CREATE TABLE IF NOT EXISTS `players` (
 -- Struttura della tabella `tables`
 --
 
-DROP TABLE IF EXISTS `tables`;
-CREATE TABLE IF NOT EXISTS `tables` (
+CREATE TABLE `tables` (
   `Id` int(6) NOT NULL,
-  `Date` date NOT NULL,
-  PRIMARY KEY (`Id`)
+  `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -75,15 +76,85 @@ CREATE TABLE IF NOT EXISTS `tables` (
 -- Struttura della tabella `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `Id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Surname` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  PRIMARY KEY (`Id`)
+  `Password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `users`
+--
+
+INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`) VALUES
+(1, '[meow', 'meow', 'meow', 'meow');
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `characters`
+--
+ALTER TABLE `characters`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indici per le tabelle `games`
+--
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IdTable` (`IdTable`);
+
+--
+-- Indici per le tabelle `players`
+--
+ALTER TABLE `players`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IdTable` (`IdTable`),
+  ADD KEY `IdUser` (`IdUser`);
+
+--
+-- Indici per le tabelle `tables`
+--
+ALTER TABLE `tables`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indici per le tabelle `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `characters`
+--
+ALTER TABLE `characters`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `games`
+--
+ALTER TABLE `games`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `players`
+--
+ALTER TABLE `players`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `users`
+--
+ALTER TABLE `users`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
