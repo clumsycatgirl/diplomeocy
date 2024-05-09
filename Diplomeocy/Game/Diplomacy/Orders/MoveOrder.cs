@@ -74,15 +74,26 @@ public class MoveOrder : Order {
 		if (forwardDependency is SupportOrder forwardSupportOrder && forwardSupportOrder.Resolved) {
 			if (forwardSupportOrder.SupportedOrder.Target == Unit.Location) {
 				// cannot cut support order as it's trying to support against *our* location
-				Status = OrderStatus.Failed;
+
+				// if we cannot dislodge the unit we can't cut the support and thus we fail
+				if (Strength <= forwardSupportOrder.Strength) {
+					Status = OrderStatus.Failed;
+					return;
+				}
+
+				// if we're stronger we can dislodge the unit and cut the support
+				forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
+				forwardSupportOrder.SupportedOrder.Strength--;
+				forwardSupportOrder.Status = OrderStatus.Failed;
+				Status = OrderStatus.Succeeded;
 				return;
 			}
 
-			forwardSupportOrder.Status = OrderStatus.Failed;
+			forwardSupportOrder.Status = OrderStatus.Dislodged;
 			forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
 			forwardSupportOrder.SupportedOrder.Strength--;
 
-			forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
+			forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 
 			Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
 			return;
