@@ -13,6 +13,11 @@ public class SupportOrder : Order {
 		if (SupportedOrder.Status == OrderStatus.Failed) {
 			Status = OrderStatus.Failed;
 		}
+
+		// this should happen only when we backtrack on the dependency graph
+		// cause we're cutting this support specifically
+		if (Status == OrderStatus.Pending) {
+		}
 	}
 
 	public override string ToString() => $"{ToString("supports")} supported ({SupportedOrder})";

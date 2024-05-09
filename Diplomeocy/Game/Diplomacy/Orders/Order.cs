@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 
+using Game.Diplomacy.Orders;
+
 namespace Diplomacy.Orders;
 
 public enum OrderStatus {
@@ -57,6 +59,7 @@ public abstract class Order {
 		List<Order> orders = depencenyGraph.Keys.ToList();
 		orders.
 			AsParallel()
+			.Where(order => order is not SupportOrder)
 			.Where(order => depencenyGraph[order].Contains(this) && order.Status != OrderStatus.Pending)
 			.ForAll(order => {
 				//Log.WriteLine($"setting {order} to pending");

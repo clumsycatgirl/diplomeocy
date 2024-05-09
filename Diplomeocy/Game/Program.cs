@@ -21,7 +21,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-12", false },
 	{ "diagram-13", false },
 	{ "diagram-14", false },
-	{ "diagram-15", true },
+	{ "diagram-15", false },
+	{ "diagram-16", true },
 };
 
 GameHandler game = new();
@@ -684,6 +685,38 @@ if (tests["diagram-15"]) {
 	russia.Unit(Territories.Bohemia);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_15_done]----");
+}
+
+if (tests["diagram-16"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_16]------");
+
+	germany.Unit(Territories.Berlin).Move(game.Board.Territory(Territories.Prussia));
+	germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia));
+
+	order = new MoveOrder {
+		Unit = germany.Unit(Territories.Prussia),
+		Target = game.Board.Territory(Territories.Warsaw),
+	};
+	germany.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = germany.Unit(Territories.Silesia),
+			SupportedOrder = order,
+		},
+	});
+
+	russia.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = russia.Unit(Territories.Warsaw),
+			Target = game.Board.Territory(Territories.Silesia),
+		}
+	});
+
+	step();
+
+	germany.Unit(Territories.Warsaw);
+	germany.Unit(Territories.Silesia);
 }
 
 #endregion

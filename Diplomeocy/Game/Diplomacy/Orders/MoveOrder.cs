@@ -1,6 +1,5 @@
 ﻿using Diplomacy;
 using Diplomacy.Orders;
-using Diplomacy.Utils;
 
 namespace Game.Diplomacy.Orders;
 
@@ -72,12 +71,18 @@ public class MoveOrder : Order {
 		}
 
 		// set all dependencies for the cancelled support order to pending
-		if (forwardDependency is SupportOrder cancelledSupportOrder && cancelledSupportOrder.Resolved) {
-			cancelledSupportOrder.Status = OrderStatus.Failed;
-			cancelledSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
-			cancelledSupportOrder.SupportedOrder.Strength--;
+		if (forwardDependency is SupportOrder forwardSupportOrder && forwardSupportOrder.Resolved) {
+			if (forwardSupportOrder.SupportedOrder.Target == Unit.Location) {
+				// cannot cut support order as it's trying to support against *our* location
+				Status = OrderStatus.Failed;
+				return;
+			}
 
-			cancelledSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
+			forwardSupportOrder.Status = OrderStatus.Failed;
+			forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
+			forwardSupportOrder.SupportedOrder.Strength--;
+
+			forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
 
 			Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
 			return;
@@ -95,7 +100,6 @@ public class MoveOrder : Order {
 		}
 
 		if (forwardDependency is MoveOrder moveOrder) {
-			Log.WriteLine($"{this} forward dependency is {moveOrder}");
 			// check if the order is trying to get to the same place the current order is takign place on
 			if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
 				if (Strength == moveOrder.Strength) {
@@ -109,7 +113,9 @@ public class MoveOrder : Order {
 					moveOrder.Status = OrderStatus.Succeeded;
 				}
 			} else if (moveOrder.Status == OrderStatus.Succeeded) {
+				// check if the forward order succeded in moving
 				if (moveOrder.Target != Unit.Location) {
+					// arey trying to get to a different location from ours then that means we can go where they were
 					Status = OrderStatus.Succeeded;
 					return;
 				}
@@ -117,14 +123,14 @@ public class MoveOrder : Order {
 				// if the forward unit is trying to get to the same place we are
 
 				// try to dislodge them
-				if (Strength <= 1) {
-					Status = OrderStatus.Failed;
-					return;
-				}
+				//if (Strength <= 1) {
+				//	Status = OrderStatus.Failed;
+				//	return;
+				//}
 
-				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-				moveOrder.Status = OrderStatus.Dislodged;
-				Status = OrderStatus.Succeeded;
+				//moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+				//moveOrder.Status = OrderStatus.Dislodged;
+				//Status = OrderStatus.Succeeded;
 			} else if (moveOrder.Status == OrderStatus.Failed) {
 				// forwardUnit should stay in place
 
@@ -149,8 +155,10 @@ public class MoveOrder : Order {
 				// forwardUnit is no more
 				Status = OrderStatus.Succeeded;
 			} else {
-				// idk what this means but it seems to be working so
-				Status = OrderStatus.Failed;
+				// idk what this means but it seems to be working so <- apparently that doesn't work anymore
+				//Status = OrderStatus.Failed;
+
+				// other unit is pending so do nothing for now instead of that *wrong* thing
 			}
 			return;
 		}
