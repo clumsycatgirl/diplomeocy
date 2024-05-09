@@ -86,15 +86,12 @@ public class MoveOrder : Order {
 		if (forwardDependency is HoldOrder holdOrder) {
 			if (holdOrder.Strength >= Strength) {
 				Status = OrderStatus.Failed;
+				holdOrder.Status = OrderStatus.Succeeded;
 			} else {
 				Status = OrderStatus.Succeeded;
 				holdOrder.Status = OrderStatus.Retired;
 			}
 			return;
-		}
-
-		if (Unit.Location?.Name == nameof(Territories.Rumania)) {
-			;
 		}
 
 		if (forwardDependency is MoveOrder moveOrder) {

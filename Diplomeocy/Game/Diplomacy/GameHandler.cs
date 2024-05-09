@@ -369,8 +369,8 @@ public class GameHandler {
 				// there should be only one of this *at all times*
 				// a unit cannot move to two different places
 				Order? forwardDependency = dependencies
-						.AsParallel()
-						.FirstOrDefault(deps => deps.Unit.Location == order.Target);
+					.AsParallel()
+					.FirstOrDefault(deps => deps.Unit.Location == order.Target);
 
 				// do the stuff
 				order.Execute(dependencyGraph, forwardDependency);

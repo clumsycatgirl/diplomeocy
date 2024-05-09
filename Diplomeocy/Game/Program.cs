@@ -20,8 +20,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-11", false },
 	{ "diagram-12", false },
 	{ "diagram-13", false },
-	{ "diagram-14", true },
-	{ "diagram-15", false },
+	{ "diagram-14", false },
+	{ "diagram-15", true },
 };
 
 GameHandler game = new();
@@ -647,7 +647,41 @@ if (tests["diagram-15"]) {
 	resetGame();
 	Log.WriteLine(Log.LogLevel.Error, "------[diagram_15]------");
 
+	germany.Unit(Territories.Berlin).Move(game.Board.Territory(Territories.Prussia));
+	germany.Unit(Territories.Munich).Move(game.Board.Territory(Territories.Silesia));
 
+	russia.Unit(Territories.Warsaw)
+		.Move(game.Board.Territory(Territories.Galicia))
+		.Move(game.Board.Territory(Territories.Bohemia));
+	russia.Unit(Territories.Moscow).Move(game.Board.Territory(Territories.Warsaw));
+
+	order = new MoveOrder {
+		Unit = germany.Unit(Territories.Prussia),
+		Target = game.Board.Territory(Territories.Warsaw),
+	};
+	germany.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = germany.Unit(Territories.Silesia),
+			SupportedOrder = order,
+		},
+	});
+	russia.Orders.AddRange(new Orders {
+		new HoldOrder {
+			Unit = russia.Unit(Territories.Warsaw),
+		},
+		new MoveOrder {
+			Unit = russia.Unit(Territories.Bohemia),
+			Target = game.Board.Territory(Territories.Silesia),
+		}
+	});
+
+	step();
+
+	germany.Unit(Territories.Prussia);
+	germany.Unit(Territories.Silesia);
+	russia.Unit(Territories.Warsaw);
+	russia.Unit(Territories.Bohemia);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_15_done]----");
 }

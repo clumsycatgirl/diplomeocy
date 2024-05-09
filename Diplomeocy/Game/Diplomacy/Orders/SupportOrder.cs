@@ -9,7 +9,11 @@ public class SupportOrder : Order {
 		Status = OrderStatus.Succeeded;
 	}
 
-	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) { }
+	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
+		if (SupportedOrder.Status == OrderStatus.Failed) {
+			Status = OrderStatus.Failed;
+		}
+	}
 
 	public override string ToString() => $"{ToString("supports")} supported ({SupportedOrder})";
 }
