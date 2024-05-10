@@ -6,6 +6,10 @@ using Orders = System.Collections.Generic.List<Diplomacy.Orders.Order>;
 
 Log.WriteLine(Log.LogLevel.Info, "meow\n");
 
+// todo actually use unit tests instead of whatever this is
+// update actually I don't think it's possible to *trans*fer it anymore
+// this is just a big ass file now no more chances to move stuff...
+// mostly cause I'm lazy
 Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-4", false },
 	{ "diagram-5", false },
@@ -25,7 +29,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-19", false },
 	{ "diagram-20", false },
 	{ "diagram-21", false },
-	{ "diagram-22", true },
+	{ "diagram-22", false },
+	{ "diagram-23", true },
 };
 
 GameHandler game = new();
@@ -1003,6 +1008,52 @@ if (tests["diagram-22"]) {
 	france.Unit(Territories.Burgundy);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_22_done]----");
+}
+
+if (tests["diagram-23"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_23]------");
+
+	germany.Unit(Territories.Munich)
+		.Move(game.Board.Territory(Territories.Ruhr));
+	france.Unit(Territories.Marseilles)
+		.Move(game.Board.Territory(Territories.Burgundy));
+	italy.Unit(Territories.Venice)
+		.Move(game.Board.Territory(Territories.Piedmont))
+		.Move(game.Board.Territory(Territories.Marseilles));
+
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Paris),
+		Target = game.Board.Territory(Territories.Burgundy),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new MoveOrder {
+			Unit = france.Unit(Territories.Burgundy),
+			Target = game.Board.Territory(Territories.Marseilles),
+		},
+	});
+	germany.Orders.AddRange(new Orders {
+		new SupportOrder {
+			Unit = germany.Unit(Territories.Ruhr),
+			SupportedOrder = order,
+		},
+	});
+	italy.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = italy.Unit(Territories.Marseilles),
+			Target = game.Board.Territory(Territories.Burgundy),
+		}
+	});
+
+	step();
+
+	france.Unit(Territories.Paris);
+	france.Unit(Territories.Burgundy);
+	germany.Unit(Territories.Ruhr);
+	italy.Unit(Territories.Marseilles);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_23_done]----");
 }
 
 #endregion
