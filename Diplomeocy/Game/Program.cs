@@ -31,7 +31,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-21", false },
 	{ "diagram-22", false },
 	{ "diagram-23", false },
-	{ "diagram-24", true },
+	{ "diagram-24", false },
+	{ "diagram-25", true },
 };
 
 GameHandler game = new();
@@ -1095,6 +1096,56 @@ if (tests["diagram-24"]) {
 	germany.Unit(Territories.Munich);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_24_done]----");
+}
+
+if (tests["diagram-25"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_25]------");
+
+	germany.Unit(Territories.Kiel)
+		.Move(game.Board.Territory(Territories.Ruhr));
+	germany.Unit(Territories.Berlin)
+		.Move(game.Board.Territory(Territories.Silesia));
+	austria.Unit(Territories.Trieste)
+		.Move(game.Board.Territory(Territories.Tyrolia));
+	austria.Unit(Territories.Vienna)
+		.Move(game.Board.Territory(Territories.Bohemia));
+
+	order = new MoveOrder {
+		Unit = germany.Unit(Territories.Silesia),
+		Target = game.Board.Territory(Territories.Munich),
+	};
+	germany.Orders.AddRange(new Orders {
+		order,
+		new MoveOrder {
+			Unit = germany.Unit(Territories.Ruhr),
+			Target = game.Board.Territory(Territories.Munich),
+		},
+		new MoveOrder {
+			Unit = germany.Unit(Territories.Munich),
+			Target = game.Board.Territory(Territories.Tyrolia),
+		}
+	});
+	austria.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = austria.Unit(Territories.Tyrolia),
+			Target = game.Board.Territory(Territories.Munich),
+		},
+		new SupportOrder {
+			Unit = austria.Unit(Territories.Bohemia),
+			SupportedOrder = order,
+		}
+	});
+
+	step();
+
+	germany.Unit(Territories.Ruhr);
+	germany.Unit(Territories.Munich);
+	germany.Unit(Territories.Silesia);
+	austria.Unit(Territories.Tyrolia);
+	austria.Unit(Territories.Bohemia);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_25_done]----");
 }
 
 #endregion
