@@ -397,8 +397,16 @@ public class GameHandler {
 					.AsParallel()
 					.FirstOrDefault(deps => deps.Unit.Location == order.Target);
 
+				// save starting deps cause we're gonna change them later on
+				// and this is the input we receive so we have to meowmoise this input
+				// not the one after the execution
+				string key = Order.MeowmoisationKey(dependencies);
+
 				// do the stuff
 				order.Execute(dependencyGraph, forwardDependency);
+
+				// make sure to save it so that we won't have to recalculate it
+				order.MeowmoiseResult(key, order.Status);
 			}
 		}
 

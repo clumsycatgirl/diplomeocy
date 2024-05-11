@@ -32,6 +32,8 @@ public abstract class Order {
 
 	public bool Resolved => Status != OrderStatus.Pending;
 
+	public Dictionary<string, OrderStatus> MeowmoisedResults { get; } = new();
+
 	public abstract void Resolve();
 	public virtual void ResolveFailed() { }
 	public abstract void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDepedency);
@@ -73,4 +75,15 @@ public abstract class Order {
 				order.SetBackwardsDependenciesToPending(depencenyGraph);
 			});
 	}
+
+	internal static string MeowmoisationKey(List<Order> deps) => $"[{String.Join(", ", deps.Select(dep => dep.ToString()))}]";
+
+	internal void MeowmoiseResult(List<Order> dependences) => MeowmoiseResult(Status, dependences);
+
+	internal void MeowmoiseResult(OrderStatus status, List<Order> dependences) {
+		string key = MeowmoisationKey(dependences);
+		MeowmoiseResult(key, status);
+	}
+
+	internal void MeowmoiseResult(String key, OrderStatus status) => MeowmoisedResults[key] = status;
 }

@@ -19,6 +19,13 @@ public class MoveOrder : Order {
 
 
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
+
+		string meowmoisationKey = MeowmoisationKey(dependencies);
+		if (MeowmoisedResults.TryGetValue(meowmoisationKey, out OrderStatus newStatus)) {
+			Status = newStatus;
+			return;
+		}
+
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
 						dependency.Status == OrderStatus.Pending
