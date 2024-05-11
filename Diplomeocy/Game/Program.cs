@@ -32,7 +32,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-22", false },
 	{ "diagram-23", false },
 	{ "diagram-24", false },
-	{ "diagram-25", true },
+	{ "diagram-25", false },
+	{ "diagram-26", true }
 };
 
 GameHandler game = new();
@@ -1146,6 +1147,80 @@ if (tests["diagram-25"]) {
 	austria.Unit(Territories.Bohemia);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_25_done]----");
+}
+
+if (tests["diagram-26"]) {
+	resetGame();
+
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_26]------");
+
+	england.Unit(Territories.Edinburgh)
+		.Move(game.Board.Territory(Territories.NorthSea))
+		.Move(game.Board.Territory(Territories.Denmark));
+	england.Unit(Territories.Liverpool)
+		.Move(game.Board.Territory(Territories.Yorkshire))
+		.Move(game.Board.Territory(Territories.NorthSea))
+		.Move(game.Board.Territory(Territories.HelgolandBight));
+	england.Unit(Territories.London)
+		.Move(game.Board.Territory(Territories.NorthSea));
+
+	germany.Unit(Territories.Berlin)
+		.Move(game.Board.Territory(Territories.Kiel))
+		.Move(game.Board.Territory(Territories.Holland));
+
+	russia.Unit(Territories.SaintPetersburg)
+		.Move(game.Board.Territory(Territories.GulfOfBothania))
+		.Move(game.Board.Territory(Territories.Sweden))
+		.Move(game.Board.Territory(Territories.Skagerrak));
+	russia.Unit(Territories.Moscow)
+		.Move(game.Board.Territory(Territories.Livonia))
+		.Move(game.Board.Territory(Territories.BalticSea));
+	russia.Unit(Territories.Warsaw)
+		.Move(game.Board.Territory(Territories.Prussia))
+		.Move(game.Board.Territory(Territories.Berlin));
+
+	order = new MoveOrder {
+		Unit = england.Unit(Territories.NorthSea),
+		Target = game.Board.Territory(Territories.Denmark),
+	};
+	england.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = england.Unit(Territories.HelgolandBight),
+			SupportedOrder = order,
+		},
+		new MoveOrder {
+			Unit = england.Unit(Territories.Denmark),
+			Target = game.Board.Territory(Territories.Kiel),
+		}
+	});
+
+	order = new MoveOrder {
+		Unit = russia.Unit(Territories.Skagerrak),
+		Target = game.Board.Territory(Territories.Denmark),
+	};
+	russia.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = russia.Unit(Territories.Berlin),
+			Target = game.Board.Territory(Territories.Kiel),
+		},
+		order,
+		new SupportOrder {
+			Unit = russia.Unit(Territories.BalticSea),
+			SupportedOrder = order,
+		},
+	});
+
+	step();
+
+	england.Unit(Territories.Denmark);
+	england.Unit(Territories.HelgolandBight);
+	england.Unit(Territories.NorthSea);
+	russia.Unit(Territories.Skagerrak);
+	russia.Unit(Territories.BalticSea);
+	russia.Unit(Territories.Berlin);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_26_done]----");
 }
 
 #endregion
