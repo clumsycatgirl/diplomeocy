@@ -30,7 +30,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-20", false },
 	{ "diagram-21", false },
 	{ "diagram-22", false },
-	{ "diagram-23", true },
+	{ "diagram-23", false },
+	{ "diagram-24", true },
 };
 
 GameHandler game = new();
@@ -1054,6 +1055,46 @@ if (tests["diagram-23"]) {
 	italy.Unit(Territories.Marseilles);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_23_done]----");
+}
+
+if (tests["diagram-24"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_24]------");
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Burgundy));
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.Paris));
+	germany.Unit(Territories.Berlin)
+		.Move(game.Board.Territory(Territories.Ruhr));
+
+	order = new MoveOrder {
+		Unit = germany.Unit(Territories.Ruhr),
+		Target = game.Board.Territory(Territories.Burgundy),
+	};
+	germany.Orders.AddRange(new Orders {
+		new HoldOrder {
+			Unit = germany.Unit(Territories.Munich),
+		},
+		order,
+	});
+	france.Orders.AddRange(new Orders {
+		new SupportOrder {
+			Unit = france.Unit(Territories.Paris),
+			SupportedOrder = order,
+		},
+		new HoldOrder {
+			Unit = france.Unit(Territories.Burgundy),
+		}
+	});
+
+	step();
+
+	france.Unit(Territories.Paris);
+	france.Unit(Territories.Burgundy);
+	germany.Unit(Territories.Ruhr);
+	germany.Unit(Territories.Munich);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_24_done]----");
 }
 
 #endregion

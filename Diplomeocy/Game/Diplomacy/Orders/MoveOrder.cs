@@ -106,8 +106,18 @@ public class MoveOrder : Order {
 			return;
 		}
 
+
 		// check if convoy allows for movement
 		if (forwardDependency is not null) {
+			int effectiveStrength = Strength;
+			SupportedBy
+				.Where(so => so.Status == OrderStatus.Succeeded && so.Unit.Country == forwardDependency.Unit.Country)
+				.ToList()
+				.ForEach(ord => {
+					effectiveStrength--;
+					ord.Status = OrderStatus.Failed;
+				});
+
 			if (IsConvoyed) {
 				// Check if the convoyed order's target is reachable by sea
 				if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
@@ -137,7 +147,7 @@ public class MoveOrder : Order {
 					// cannot cut support order as it's trying to support against *our* location
 
 					// if we cannot dislodge the unit we can't cut the support and thus we fail
-					if (Strength <= forwardSupportOrder.Strength) {
+					if (effectiveStrength <= forwardSupportOrder.Strength) {
 						Status = OrderStatus.Failed;
 						return;
 					}
@@ -165,7 +175,7 @@ public class MoveOrder : Order {
 					Status = OrderStatus.Failed;
 					return;
 				}
-				if (holdOrder.Strength >= Strength) {
+				if (holdOrder.Strength >= effectiveStrength) {
 					Status = OrderStatus.Failed;
 					holdOrder.Status = OrderStatus.Succeeded;
 				} else {
@@ -178,12 +188,12 @@ public class MoveOrder : Order {
 			if (forwardDependency is MoveOrder moveOrder) {
 				// check if the order is trying to get to the same place the current order is takign place on
 				if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
-					if (Strength == moveOrder.Strength) {
+					if (effectiveStrength == moveOrder.Strength) {
 						moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 						SetBackwardsDependenciesToPending(dependencyGraph!);
 						Status = OrderStatus.Failed;
 						moveOrder.Status = OrderStatus.Failed;
-					} else if (Strength > moveOrder.Strength) {
+					} else if (effectiveStrength > moveOrder.Strength) {
 						moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 						moveOrder.Status = OrderStatus.Dislodged;
 						Status = OrderStatus.Succeeded;
@@ -214,7 +224,7 @@ public class MoveOrder : Order {
 					// forwardUnit should stay in place
 
 					// standoff
-					if (Strength <= 1) {
+					if (effectiveStrength <= 1) {
 						SetBackwardsDependenciesToPending(dependencyGraph!);
 						moveOrder.Status = OrderStatus.Failed;
 						Status = OrderStatus.Failed;
