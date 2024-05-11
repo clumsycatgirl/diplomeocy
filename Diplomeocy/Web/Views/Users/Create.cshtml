@@ -32,11 +32,21 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div>
-                <div>
-                    <img src="~/assets/images/kittators/Kitler.png" width="50" height="100" alt="Kitler" />
-                    <input type="radio" asp-for="IdCharacter" id="kitler" name="kitler" value="kitler" class="kitler">
+            <div style="display: flex;">
+                <div style="display: flex; flex-direction: column;">
+                    <img src="~/assets/images/kittators/Kitler.png" width="50" height="100" alt="Kitler"/>
+                    <input type="radio" asp-for="IdCharacter" id="kitler" name="cats" value="kitler">
                     <label>Kitler</label>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <img src="~/assets/images/kittators/Meowssolini.png" width="50" height="100" alt="Meowssolini" />
+                    <input type="radio" asp-for="IdCharacter" id="Meowssolini" name="cats" value="Meowssolini"/>
+                    <label>Meowssolini</label>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <img src="~/assets/images/kittators/Leonin.png" width="50" height="100" alt="Leonin" />
+                    <input type="radio" asp-for="IdCharacter" id="Leonin" name="cats" value="Leonin" />
+                    <label>Meowssolini</label>
                 </div>
             </div>
             
