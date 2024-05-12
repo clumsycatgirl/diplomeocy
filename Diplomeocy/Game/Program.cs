@@ -33,7 +33,9 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-23", false },
 	{ "diagram-24", false },
 	{ "diagram-25", false },
-	{ "diagram-26", true }
+	{ "diagram-26", false },
+	{ "diagram-27", false },
+	{ "diagram-28", true },
 };
 
 GameHandler game = new();
@@ -1221,6 +1223,46 @@ if (tests["diagram-26"]) {
 	russia.Unit(Territories.Berlin);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_26_done]----");
+}
+
+if (tests["diagram-27"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_27]------");
+
+	austria.Unit(Territories.Budapest)
+		.Move(game.Board.Territory(Territories.Rumania));
+	austria.Unit(Territories.Trieste)
+		.Move(game.Board.Territory(Territories.Serbia));
+
+	russia.Unit(Territories.Warsaw)
+		.Move(game.Board.Territory(Territories.Galicia));
+
+	order = new MoveOrder {
+		Unit = austria.Unit(Territories.Serbia),
+		Target = game.Board.Territory(Territories.Budapest),
+	};
+	austria.Orders.AddRange(new Orders {
+		order,
+		new MoveOrder {
+			Unit = austria.Unit(Territories.Vienna),
+			Target = game.Board.Territory(Territories.Budapest),
+		}
+	});
+
+	russia.Orders.AddRange(new Orders {
+		new SupportOrder {
+			Unit = russia.Unit(Territories.Galicia),
+			SupportedOrder = order,
+		},
+	});
+
+	step();
+
+	austria.Unit(Territories.Budapest);
+	austria.Unit(Territories.Vienna);
+	russia.Unit(Territories.Galicia);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_27_done]----");
 }
 
 #endregion
