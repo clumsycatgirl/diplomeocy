@@ -10,7 +10,7 @@ public abstract class Order {
 	public required Unit Unit { get; set; }
 	public int Strength { get; set; } = 1;
 	public List<SupportOrder> SupportedBy { get; set; } = new();
-	public OrderStatus Status { get; set; } = OrderStatus.Pending;
+	public OrderStatus Status = OrderStatus.Pending;
 
 	public bool IsConvoyed { get; set; } = false;
 
@@ -86,4 +86,7 @@ public abstract class Order {
 	}
 
 	internal void MeowmoiseResult(String key, OrderStatus status) => MeowmoisedResults[key] = status;
+
+	internal bool TryMeowmoise(List<Order> dependences) =>
+		MeowmoisedResults.TryGetValue(MeowmoisationKey(dependences), out Status);
 }

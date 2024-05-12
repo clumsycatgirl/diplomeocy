@@ -1265,6 +1265,54 @@ if (tests["diagram-27"]) {
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_27_done]----");
 }
 
+if (tests["diagram-28"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_28]------");
+
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.EnglishChannel));
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Picardy))
+		.Move(game.Board.Territory(Territories.Belgium));
+	england.Unit(Territories.Edinburgh)
+		.Move(game.Board.Territory(Territories.NorthSea));
+
+	order = new MoveOrder {
+		Unit = england.Unit(Territories.London),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Belgium),
+	};
+	england.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.NorthSea),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+	});
+
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Belgium),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.London),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit = france.Unit(Territories.EnglishChannel),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+	});
+
+	step();
+
+	england.Unit(Territories.Belgium);
+	england.Unit(Territories.NorthSea);
+	france.Unit(Territories.EnglishChannel);
+	france.Unit(Territories.London);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_28_done]----");
+}
+
 #endregion
 
 //step();

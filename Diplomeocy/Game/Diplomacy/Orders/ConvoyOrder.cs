@@ -29,7 +29,7 @@ public class ConvoyOrder : Order {
 		// Create a dictionary mapping territories to convoy orders
 		Dictionary<Territory, ConvoyOrder> territoryToOrder = convoyOrders.ToDictionary(
 			 order => order.Unit.Location!,
-			  order => order);
+			 order => order);
 
 		// Create a queue for the BFS and enqueue the origin
 		Queue<Territory> queue = new();

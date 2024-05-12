@@ -356,7 +356,8 @@ public class GameHandler {
 						&& (o.Target == order.Target
 						|| o.Unit.Location == order.Unit.Location
 						|| o.Unit.Location == order.Target
-						|| o.Target == order.Unit.Location))
+						|| o.Target == order.Unit.Location
+						) || (order is ConvoyOrder co && co.ConvoyedOrder == o))
 					.ToList();
 
 				lock (dependencyGraph) {
@@ -387,6 +388,9 @@ public class GameHandler {
 			for (int i = 0; i < orders.Count; i++) {
 				Order order = orders[i];
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
+
+				if (order.Unit.Location == Board.Territory(Territories.London))
+					;
 
 				if (order.Resolved) continue;
 				Log.WriteLine($"\nlooking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");

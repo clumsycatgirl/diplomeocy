@@ -17,14 +17,9 @@ public class MoveOrder : Order {
 	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
 		if (dependencyGraph is null) throw new Exception("come on");
 
-
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 
-		string meowmoisationKey = MeowmoisationKey(dependencies);
-		if (MeowmoisedResults.TryGetValue(meowmoisationKey, out OrderStatus newStatus)) {
-			Status = newStatus;
-			return;
-		}
+		if (TryMeowmoise(dependencies)) return;
 
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
@@ -120,10 +115,13 @@ public class MoveOrder : Order {
 
 			if (IsConvoyed) {
 				// Check if the convoyed order's target is reachable by sea
-				if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
-					Status = OrderStatus.Failed;
-					return;
-				}
+
+				// what the fuck was I doing here
+				// like girl you're convoying to go somewhere far and you break if you it's too far
+				//if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
+				//	Status = OrderStatus.Failed;
+				//	return;
+				//}
 
 				// Find all successful convoy orders
 				List<ConvoyOrder> convoyOrders = dependencyGraph!
@@ -132,7 +130,8 @@ public class MoveOrder : Order {
 					.ToList();
 
 				// Check for an unbroken chain of fleets
-				ConvoyOrder? closestConvoy = convoyOrders.FirstOrDefault(order => Unit.Location!.AdjacentTerritories.Contains(order.Unit.Location!));
+				ConvoyOrder? closestConvoy = convoyOrders.FirstOrDefault(convoyOrder => Unit.Location!.AdjacentTerritories.Contains(convoyOrder.Unit.Location!));
+				bool isGood = closestConvoy?.IsUnbrokenChainOfFleets(convoyOrders) ?? false;
 				if (closestConvoy is not null && closestConvoy.IsUnbrokenChainOfFleets(convoyOrders)) {
 					Status = OrderStatus.Succeeded;
 				} else {
