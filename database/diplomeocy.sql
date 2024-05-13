@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 13, 2024 alle 14:37
+-- Creato il: Mag 13, 2024 alle 15:56
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `characters` (
-  `Name` varchar(32) NOT NULL,
+  `Id` int(11) NOT NULL,
+  `Name` varchar(128) NOT NULL,
   `Path` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -36,9 +37,8 @@ CREATE TABLE `characters` (
 -- Dump dei dati per la tabella `characters`
 --
 
-INSERT INTO `characters` (`Name`, `Path`) VALUES
-('Kitler', '~/assets/images/kittators/Kitler.png'),
-('Meowssolini', '~/assets/images/kittators/Meowssolini.png');
+INSERT INTO `characters` (`Id`, `Name`, `Path`) VALUES
+(1, 'Kitler', '~/assets/images/kittators/Kitler.png');
 
 -- --------------------------------------------------------
 
@@ -89,15 +89,15 @@ CREATE TABLE `users` (
   `Surname` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `PathCharacter` varchar(128) NOT NULL
+  `IdCharacter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `users`
 --
 
-INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `PathCharacter`) VALUES
-(1, '[meow', 'meow', 'meow', 'meow', '~/assets/images/kittators/Kitler.png');
+INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `IdCharacter`) VALUES
+(1, '[meow', 'meow', 'meow', 'meow', 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -107,7 +107,7 @@ INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `PathChara
 -- Indici per le tabelle `characters`
 --
 ALTER TABLE `characters`
-  ADD PRIMARY KEY (`Path`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indici per le tabelle `games`
@@ -135,11 +135,17 @@ ALTER TABLE `tables`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `PathCharacter` (`PathCharacter`);
+  ADD KEY `PathCharacter` (`IdCharacter`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
+
+--
+-- AUTO_INCREMENT per la tabella `characters`
+--
+ALTER TABLE `characters`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `games`
@@ -180,7 +186,7 @@ ALTER TABLE `players`
 -- Limiti per la tabella `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`PathCharacter`) REFERENCES `characters` (`Path`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`IdCharacter`) REFERENCES `characters` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -83,6 +83,27 @@ table, td, th, tr, thead {
 }
 
 
+.cat-form {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	margin-left: 10%;
+	margin-right: 10%;
+	
+}
+.cats {
+	display: flex;
+	flex-direction: column;
+	margin:2.5%;
+	text-align: center;
+	font-size: 9px;
+}
+.cat-image{
+	position:relative;
+	width:50px;
+	height:100px;
+	margin-right:2%;
+}
 .indigo-header {
 	background-color: #ddd6fe;
 	border-color: #a78bfa;
@@ -106,4 +127,5 @@ table, td, th, tr, thead {
 	width: fit-content;
 	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+	width:auto;
 }
