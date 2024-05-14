@@ -19,14 +19,7 @@ public class MoveOrder : Order {
 
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 
-		List<Order> meowmoiseDependencies = dependencies
-			.ToList()
-			.Concat(dependencyGraph!
-					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
-					.Select(kvp => (ConvoyOrder)kvp.Key)
-					.DistinctBy(order => order.Unit.Location)
-					.ToList())
-			.ToList();
+		List<Order> meowmoiseDependencies = FullDependencyList(dependencyGraph);
 		if (TryMeowmoise(meowmoiseDependencies)) return;
 
 		List<Order> conflictingDependencies = dependencies
@@ -143,14 +136,14 @@ public class MoveOrder : Order {
 
 				// what the fuck was I doing here
 				// like girl you're convoying to go somewhere far and you break if you it's too far
-				if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
-					Status = OrderStatus.Failed;
-					return;
-				}
+				//if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
+				//	Status = OrderStatus.Failed;
+				//	return;
+				//}
 
 				// Find all successful convoy orders
 				List<ConvoyOrder> convoyOrders = dependencyGraph!
-					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
+					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded && kvp.Key is ConvoyOrder)
 					.Select(kvp => (ConvoyOrder)kvp.Key)
 					.ToList();
 

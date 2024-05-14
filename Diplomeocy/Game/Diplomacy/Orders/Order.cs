@@ -93,4 +93,14 @@ public abstract class Order {
 		Status = status;
 		return true;
 	}
+
+	internal List<Order> FullDependencyList(Dictionary<Order, List<Order>> dependencyGraph) =>
+		dependencyGraph.GetValueOrDefault(this, new())
+			.ToList()
+			.Concat(dependencyGraph
+					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded && kvp.Key is ConvoyOrder)
+					.Select(kvp => (ConvoyOrder)kvp.Key)
+					.DistinctBy(order => order.Unit.Location)
+					.ToList())
+			.ToList();
 }
