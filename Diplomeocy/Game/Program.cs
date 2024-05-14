@@ -28,14 +28,15 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-18", false },
 	{ "diagram-19", false },
 	{ "diagram-20", false },
-	{ "diagram-21", false }, // infinite loop
+	{ "diagram-21", false },
 	{ "diagram-22", false },
 	{ "diagram-23", false },
 	{ "diagram-24", false },
 	{ "diagram-25", false },
 	{ "diagram-26", false },
 	{ "diagram-27", false },
-	{ "diagram-28", true },
+	{ "diagram-28", false },
+	{ "diagram-29", true },
 };
 
 GameHandler game = new();
@@ -1311,6 +1312,61 @@ if (tests["diagram-28"]) {
 	france.Unit(Territories.London);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_28_done]----");
+}
+
+if (tests["diagram-29"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_29]------");
+
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.MidAtlanticOcean))
+		.Move(game.Board.Territory(Territories.IrishSea));
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Brest));
+
+	england.Unit(Territories.Edinburgh)
+		.Move(game.Board.Territory(Territories.NorthSea));
+	england.Unit(Territories.Liverpool)
+		.Move(game.Board.Territory(Territories.Wales))
+		.Move(game.Board.Territory(Territories.EnglishChannel));
+
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Brest),
+		Target = game.Board.Territory(Territories.EnglishChannel),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = france.Unit(Territories.IrishSea),
+			SupportedOrder = order,
+		},
+	});
+
+	order = new MoveOrder {
+		Unit = england.Unit(Territories.London),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Belgium),
+	};
+	england.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.NorthSea),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new ConvoyOrder {
+			Unit = england.Unit(Territories.EnglishChannel),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+	});
+
+	step();
+
+	england.Unit(Territories.Belgium);
+	england.Unit(Territories.NorthSea);
+	france.Unit(Territories.IrishSea);
+	france.Unit(Territories.EnglishChannel);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_29_done]----");
 }
 
 #endregion
