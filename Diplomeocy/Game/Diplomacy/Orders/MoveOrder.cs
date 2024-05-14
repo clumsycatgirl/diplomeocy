@@ -19,11 +19,19 @@ public class MoveOrder : Order {
 
 		List<Order> dependencies = dependencyGraph.GetValueOrDefault(this, new());
 
-		if (TryMeowmoise(dependencies)) return;
+		List<Order> meowmoiseDependencies = dependencies
+			.ToList()
+			.Concat(dependencyGraph!
+					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
+					.Select(kvp => (ConvoyOrder)kvp.Key)
+					.DistinctBy(order => order.Unit.Location)
+					.ToList())
+			.ToList();
+		if (TryMeowmoise(meowmoiseDependencies)) return;
 
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
-						dependency.Status == OrderStatus.Pending
+						(dependency.Status == OrderStatus.Pending || dependency.Status == OrderStatus.Dislodged)
 						&& dependency is MoveOrder moveOrder
 						&& moveOrder.Target == Target)
 					.ToList();
@@ -101,6 +109,23 @@ public class MoveOrder : Order {
 			return;
 		}
 
+		if (forwardDependency is null & IsConvoyed) {
+			List<ConvoyOrder> convoyOrders = dependencyGraph!
+					.Where(kvp => kvp.Value.Contains(this) && kvp.Key.Status == OrderStatus.Succeeded)
+					.Select(kvp => (ConvoyOrder)kvp.Key)
+					.DistinctBy(order => order.Unit.Location)
+					.ToList();
+
+			ConvoyOrder? closestConvoy = convoyOrders.FirstOrDefault(convoyOrder => Unit.Location!.AdjacentTerritories.Contains(convoyOrder.Unit.Location!));
+			bool isValidConvoyRoute = closestConvoy?.IsUnbrokenChainOfFleets(convoyOrders) ?? false;
+			if (closestConvoy is not null && isValidConvoyRoute) {
+				Status = OrderStatus.Succeeded;
+			} else {
+				Status = OrderStatus.Failed;
+			}
+
+			return;
+		}
 
 		// check if convoy allows for movement
 		if (forwardDependency is not null) {
@@ -118,10 +143,10 @@ public class MoveOrder : Order {
 
 				// what the fuck was I doing here
 				// like girl you're convoying to go somewhere far and you break if you it's too far
-				//if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
-				//	Status = OrderStatus.Failed;
-				//	return;
-				//}
+				if (!Unit.Location!.AdjacentTerritories.Contains(Target!)) {
+					Status = OrderStatus.Failed;
+					return;
+				}
 
 				// Find all successful convoy orders
 				List<ConvoyOrder> convoyOrders = dependencyGraph!
@@ -222,15 +247,15 @@ public class MoveOrder : Order {
 				} else if (moveOrder.Status == OrderStatus.Failed) {
 					// forwardUnit should stay in place
 
-					// standoff
-					if (effectiveStrength <= 1) {
+					if (moveOrder.Unit.Country == Unit.Country) {
 						SetBackwardsDependenciesToPending(dependencyGraph!);
 						moveOrder.Status = OrderStatus.Failed;
 						Status = OrderStatus.Failed;
 						return;
 					}
 
-					if (moveOrder.Unit.Country == Unit.Country) {
+					// standoff
+					if (effectiveStrength <= 1) {
 						SetBackwardsDependenciesToPending(dependencyGraph!);
 						moveOrder.Status = OrderStatus.Failed;
 						Status = OrderStatus.Failed;
@@ -260,7 +285,7 @@ public class MoveOrder : Order {
 				return;
 			}
 
-			if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded && Strength > convoyOrder.Strength) {
+			if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded && effectiveStrength > convoyOrder.Strength) {
 				convoyOrder.Status = OrderStatus.Dislodged;
 				convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
 				Status = OrderStatus.Succeeded;

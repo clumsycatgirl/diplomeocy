@@ -47,17 +47,20 @@ public class ConvoyOrder : Order {
 				return true;
 			}
 
-			// Enqueue all adjacent territories that have a convoy order and haven't been visited yet
-			foreach (Territory adjacent in current.AdjacentTerritories) {
-				if (territoryToOrder.ContainsKey(adjacent) && !visited.Contains(adjacent)) {
-					queue.Enqueue(adjacent);
-				}
+			if (current.AdjacentTerritories.Contains(ConvoyedOrder.Target!)) {
+				return true;
 			}
+
+			// Enqueue all adjacent territories that have a convoy order and haven't been visited yet
+			current.AdjacentTerritories
+				.Where(adjacent => territoryToOrder.ContainsKey(adjacent) && !visited.Contains(adjacent))
+				.AsParallel()
+				.ForAll(adjacent => queue.Enqueue(adjacent));
 		}
 
 		// If we've exhausted all possibilities without reaching the destination, return false
 		return false;
 	}
 
-	public override string ToString() => $"{ToString("convoy")} convoyed ({ConvoyedOrder})";
+	public override string ToString() => $"{ToString("convoy")} ({ConvoyedOrder})";
 }

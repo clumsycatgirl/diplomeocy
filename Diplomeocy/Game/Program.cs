@@ -28,7 +28,7 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-18", false },
 	{ "diagram-19", false },
 	{ "diagram-20", false },
-	{ "diagram-21", false },
+	{ "diagram-21", false }, // infinite loop
 	{ "diagram-22", false },
 	{ "diagram-23", false },
 	{ "diagram-24", false },
@@ -846,7 +846,7 @@ if (tests["diagram-18"]) {
 
 if (tests["diagram-19"]) {
 	resetGame();
-	Log.WriteLine(Log.LogLevel.Error, "------[diagram_20]------");
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_19]------");
 
 	england.Unit(Territories.Edinburgh)
 		.Move(game.Board.Territory(Territories.NorthSea));

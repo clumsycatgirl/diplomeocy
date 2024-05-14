@@ -2,6 +2,8 @@
 
 namespace Diplomacy;
 
+using System.Linq;
+
 using Diplomacy.Orders;
 
 using Utils;
@@ -404,7 +406,18 @@ public class GameHandler {
 				// save starting deps cause we're gonna change them later on
 				// and this is the input we receive so we have to meowmoise this input
 				// not the one after the execution
-				string key = Order.MeowmoisationKey(dependencies);
+				List<Order> meowmoiseDependencies = dependencies
+					.ToList()
+					.Concat(dependencyGraph!
+							.Where(kvp => kvp.Value.Contains(order) && kvp.Key.Status == OrderStatus.Succeeded)
+							.Select(kvp => (ConvoyOrder)kvp.Key)
+							.DistinctBy(order => order.Unit.Location)
+							.ToList())
+					.ToList();
+				string key = Order.MeowmoisationKey(meowmoiseDependencies);
+
+				if (order.Unit.Location == Board.Territory(Territories.Spain))
+					;
 
 				// do the stuff
 				order.Execute(dependencyGraph, forwardDependency);
