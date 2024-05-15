@@ -23,6 +23,7 @@ public class ConvoyOrder : Order {
 	}
 
 	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
+		Status = OrderStatus.Succeeded;
 	}
 
 	public bool IsUnbrokenChainOfFleets(List<ConvoyOrder> convoyOrders) {

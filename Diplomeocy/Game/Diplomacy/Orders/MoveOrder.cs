@@ -24,7 +24,7 @@ public class MoveOrder : Order {
 
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
-						(dependency.Status == OrderStatus.Pending || dependency.Status == OrderStatus.Dislodged)
+						(dependency.Status == OrderStatus.Pending)
 						&& dependency is MoveOrder moveOrder
 						&& moveOrder.Target == Target)
 					.ToList();
@@ -151,7 +151,25 @@ public class MoveOrder : Order {
 				ConvoyOrder? closestConvoy = convoyOrders.FirstOrDefault(convoyOrder => Unit.Location!.AdjacentTerritories.Contains(convoyOrder.Unit.Location!));
 				bool isGood = closestConvoy?.IsUnbrokenChainOfFleets(convoyOrders) ?? false;
 				if (closestConvoy is not null && closestConvoy.IsUnbrokenChainOfFleets(convoyOrders)) {
-					Status = OrderStatus.Succeeded;
+					//Status = OrderStatus.Succeeded;
+					//set all dependencies for the cancelled support order to pending
+					if (forwardDependency is SupportOrder _forwardSupportOrder && _forwardSupportOrder.Resolved) {
+						HandleSupportOrder(_forwardSupportOrder, effectiveStrength, dependencyGraph);
+					}
+
+					if (forwardDependency is HoldOrder _holdOrder) {
+						HandleHoldOrder(_holdOrder, effectiveStrength, dependencyGraph);
+					}
+
+					if (forwardDependency is MoveOrder _moveOrder) {
+						HandleMoveOrder(_moveOrder, effectiveStrength, dependencyGraph);
+					}
+
+					if (forwardDependency is ConvoyOrder _convoyOrder && _convoyOrder.Status == OrderStatus.Succeeded && effectiveStrength > _convoyOrder.Strength) {
+						HandleConvoyOrder(_convoyOrder, effectiveStrength, dependencyGraph);
+					}
+
+					return;
 				} else {
 					Status = OrderStatus.Failed;
 				}
@@ -160,128 +178,22 @@ public class MoveOrder : Order {
 
 			// set all dependencies for the cancelled support order to pending
 			if (forwardDependency is SupportOrder forwardSupportOrder && forwardSupportOrder.Resolved) {
-				if (forwardSupportOrder.SupportedOrder.Target == Unit.Location) {
-					// cannot cut support order as it's trying to support against *our* location
-
-					// if we cannot dislodge the unit we can't cut the support and thus we fail
-					if (effectiveStrength <= forwardSupportOrder.Strength) {
-						Status = OrderStatus.Failed;
-						return;
-					}
-
-					// if we're stronger we can dislodge the unit and cut the support
-					forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
-					forwardSupportOrder.SupportedOrder.Strength--;
-					forwardSupportOrder.Status = OrderStatus.Failed;
-					Status = OrderStatus.Succeeded;
-					return;
-				}
-
-				forwardSupportOrder.Status = OrderStatus.Dislodged;
-				forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
-				forwardSupportOrder.SupportedOrder.Strength--;
-
-				forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-
-				Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
+				HandleSupportOrder(forwardSupportOrder, effectiveStrength, dependencyGraph);
 				return;
 			}
 
 			if (forwardDependency is HoldOrder holdOrder) {
-				if (holdOrder.Unit.Country == Unit.Country) {
-					Status = OrderStatus.Failed;
-					return;
-				}
-				if (holdOrder.Strength >= effectiveStrength) {
-					Status = OrderStatus.Failed;
-					holdOrder.Status = OrderStatus.Succeeded;
-				} else {
-					Status = OrderStatus.Succeeded;
-					holdOrder.Status = OrderStatus.Retired;
-				}
+				HandleHoldOrder(holdOrder, effectiveStrength, dependencyGraph);
 				return;
 			}
 
 			if (forwardDependency is MoveOrder moveOrder) {
-				// check if the order is trying to get to the same place the current order is takign place on
-				if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
-					if (effectiveStrength == moveOrder.Strength) {
-						moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-						SetBackwardsDependenciesToPending(dependencyGraph!);
-						Status = OrderStatus.Failed;
-						moveOrder.Status = OrderStatus.Failed;
-					} else if (effectiveStrength > moveOrder.Strength) {
-						moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-						moveOrder.Status = OrderStatus.Dislodged;
-						Status = OrderStatus.Succeeded;
-					} else {
-						Status = OrderStatus.Dislodged;
-						moveOrder.Status = OrderStatus.Succeeded;
-					}
-				} else if (moveOrder.Status == OrderStatus.Succeeded) {
-					// check if the forward order succeded in moving
-					if (moveOrder.Target != Unit.Location) {
-						// arey trying to get to a different location from ours then that means we can go where they were
-						Status = OrderStatus.Succeeded;
-						return;
-					}
-
-					// if the forward unit is trying to get to the same place we are
-
-					// try to dislodge them
-					//if (Strength <= 1) {
-					//	Status = OrderStatus.Failed;
-					//	return;
-					//}
-
-					//moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-					//moveOrder.Status = OrderStatus.Dislodged;
-					//Status = OrderStatus.Succeeded;
-				} else if (moveOrder.Status == OrderStatus.Failed) {
-					// forwardUnit should stay in place
-
-					if (moveOrder.Unit.Country == Unit.Country) {
-						SetBackwardsDependenciesToPending(dependencyGraph!);
-						moveOrder.Status = OrderStatus.Failed;
-						Status = OrderStatus.Failed;
-						return;
-					}
-
-					// standoff
-					if (effectiveStrength <= 1) {
-						SetBackwardsDependenciesToPending(dependencyGraph!);
-						moveOrder.Status = OrderStatus.Failed;
-						Status = OrderStatus.Failed;
-						return;
-					}
-
-					// if we can win retire the forwardUnit
-					// this means all things that tried to get to that location and failed
-					// could now succeed so set them to pending for the next iteration
-					moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
-					//dependencyGraph!
-					//	.ToList()
-					//	.Where(kvp => kvp.Value.Contains(moveOrder))
-					//	.ToList()
-					//	.ForEach(kvp => kvp.Key.Status = OrderStatus.Pending);
-					moveOrder.Status = OrderStatus.Dislodged;
-					Status = OrderStatus.Succeeded;
-				} else if (moveOrder.Status == OrderStatus.Dislodged) {
-					// forwardUnit is no more
-					Status = OrderStatus.Succeeded;
-				} else {
-					// idk what this means but it seems to be working so <- apparently that doesn't work anymore
-					//Status = OrderStatus.Failed;
-
-					// other unit is pending so do nothing for now instead of that *wrong* thing
-				}
+				HandleMoveOrder(moveOrder, effectiveStrength, dependencyGraph);
 				return;
 			}
 
-			if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded && effectiveStrength > convoyOrder.Strength) {
-				convoyOrder.Status = OrderStatus.Dislodged;
-				convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
-				Status = OrderStatus.Succeeded;
+			if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded) {
+				HandleConvoyOrder(convoyOrder, effectiveStrength, dependencyGraph);
 				return;
 			}
 
@@ -296,6 +208,134 @@ public class MoveOrder : Order {
 				}
 				return;
 			}
+		}
+	}
+
+	private void HandleSupportOrder(SupportOrder forwardSupportOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
+		if (forwardSupportOrder.SupportedOrder.Target == Unit.Location) {
+			// cannot cut support order as it's trying to support against *our* location
+
+			// if we cannot dislodge the unit we can't cut the support and thus we fail
+			if (effectiveStrength <= forwardSupportOrder.Strength) {
+				Status = OrderStatus.Failed;
+				return;
+			}
+
+			// if we're stronger we can dislodge the unit and cut the support
+			forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
+			forwardSupportOrder.SupportedOrder.Strength--;
+			forwardSupportOrder.Status = OrderStatus.Failed;
+			Status = OrderStatus.Succeeded;
+			return;
+		}
+
+		forwardSupportOrder.Status = forwardSupportOrder.Strength < effectiveStrength ? OrderStatus.Dislodged : OrderStatus.Failed;
+		forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
+		forwardSupportOrder.SupportedOrder.Strength--;
+
+		forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+
+		Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
+	}
+
+	private void HandleHoldOrder(HoldOrder holdOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
+		if (holdOrder.Unit.Country == Unit.Country) {
+			Status = OrderStatus.Failed;
+			return;
+		}
+		if (holdOrder.Strength >= effectiveStrength) {
+			Status = OrderStatus.Failed;
+			holdOrder.Status = OrderStatus.Succeeded;
+		} else {
+			Status = OrderStatus.Succeeded;
+			holdOrder.Status = OrderStatus.Retired;
+		}
+	}
+
+	private void HandleMoveOrder(MoveOrder moveOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
+		// check if the order is trying to get to the same place the current order is takign place on
+		if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
+			if (effectiveStrength == moveOrder.Strength) {
+				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+				SetBackwardsDependenciesToPending(dependencyGraph!);
+				Status = OrderStatus.Failed;
+				moveOrder.Status = OrderStatus.Failed;
+			} else if (effectiveStrength > moveOrder.Strength) {
+				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+				moveOrder.Status = OrderStatus.Dislodged;
+				Status = OrderStatus.Succeeded;
+			} else {
+				Status = OrderStatus.Dislodged;
+				moveOrder.Status = OrderStatus.Succeeded;
+			}
+		} else if (moveOrder.Status == OrderStatus.Succeeded) {
+			// check if the forward order succeded in moving
+			if (moveOrder.Target != Unit.Location) {
+				// arey trying to get to a different location from ours then that means we can go where they were
+				Status = OrderStatus.Succeeded;
+				return;
+			}
+
+			// if the forward unit is trying to get to the same place we are
+
+			// try to dislodge them
+			//if (Strength <= 1) {
+			//	Status = OrderStatus.Failed;
+			//	return;
+			//}
+
+			//moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+			//moveOrder.Status = OrderStatus.Dislodged;
+			//Status = OrderStatus.Succeeded;
+		} else if (moveOrder.Status == OrderStatus.Failed) {
+			// forwardUnit should stay in place
+
+			if (moveOrder.Unit.Country == Unit.Country) {
+				SetBackwardsDependenciesToPending(dependencyGraph!);
+				moveOrder.Status = OrderStatus.Failed;
+				Status = OrderStatus.Failed;
+				return;
+			}
+
+			// standoff
+			if (effectiveStrength <= 1) {
+				SetBackwardsDependenciesToPending(dependencyGraph!);
+				moveOrder.Status = OrderStatus.Failed;
+				Status = OrderStatus.Failed;
+				return;
+			}
+
+			// if we can win retire the forwardUnit
+			// this means all things that tried to get to that location and failed
+			// could now succeed so set them to pending for the next iteration
+			moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+			//dependencyGraph!
+			//	.ToList()
+			//	.Where(kvp => kvp.Value.Contains(moveOrder))
+			//	.ToList()
+			//	.ForEach(kvp => kvp.Key.Status = OrderStatus.Pending);
+			moveOrder.Status = OrderStatus.Dislodged;
+			Status = OrderStatus.Succeeded;
+		} else if (moveOrder.Status == OrderStatus.Dislodged) {
+			// forwardUnit is no more
+			Status = OrderStatus.Succeeded;
+		} else {
+			// idk what this means but it seems to be working so <- apparently that doesn't work anymore
+			//Status = OrderStatus.Failed;
+
+			// other unit is pending so do nothing for now instead of that *wrong* thing
+		}
+	}
+
+	private void HandleConvoyOrder(ConvoyOrder convoyOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
+		if (effectiveStrength > convoyOrder.Strength) {
+			convoyOrder.Status = OrderStatus.Dislodged;
+			convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
+			Status = OrderStatus.Succeeded;
+		} else {
+			convoyOrder.Status = OrderStatus.Failed;
+			convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
+			Status = OrderStatus.Failed;
 		}
 	}
 
