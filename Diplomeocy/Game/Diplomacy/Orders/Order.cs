@@ -11,6 +11,7 @@ public abstract class Order {
 	public int Strength { get; set; } = 1;
 	public List<SupportOrder> SupportedBy { get; set; } = new();
 	public OrderStatus Status { get; set; } = OrderStatus.Pending;
+	public Order? DislodgedBy { get; set; } = null;
 
 	public bool IsConvoyed { get; set; } = false;
 

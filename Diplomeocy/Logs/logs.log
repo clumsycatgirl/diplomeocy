@@ -1,0 +1,178 @@
+------ [logs] ------
+--- [project configuration] ---
+ - Name: 'Game'
+ - Version: '1.0.0.0'
+ - Author: 'Game'
+ - Build: 'Debug'
+
+
+meow
+
+----Turn 1901 Spring----
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+
+--Austria: Units--
+([Austria] Army in Vienna)
+([Austria] Army in Budapest)
+([Austria] Army in Trieste)
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Constantinople)
+([Turkey] Army in Smyrna)
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+
+--Russia: Units--
+([Russia] Army in Moscow)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Warsaw)
+([Russia] Fleet in Sevastopol)
+
+------[diagram_13]------
+----Turn 1901 Spring----
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+--England: Orders--
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+--Germany: Orders--
+
+--Austria: Units--
+([Austria] Army in Vienna)
+([Austria] Army in Budapest)
+([Austria] Army in Trieste)
+--Austria: Orders--
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Bulgaria)
+([Turkey] Army in Smyrna)
+--Turkey: Orders--
+[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+--France: Orders--
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+--Italy: Orders--
+
+--Russia: Units--
+([Russia] Army in Rumania)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Serbia)
+([Russia] Fleet in Sevastopol)
+--Russia: Orders--
+[Pending][1] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+[Pending][1] (Army in Serbia) supports supported ([Pending][1] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
+[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+
+--support orders--
+support: [Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+--dependency graph--
+[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
+	[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+looking at [Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)) with 
+	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+looking at [Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)) with 
+	[Failed][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)) with 
+	[Dislodged][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+--orders review--
+[Succeeded][1] (Army in Serbia) supports supported ([Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
+[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
+	[Failed][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Failed][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+[Failed][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+	[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+
+
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+--England: Orders--
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+--Germany: Orders--
+
+--Austria: Units--
+([Austria] Army in Vienna)
+([Austria] Army in Budapest)
+([Austria] Army in Trieste)
+--Austria: Orders--
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Bulgaria)
+([Turkey] Army in Smyrna)
+--Turkey: Orders--
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+--France: Orders--
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+--Italy: Orders--
+
+--Russia: Units--
+([Russia] Army in Bulgaria)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Serbia)
+([Russia] Fleet in Sevastopol)
+--Russia: Orders--
+
+

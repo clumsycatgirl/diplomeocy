@@ -1,0 +1,197 @@
+------ [logs] ------
+--- [project configuration] ---
+ - Name: 'Game'
+ - Version: '1.0.0.0'
+ - Author: 'Game'
+ - Build: 'Debug'
+
+
+meow
+
+----Turn 1901 Spring----
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+
+--Austria: Units--
+([Austria] Army in Vienna)
+([Austria] Army in Budapest)
+([Austria] Army in Trieste)
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Constantinople)
+([Turkey] Army in Smyrna)
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+
+--Russia: Units--
+([Russia] Army in Moscow)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Warsaw)
+([Russia] Fleet in Sevastopol)
+
+------[diagram_12]------
+----Turn 1901 Spring----
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+--England: Orders--
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+--Germany: Orders--
+[Pending][1] (Army in Munich) moves targets (Silesia occupied by none)
+[Pending][1] (Army in Berlin) supports supported ([Pending][1] (Army in Munich) moves targets (Silesia occupied by none))
+
+--Austria: Units--
+([Austria] Army in Bohemia)
+([Austria] Army in Budapest)
+([Austria] Army in Tyrolia)
+--Austria: Orders--
+[Pending][1] (Army in Bohemia) moves targets (Munich occupied by none)
+[Pending][1] (Army in Tyrolia) supports supported ([Pending][1] (Army in Bohemia) moves targets (Munich occupied by none))
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Constantinople)
+([Turkey] Army in Smyrna)
+--Turkey: Orders--
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+--France: Orders--
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+--Italy: Orders--
+
+--Russia: Units--
+([Russia] Army in Warsaw)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Prussia)
+([Russia] Fleet in Sevastopol)
+--Russia: Orders--
+[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none)
+[Pending][1] (Army in Prussia) supports supported ([Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none))
+
+
+--support orders--
+support: [Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
+support: [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
+support: [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+--dependency graph--
+[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none): 
+	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Pending][2] (Army in Munich) moves targets (Silesia occupied by none): 
+	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
+	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
+	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
+[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
+
+looking at [Pending][2] (Army in Munich) moves targets (Silesia occupied by none) with 
+	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
+	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+
+looking at [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none) with 
+	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+
+looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none) with 
+	[Dislodged][2] (Army in Munich) moves targets (Silesia occupied by none)
+--orders review--
+[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
+[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
+[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none): 
+	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Failed][2] (Army in Munich) moves targets (Silesia occupied by none): 
+	[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)
+	[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
+	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
+[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+
+
+--England: Units--
+([England] Army in London)
+([England] Army in Liverpool)
+([England] Army in Edinburgh)
+--England: Orders--
+
+--Germany: Units--
+([Germany] Army in Berlin)
+([Germany] Army in Munich)
+([Germany] Army in Kiel)
+--Germany: Orders--
+
+--Austria: Units--
+([Austria] Army in Munich)
+([Austria] Army in Budapest)
+([Austria] Army in Tyrolia)
+--Austria: Orders--
+
+--Turkey: Units--
+([Turkey] Army in Ankara)
+([Turkey] Army in Constantinople)
+([Turkey] Army in Smyrna)
+--Turkey: Orders--
+
+--France: Units--
+([France] Army in Paris)
+([France] Army in Marseilles)
+([France] Army in Brest)
+--France: Orders--
+
+--Italy: Units--
+([Italy] Army in Rome)
+([Italy] Army in Naples)
+([Italy] Army in Venice)
+--Italy: Orders--
+
+--Russia: Units--
+([Russia] Army in Warsaw)
+([Russia] Army in SaintPetersburg)
+([Russia] Army in Prussia)
+([Russia] Fleet in Sevastopol)
+--Russia: Orders--
+
+
+----[diagram_12_done]----

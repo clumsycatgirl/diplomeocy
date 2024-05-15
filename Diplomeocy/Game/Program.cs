@@ -19,8 +19,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-9", false },
 	{ "diagram-10", false },
 	{ "diagram-11", false },
-	{ "diagram-12", false }, // works with edge case
-	{ "diagram-13", false }, // fucking kill me
+	{ "diagram-12", false },
+	{ "diagram-13", false },
 	{ "diagram-14", false },
 	{ "diagram-15", false },
 	{ "diagram-16", false },

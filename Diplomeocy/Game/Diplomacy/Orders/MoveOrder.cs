@@ -24,7 +24,7 @@ public class MoveOrder : Order {
 
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
-						(dependency.Status == OrderStatus.Pending || dependency.Status == OrderStatus.Dislodged)
+						(dependency.Status == OrderStatus.Pending || (dependency.Status == OrderStatus.Dislodged && dependency.DislodgedBy?.Unit.Location != dependency.Target))
 						&& dependency is MoveOrder moveOrder
 						&& moveOrder.Target == Target)
 					.ToList();
@@ -282,6 +282,7 @@ public class MoveOrder : Order {
 
 		// shouldn't need idr it was late but I'm not gonna go cehck
 		Status = forwardSupportOrder.Status == OrderStatus.Dislodged ? OrderStatus.Succeeded : OrderStatus.Failed;
+		if (forwardSupportOrder.Status == OrderStatus.Dislodged) forwardSupportOrder.DislodgedBy = this;
 	}
 
 	private void HandleHoldOrder(HoldOrder holdOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
@@ -312,9 +313,11 @@ public class MoveOrder : Order {
 			} else if (effectiveStrength > moveOrder.Strength) {
 				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 				moveOrder.Status = OrderStatus.Dislodged;
+				moveOrder.DislodgedBy = this;
 				Status = OrderStatus.Succeeded;
 			} else {
 				Status = OrderStatus.Dislodged;
+				DislodgedBy = moveOrder;
 				moveOrder.Status = OrderStatus.Succeeded;
 			}
 		} else if (moveOrder.Status == OrderStatus.Succeeded) {
@@ -370,6 +373,7 @@ public class MoveOrder : Order {
 			//	.ToList()
 			//	.ForEach(kvp => kvp.Key.Status = OrderStatus.Pending);
 			moveOrder.Status = OrderStatus.Dislodged;
+			moveOrder.DislodgedBy = this;
 			Status = OrderStatus.Succeeded;
 		} else if (moveOrder.Status == OrderStatus.Dislodged) {
 			// forwardUnit is no more
@@ -385,6 +389,7 @@ public class MoveOrder : Order {
 	private void HandleConvoyOrder(ConvoyOrder convoyOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
 		if (effectiveStrength > convoyOrder.Strength) {
 			convoyOrder.Status = OrderStatus.Dislodged;
+			convoyOrder.DislodgedBy = this;
 			convoyOrder.ConvoyedOrder.Status = OrderStatus.Pending;
 			Status = OrderStatus.Succeeded;
 		} else {
