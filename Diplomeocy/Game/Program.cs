@@ -37,9 +37,9 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-27", false },
 	{ "diagram-28", false },
 	{ "diagram-29", false },
-	{ "diagram-30", false }, // error
+	{ "diagram-30", false },
 	{ "diagram-31", false },
-	{ "diagram-32", false } // error
+	{ "diagram-32", false },
 };
 
 GameHandler game = new();

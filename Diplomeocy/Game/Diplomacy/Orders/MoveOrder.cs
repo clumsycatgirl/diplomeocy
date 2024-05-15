@@ -198,7 +198,7 @@ public class MoveOrder : Order {
 				if (closestConvoy is not null && closestConvoy.IsUnbrokenChainOfFleets(convoyOrders)) {
 					//Status = OrderStatus.Succeeded;
 					//set all dependencies for the cancelled support order to pending
-					if (forwardDependency is SupportOrder _forwardSupportOrder && _forwardSupportOrder.Resolved) {
+					if (forwardDependency is SupportOrder _forwardSupportOrder && _forwardSupportOrder.Resolved && !convoyOrders.Any(convoyOrder => convoyOrder.Unit.Location == _forwardSupportOrder.SupportedOrder.Target)) {
 						HandleSupportOrder(_forwardSupportOrder, effectiveStrength, dependencyGraph);
 					}
 

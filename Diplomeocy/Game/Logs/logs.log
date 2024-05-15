@@ -45,7 +45,7 @@ meow
 ([Russia] Army in Warsaw)
 ([Russia] Fleet in Sevastopol)
 
-------[diagram_12]------
+------[diagram_32]------
 ----Turn 1901 Spring----
 --England: Units--
 ([England] Army in London)
@@ -58,16 +58,12 @@ meow
 ([Germany] Army in Munich)
 ([Germany] Army in Kiel)
 --Germany: Orders--
-[Pending][1] (Army in Munich) moves targets (Silesia occupied by none)
-[Pending][1] (Army in Berlin) supports supported ([Pending][1] (Army in Munich) moves targets (Silesia occupied by none))
 
 --Austria: Units--
-([Austria] Army in Bohemia)
+([Austria] Army in Vienna)
 ([Austria] Army in Budapest)
-([Austria] Army in Tyrolia)
+([Austria] Army in Trieste)
 --Austria: Orders--
-[Pending][1] (Army in Bohemia) moves targets (Munich occupied by none)
-[Pending][1] (Army in Tyrolia) supports supported ([Pending][1] (Army in Bohemia) moves targets (Munich occupied by none))
 
 --Turkey: Units--
 ([Turkey] Army in Ankara)
@@ -76,78 +72,131 @@ meow
 --Turkey: Orders--
 
 --France: Units--
-([France] Army in Paris)
-([France] Army in Marseilles)
-([France] Army in Brest)
+([France] Army in TyrrhenianSea)
+([France] Army in Tunis)
+([France] Army in IonianSea)
+([France] Army in Apuleia)
 --France: Orders--
+[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
+[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Pending][1] (Army in IonianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Pending][1] (Army in Apuleia) supports supported ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
 
 --Italy: Units--
 ([Italy] Army in Rome)
 ([Italy] Army in Naples)
 ([Italy] Army in Venice)
 --Italy: Orders--
+[Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+[Pending][1] (Army in Naples) supports supported ([Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 --Russia: Units--
-([Russia] Army in Warsaw)
+([Russia] Army in Moscow)
 ([Russia] Army in SaintPetersburg)
-([Russia] Army in Prussia)
+([Russia] Army in Warsaw)
 ([Russia] Fleet in Sevastopol)
 --Russia: Orders--
-[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none)
-[Pending][1] (Army in Prussia) supports supported ([Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none))
 
 
 --support orders--
-support: [Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
-support: [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
-support: [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+support: [Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
+support: [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 --dependency graph--
-[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none): 
-	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
-[Pending][2] (Army in Munich) moves targets (Silesia occupied by none): 
-	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
-	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
-[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
-	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
-[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][2] (Army in Tunis) moves targets (Naples occupied by none): 
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
+	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
-looking at [Pending][2] (Army in Munich) moves targets (Silesia occupied by none) with 
-	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
-	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
+looking at [Pending][2] (Army in Tunis) moves targets (Naples occupied by none) with 
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
-looking at [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none) with 
-	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+looking at [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)) with 
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
 
-looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none) with 
-	[Dislodged][2] (Army in Munich) moves targets (Silesia occupied by none)
+looking at [Pending][2] (Army in Tunis) moves targets (Naples occupied by none) with 
+	[Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)) with 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Dislodged][1] (Army in Naples) supports supported ([Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)) with 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Dislodged][1] (Army in Naples) supports supported ([Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)) with 
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+
+looking at [Pending][2] (Army in Tunis) moves targets (Naples occupied by none) with 
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][1] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)) with 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Dislodged][1] (Army in Naples) supports supported ([Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)) with 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Dislodged][1] (Army in Naples) supports supported ([Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+
+looking at [Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)) with 
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
 --orders review--
-[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
-[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
-[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none): 
-	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
-[Failed][2] (Army in Munich) moves targets (Silesia occupied by none): 
-	[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)
-	[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)
-[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
-	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
-[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none): 
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 
 --England: Units--
@@ -163,9 +212,9 @@ looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none
 --Germany: Orders--
 
 --Austria: Units--
-([Austria] Army in Munich)
+([Austria] Army in Vienna)
 ([Austria] Army in Budapest)
-([Austria] Army in Tyrolia)
+([Austria] Army in Trieste)
 --Austria: Orders--
 
 --Turkey: Units--
@@ -175,9 +224,10 @@ looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none
 --Turkey: Orders--
 
 --France: Units--
-([France] Army in Paris)
-([France] Army in Marseilles)
-([France] Army in Brest)
+([France] Army in TyrrhenianSea)
+([France] Army in Naples)
+([France] Army in IonianSea)
+([France] Army in Apuleia)
 --France: Orders--
 
 --Italy: Units--
@@ -187,11 +237,11 @@ looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none
 --Italy: Orders--
 
 --Russia: Units--
-([Russia] Army in Warsaw)
+([Russia] Army in Moscow)
 ([Russia] Army in SaintPetersburg)
-([Russia] Army in Prussia)
+([Russia] Army in Warsaw)
 ([Russia] Fleet in Sevastopol)
 --Russia: Orders--
 
 
-----[diagram_12_done]----
+----[diagram_32_done]----
