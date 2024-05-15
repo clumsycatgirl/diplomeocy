@@ -24,7 +24,7 @@ public class MoveOrder : Order {
 
 		List<Order> conflictingDependencies = dependencies
 					.Where(dependency =>
-						(dependency.Status == OrderStatus.Pending)
+						(dependency.Status == OrderStatus.Pending || dependency.Status == OrderStatus.Dislodged)
 						&& dependency is MoveOrder moveOrder
 						&& moveOrder.Target == Target)
 					.ToList();
@@ -60,29 +60,74 @@ public class MoveOrder : Order {
 				.First();
 
 			if (winner.Target!.OccupyingUnit is not null) {
-				// territory is occupied by another unit
-				if (forwardDependency is HoldOrder && forwardDependency.Status == OrderStatus.Dislodged) {
-					winner.Status = OrderStatus.Succeeded;
-				}
+				//// territory is occupied by another unit
+				//if (forwardDependency is HoldOrder && forwardDependency.Status == OrderStatus.Dislodged) {
+				//	winner.Status = OrderStatus.Succeeded;
+				//}
 
-				if (forwardDependency is MoveOrder && forwardDependency.Status == OrderStatus.Failed) {
-					if (forwardDependency.Unit!.Country == winner.Unit.Country) {
-						winner.Status = OrderStatus.Failed;
-					} else {
-						if (forwardDependency.Strength <= winner.Strength) {
-							forwardDependency.Status = OrderStatus.Dislodged;
-							winner.Status = OrderStatus.Succeeded;
-						} else {
-							winner.Status = OrderStatus.Failed;
-						}
+				//if (forwardDependency is MoveOrder && forwardDependency.Status == OrderStatus.Failed) {
+				//	if (forwardDependency.Unit!.Country == winner.Unit.Country) {
+				//		winner.Status = OrderStatus.Failed;
+				//	} else {
+				//		if (forwardDependency.Strength <= winner.Strength) {
+				//			forwardDependency.Status = OrderStatus.Dislodged;
+				//			winner.Status = OrderStatus.Succeeded;
+				//		} else {
+				//			winner.Status = OrderStatus.Failed;
+				//		}
+				//	}
+				//}
+
+				//if (forwardDependency!.Status == OrderStatus.Pending) {
+				//	winner.Status = OrderStatus.Pending;
+				//} else {
+				//	winner.Status = OrderStatus.Succeeded;
+				//}
+
+				int winnerEffectiveStrength = winner.Strength;
+				if (forwardDependency is not null) {
+					winner.SupportedBy
+					.Where(so => so.Status == OrderStatus.Succeeded && so.Unit.Country == forwardDependency.Unit.Country)
+					.ToList()
+					.ForEach(ord => {
+						winnerEffectiveStrength--;
+						ord.Status = OrderStatus.Failed;
+					});
+					if (forwardDependency is SupportOrder forwardSupportOrder && forwardSupportOrder.Resolved) {
+						((MoveOrder)winner).HandleSupportOrder(forwardSupportOrder, winnerEffectiveStrength, dependencyGraph);
+						return;
 					}
-				}
 
-				if (forwardDependency!.Status == OrderStatus.Pending) {
-					winner.Status = OrderStatus.Pending;
+					if (forwardDependency is HoldOrder holdOrder) {
+						((MoveOrder)winner).HandleHoldOrder(holdOrder, winnerEffectiveStrength, dependencyGraph);
+						return;
+					}
+
+					if (forwardDependency is MoveOrder moveOrder) {
+						((MoveOrder)winner).HandleMoveOrder(moveOrder, winnerEffectiveStrength, dependencyGraph);
+						return;
+					}
+
+					if (forwardDependency is ConvoyOrder convoyOrder && convoyOrder.Status == OrderStatus.Succeeded) {
+						((MoveOrder)winner).HandleConvoyOrder(convoyOrder, winnerEffectiveStrength, dependencyGraph);
+						return;
+					}
+
+					if (forwardDependency!.Resolved) {
+						// if the one in front is done check if it's goign to a different place cause then we can go there
+						if (forwardDependency.Status == OrderStatus.Succeeded && forwardDependency.Target != winner.Target) {
+							Status = OrderStatus.Succeeded;
+						} else {
+							// if that fucker of a forward faield just like I did at spelling
+							// then we also fail
+							Status = OrderStatus.Failed;
+						}
+						return;
+					}
 				} else {
 					winner.Status = OrderStatus.Succeeded;
 				}
+
 			}
 
 			//winner.Status = OrderStatus.Pending;
