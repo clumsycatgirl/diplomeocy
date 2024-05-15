@@ -32,10 +32,10 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-22", false },
 	{ "diagram-23", false },
 	{ "diagram-24", false },
-	{ "diagram-25", true }, // error
+	{ "diagram-25", false },
 	{ "diagram-26", false },
 	{ "diagram-27", false },
-	{ "diagram-28", false }, // error
+	{ "diagram-28", true }, // error
 	{ "diagram-29", false },
 	{ "diagram-30", false }, // error
 	{ "diagram-31", false },

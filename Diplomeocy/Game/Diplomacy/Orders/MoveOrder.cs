@@ -301,7 +301,10 @@ public class MoveOrder : Order {
 	private void HandleMoveOrder(MoveOrder moveOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
 		// check if the order is trying to get to the same place the current order is takign place on
 		if (Unit.Location == moveOrder.Target && moveOrder.Status == OrderStatus.Pending) {
-			if (effectiveStrength == moveOrder.Strength) {
+			if (IsConvoyed && moveOrder.IsConvoyed) {
+				// we can move so we just handle ourselves
+				Status = OrderStatus.Succeeded;
+			} else if (effectiveStrength == moveOrder.Strength) {
 				moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 				SetBackwardsDependenciesToPending(dependencyGraph!);
 				Status = OrderStatus.Failed;
@@ -329,6 +332,12 @@ public class MoveOrder : Order {
 			//	Status = OrderStatus.Failed;
 			//	return;
 			//}
+
+			// if we're both convoyed and we're going to the same place and the forward unit moved
+			// we can also move
+			if (IsConvoyed && moveOrder.IsConvoyed && moveOrder.Unit.Location == Target) {
+				Status = OrderStatus.Succeeded;
+			}
 
 			//moveOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 			//moveOrder.Status = OrderStatus.Dislodged;
