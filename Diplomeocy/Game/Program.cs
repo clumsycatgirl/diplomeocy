@@ -14,15 +14,15 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-4", false },
 	{ "diagram-5", false },
 	{ "diagram-6", false },
-	{ "diagram-7", true },
+	{ "diagram-7", false },
 	{ "diagram-8", false },
 	{ "diagram-9", false },
 	{ "diagram-10", false },
 	{ "diagram-11", false },
-	{ "diagram-12", false },
+	{ "diagram-12", false }, // error
 	{ "diagram-13", false },
 	{ "diagram-14", false },
-	{ "diagram-15", false },
+	{ "diagram-15", false }, // error
 	{ "diagram-16", false },
 	{ "diagram-17", false },
 	{ "diagram-18", false },
@@ -30,16 +30,16 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-20", false },
 	{ "diagram-21", false },
 	{ "diagram-22", false },
-	{ "diagram-23", false },
+	{ "diagram-23", false }, // error
 	{ "diagram-24", false },
-	{ "diagram-25", false },
+	{ "diagram-25", false }, // error
 	{ "diagram-26", false },
 	{ "diagram-27", false },
-	{ "diagram-28", false },
+	{ "diagram-28", false }, // error
 	{ "diagram-29", false },
-	{ "diagram-30", false },
+	{ "diagram-30", false }, // error
 	{ "diagram-31", false },
-	{ "diagram-32", false }
+	{ "diagram-32", false } // error
 };
 
 GameHandler game = new();
