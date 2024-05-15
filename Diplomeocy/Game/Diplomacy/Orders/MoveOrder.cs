@@ -235,7 +235,8 @@ public class MoveOrder : Order {
 
 		forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
 
-		Status = OrderStatus.Failed; // shouldn't need idr it was late but I'm not gonna go cehck
+		// shouldn't need idr it was late but I'm not gonna go cehck
+		Status = forwardSupportOrder.Status == OrderStatus.Dislodged ? OrderStatus.Succeeded : OrderStatus.Failed;
 	}
 
 	private void HandleHoldOrder(HoldOrder holdOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {

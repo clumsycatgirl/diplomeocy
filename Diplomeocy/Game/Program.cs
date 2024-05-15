@@ -38,7 +38,8 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-28", false },
 	{ "diagram-29", false },
 	{ "diagram-30", false },
-	{ "diagram-31", true },
+	{ "diagram-31", false },
+	{ "diagram-32", true }
 };
 
 GameHandler game = new();
@@ -1479,6 +1480,74 @@ if (tests["diagram-31"]) {
 	france.Unit(Territories.TyrrhenianSea);
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_31_done]----");
+}
+
+if (tests["diagram-32"]) {
+	resetGame();
+	Log.WriteLine(Log.LogLevel.Error, "------[diagram_32]------");
+
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.MidAtlanticOcean))
+		.Move(game.Board.Territory(Territories.WesternMediterranean))
+		.Move(game.Board.Territory(Territories.TyrrhenianSea))
+		.Move(game.Board.Territory(Territories.IonianSea));
+	france.Unit(Territories.Paris)
+		.Move(game.Board.Territory(Territories.Brest))
+		.Move(game.Board.Territory(Territories.MidAtlanticOcean))
+		.Move(game.Board.Territory(Territories.WesternMediterranean))
+		.Move(game.Board.Territory(Territories.TyrrhenianSea));
+	france.Unit(Territories.Marseilles)
+		.Move(game.Board.Territory(Territories.GulfOfLyon))
+		.Move(game.Board.Territory(Territories.WesternMediterranean))
+		.Move(game.Board.Territory(Territories.Tunis));
+	france.Units.Add(new Unit {
+		Country = Countries.France,
+		Location = game.Board.Territory(Territories.Apuleia),
+		Type = UnitType.Army,
+	});
+
+	order = new MoveOrder {
+		Unit = france.Unit(Territories.Tunis),
+		IsConvoyed = true,
+		Target = game.Board.Territory(Territories.Naples),
+	};
+	france.Orders.AddRange(new Orders {
+		order,
+		new ConvoyOrder {
+			Unit  = france.Unit(Territories.TyrrhenianSea),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new ConvoyOrder {
+			Unit = france.Unit(Territories.IonianSea),
+			ConvoyedOrder = (MoveOrder)order,
+		},
+		new SupportOrder {
+			Unit = france.Unit(Territories.Apuleia),
+			SupportedOrder = order,
+		},
+	});
+
+	order = new MoveOrder {
+		Unit = italy.Unit(Territories.Rome),
+		Target = game.Board.Territory(Territories.TyrrhenianSea),
+	};
+	italy.Orders.AddRange(new Orders {
+		order,
+		new SupportOrder {
+			Unit = italy.Unit(Territories.Naples),
+			SupportedOrder = order,
+		},
+	});
+
+	step();
+
+	italy.Unit(Territories.Rome);
+	france.Unit(Territories.Naples);
+	france.Unit(Territories.IonianSea);
+	france.Unit(Territories.TyrrhenianSea);
+	france.Unit(Territories.Apuleia);
+
+	Log.WriteLine(Log.LogLevel.Error, "----[diagram_32_done]----");
 }
 
 #endregion
