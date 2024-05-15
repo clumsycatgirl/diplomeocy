@@ -14,7 +14,7 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-4", false },
 	{ "diagram-5", false },
 	{ "diagram-6", false },
-	{ "diagram-7", false }, // todo
+	{ "diagram-7", true },
 	{ "diagram-8", false },
 	{ "diagram-9", false },
 	{ "diagram-10", false },
@@ -39,7 +39,7 @@ Dictionary<string, bool> tests = new Dictionary<string, bool> {
 	{ "diagram-29", false },
 	{ "diagram-30", false },
 	{ "diagram-31", false },
-	{ "diagram-32", true }
+	{ "diagram-32", false }
 };
 
 GameHandler game = new();
@@ -414,7 +414,42 @@ if (tests["diagram-6"]) {
 if (tests["diagram-7"]) {
 	resetGame();
 	Log.WriteLine(Log.LogLevel.Error, "------[diagram_7]------");
-	Log.WriteLine("implement those damned convoys coward!! stop running!!");
+
+	france.Unit(Territories.Brest)
+		.Move(game.Board.Territory(Territories.EnglishChannel))
+		.Move(game.Board.Territory(Territories.NorthSea));
+	england.Unit(Territories.London)
+		.Move(game.Board.Territory(Territories.EnglishChannel))
+		.Move(game.Board.Territory(Territories.Belgium))
+		.Move(game.Board.Territory(Territories.Holland));
+	england.Unit(Territories.Liverpool)
+		.Move(game.Board.Territory(Territories.Wales))
+		.Move(game.Board.Territory(Territories.EnglishChannel))
+		.Move(game.Board.Territory(Territories.Belgium));
+
+	france.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = france.Unit(Territories.NorthSea),
+			Target = game.Board.Territory(Territories.Belgium),
+		},
+	});
+	england.Orders.AddRange(new Orders {
+		new MoveOrder {
+			Unit = england.Unit(Territories.Belgium),
+			Target = game.Board.Territory(Territories.Holland),
+		},
+		new MoveOrder {
+			Unit = england.Unit(Territories.Holland),
+			Target = game.Board.Territory(Territories.NorthSea),
+		}
+	});
+
+	step();
+
+	england.Unit(Territories.NorthSea);
+	england.Unit(Territories.Holland);
+	france.Unit(Territories.Belgium);
+
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_7_done]----");
 }
 
@@ -1546,6 +1581,8 @@ if (tests["diagram-32"]) {
 	france.Unit(Territories.IonianSea);
 	france.Unit(Territories.TyrrhenianSea);
 	france.Unit(Territories.Apuleia);
+
+	france.Units.Remove(france.Unit(Territories.Apuleia));
 
 	Log.WriteLine(Log.LogLevel.Error, "----[diagram_32_done]----");
 }

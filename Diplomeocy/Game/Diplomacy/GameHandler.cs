@@ -386,6 +386,7 @@ public class GameHandler {
 			.OfType<ConvoyOrder>()
 			.ForAll(order => order.Status = OrderStatus.Succeeded);
 
+		List<Order>? previousOrders = null;
 		while (orders.Any(order => !order.Resolved)) {
 			for (int i = 0; i < orders.Count; i++) {
 				Order order = orders[i];
@@ -415,6 +416,15 @@ public class GameHandler {
 				// make sure to save it so that we won't have to recalculate it
 				order.MeowmoiseResult(key, order.Status);
 			}
+
+			// if we're cycling through the same orders we're in a deadlock
+			// we'll just randomly pick one to succeed
+			// it's not the best solution but it's the best we can do
+			// it'll get handled during the next iteration
+			if (previousOrders is not null && Enumerable.SequenceEqual(orders, previousOrders)) {
+				orders[new Random(Guid.NewGuid().GetHashCode()).Next(orders.Count)].Status = OrderStatus.Succeeded;
+			}
+			previousOrders = orders.ToList();
 		}
 
 		Log.WriteLine(Log.LogLevel.Info, "--orders review--");
