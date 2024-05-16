@@ -88,7 +88,10 @@ user-form {
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
 	width: fit-content;
+	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
 	width: auto;
 }
@@ -104,7 +107,6 @@ table, td, th, tr, thead {
 	border-color: #00000071;
 	background-color: #ede9fe;
 }
-
 
 .cat-form {
 	display: flex;
@@ -150,5 +152,5 @@ table, td, th, tr, thead {
 	width: fit-content;
 	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-	width:auto;
+	width: auto;
 }
