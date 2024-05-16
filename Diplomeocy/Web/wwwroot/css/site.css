@@ -68,11 +68,29 @@ input[type="submit"]:focus{
 	border-color: #a5b4fc;
 }
 
+.name-text {
+	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	font-style: normal;
+	font-size: 18px;
+	font-style:italic;
+	margin-top:2.5%;
+}
 .user-text {
 	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	font-style: normal;
-	font-size: 20px;
-	font-style:italic;
+	font-size: 14px;
+	margin-top: 2.5%;
+	
+}
+user-form {
+	border-radius: 10px;
+	background-color: #a5b4fcaa;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	width: fit-content;
+	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+	width: auto;
 }
 ol {
 	list-style-position:outside;
