@@ -9,38 +9,41 @@
 <div>
     <h4>User</h4>
     <hr />
-    <dl class="row user-form">
-        <dt class = "col-sm-2 name-text">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10 user-text">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2 name-text">
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-        <dd class="col-sm-10 user-text">
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-        <dt class="col-sm-2 name-text">
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-        <dd class="col-sm-10 user-text">
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt class="col-sm-2 name-text">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class="col-sm-10 user-text">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class="col-sm-2 name-text">
-            @Html.DisplayNameFor(model => model.PathImage)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Html.DisplayFor(model => model.PathImage)" class="cat-image"/>
-        </dd>
-    </dl>
+    <div class="something-form">
+        <dl class="row inset-0 justify-items-center">
+            <dt class="col-sm-2 name-text">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10 user-text">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2 name-text">
+                @Html.DisplayNameFor(model => model.Surname)
+            </dt>
+            <dd class="col-sm-10 user-text">
+                @Html.DisplayFor(model => model.Surname)
+            </dd>
+            <dt class="col-sm-2 name-text">
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+            <dd class="col-sm-10 user-text">
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+            <dt class="col-sm-2 name-text">
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd class="col-sm-10 user-text">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            <dt class="col-sm-2 name-text">
+                @Html.DisplayNameFor(model => model.PathImage)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Html.DisplayFor(model => model.PathImage)" alt="Meow" class="cat-image" />
+            </dd>
+        </dl>
+    </div>
+    
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

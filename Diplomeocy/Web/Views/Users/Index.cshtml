@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PathImage)
+                <img src="@Html.DisplayFor(modelItem => item.PathImage)" class="cat-image"/>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
