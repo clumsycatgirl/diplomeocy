@@ -11,77 +11,77 @@
 <div class="row">
     <div class="login-form">
         <form asp-action="Create">
-            <div>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="cat-form">
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Meowssolini.png" alt="Meowssolini" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Meowssolini" name="cats" value="~/assets/images/kittators/Meowssolini.png"><label>Meowssolini</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Surname" class="control-label"></label>
-                    <input asp-for="Surname" class="form-control" />
-                    <span asp-validation-for="Surname" class="text-danger"></span>
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Kitler.png" alt="Kitler" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="kitler" name="cats" value="~/assets/images/kittators/Kitler.png"><label>Kitler</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Username" class="control-label"></label>
-                    <input asp-for="Username" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Leonin.png" alt="Leonin" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Leonin" name="cats" value="~/assets/images/kittators/Leonin.png"><label>Leonin</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Churchill.png" alt="Churchill" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Churchill" name="cats" value="~/assets/images/kittators/Churchill.png"><label>Churchill</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-                <div class="cat-form" >
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Meowssolini.png" alt="Meowssolini" class="cat-image"/>
-                        <input type="radio" asp-for="IdCharacter" id="Meowssolini" name="cats" value="~/assets/images/kittators/Meowssolini.png"><label>Meowssolini</label></input>
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Kitler.png" alt="Kitler" class="cat-image"/>
-                        <input type="radio" asp-for="IdCharacter" id="kitler" name="cats" value="~/assets/images/kittators/Kitler.png"><label>Kitler</label></input>
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Leonin.png" alt="Leonin" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Leonin" name="cats" value="~/assets/images/kittators/Leonin.png"><label>Leonin</label></input>
-                        
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Churchill.png" alt="Churchill" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Churchill" name="cats" value="~/assets/images/kittators/Churchill.png"><label>Churchill</label></input>
-
-                    </div>
+            </div>
+            <div class="cat-form">
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Elisabetta.png" alt="Elisabetta" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Elisabetta" name="cats" value="~/assets/images/kittators/Elisabetta.png"><label>Elisabetta</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-                <div class="cat-form">
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Elisabetta.png" alt="Elisabetta" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Elisabetta" name="cats" value="~/assets/images/kittators/Elisabetta.png"><label>Elisabetta</label></input>
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Giorgio.png" alt="Giorgio" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Giorgio" name="cats" value="~/assets/images/kittators/Giorgio.png"><label>Giorgio</label></input>
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Meowmed.png" alt="Meowmed" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Meowmed" name="cats" value="~/assets/images/kittators/Meowmed.png"><label>Meowmed</label></input>
-                        
-                    </div>
-                    <div class="cats">
-                        <img src="~/assets/images/kittators/Stalin.png" alt="Stalin" class="cat-image" />
-                        <input type="radio" asp-for="IdCharacter" id="Stalin" name="cats" value="~/assets/images/kittators/Stalin.png"><label>Stalin</label></input>
-                        
-                    </div>
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Giorgio.png" alt="Giorgio" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Giorgio" name="cats" value="~/assets/images/kittators/Giorgio.png"><label>Giorgio</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
-            
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Meowmed.png" alt="Meowmed" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Meowmed" name="cats" value="~/assets/images/kittators/Meowmed.png"><label>Meowmed</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
+                <div class="cats">
+                    <img src="~/assets/images/kittators/Stalin.png" alt="Stalin" class="cat-image" />
+                    <input type="radio" asp-for="PathImage" id="Stalin" name="cats" value="~/assets/images/kittators/Stalin.png"><label>Stalin</label></input>
+                    <span asp-validation-for="PathImage" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 
 <div>
     <a asp-action="Index">Back to List</a>

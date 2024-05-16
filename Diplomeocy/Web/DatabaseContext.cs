@@ -11,5 +11,5 @@ public class DatabaseContext : DbContext
 	public DbSet<Models.Players> Players { get; set; } = default!;
 	public DbSet<Models.Tables> Tables { get; set; } = default!;
 	public DbSet<Models.Games> Games { get; set; } = default!;
-	public DbSet<Models.Characters> Characters { get; set; } = default!;
+	
 }

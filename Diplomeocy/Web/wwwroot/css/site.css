@@ -26,7 +26,7 @@ html {
 
 body {
 	height: 100%;
-	background-color: #ddd6feaa;
+	background-color: #ddd6fe5c;
 	margin-bottom: 60px;
 }
 
@@ -68,7 +68,12 @@ input[type="submit"]:focus{
 	border-color: #a5b4fc;
 }
 
-
+.user-text {
+	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	font-style: normal;
+	font-size: 20px;
+	font-style:italic;
+}
 ol {
 	list-style-position:outside;
 	list-style-type: decimal;
@@ -106,7 +111,7 @@ table, td, th, tr, thead {
 }
 .indigo-header {
 	background-color: #ddd6fe;
-	border-color: #a78bfa;
+	border-color: #a78bfa4a;
 }
 
 .hat {

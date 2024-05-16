@@ -35,6 +35,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PathImage)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Html.DisplayFor(model => model.PathImage)" class="cat-image"/>
+        </dd>
     </dl>
     
     <form asp-action="Delete">
