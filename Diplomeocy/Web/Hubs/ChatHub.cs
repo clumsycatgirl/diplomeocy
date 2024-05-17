@@ -31,4 +31,8 @@ public class ChatHub : Hub {
 		if (data is null || data.Action != MessageData.MessageDataAction.SendMessageToGroup) return Task.CompletedTask;
 		return Clients.Group(data.Group).SendAsync("ReceiveMessage", json);
 	}
+
+	public Task SendVoiceSignal(string signal) {
+		return Clients.All.SendAsync("ReceiveVoiceSignal", signal);
+	}
 }

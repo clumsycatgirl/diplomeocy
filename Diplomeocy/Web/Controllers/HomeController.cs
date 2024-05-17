@@ -21,6 +21,7 @@ namespace Web.Controllers {
 		}
 
 		public IActionResult Chat() => View();
+		public IActionResult ChatVoice() => View();
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error() {

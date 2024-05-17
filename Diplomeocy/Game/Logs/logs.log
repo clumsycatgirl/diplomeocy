@@ -94,18 +94,18 @@ meow
 
 
 --dependency graph--
-[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Pending][1] (Army in Berlin) moves targets (Silesia occupied by none)
 [Pending][1] (Army in Berlin) moves targets (Silesia occupied by none): 
 	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none)
+[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Pending][1] (Army in Berlin) moves targets (Silesia occupied by none)
 
 looking at [Pending][1] (Army in Berlin) moves targets (Silesia occupied by none) with 
 	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by none)
 --orders review--
-[Failed][1] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Failed][1] (Army in Berlin) moves targets (Silesia occupied by none)
 [Failed][1] (Army in Berlin) moves targets (Silesia occupied by none): 
 	[Failed][1] (Army in Warsaw) moves targets (Silesia occupied by none)
+[Failed][1] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Failed][1] (Army in Berlin) moves targets (Silesia occupied by none)
 
 
 --England: Units--
@@ -203,13 +203,13 @@ looking at [Pending][1] (Army in Berlin) moves targets (Silesia occupied by none
 
 
 --dependency graph--
-[Pending][1] (Army in Prussia) holds: 
-	[Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Pending][1] (Army in Kiel) moves targets (Berlin occupied by none): 
 	[Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Pending][1] (Army in Kiel) moves targets (Berlin occupied by none)
 	[Pending][1] (Army in Prussia) holds
+[Pending][1] (Army in Prussia) holds: 
+	[Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 
 looking at [Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)) with 
 	[Pending][1] (Army in Kiel) moves targets (Berlin occupied by none)
@@ -221,13 +221,13 @@ looking at [Pending][1] (Army in Kiel) moves targets (Berlin occupied by none) w
 looking at [Pending][1] (Army in Prussia) holds with 
 	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 --orders review--
-[Succeeded][1] (Army in Prussia) holds: 
-	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Failed][1] (Army in Kiel) moves targets (Berlin occupied by none): 
 	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Failed][1] (Army in Kiel) moves targets (Berlin occupied by none)
 	[Succeeded][1] (Army in Prussia) holds
+[Succeeded][1] (Army in Prussia) holds: 
+	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 
 
 --England: Units--
@@ -433,15 +433,15 @@ looking at [Pending][1] (Army in Berlin) moves targets (Prussia occupied by ([Ru
 
 
 --dependency graph--
+[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea)): 
+	[Pending][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
+	[Pending][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
 [Pending][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland)): 
 	[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
 	[Pending][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
 [Pending][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium)): 
 	[Pending][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
 	[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
-[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea)): 
-	[Pending][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
-	[Pending][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
 
 looking at [Pending][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland)) with 
 	[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
@@ -582,20 +582,16 @@ looking at [Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([
 looking at [Pending][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium)) with 
 	[Succeeded][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
 	[Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
-
-looking at [Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea)) with 
+--orders review--
+[Succeeded][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea)): 
 	[Succeeded][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
 	[Succeeded][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
---orders review--
 [Succeeded][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland)): 
 	[Succeeded][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
 	[Succeeded][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
 [Succeeded][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium)): 
 	[Succeeded][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
 	[Succeeded][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea))
-[Succeeded][1] (Army in Holland) moves targets (NorthSea occupied by ([France] Army in NorthSea)): 
-	[Succeeded][1] (Army in Belgium) moves targets (Holland occupied by ([England] Army in Holland))
-	[Succeeded][1] (Army in NorthSea) moves targets (Belgium occupied by ([England] Army in Belgium))
 
 
 --England: Units--
@@ -695,11 +691,11 @@ looking at [Pending][1] (Army in Holland) moves targets (NorthSea occupied by ([
 --support orders--
 support: [Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy))
 --dependency graph--
+[Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)): 
+	[Pending][1] (Army in Burgundy) holds
 [Pending][1] (Army in Burgundy) holds: 
 	[Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy))
 	[Succeeded][1] (Army in Gascony) supports supported ([Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)))
-[Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)): 
-	[Pending][1] (Army in Burgundy) holds
 [Succeeded][1] (Army in Gascony) supports supported ([Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy))): 
 	[Pending][1] (Army in Burgundy) holds
 
@@ -707,11 +703,11 @@ looking at [Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by
 	[Succeeded][1] (Army in Burgundy) holds
 --orders review--
 [Succeeded][1] (Army in Gascony) supports supported ([Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)))
+[Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)): 
+	[Retired][1] (Army in Burgundy) holds
 [Retired][1] (Army in Burgundy) holds: 
 	[Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy))
 	[Succeeded][1] (Army in Gascony) supports supported ([Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)))
-[Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy)): 
-	[Retired][1] (Army in Burgundy) holds
 [Succeeded][1] (Army in Gascony) supports supported ([Succeeded][2] (Army in Marseilles) moves targets (Burgundy occupied by ([Germany] Army in Burgundy))): 
 	[Retired][1] (Army in Burgundy) holds
 
@@ -813,24 +809,24 @@ looking at [Pending][2] (Army in Marseilles) moves targets (Burgundy occupied by
 --support orders--
 support: [Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 --dependency graph--
-[Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
+[Succeeded][1] (Army in BalticSea) supports supported ([Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
 	[Pending][1] (Army in Prussia) holds
 [Pending][1] (Army in Prussia) holds: 
 	[Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Succeeded][1] (Army in BalticSea) supports supported ([Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
-[Succeeded][1] (Army in BalticSea) supports supported ([Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
+[Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Pending][1] (Army in Prussia) holds
 
 looking at [Pending][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)) with 
 	[Succeeded][1] (Army in Prussia) holds
 --orders review--
 [Succeeded][1] (Army in BalticSea) supports supported ([Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
-[Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
+[Succeeded][1] (Army in BalticSea) supports supported ([Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
 	[Retired][1] (Army in Prussia) holds
 [Retired][1] (Army in Prussia) holds: 
 	[Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Succeeded][1] (Army in BalticSea) supports supported ([Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
-[Succeeded][1] (Army in BalticSea) supports supported ([Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
+[Succeeded][2] (Army in Silesia) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Retired][1] (Army in Prussia) holds
 
 
@@ -1059,6 +1055,8 @@ support: [Pending][2] (Army in TyrrhenianSea) holds
 [Succeeded][1] (Army in WesternMediterranean) supports supported ([Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea))): 
 	[Pending][2] (Army in TyrrhenianSea) holds
 	[Succeeded][1] (Army in Rome) supports supported ([Pending][2] (Army in TyrrhenianSea) holds)
+[Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)): 
+	[Pending][2] (Army in TyrrhenianSea) holds
 [Succeeded][1] (Army in Rome) supports supported ([Pending][2] (Army in TyrrhenianSea) holds): 
 	[Succeeded][1] (Army in WesternMediterranean) supports supported ([Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)))
 	[Pending][2] (Army in TyrrhenianSea) holds
@@ -1066,8 +1064,6 @@ support: [Pending][2] (Army in TyrrhenianSea) holds
 	[Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in WesternMediterranean) supports supported ([Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)))
 	[Succeeded][1] (Army in Rome) supports supported ([Pending][2] (Army in TyrrhenianSea) holds)
-[Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)): 
-	[Pending][2] (Army in TyrrhenianSea) holds
 
 looking at [Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)) with 
 	[Succeeded][2] (Army in TyrrhenianSea) holds
@@ -1077,6 +1073,8 @@ looking at [Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupi
 [Succeeded][1] (Army in WesternMediterranean) supports supported ([Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea))): 
 	[Succeeded][2] (Army in TyrrhenianSea) holds
 	[Succeeded][1] (Army in Rome) supports supported ([Succeeded][2] (Army in TyrrhenianSea) holds)
+[Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)): 
+	[Succeeded][2] (Army in TyrrhenianSea) holds
 [Succeeded][1] (Army in Rome) supports supported ([Succeeded][2] (Army in TyrrhenianSea) holds): 
 	[Succeeded][1] (Army in WesternMediterranean) supports supported ([Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)))
 	[Succeeded][2] (Army in TyrrhenianSea) holds
@@ -1084,8 +1082,6 @@ looking at [Pending][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupi
 	[Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in WesternMediterranean) supports supported ([Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)))
 	[Succeeded][1] (Army in Rome) supports supported ([Succeeded][2] (Army in TyrrhenianSea) holds)
-[Failed][2] (Army in GulfOfLyon) moves targets (TyrrhenianSea occupied by ([Italy] Army in TyrrhenianSea)): 
-	[Succeeded][2] (Army in TyrrhenianSea) holds
 
 
 --England: Units--
@@ -1190,22 +1186,22 @@ support: [Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
 support: [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
 support: [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
 --dependency graph--
-[Pending][2] (Army in Munich) moves targets (Silesia occupied by none): 
-	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
-	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
 [Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none)): 
 	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
 	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Pending][2] (Army in Munich) moves targets (Silesia occupied by none): 
+	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
+	[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)
 [Pending][2] (Army in Bohemia) moves targets (Munich occupied by none): 
 	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
-[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
+[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
 [Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
 	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
 	[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Pending][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Prussia) supports supported ([Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Pending][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
 
 looking at [Pending][2] (Army in Munich) moves targets (Silesia occupied by none) with 
 	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
@@ -1220,22 +1216,22 @@ looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none
 [Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
 [Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
 [Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Failed][2] (Army in Munich) moves targets (Silesia occupied by none): 
-	[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)
-	[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)
 [Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none)): 
 	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
 	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
+[Failed][2] (Army in Munich) moves targets (Silesia occupied by none): 
+	[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)
+	[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)
 [Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none): 
 	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
-[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
-	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
-	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
+[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
+	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
 [Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)): 
 	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
 	[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none))
-[Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none): 
-	[Failed][2] (Army in Munich) moves targets (Silesia occupied by none)
+[Succeeded][1] (Army in Prussia) supports supported ([Failed][2] (Army in Warsaw) moves targets (Silesia occupied by none)): 
+	[Succeeded][1] (Army in Berlin) supports supported ([Failed][2] (Army in Munich) moves targets (Silesia occupied by none))
+	[Succeeded][1] (Army in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
 
 
 --England: Units--
@@ -1336,14 +1332,14 @@ looking at [Pending][2] (Army in Warsaw) moves targets (Silesia occupied by none
 --support orders--
 support: [Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 --dependency graph--
-[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
-	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
-	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
 	[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 [Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
 	[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Pending][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 
 looking at [Pending][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)) with 
@@ -1359,14 +1355,14 @@ looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by
 	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 --orders review--
 [Succeeded][1] (Army in Serbia) supports supported ([Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
-[Dislodged][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
-	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
-	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 [Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
 	[Dislodged][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 [Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
 	[Dislodged][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Dislodged][1] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Succeeded][2] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 
 
@@ -1471,17 +1467,11 @@ looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by
 support: [Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 support: [Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 --dependency graph--
-[Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
-	[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
-	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
-[Succeeded][1] (Army in Serbia) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
-	[Succeeded][1] (Army in BlackSea) supports supported ([Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
-	[Succeeded][1] (Army in Greece) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
 [Succeeded][1] (Army in BlackSea) supports supported ([Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))): 
 	[Succeeded][1] (Army in Serbia) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
 	[Succeeded][1] (Army in Greece) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
-[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
-	[Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 [Succeeded][1] (Army in Greece) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
 	[Succeeded][1] (Army in BlackSea) supports supported ([Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
@@ -1489,6 +1479,12 @@ support: [Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Tu
 [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
 	[Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 	[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+[Succeeded][1] (Army in Serbia) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
+	[Succeeded][1] (Army in BlackSea) supports supported ([Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
+	[Succeeded][1] (Army in Greece) supports supported ([Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
+[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
+	[Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 
 looking at [Pending][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)) with 
 	[Pending][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
@@ -1501,17 +1497,11 @@ looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by
 [Succeeded][1] (Army in BlackSea) supports supported ([Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
 [Succeeded][1] (Army in Serbia) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
 [Succeeded][1] (Army in Greece) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
-[Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
-	[Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
-	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
-[Succeeded][1] (Army in Serbia) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
-	[Succeeded][1] (Army in BlackSea) supports supported ([Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
-	[Succeeded][1] (Army in Greece) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
 [Succeeded][1] (Army in BlackSea) supports supported ([Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))): 
 	[Succeeded][1] (Army in Serbia) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
 	[Succeeded][1] (Army in Greece) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
-[Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
-	[Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
 	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 [Succeeded][1] (Army in Greece) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
 	[Succeeded][1] (Army in BlackSea) supports supported ([Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
@@ -1519,6 +1509,12 @@ looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by
 [Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
 	[Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 	[Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))
+[Succeeded][1] (Army in Serbia) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria))): 
+	[Succeeded][1] (Army in BlackSea) supports supported ([Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania)))
+	[Succeeded][1] (Army in Greece) supports supported ([Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)))
+[Succeeded][3] (Army in Rumania) moves targets (Bulgaria occupied by ([Turkey] Army in Bulgaria)): 
+	[Dislodged][2] (Army in Bulgaria) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+	[Succeeded][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
 
 
 --England: Units--
@@ -1619,14 +1615,14 @@ looking at [Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by
 --support orders--
 support: [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
 --dependency graph--
-[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))): 
-	[Pending][1] (Army in Warsaw) holds
-	[Pending][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)): 
 	[Pending][1] (Army in Warsaw) holds
 [Pending][1] (Army in Warsaw) holds: 
 	[Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)))
+[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))): 
+	[Pending][1] (Army in Warsaw) holds
+	[Pending][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Pending][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)))
 
@@ -1640,14 +1636,14 @@ looking at [Pending][1] (Army in Prussia) moves targets (Warsaw occupied by ([Ru
 	[Pending][1] (Army in Warsaw) holds
 --orders review--
 [Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)))
-[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))): 
-	[Succeeded][1] (Army in Warsaw) holds
-	[Failed][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)): 
 	[Succeeded][1] (Army in Warsaw) holds
 [Succeeded][1] (Army in Warsaw) holds: 
 	[Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)))
+[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))): 
+	[Succeeded][1] (Army in Warsaw) holds
+	[Failed][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Failed][1] (Army in Bohemia) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)))
 
@@ -1751,11 +1747,11 @@ support: [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none)
 --dependency graph--
 [Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none)): 
 	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
-[Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none): 
-	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Pending][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none)
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none))
+[Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none): 
+	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 
 looking at [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none) with 
 	[Pending][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
@@ -1770,11 +1766,11 @@ looking at [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none
 [Succeeded][1] (Army in Silesia) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none))
 [Succeeded][1] (Army in Silesia) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none)): 
 	[Dislodged][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
-[Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none): 
-	[Dislodged][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Dislodged][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none)
 	[Succeeded][1] (Army in Silesia) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none))
+[Succeeded][2] (Army in Prussia) moves targets (Warsaw occupied by none): 
+	[Dislodged][1] (Army in Warsaw) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 
 
 --England: Units--
@@ -1877,21 +1873,21 @@ looking at [Pending][2] (Army in Prussia) moves targets (Warsaw occupied by none
 support: [Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 support: [Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 --dependency graph--
+[Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
+	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
+	[Pending][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
-	[Pending][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
-[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
-	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
-	[Succeeded][1] (Army in Warsaw) supports supported ([Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)))
-[Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
-	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 	[Pending][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Pending][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Succeeded][1] (Army in Warsaw) supports supported ([Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))): 
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
+[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
+	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
+	[Succeeded][1] (Army in Warsaw) supports supported ([Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)))
 
 looking at [Pending][2] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)) with 
 	[Pending][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
@@ -1908,21 +1904,21 @@ looking at [Pending][1] (Army in BalticSea) moves targets (Prussia occupied by (
 --orders review--
 [Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
 [Succeeded][1] (Army in Warsaw) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)))
+[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
+	[Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
+	[Failed][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)): 
 	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
-	[Failed][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
-[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
-	[Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
-	[Succeeded][1] (Army in Warsaw) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)))
-[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
-	[Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 	[Failed][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 [Failed][1] (Army in BalticSea) moves targets (Prussia occupied by ([Russia] Army in Prussia)): 
 	[Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))
 	[Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
 [Succeeded][1] (Army in Warsaw) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))): 
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia)))
+[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Berlin) moves targets (Prussia occupied by ([Russia] Army in Prussia))): 
+	[Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia))
+	[Succeeded][1] (Army in Warsaw) supports supported ([Succeeded][2] (Army in Prussia) moves targets (Silesia occupied by ([Germany] Army in Silesia)))
 
 
 --England: Units--
@@ -2030,11 +2026,11 @@ support: [Pending][2] (Army in Prussia) moves targets (Berlin occupied by none)
 	[Succeeded][1] (Fleet in Tyrolia) supports supported ([Pending][2] (Army in Bohemia) moves targets (Munich occupied by none))
 	[Pending][2] (Army in Prussia) moves targets (Berlin occupied by none)
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Berlin occupied by none))
+[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none): 
+	[Pending][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
 [Pending][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia)): 
 	[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none)
 	[Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Berlin occupied by none))
-[Pending][2] (Army in Bohemia) moves targets (Munich occupied by none): 
-	[Pending][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
 [Succeeded][1] (Army in Silesia) supports supported ([Pending][2] (Army in Prussia) moves targets (Berlin occupied by none)): 
 	[Pending][1] (Army in Berlin) holds
 	[Pending][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
@@ -2061,11 +2057,11 @@ looking at [Pending][1] (Army in Prussia) moves targets (Berlin occupied by none
 	[Succeeded][1] (Fleet in Tyrolia) supports supported ([Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none))
 	[Failed][1] (Army in Prussia) moves targets (Berlin occupied by none)
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Berlin occupied by none))
+[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none): 
+	[Dislodged][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
 [Dislodged][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia)): 
 	[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none)
 	[Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Berlin occupied by none))
-[Succeeded][2] (Army in Bohemia) moves targets (Munich occupied by none): 
-	[Dislodged][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
 [Failed][1] (Army in Silesia) supports supported ([Failed][1] (Army in Prussia) moves targets (Berlin occupied by none)): 
 	[Succeeded][1] (Army in Berlin) holds
 	[Dislodged][1] (Army in Munich) moves targets (Silesia occupied by ([Russia] Army in Silesia))
@@ -2278,6 +2274,16 @@ looking at [Pending][1] (Army in London) moves targets (Norway occupied by none)
 
 
 --dependency graph--
+[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none)): 
+	[Pending][1] (Army in London) moves targets (Tunis occupied by none)
+	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
+	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
+	[Pending][1] (Army in WesternMediterranean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
+[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none)): 
+	[Pending][1] (Army in London) moves targets (Tunis occupied by none)
+	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
+	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
+	[Pending][1] (Army in WesternMediterranean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
 [Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none)): 
 	[Pending][1] (Army in London) moves targets (Tunis occupied by none)
 	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
@@ -2288,20 +2294,20 @@ looking at [Pending][1] (Army in London) moves targets (Norway occupied by none)
 	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
 	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
 	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none)): 
-	[Pending][1] (Army in London) moves targets (Tunis occupied by none)
-	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-	[Pending][1] (Army in WesternMediterranean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none)): 
-	[Pending][1] (Army in London) moves targets (Tunis occupied by none)
-	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-	[Pending][1] (Army in MidAtlanticOcean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
-	[Pending][1] (Army in WesternMediterranean) convoy ([Pending][1] (Army in London) moves targets (Tunis occupied by none))
 
 looking at [Pending][1] (Army in London) moves targets (Tunis occupied by none) with 
 	
 --orders review--
+[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none)): 
+	[Succeeded][1] (Army in London) moves targets (Tunis occupied by none)
+	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
+	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
+	[Succeeded][1] (Army in WesternMediterranean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
+[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none)): 
+	[Succeeded][1] (Army in London) moves targets (Tunis occupied by none)
+	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
+	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
+	[Succeeded][1] (Army in WesternMediterranean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
 [Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none)): 
 	[Succeeded][1] (Army in London) moves targets (Tunis occupied by none)
 	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
@@ -2312,16 +2318,6 @@ looking at [Pending][1] (Army in London) moves targets (Tunis occupied by none) 
 	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
 	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
 	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none)): 
-	[Succeeded][1] (Army in London) moves targets (Tunis occupied by none)
-	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-	[Succeeded][1] (Army in WesternMediterranean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none)): 
-	[Succeeded][1] (Army in London) moves targets (Tunis occupied by none)
-	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-	[Succeeded][1] (Army in MidAtlanticOcean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
-	[Succeeded][1] (Army in WesternMediterranean) convoy ([Succeeded][1] (Army in London) moves targets (Tunis occupied by none))
 
 
 --England: Units--
@@ -2423,19 +2419,19 @@ looking at [Pending][1] (Army in London) moves targets (Tunis occupied by none) 
 --support orders--
 support: [Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 --dependency graph--
-[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none)): 
-	[Pending][1] (Army in Spain) moves targets (Naples occupied by none)
-	[Pending][1] (Army in GulfOfLyon) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
-	[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
-	[Succeeded][1] (Army in Tunis) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
-	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
 [Succeeded][1] (Army in Tunis) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Pending][1] (Army in GulfOfLyon) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
 [Pending][1] (Army in GulfOfLyon) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none)): 
 	[Pending][1] (Army in Spain) moves targets (Naples occupied by none)
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Tunis) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
+[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none)): 
+	[Pending][1] (Army in Spain) moves targets (Naples occupied by none)
+	[Pending][1] (Army in GulfOfLyon) convoy ([Pending][1] (Army in Spain) moves targets (Naples occupied by none))
+	[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in Tunis) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 looking at [Pending][1] (Army in Spain) moves targets (Naples occupied by none) with 
@@ -2448,19 +2444,19 @@ looking at [Pending][1] (Army in Spain) moves targets (Naples occupied by none) 
 	
 --orders review--
 [Succeeded][1] (Army in Tunis) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none)): 
-	[Failed][1] (Army in Spain) moves targets (Naples occupied by none)
-	[Succeeded][1] (Army in GulfOfLyon) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
-	[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
-	[Succeeded][1] (Army in Tunis) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
-	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
 [Succeeded][1] (Army in Tunis) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Succeeded][1] (Army in GulfOfLyon) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
 	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
 [Succeeded][1] (Army in GulfOfLyon) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none)): 
 	[Failed][1] (Army in Spain) moves targets (Naples occupied by none)
 	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Tunis) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
+[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none)): 
+	[Failed][1] (Army in Spain) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in GulfOfLyon) convoy ([Failed][1] (Army in Spain) moves targets (Naples occupied by none))
+	[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in Tunis) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 
@@ -2561,9 +2557,9 @@ looking at [Pending][1] (Army in Spain) moves targets (Naples occupied by none) 
 --support orders--
 support: [Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy))
 --dependency graph--
-[Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
-	[Pending][1] (Army in Burgundy) holds
 [Succeeded][1] (Army in Marseilles) supports supported ([Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy))): 
+	[Pending][1] (Army in Burgundy) holds
+[Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
 	[Pending][1] (Army in Burgundy) holds
 [Pending][1] (Army in Burgundy) holds: 
 	[Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy))
@@ -2573,9 +2569,9 @@ looking at [Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([Fr
 	[Succeeded][1] (Army in Burgundy) holds
 --orders review--
 [Failed][1] (Army in Marseilles) supports supported ([Failed][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy)))
-[Failed][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
-	[Succeeded][1] (Army in Burgundy) holds
 [Failed][1] (Army in Marseilles) supports supported ([Failed][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy))): 
+	[Succeeded][1] (Army in Burgundy) holds
+[Failed][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
 	[Succeeded][1] (Army in Burgundy) holds
 [Succeeded][1] (Army in Burgundy) holds: 
 	[Failed][2] (Army in Paris) moves targets (Burgundy occupied by ([France] Army in Burgundy))
@@ -2820,8 +2816,6 @@ looking at [Pending][2] (Army in Paris) moves targets (Burgundy occupied by ([Fr
 --support orders--
 support: [Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy))
 --dependency graph--
-[Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
-	[Pending][1] (Army in Burgundy) holds
 [Pending][1] (Army in Munich) holds: 
 	[Succeeded][1] (Army in Paris) supports supported ([Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)))
 	[Pending][1] (Army in Burgundy) holds
@@ -2832,13 +2826,13 @@ support: [Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([Franc
 [Succeeded][1] (Army in Paris) supports supported ([Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy))): 
 	[Pending][1] (Army in Munich) holds
 	[Pending][1] (Army in Burgundy) holds
+[Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
+	[Pending][1] (Army in Burgundy) holds
 
 looking at [Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)) with 
 	[Succeeded][1] (Army in Burgundy) holds
 --orders review--
 [Failed][1] (Army in Paris) supports supported ([Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)))
-[Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
-	[Succeeded][1] (Army in Burgundy) holds
 [Succeeded][1] (Army in Munich) holds: 
 	[Failed][1] (Army in Paris) supports supported ([Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)))
 	[Succeeded][1] (Army in Burgundy) holds
@@ -2848,6 +2842,8 @@ looking at [Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([Fra
 	[Failed][1] (Army in Paris) supports supported ([Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)))
 [Failed][1] (Army in Paris) supports supported ([Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy))): 
 	[Succeeded][1] (Army in Munich) holds
+	[Succeeded][1] (Army in Burgundy) holds
+[Failed][2] (Army in Ruhr) moves targets (Burgundy occupied by ([France] Army in Burgundy)): 
 	[Succeeded][1] (Army in Burgundy) holds
 
 
@@ -2950,16 +2946,16 @@ looking at [Pending][2] (Army in Ruhr) moves targets (Burgundy occupied by ([Fra
 --support orders--
 support: [Pending][2] (Army in Silesia) moves targets (Munich occupied by none)
 --dependency graph--
+[Pending][2] (Army in Silesia) moves targets (Munich occupied by none): 
+	[Pending][1] (Army in Ruhr) moves targets (Munich occupied by none)
+	[Pending][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
+	[Pending][1] (Army in Tyrolia) moves targets (Munich occupied by none)
 [Pending][1] (Army in Tyrolia) moves targets (Munich occupied by none): 
 	[Pending][2] (Army in Silesia) moves targets (Munich occupied by none)
 	[Pending][1] (Army in Ruhr) moves targets (Munich occupied by none)
 	[Pending][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
 [Pending][1] (Army in Ruhr) moves targets (Munich occupied by none): 
 	[Pending][2] (Army in Silesia) moves targets (Munich occupied by none)
-	[Pending][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
-	[Pending][1] (Army in Tyrolia) moves targets (Munich occupied by none)
-[Pending][2] (Army in Silesia) moves targets (Munich occupied by none): 
-	[Pending][1] (Army in Ruhr) moves targets (Munich occupied by none)
 	[Pending][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
 	[Pending][1] (Army in Tyrolia) moves targets (Munich occupied by none)
 [Pending][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia)): 
@@ -2993,16 +2989,16 @@ looking at [Pending][1] (Army in Ruhr) moves targets (Munich occupied by none) w
 	[Pending][1] (Army in Tyrolia) moves targets (Munich occupied by none)
 --orders review--
 [Succeeded][1] (Army in Bohemia) supports supported ([Failed][2] (Army in Silesia) moves targets (Munich occupied by none))
+[Failed][2] (Army in Silesia) moves targets (Munich occupied by none): 
+	[Failed][1] (Army in Ruhr) moves targets (Munich occupied by none)
+	[Failed][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
+	[Failed][1] (Army in Tyrolia) moves targets (Munich occupied by none)
 [Failed][1] (Army in Tyrolia) moves targets (Munich occupied by none): 
 	[Failed][2] (Army in Silesia) moves targets (Munich occupied by none)
 	[Failed][1] (Army in Ruhr) moves targets (Munich occupied by none)
 	[Failed][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
 [Failed][1] (Army in Ruhr) moves targets (Munich occupied by none): 
 	[Failed][2] (Army in Silesia) moves targets (Munich occupied by none)
-	[Failed][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
-	[Failed][1] (Army in Tyrolia) moves targets (Munich occupied by none)
-[Failed][2] (Army in Silesia) moves targets (Munich occupied by none): 
-	[Failed][1] (Army in Ruhr) moves targets (Munich occupied by none)
 	[Failed][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia))
 	[Failed][1] (Army in Tyrolia) moves targets (Munich occupied by none)
 [Failed][1] (Army in Munich) moves targets (Tyrolia occupied by ([Austria] Army in Tyrolia)): 
@@ -3112,22 +3108,22 @@ looking at [Pending][1] (Army in Ruhr) moves targets (Munich occupied by none) w
 support: [Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
 support: [Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 --dependency graph--
-[Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)): 
-	[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none)
-	[Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 [Succeeded][1] (Army in HelgolandBight) supports supported ([Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))): 
 	[Succeeded][1] (Army in BalticSea) supports supported ([Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark)))
 [Pending][1] (Army in Berlin) moves targets (Kiel occupied by none): 
 	[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none)
-[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none): 
-	[Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
-	[Pending][1] (Army in Berlin) moves targets (Kiel occupied by none)
+[Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)): 
+	[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none)
 	[Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 [Succeeded][1] (Army in BalticSea) supports supported ([Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))): 
 	[Succeeded][1] (Army in HelgolandBight) supports supported ([Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)))
 [Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark)): 
 	[Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
 	[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none)
+[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none): 
+	[Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
+	[Pending][1] (Army in Berlin) moves targets (Kiel occupied by none)
+	[Pending][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 
 looking at [Pending][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)) with 
 	[Pending][1] (Army in Denmark) moves targets (Kiel occupied by none)
@@ -3140,22 +3136,22 @@ looking at [Pending][1] (Army in Denmark) moves targets (Kiel occupied by none) 
 --orders review--
 [Succeeded][1] (Army in HelgolandBight) supports supported ([Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)))
 [Succeeded][1] (Army in BalticSea) supports supported ([Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark)))
-[Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)): 
-	[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none)
-	[Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 [Succeeded][1] (Army in HelgolandBight) supports supported ([Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))): 
 	[Succeeded][1] (Army in BalticSea) supports supported ([Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark)))
 [Failed][1] (Army in Berlin) moves targets (Kiel occupied by none): 
 	[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none)
-[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none): 
-	[Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
-	[Failed][1] (Army in Berlin) moves targets (Kiel occupied by none)
+[Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)): 
+	[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none)
 	[Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 [Succeeded][1] (Army in BalticSea) supports supported ([Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))): 
 	[Succeeded][1] (Army in HelgolandBight) supports supported ([Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark)))
 [Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark)): 
 	[Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
 	[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none)
+[Failed][1] (Army in Denmark) moves targets (Kiel occupied by none): 
+	[Failed][2] (Army in NorthSea) moves targets (Denmark occupied by ([England] Army in Denmark))
+	[Failed][1] (Army in Berlin) moves targets (Kiel occupied by none)
+	[Failed][2] (Army in Skagerrak) moves targets (Denmark occupied by ([England] Army in Denmark))
 
 
 --England: Units--
@@ -3255,10 +3251,10 @@ looking at [Pending][1] (Army in Denmark) moves targets (Kiel occupied by none) 
 --support orders--
 support: [Pending][2] (Army in Serbia) moves targets (Budapest occupied by none)
 --dependency graph--
-[Pending][1] (Army in Vienna) moves targets (Budapest occupied by none): 
-	[Pending][2] (Army in Serbia) moves targets (Budapest occupied by none)
 [Pending][2] (Army in Serbia) moves targets (Budapest occupied by none): 
 	[Pending][1] (Army in Vienna) moves targets (Budapest occupied by none)
+[Pending][1] (Army in Vienna) moves targets (Budapest occupied by none): 
+	[Pending][2] (Army in Serbia) moves targets (Budapest occupied by none)
 
 looking at [Pending][2] (Army in Serbia) moves targets (Budapest occupied by none) with 
 	[Pending][1] (Army in Vienna) moves targets (Budapest occupied by none)
@@ -3267,10 +3263,10 @@ looking at [Pending][2] (Army in Serbia) moves targets (Budapest occupied by non
 	[Failed][1] (Army in Vienna) moves targets (Budapest occupied by none)
 --orders review--
 [Succeeded][1] (Army in Galicia) supports supported ([Succeeded][2] (Army in Serbia) moves targets (Budapest occupied by none))
-[Failed][1] (Army in Vienna) moves targets (Budapest occupied by none): 
-	[Succeeded][2] (Army in Serbia) moves targets (Budapest occupied by none)
 [Succeeded][2] (Army in Serbia) moves targets (Budapest occupied by none): 
 	[Failed][1] (Army in Vienna) moves targets (Budapest occupied by none)
+[Failed][1] (Army in Vienna) moves targets (Budapest occupied by none): 
+	[Succeeded][2] (Army in Serbia) moves targets (Budapest occupied by none)
 
 
 --England: Units--
@@ -3369,16 +3365,16 @@ looking at [Pending][2] (Army in Serbia) moves targets (Budapest occupied by non
 
 
 --dependency graph--
-[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in Belgium) moves targets (London occupied by none)): 
-	[Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)))
-	[Pending][1] (Army in Belgium) moves targets (London occupied by none)
 [Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))): 
 	[Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in Belgium) moves targets (London occupied by none))
-[Pending][1] (Army in Belgium) moves targets (London occupied by none): 
-	[Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 [Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)): 
 	[Pending][1] (Army in Belgium) moves targets (London occupied by none)
+[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in Belgium) moves targets (London occupied by none)): 
+	[Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)))
+	[Pending][1] (Army in Belgium) moves targets (London occupied by none)
+[Pending][1] (Army in Belgium) moves targets (London occupied by none): 
+	[Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 
 looking at [Pending][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)) with 
 	[Pending][1] (Army in Belgium) moves targets (London occupied by none)
@@ -3386,16 +3382,16 @@ looking at [Pending][1] (Army in London) moves targets (Belgium occupied by ([Fr
 looking at [Pending][1] (Army in Belgium) moves targets (London occupied by none) with 
 	[Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 --orders review--
-[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in Belgium) moves targets (London occupied by none)): 
-	[Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)))
-	[Succeeded][1] (Army in Belgium) moves targets (London occupied by none)
 [Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))): 
 	[Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 	[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in Belgium) moves targets (London occupied by none))
-[Succeeded][1] (Army in Belgium) moves targets (London occupied by none): 
-	[Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 [Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)): 
 	[Succeeded][1] (Army in Belgium) moves targets (London occupied by none)
+[Succeeded][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in Belgium) moves targets (London occupied by none)): 
+	[Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium)))
+	[Succeeded][1] (Army in Belgium) moves targets (London occupied by none)
+[Succeeded][1] (Army in Belgium) moves targets (London occupied by none): 
+	[Succeeded][1] (Army in London) moves targets (Belgium occupied by ([France] Army in Belgium))
 
 
 --England: Units--
@@ -3497,20 +3493,20 @@ looking at [Pending][1] (Army in Belgium) moves targets (London occupied by none
 --support orders--
 support: [Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))
 --dependency graph--
+[Succeeded][1] (Army in IrishSea) supports supported ([Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))): 
+	[Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
+	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
 [Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none)): 
 	[Pending][1] (Army in London) moves targets (Belgium occupied by none)
 	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
 	[Succeeded][1] (Army in IrishSea) supports supported ([Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)))
-[Succeeded][1] (Army in IrishSea) supports supported ([Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))): 
-	[Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
-	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
-[Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)): 
-	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
 [Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none)): 
 	[Pending][1] (Army in London) moves targets (Belgium occupied by none)
 	[Pending][1] (Army in NorthSea) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
 	[Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))
 	[Succeeded][1] (Army in IrishSea) supports supported ([Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)))
+[Pending][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)): 
+	[Pending][1] (Army in EnglishChannel) convoy ([Pending][1] (Army in London) moves targets (Belgium occupied by none))
 
 looking at [Pending][1] (Army in London) moves targets (Belgium occupied by none) with 
 	
@@ -3522,20 +3518,20 @@ looking at [Pending][1] (Army in London) moves targets (Belgium occupied by none
 	
 --orders review--
 [Succeeded][1] (Army in IrishSea) supports supported ([Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)))
+[Succeeded][1] (Army in IrishSea) supports supported ([Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))): 
+	[Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
+	[Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
 [Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none)): 
 	[Succeeded][1] (Army in London) moves targets (Belgium occupied by none)
 	[Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
 	[Succeeded][1] (Army in IrishSea) supports supported ([Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)))
-[Succeeded][1] (Army in IrishSea) supports supported ([Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))): 
-	[Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
-	[Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
-[Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)): 
-	[Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
 [Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none)): 
 	[Succeeded][1] (Army in London) moves targets (Belgium occupied by none)
 	[Succeeded][1] (Army in NorthSea) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
 	[Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel))
 	[Succeeded][1] (Army in IrishSea) supports supported ([Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)))
+[Succeeded][2] (Army in Brest) moves targets (EnglishChannel occupied by ([England] Army in EnglishChannel)): 
+	[Dislodged][1] (Army in EnglishChannel) convoy ([Succeeded][1] (Army in London) moves targets (Belgium occupied by none))
 
 
 --England: Units--
@@ -3636,16 +3632,16 @@ looking at [Pending][1] (Army in London) moves targets (Belgium occupied by none
 --support orders--
 support: [Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 --dependency graph--
-[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none)): 
-	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
-	[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+[Pending][1] (Army in Tunis) moves targets (Naples occupied by none): 
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
 [Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
-[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
-	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
-[Pending][1] (Army in Tunis) moves targets (Naples occupied by none): 
+[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 looking at [Pending][1] (Army in Tunis) moves targets (Naples occupied by none) with 
@@ -3658,16 +3654,16 @@ looking at [Pending][1] (Army in Tunis) moves targets (Naples occupied by none) 
 	[Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 --orders review--
 [Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none)): 
-	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
-	[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+[Failed][1] (Army in Tunis) moves targets (Naples occupied by none): 
 	[Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
+	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
 [Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
-[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
-	[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
-[Failed][1] (Army in Tunis) moves targets (Naples occupied by none): 
+[Dislodged][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in Naples) supports supported ([Succeeded][2] (Army in IonianSea) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 
 
@@ -3770,23 +3766,23 @@ looking at [Pending][1] (Army in Tunis) moves targets (Naples occupied by none) 
 --support orders--
 support: [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 --dependency graph--
-[Pending][1] (Army in Tunis) moves targets (Naples occupied by none): 
-	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Pending][1] (Army in IonianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
 	[Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
-	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
-	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
-	[Pending][1] (Army in IonianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Pending][1] (Army in Tunis) moves targets (Naples occupied by none): 
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Pending][1] (Army in IonianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
+	[Pending][1] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][1] (Army in IonianSea) convoy ([Pending][1] (Army in Tunis) moves targets (Naples occupied by none))
 
 looking at [Pending][1] (Army in Tunis) moves targets (Naples occupied by none) with 
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
@@ -3829,23 +3825,23 @@ looking at [Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by 
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
 --orders review--
 [Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Failed][1] (Army in Tunis) moves targets (Naples occupied by none): 
-	[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Succeeded][1] (Army in IonianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
 	[Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
 	[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
-[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
-	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
-	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
-	[Succeeded][1] (Army in IonianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Failed][1] (Army in Tunis) moves targets (Naples occupied by none): 
+	[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][1] (Army in IonianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
 	[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
+[Failed][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
+	[Failed][1] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in IonianSea) convoy ([Failed][1] (Army in Tunis) moves targets (Naples occupied by none))
 
 
 --England: Units--
@@ -3952,6 +3948,12 @@ support: [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([
 --dependency graph--
 [Pending][2] (Army in Tunis) moves targets (Naples occupied by none): 
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
 	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
@@ -3963,12 +3965,6 @@ support: [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([
 	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
-[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none)): 
-	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
-	[Pending][1] (Army in IonianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
-	[Succeeded][1] (Army in Apuleia) supports supported ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
-	[Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
-	[Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][1] (Army in Naples) supports supported ([Pending][2] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Pending][2] (Army in Tunis) moves targets (Naples occupied by none)
 	[Pending][1] (Army in TyrrhenianSea) convoy ([Pending][2] (Army in Tunis) moves targets (Naples occupied by none))
@@ -4023,6 +4019,12 @@ looking at [Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by 
 [Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none): 
 	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
+[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
+	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
+	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
+	[Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
+	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
 	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
@@ -4034,12 +4036,6 @@ looking at [Pending][0] (Army in Rome) moves targets (TyrrhenianSea occupied by 
 	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)): 
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
-[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)): 
-	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
-	[Succeeded][1] (Army in IonianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
-	[Succeeded][1] (Army in Apuleia) supports supported ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))
-	[Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))
-	[Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea)))
 [Dislodged][1] (Army in Naples) supports supported ([Failed][0] (Army in Rome) moves targets (TyrrhenianSea occupied by ([France] Army in TyrrhenianSea))): 
 	[Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none)
 	[Succeeded][1] (Army in TyrrhenianSea) convoy ([Succeeded][2] (Army in Tunis) moves targets (Naples occupied by none))

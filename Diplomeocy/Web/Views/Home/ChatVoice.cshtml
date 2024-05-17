@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Voice Chat";
+}
+
+<div id="controls">
+        <button id="startCall">Start Call</button>
+        <button id="endCall">End Call</button>
+    </div>
+    <audio id="remoteAudio" autoplay></audio>
+
+    <script src="voiceChat.js"></script>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="module" src="~/js/chat_voice.js"></script>
+}
