@@ -30,9 +30,8 @@ body {
 	margin-bottom: 60px;
 }
 
-h1, h2, label, span, a {
-	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-	font-style: normal;
+h1, h2, h3, label, span, a, p {
+	@apply inset-x-0 top-0 font-serif italic antialiased font-medium oldstyle-nums tracking-wide align-middle;
 }
 
 form {
@@ -40,6 +39,7 @@ form {
 	margin: 0 auto;
 	text-align: center;
 }
+
 form input[type="submit"]{
 	margin-top:4%;
 }
@@ -49,6 +49,7 @@ form input[type="email"],
 form input[type="password"],
 input[type="submit"],
 form text {
+	color:black;
 	width: 100%;
 	padding: 10px;
 	height: 40px;
@@ -63,32 +64,48 @@ form text {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="submit"]:focus{
+input[type="submit"]:focus,
+input[type="radio"]:focus {
 	background-color: #eef2ff;
 	border-color: #a5b4fc;
+	align-content: center;
+	vertical-align: middle;
+	text-align: center;
+	color:black;
 }
 
-.name-text {
-	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-	font-style: normal;
-	font-size: 18px;
-	font-style:italic;
-	margin-top:2.5%;
-}
-.user-text {
-	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-	font-style: normal;
-	font-size: 14px;
-	margin-top: 2.5%;
+input[type="submit"]:hover {
+	background-color: #eef2ff; 
+	border-color: #a5b4fc;
+	color:black;
 }
 
-.something-form {
+.user-details-text {
+	@apply inset-x-0 top-0 font-serif italic antialiased oldstyle-nums tracking-wide align-middle font-black text-base;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+.user-details-cat-image {
+	@apply bottom-0 right-0;
+	filter: drop-shadow(10px 7px 10px #4f46e5aa);
+	position: relative;
+	width: 75px;
+	height: 150px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom:2.5%;
+}
+.user-details-form {
 	position: relative;
 	background-color: #a5b4fcaa;
 	text-align: center;
 	border-radius: 10px;
-	margin: 2.5%;
-	width: fit-content;
+	margin: 0 auto;
+	position: relative;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+	width: 30%;
 	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
 }
@@ -96,14 +113,12 @@ input[type="submit"]:focus{
 	border-radius: 10px;
 	background-color: #a5b4fcaa;
 	margin: 0 auto;
-	
 	position: relative;
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
 	width: fit-content;
 	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-	
 }
 ol {
 	list-style-position:outside;
@@ -126,25 +141,20 @@ table, td, th, tr, thead {
 	position: relative;
 	margin-left: 10%;
 	margin-right: 10%;
-	
 }
-.cats {
+.create-user-cat-div {
 	display: flex;
 	flex-direction: column;
 	margin:2.5%;
 	text-align: center;
 	font-size: 9px;
 }
-.cat-image {
+.create-user-cat-image {
 	position: relative;
 	width: 50px;
 	height: 100px;
 	margin-right: 2%;
-}
-user-cat-image{
-	width:50px;
-	height:100px;
-	position:relative;
+	filter: drop-shadow(10px 7px 10px #4f46e5aa);
 }
 .indigo-header {
 	background-color: #ddd6fe;
