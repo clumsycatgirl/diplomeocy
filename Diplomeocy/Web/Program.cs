@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Web;
 using Web.Hubs;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 
+// used for api requests to backend
 builder.Services.AddScoped<HttpClient>();
 
 // add setup for mysql server
@@ -22,7 +23,7 @@ else {
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-WebApplication app = builder.Build();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {

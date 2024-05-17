@@ -1,5 +1,6 @@
+
 const fuck = () => {
-	console.log('meow')
+    console.log('fuck')
 }
 
 fuck()
