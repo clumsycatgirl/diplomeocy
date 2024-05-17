@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using System.Diagnostics;
+
+using Microsoft.AspNetCore.SignalR;
 
 using Newtonsoft.Json;
 
@@ -33,6 +35,7 @@ public class ChatHub : Hub {
 	}
 
 	public Task SendVoiceSignal(string signal) {
+		Debug.WriteLine($"Received voice signal: {signal}");
 		return Clients.All.SendAsync("ReceiveVoiceSignal", signal);
 	}
 }
