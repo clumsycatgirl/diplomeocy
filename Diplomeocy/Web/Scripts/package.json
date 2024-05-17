@@ -18,6 +18,8 @@
     },
     "dependencies": {
         "@microsoft/signalr": "^8.0.0",
-        "@types/signalr": "^2.4.3"
+        "@types/signalr": "^2.4.3",
+        "@types/webrtc": "^0.0.43",
+        "webrtc": "^1.14.1"
     }
 }
