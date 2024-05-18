@@ -8,26 +8,24 @@
 <hr>
 <div class="row">
     <div class="login-form">
-        <form asp-action="LogIn" id="LogInForm">
+        <form id="log-in-form">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label asp-for="Username"></label>
-                <div class="mt-2">
-                    <input asp-for="Username" class="form-control" required/>
-                </div>
-                <span asp-validation-for="Username"></span>
+                <input asp-for="Username" class="form-control" required id="username"/>
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Password"></label>
-                <div class="mt-2">
-                    <input asp-for="Password" class="form-control" required/>
-                <span asp-validation-for="Password"></span>
+                <input asp-for="Password" class="form-control" required id="password" type="password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Log In" class="form-button"/>
+                <input type="button" value="Log In" class="form-button" id="loginButton"/>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -37,6 +35,6 @@
 </div>
 
 @section Scripts {
-   
+            <script type="module" src="~/js/auth.js"></script>   
 }
 

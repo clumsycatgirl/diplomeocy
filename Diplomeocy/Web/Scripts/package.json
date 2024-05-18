@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@microsoft/signalr": "^8.0.0",
-        "@types/signalr": "^2.4.3"
+        "@types/signalr": "^2.4.3",
+        "sweetalert2": "^11.11.0"
     }
 }

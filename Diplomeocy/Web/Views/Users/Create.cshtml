@@ -10,74 +10,75 @@
 <hr />
 <div class="row">
     <div class="login-form">
-        <form asp-action="Create">
+        <form id="form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" id="name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
+                <input asp-for="Surname" class="form-control" id="surname"/>
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" class="form-control" id="username" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
+                <input asp-for="Password" type="password" class="form-control" id="password"/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="cat-form">
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Meowssolini.png" alt="Meowssolini" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Meowssolini" name="PathImage" value="/assets/images/kittators/Meowssolini.png"><label>Meowssolini</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Meowssolini.png"><label>Meowssolini</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Kitler.png" alt="Kitler" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="kitler" name="PathImage" value="/assets/images/kittators/Kitler.png"><label>Kitler</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Kitler.png"><label>Kitler</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Leonin.png" alt="Leonin" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Leonin" name="PathImage" value="/assets/images/kittators/Leonin.png"><label>Leonin</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Leonin.png"><label>Leonin</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Churchill.png" alt="Churchill" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Churchill" name="PathImage" value="/assets/images/kittators/Churchill.png"><label>Churchill</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Churchill.png"><label>Churchill</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
             </div>
             <div class="cat-form">
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Elisabetta.png" alt="Elisabetta" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Elisabetta" name="PathImage" value="/assets/images/kittators/Elisabetta.png"><label>Elisabetta</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Elisabetta.png"><label>Elisabetta</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Giorgio.png" alt="Giorgio" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Giorgio" name="PathImage" value="/assets/images/kittators/Giorgio.png"><label>Giorgio</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Giorgio.png"><label>Giorgio</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Meowmed.png" alt="Meowmed" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Meowmed" name="PathImage" value="/assets/images/kittators/Meowmed.png"><label>Meowmed</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Meowmed.png"><label>Meowmed</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
                 <div class="create-user-cat-div">
                     <img src="~/assets/images/kittators/Stalin.png" alt="Stalin" class="create-user-cat-image" />
-                    <input type="radio" asp-for="PathImage" id="Stalin" name="PathImage" value="/assets/images/kittators/Stalin.png"><label>Stalin</label></input>
+                    <input type="radio" asp-for="PathImage" id="pathimage" name="PathImage" value="/assets/images/kittators/Stalin.png"><label>Stalin</label></input>
                     <span asp-validation-for="PathImage" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="button" value="Create" class="btn btn-primary" id="createButton" />
             </div>
         </form>
     </div>
@@ -87,3 +88,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script type="module" src="~/js/auth.js"></script>
+}

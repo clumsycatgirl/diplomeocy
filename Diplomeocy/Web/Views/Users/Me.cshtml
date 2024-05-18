@@ -1,0 +1,15 @@
+@model Web.Models.User
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User Details</h1>
+
+<div>
+    <h2>Name: @Model.Name</h2>
+    <h2>Surname: @Model.Surname</h2>
+    <h2>Username: @Model.Username</h2>
+    <h2>Password: @Model.Password</h2>
+    <img src="@Model.PathImage" alt="User Image" class="user-details-cat-image" />
+</div>

@@ -30,7 +30,10 @@ body {
 	margin-bottom: 60px;
 }
 
-h1, h2, h3, label, span, a, p {
+/* I remove span from this cause it causes problems */
+/* there's a reason I said to not give a style to an element but use classes instead */
+/* dummy */
+h1, h2, h3, label, a, p {
 	@apply inset-x-0 top-0 font-serif italic antialiased font-medium oldstyle-nums tracking-wide align-middle;
 }
 
@@ -168,4 +171,6 @@ table, td, th, tr, thead {
 	transform: rotate(37.5);
 }
 
-
+.no-before::before {
+    display: none !important;
+}

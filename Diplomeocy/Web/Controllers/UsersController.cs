@@ -1,39 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+
+using Diplomacy.Utils;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-using Web;
 using Web.Models;
+using Web.Utils;
 
 namespace Web.Controllers {
 	public class UsersController : Controller {
-		private readonly DatabaseContext _context;
+		private readonly DatabaseContext context;
 
 		public UsersController(DatabaseContext context) {
-			_context = context;
+			this.context = context;
 		}
 
 		// GET: Users
 		public async Task<IActionResult> Index() {
-			return _context.Users != null ?
-						View(await _context.Users.ToListAsync()) :
+			return context.Users is not null ?
+						View(await context.Users.ToListAsync()) :
 						Problem("Entity set 'DatabaseContext.Users'  is null.");
+		}
+
+		public async Task<IActionResult> Me() {
+			User? user = HttpContext.Session.Get<User>("User");
+			return user is not null ? View(user) : Problem("login first");
 		}
 
 		// GET: Users/Details/5
 		public async Task<IActionResult> Details(int? id) {
-			if (id == null || _context.Users == null) {
+			if (id == null || context.Users == null) {
 				return NotFound();
 			}
 
-			var user = await _context.Users
+			var user = await context.Users
 				.FirstOrDefaultAsync(m => m.Id == id);
-			if (user == null) {
+			if (user is null) {
 				return NotFound();
 			}
 
@@ -48,18 +51,34 @@ namespace Web.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> LogIn(String? username, String? password) {
-			if (username == "" || password == "" || _context.Users is null) {
-				return NotFound();
+			List<(string Field, string ErrorMessage)> errors = new();
+
+			if (username is null) {
+				errors.Add(("username", "Username is required"));
 			}
 
-			User? user = await _context.Users
+			if (password is null) {
+				errors.Add(("password", "Password is required"));
+			}
+
+			if (context.Users is null) {
+				// return NotFound();
+				errors.Add(("context", "Missing context"));
+			}
+
+			if (errors.Any()) {
+				return this.JsonError(errors.ToArray());
+			}
+
+			User? user = await context.Users!
 			   .FirstOrDefaultAsync(m => m.Username == username && m.Password == password);
 
 			if (user is not null) {
-				HttpContext.Session.SetString("UserId", user.Id.ToString());
+				// HttpContext.Session.SetString("UserId", user.Id.ToString());
+				HttpContext.Session.Set("User", user);
 			}
 
-			return user is null ? NotFound() : RedirectToAction(nameof(Index));
+			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Index")!);
 		}
 		// GET: Users/Create
 		public IActionResult Create() {
@@ -72,22 +91,49 @@ namespace Web.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Name,Surname,Username,Password,PathImage")] User user) {
+			Log.WriteLine("meow");
+			Debug.WriteLine("meow");
+
 			if (ModelState.IsValid) {
-				_context.Add(user);
-				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				context.Add(user);
+				await context.SaveChangesAsync();
+				// return RedirectToAction(nameof(Index)); // automatic redirect 
+				// we can't use this with async requests as it'd give us the html as response and then we'd have to do bad stuff
+
+				// set the user in the session
+				HttpContext.Session.Set<User>("User", user);
+
+				// we just return *where* to go
+				return Json(new { success = true, destination = Url.Action("Index") });
 			}
-			return View(user);
+
+			// this refreshes the page
+			// return View(user);
+
+			// get all errors and maps them to objects with { Field = state.Key, Errors = [ ...error.ErrorMessage ] }
+			List<object> errorList = ModelState
+				.Where(state => state.Value is not null && state.Value.Errors.Any())
+				.Select(state => new {
+					Field = state.Key,
+					Errors = state.Value!.Errors.Select(error => error.ErrorMessage).ToList()
+				})
+				.Cast<object>()
+				.ToList();
+
+			// Json is like View inherited from base class
+			// automatically parses to json
+			// that's an anonymous type cause I was too lazy to make a record for this
+			return Json(new { success = false, errors = errorList });
 		}
 
 		// GET: Users/Edit/5
 		public async Task<IActionResult> Edit(int? id) {
-			if (id == null || _context.Users == null) {
+			if (id is null || context.Users is null) {
 				return NotFound();
 			}
 
-			User user = await _context.Users.FindAsync(id);
-			if (user == null) {
+			User? user = await context.Users.FindAsync(id);
+			if (user is null) {
 				return NotFound();
 			}
 			return View(user);
@@ -105,8 +151,8 @@ namespace Web.Controllers {
 
 			if (ModelState.IsValid) {
 				try {
-					_context.Update(user);
-					await _context.SaveChangesAsync();
+					context.Update(user);
+					await context.SaveChangesAsync();
 				} catch (DbUpdateConcurrencyException) {
 					if (!UserExists(user.Id)) {
 						return NotFound();
@@ -121,11 +167,11 @@ namespace Web.Controllers {
 
 		// GET: Users/Delete/5
 		public async Task<IActionResult> Delete(int? id) {
-			if (id == null || _context.Users == null) {
+			if (id == null || context.Users == null) {
 				return NotFound();
 			}
 
-			var user = await _context.Users
+			var user = await context.Users
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (user == null) {
 				return NotFound();
@@ -138,20 +184,20 @@ namespace Web.Controllers {
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id) {
-			if (_context.Users == null) {
+			if (context.Users == null) {
 				return Problem("Entity set 'DatabaseContext.Users'  is null.");
 			}
-			var user = await _context.Users.FindAsync(id);
+			var user = await context.Users.FindAsync(id);
 			if (user != null) {
-				_context.Users.Remove(user);
+				context.Users.Remove(user);
 			}
 
-			await _context.SaveChangesAsync();
+			await context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
 
 		private bool UserExists(int id) {
-			return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+			return (context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
 		}
 	}
 }
