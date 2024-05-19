@@ -1,81 +1,98 @@
 import * as signalR from '@microsoft/signalr'
 
-let localStream: MediaStream = null
-let peerConnection: RTCPeerConnection = null
-const configuration: RTCConfiguration = {
-	iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
-}
-
 const connection = new signalR.HubConnectionBuilder()
-	.withUrl('/textchat')
+	.withUrl('/chat/voice')
 	.build()
 
-connection.start().catch(console.error)
-
-connection.on('ReceiveVoiceSignal', async (signal: string) => {
-	const message = JSON.parse(signal)
-
-	if (message.offer) {
-		const peerConnection = new RTCPeerConnection(configuration)
-
-		peerConnection.onicecandidate = async (event) => {
-			if (event.candidate) {
-				await connection.invoke(
-					'SendVoiceSignal',
-					JSON.stringify({ candidate: event.candidate }),
-				)
-			}
-		}
-
-		peerConnection.ontrack = (event) => {
-			const remoteAudio = document.getElementById(
-				'remoteAudio',
-			) as HTMLAudioElement
-			if (!remoteAudio.srcObject) {
-				remoteAudio.srcObject = event.streams[0]
-			}
-		}
-
-		await peerConnection.setRemoteDescription(
-			new RTCSessionDescription(message.offer),
-		)
-
-		const answer = await peerConnection.createAnswer()
-		await peerConnection.setLocalDescription(answer)
-		await connection.invoke(
-			'SendVoiceSignal',
-			JSON.stringify({ answer: peerConnection.localDescription }),
-		)
-	} else if (message.answer) {
-		await peerConnection.setRemoteDescription(
-			new RTCSessionDescription(message.answer),
-		)
-	} else if (message.candidate) {
-		await peerConnection.addIceCandidate(
-			new RTCIceCandidate(message.candidate),
-		)
+connection.on('Receive', (data: string) => {
+	console.log(data)
+	const bytesString = atob(data)
+	const bytes = new Uint8Array(bytesString.length)
+	for (let i = 0; i < bytesString.length; i++) {
+		bytes[i] = bytesString.charCodeAt(i)
 	}
+
+	const audioElement = new Audio()
+
+	const blob = new Blob([bytes], { type: 'audio/wav' })
+	const url = URL.createObjectURL(blob)
+	audioElement.src = url
+
+	audioElement
+		.play()
+		.then(() => {
+			console.log('Audio playback started successfully.')
+		})
+		.catch((error) => {
+			console.error('Error playing audio:', error)
+		})
+	return
 })
 
-// Simplified call start function
-$('#startCall').on('click', async () => {
+export const startVoiceChat = async () => {
 	try {
-		const localStream = await navigator.mediaDevices.getUserMedia({
-			audio: true,
-		})
-		const peerConnection = new RTCPeerConnection(configuration)
-
-		localStream.getTracks().forEach((track) => {
-			peerConnection.addTrack(track, localStream)
-		})
-
-		const offer = await peerConnection.createOffer()
-		await peerConnection.setLocalDescription(offer)
-		await connection.invoke(
-			'SendVoiceSignal',
-			JSON.stringify({ offer: peerConnection.localDescription }),
-		)
+		await connection.start()
+		console.log('SignalR connected')
 	} catch (error) {
 		console.error(error)
 	}
+}
+
+export const stopVoiceChat = () => {
+	connection.stop()
+}
+
+const audioElement = document.getElementById('audioElement') as HTMLAudioElement
+
+let mediaRecorder: MediaRecorder
+let mediaStream: MediaStream
+let audioChunks: Blob[] = []
+
+const handleDataAvailable = async (event: BlobEvent) => {
+	console.log('handleDataAvailable')
+	if (event.data.size > 0) {
+		audioChunks.push(event.data)
+
+		const arrayBuffer = await event.data.arrayBuffer()
+		const bytes = new Uint8Array(arrayBuffer)
+		const base64String = btoa(String.fromCharCode(...bytes))
+
+		await connection.invoke('Send', base64String)
+	}
+}
+
+const startMediaRecorder = () => {
+	if (mediaStream) {
+		mediaRecorder = new MediaRecorder(mediaStream)
+		mediaRecorder.ondataavailable = handleDataAvailable
+		mediaRecorder.start()
+		console.log('MediaRecorder started')
+	}
+}
+
+const stopMediaRecorder = () => {
+	if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+		mediaRecorder.stop()
+		console.log('MediaRecorder stopped')
+	}
+}
+
+$('#startCall').on('click', startMediaRecorder)
+$('#endCall').on('click', stopMediaRecorder)
+
+navigator.mediaDevices
+	.getUserMedia({ audio: true })
+	.then((stream) => {
+		// audioElement.srcObject = stream
+		mediaStream = stream
+	})
+	.catch((error) => {
+		console.error('Error accessing microphone:', error)
+	})
+
+$(() => {
+	setTimeout(() => {
+		startVoiceChat()
+		startMediaRecorder()
+	}, 2500)
 })

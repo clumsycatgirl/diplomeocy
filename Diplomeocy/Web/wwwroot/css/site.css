@@ -30,7 +30,7 @@ body {
 	margin-bottom: 60px;
 }
 
-/* I remove span from this cause it causes problems */
+/* I removed span from this cause it causes problems */
 /* there's a reason I said to not give a style to an element but use classes instead */
 /* dummy */
 h1, h2, h3, label, a, p {

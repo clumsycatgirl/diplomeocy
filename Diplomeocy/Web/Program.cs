@@ -11,6 +11,14 @@ builder.Services.AddSignalR();
 
 builder.Services.AddSession();
 
+builder.Services.AddLogging(logging => {
+	logging.SetMinimumLevel(LogLevel.Debug)
+		.AddConsole()
+		.AddDebug()
+		.AddTraceSource("Information, ActivityTracing")
+		.AddEventSourceLogger();
+});
+
 // used for api requests to backend
 builder.Services.AddScoped<HttpClient>();
 
@@ -24,6 +32,14 @@ else {
 // setup swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Logging
+	.ClearProviders()
+	.AddConsole()
+	.AddTraceSource("Information, ActivityTracing")
+	.AddDebug()
+	.AddDebug()
+	.AddEventSourceLogger();
 
 var app = builder.Build();
 
@@ -40,6 +56,8 @@ if (!app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseHttpLogging();
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -50,6 +68,7 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapHub<ChatHub>("/textchat");
+app.MapHub<ChatHub>("/chat/text");
+app.MapHub<VoiceChatHub>("/chat/voice");
 
 app.Run();
