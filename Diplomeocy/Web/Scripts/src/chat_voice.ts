@@ -1,98 +1,132 @@
-import * as signalR from '@microsoft/signalr'
-
-const connection = new signalR.HubConnectionBuilder()
-	.withUrl('/chat/voice')
-	.build()
-
-connection.on('Receive', (data: string) => {
-	console.log(data)
-	const bytesString = atob(data)
-	const bytes = new Uint8Array(bytesString.length)
-	for (let i = 0; i < bytesString.length; i++) {
-		bytes[i] = bytesString.charCodeAt(i)
-	}
-
-	const audioElement = new Audio()
-
-	const blob = new Blob([bytes], { type: 'audio/wav' })
-	const url = URL.createObjectURL(blob)
-	audioElement.src = url
-
-	audioElement
-		.play()
-		.then(() => {
-			console.log('Audio playback started successfully.')
-		})
-		.catch((error) => {
-			console.error('Error playing audio:', error)
-		})
-	return
-})
-
-export const startVoiceChat = async () => {
-	try {
-		await connection.start()
-		console.log('SignalR connected')
-	} catch (error) {
-		console.error(error)
-	}
-}
-
-export const stopVoiceChat = () => {
-	connection.stop()
-}
-
-const audioElement = document.getElementById('audioElement') as HTMLAudioElement
-
-let mediaRecorder: MediaRecorder
-let mediaStream: MediaStream
-let audioChunks: Blob[] = []
-
-const handleDataAvailable = async (event: BlobEvent) => {
-	console.log('handleDataAvailable')
-	if (event.data.size > 0) {
-		audioChunks.push(event.data)
-
-		const arrayBuffer = await event.data.arrayBuffer()
-		const bytes = new Uint8Array(arrayBuffer)
-		const base64String = btoa(String.fromCharCode(...bytes))
-
-		await connection.invoke('Send', base64String)
-	}
-}
-
-const startMediaRecorder = () => {
-	if (mediaStream) {
-		mediaRecorder = new MediaRecorder(mediaStream)
-		mediaRecorder.ondataavailable = handleDataAvailable
-		mediaRecorder.start()
-		console.log('MediaRecorder started')
-	}
-}
-
-const stopMediaRecorder = () => {
-	if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-		mediaRecorder.stop()
-		console.log('MediaRecorder stopped')
-	}
-}
-
-$('#startCall').on('click', startMediaRecorder)
-$('#endCall').on('click', stopMediaRecorder)
-
 navigator.mediaDevices
 	.getUserMedia({ audio: true })
-	.then((stream) => {
-		// audioElement.srcObject = stream
-		mediaStream = stream
+	.then((stream: MediaStream) => {
+		const mediaRecorder = new MediaRecorder(stream, {
+			mimeType: 'audio/ogg; codecs=opus;',
+		})
+
+		mediaRecorder.onstart = () => console.log('Started media recorder')
+
+		mediaRecorder.ondataavailable = async (event: BlobEvent) => {
+			console.log('on-data-available')
+			// const arrayBuffer = await event.data.arrayBuffer()
+			// console.log('format=' + new Uint8Array(arrayBuffer, 0, 4))
+			// console.log(arrayBuffer)
+			// socket.send(arrayBuffer)
+
+			// const arrayBuffer = await event.data.arrayBuffer()
+			// const bytes = new Uint8Array(arrayBuffer)
+			// const base64String = btoa(String.fromCharCode(...bytes))
+
+			// const bytesString = atob(base64String)
+			// const backBytes = new Uint8Array(bytesString.length)
+			// for (let i = 0; i < bytesString.length; i++) {
+			// bytes[i] = bytesString.charCodeAt(i)
+			// }
+
+			// const audioElement = new Audio()
+
+			// const blob = new Blob([backBytes], {
+			// type: 'audio/ogg; codecs=opus;',
+			// })
+			// const url = URL.createObjectURL(blob)
+			// audioElement.srcObject = stream
+
+			// audioElement
+			// .play()
+			// .then(() => console.log('started playing'))
+			// .catch(console.error)
+			const blob = new Blob([event.data])
+			const url = URL.createObjectURL(blob)
+			const audio = new Audio(url)
+			audio.play()
+		}
+		mediaRecorder.onerror = console.error
+
+		mediaRecorder.onstop = () => console.log('Stopped media recorder')
+
+		mediaRecorder.start(2000)
 	})
-	.catch((error) => {
-		console.error('Error accessing microphone:', error)
+	.catch((error: any) => {
+		console.error('Error accessing audio devices.', error)
 	})
 
-$(() => {
-	setTimeout(() => {
-		startVoiceChat()
-		startMediaRecorder()
-	}, 2500)
-})
+const url = `wss://${window.location.hostname}:${window.location.port}/ws`
+const socket = new WebSocket(url)
+
+socket.binaryType = 'arraybuffer'
+
+socket.onopen = () => console.log(`Started WebSocket connection on '${url}'`)
+
+const audioContext = new AudioContext()
+socket.onmessage = async (event: MessageEvent<ArrayBuffer>) => {
+	console.log(`received-length:${event.data.byteLength}`)
+	console.log(event.data)
+
+	return
+	try {
+		const blob = new Blob([event.data], { type: 'audio/ogg' })
+		const url = URL.createObjectURL(blob)
+
+		const audio = new Audio(url)
+		const source = audioContext.createMediaElementSource(audio)
+		source.connect(audioContext.destination)
+		audio.play()
+	} catch (err) {
+		console.error('Error playing audio:', err)
+	}
+}
+
+socket.onerror = console.error
+
+const sendSignalingMessage = (message: any, json: boolean = true) => {
+	if (json) message = JSON.stringify(message)
+	console.log(`sent-length:${message.length}`)
+	socket.send(message)
+}
+
+if (false) {
+	// const toggleMic = () => {
+	// 	if (!canRecord) return
+	// 	console.log('toggle')
+	// 	isRecording = !isRecording
+	// 	if (isRecording) {
+	// 		recorder.start()
+	// 	} else {
+	// 		recorder.stop()
+	// 	}
+	// }
+	// const audioElement = new Audio()
+	// let canRecord = false
+	// let isRecording = false
+	// let recorder: MediaRecorder = null
+	// let chunks: Blob[] = []
+	// const setupAudio = () => {
+	// 	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+	// 		navigator.mediaDevices
+	// 			.getUserMedia({ audio: true })
+	// 			.then(setupStream)
+	// 			.catch(console.error)
+	// }
+	// const setupStream = (stream: MediaStream) => {
+	// 	recorder = new MediaRecorder(stream, {
+	// 		mimeType: 'audio/ogg; codecs=opus;',
+	// 	})
+	// 	recorder.ondataavailable = ({ data }) => {
+	// 		chunks.push(data)
+	// 	}
+	// 	recorder.onstop = (event) => {
+	// 		const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus;' })
+	// 		chunks = []
+	// 		const audioUrl = URL.createObjectURL(blob)
+	// 		audioElement.src = audioUrl
+	// 	}
+	// 	canRecord = true
+	// }
+	// $('#startCall').on('click', toggleMic)
+	// $('#endCall').on('click', () => {
+	// 	console.log('started playing')
+	// 	audioElement.play()
+	// })
+	// setupAudio()
+}
