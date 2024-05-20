@@ -26,7 +26,7 @@ html {
 
 body {
 	height: 100%;
-	background-color: #ddd6fe5c;
+	background-color: #0c4a6eac;
 	margin-bottom: 60px;
 }
 
@@ -34,7 +34,7 @@ body {
 /* there's a reason I said to not give a style to an element but use classes instead */
 /* dummy */
 h1, h2, h3, label, a, p {
-	@apply inset-x-0 top-0 font-serif italic antialiased font-medium oldstyle-nums tracking-wide align-middle;
+	@apply font-serif italic antialiased font-medium oldstyle-nums tracking-wide align-middle;
 }
 
 form {
@@ -60,27 +60,50 @@ form text {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	text-align: center;
-	background-color: #eef2ffaa;
-	border-color: #a5b4fc;
+	background-color: #217aa59f;
+	border-color: #217aa59f;
 	box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
 }
-
+.create-user-button {
+	color: black;
+	width: 75%;
+	padding: 10px;
+	height: 40px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	background-color: #2d93c59f;
+	border-color: #2d93c59f;
+	box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="submit"]:focus,
 input[type="radio"]:focus {
-	background-color: #eef2ff;
-	border-color: #a5b4fc;
+	background-color: #0891b25e;
+	border-color: #0891b25e;
 	align-content: center;
 	vertical-align: middle;
 	text-align: center;
-	color:black;
+	color: black;
 }
 
 input[type="submit"]:hover {
-	background-color: #eef2ff; 
-	border-color: #a5b4fc;
-	color:black;
+	background-color: #0891b25e;
+	border-color: #0891b25e;
+	color: black;
+}
+
+.logo-image {
+	@apply inset-x-0 top-0;
+	position: relative;
+	width: 75%;
+	height: 10%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2.5%;
 }
 
 .user-details-text {
@@ -114,7 +137,7 @@ input[type="submit"]:hover {
 }
 .login-form {
 	border-radius: 10px;
-	background-color: #a5b4fcaa;
+	background-color: #075985;
 	margin: 0 auto;
 	position: relative;
 	margin-top: 2.5%;
@@ -157,11 +180,11 @@ table, td, th, tr, thead {
 	width: 50px;
 	height: 100px;
 	margin-right: 2%;
-	filter: drop-shadow(10px 7px 10px #4f46e5aa);
+	filter: drop-shadow(10px 7px 10px #217aa59f);
 }
 .indigo-header {
-	background-color: #ddd6fe;
-	border-color: #a78bfa4a;
+	background-color: #115772cc;
+	border-color: #083344;
 }
 
 .hat {
