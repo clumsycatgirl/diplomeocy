@@ -75,14 +75,14 @@ app.MapControllerRoute(
 
 app.MapHub<ChatHub>("/chat/text");
 
-VoiceChatService voiceChatService = new();
-#pragma warning disable CS4014
-Task.Run(() => voiceChatService.StartAsync());
-#pragma warning restore CS4014
-IHostApplicationLifetime lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
-lifetime.ApplicationStopping.Register(() => voiceChatService.Stop());
+// VoiceChatService voiceChatService = new();
+// #pragma warning disable CS4014
+// Task.Run(() => voiceChatService.StartAsync());
+// #pragma warning restore CS4014
+// IHostApplicationLifetime lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+// lifetime.ApplicationStopping.Register(() => voiceChatService.Stop());
 
-app.UseWebSockets();
-app.Use(async (context, next) => await WebSocketMiddlerware.Execute(context, next));
+// app.UseWebSockets();
+// app.Use(async (context, next) => await WebSocketMiddlerware.Execute(context, next));
 
 app.Run();

@@ -15,8 +15,8 @@ public class WebSocketMiddlerware {
 			return;
 		}
 
-		WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-		await HandleWebSocketCommunication(webSocket);
+		// WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+		// await HandleWebSocketCommunication(webSocket);
 	}
 
 	private static async Task HandleWebSocketCommunication(WebSocket webSocket) {
