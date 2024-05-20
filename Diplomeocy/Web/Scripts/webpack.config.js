@@ -21,7 +21,7 @@ function getEntries(srcPath) {
 }
 
 module.exports = {
-  entry: getEntries('./src'), // Get all TypeScript files in src directory,
+  entry: getEntries('./src'),
   mode: 'development',
   module: {
     rules: [

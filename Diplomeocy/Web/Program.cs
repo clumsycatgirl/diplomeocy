@@ -1,12 +1,7 @@
-using System.Runtime.CompilerServices;
-
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Web;
 using Web.Hubs;
-using Web.Middleware;
-using Web.VoiceChatServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,16 +68,7 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllers();
 app.MapHub<ChatHub>("/chat/text");
-
-// VoiceChatService voiceChatService = new();
-// #pragma warning disable CS4014
-// Task.Run(() => voiceChatService.StartAsync());
-// #pragma warning restore CS4014
-// IHostApplicationLifetime lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
-// lifetime.ApplicationStopping.Register(() => voiceChatService.Stop());
-
-// app.UseWebSockets();
-// app.Use(async (context, next) => await WebSocketMiddlerware.Execute(context, next));
 
 app.Run();
