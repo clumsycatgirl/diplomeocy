@@ -26,7 +26,7 @@ html {
 
 body {
 	height: 100%;
-	background-color: #0c4a6eac;
+	background-color: rgb(51 123 168);
 	margin-bottom: 60px;
 }
 
@@ -34,7 +34,21 @@ body {
 /* there's a reason I said to not give a style to an element but use classes instead */
 /* dummy */
 h1, h2, h3, label, a, p {
-	@apply font-serif italic antialiased font-medium oldstyle-nums tracking-wide align-middle;
+	@apply font-serif italic antialiased font-medium oldstyle-nums tracking-wide;
+}
+ol {
+	list-style-position: outside;
+	list-style-type: decimal;
+}
+
+table, td, th, tr, thead {
+	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	font-style: normal;
+	border-width: 1px;
+	border-color: rgb(33 82 114);
+	background-color: rgb(123 168 202);
+	text-align: center;
+	vertical-align: central;
 }
 
 form {
@@ -42,16 +56,20 @@ form {
 	margin: 0 auto;
 	text-align: center;
 }
-
 form input[type="submit"]{
 	margin-top:4%;
 }
+
 form input[type="text"],
 form input[type="number"],
 form input[type="email"],
 form input[type="password"],
 input[type="submit"],
-form text {
+form text,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="submit"]:focus,
+input[type="radio"]:focus{
 	color:black;
 	width: 100%;
 	padding: 10px;
@@ -60,37 +78,15 @@ form text {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	text-align: center;
-	background-color: #217aa59f;
-	border-color: #217aa59f;
-	box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
-}
-.create-user-button {
-	color: black;
-	width: 75%;
-	padding: 10px;
-	height: 40px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	text-align: center;
-	background-color: #2d93c59f;
-	border-color: #2d93c59f;
-	box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
-}
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="submit"]:focus,
-input[type="radio"]:focus {
-	background-color: #0891b25e;
-	border-color: #0891b25e;
 	align-content: center;
 	vertical-align: middle;
-	text-align: center;
-	color: black;
+	background-color: rgb(123 168 202);
+	border-color: #217aa59f;
+	box-shadow: inset 0 2px 4px 0 rgb(123 168 202);
 }
 
 input[type="submit"]:hover {
-	background-color: #0891b25e;
+	background-color: rgb(123 168 202);
 	border-color: #0891b25e;
 	color: black;
 }
@@ -113,18 +109,19 @@ input[type="submit"]:hover {
 }
 .user-details-cat-image {
 	@apply bottom-0 right-0;
-	filter: drop-shadow(10px 7px 10px #4f46e5aa);
+	filter: drop-shadow(10px 7px 10px rgb(51 123 168));
 	position: relative;
 	width: 75px;
 	height: 150px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom:2.5%;
+	margin-bottom: 2.5%;
 }
 .user-details-form {
 	position: relative;
-	background-color: #0891b25e;
+	background-color: rgb(33 82 114);
+	border-color: #172554;
 	text-align: center;
 	border-radius: 10px;
 	margin: 0 auto;
@@ -133,33 +130,21 @@ input[type="submit"]:hover {
 	margin-bottom: 2.5%;
 	width: 30%;
 	padding-block-start: auto;
-	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+	box-shadow: 0 25px 50px -12px rgb(33 82 114);
 }
 .login-form {
 	border-radius: 10px;
-	background-color: #075985;
+	background-color: rgb(33 82 114);
+	border-color: #172554;
 	margin: 0 auto;
 	position: relative;
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
 	width: fit-content;
 	padding-block-start: auto;
-	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-}
-ol {
-	list-style-position:outside;
-	list-style-type: decimal;
+	box-shadow: 0 25px 50px -12px rgb(33 82 114);
 }
 
-table, td, th, tr, thead {
-	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-	font-style: normal;
-	border-width: 1px;
-	border-color: #00000071;
-	background-color: #ede9fe;
-	text-align:center;
-	vertical-align:central;
-}
 
 .cat-form {
 	display: flex;
@@ -167,6 +152,19 @@ table, td, th, tr, thead {
 	position: relative;
 	margin-left: 10%;
 	margin-right: 10%;
+}
+.user-button {
+	color: black;
+	width: 75%;
+	padding: 10px;
+	height: 40px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	background-color: rgb(123 168 202);
+	border-color: #2d93c59f;
+	box-shadow: inset 0 2px 4px 0 rgb(123 168 202);
 }
 .create-user-cat-div {
 	display: flex;
@@ -180,11 +178,11 @@ table, td, th, tr, thead {
 	width: 50px;
 	height: 100px;
 	margin-right: 2%;
-	filter: drop-shadow(10px 7px 10px #217aa59f);
+	filter: drop-shadow(10px 7px 10px rgb(51 123 168));
 }
-.indigo-header {
-	background-color: #115772cc;
-	border-color: #083344;
+.blue-header {
+	background-color: rgb(33 82 114);
+	border-color: #172554;
 }
 
 .hat {
