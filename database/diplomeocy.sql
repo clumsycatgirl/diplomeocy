@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 16, 2024 alle 15:44
+-- Creato il: Mag 21, 2024 alle 15:29
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -55,7 +55,8 @@ CREATE TABLE `players` (
 
 CREATE TABLE `tables` (
   `Id` int(6) NOT NULL,
-  `Date` date NOT NULL
+  `Date` date NOT NULL,
+  `Host` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -78,7 +79,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `PathImage`) VALUES
-(1, '[meow', 'meow', 'meow', 'meow', '');
+(1, '[meow', 'meow', 'meow', 'meow', ''),
+(2, 'mr', 'meow', 'meow', 'meow', '/assets/images/kittators/Giorgio.png');
 
 --
 -- Indici per le tabelle scaricate
@@ -103,7 +105,8 @@ ALTER TABLE `players`
 -- Indici per le tabelle `tables`
 --
 ALTER TABLE `tables`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Host` (`Host`);
 
 --
 -- Indici per le tabelle `users`
@@ -131,7 +134,7 @@ ALTER TABLE `players`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Limiti per le tabelle scaricate
@@ -149,6 +152,12 @@ ALTER TABLE `games`
 ALTER TABLE `players`
   ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`IdUser`) REFERENCES `users` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `players_ibfk_2` FOREIGN KEY (`IdTable`) REFERENCES `tables` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `tables`
+--
+ALTER TABLE `tables`
+  ADD CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`Host`) REFERENCES `users` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

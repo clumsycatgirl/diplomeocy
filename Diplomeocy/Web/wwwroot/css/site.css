@@ -98,8 +98,8 @@ input[type="submit"]:hover {
 .logo-image {
 	@apply inset-x-0 top-0;
 	position: relative;
-	width: 75%;
-	height: 10%;
+	width: 65%;
+	height: 8%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -124,7 +124,7 @@ input[type="submit"]:hover {
 }
 .user-details-form {
 	position: relative;
-	background-color: #a5b4fcaa;
+	background-color: #0891b25e;
 	text-align: center;
 	border-radius: 10px;
 	margin: 0 auto;
