@@ -41,6 +41,12 @@ builder.Logging
 	.AddDebug()
 	.AddEventSourceLogger();
 
+builder.Services.AddCors((options) => {
+	options.AddPolicy("cors", (policy) => {
+		policy.AllowAnyOrigin();
+	});
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +69,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
+
+app.UseCors("cors");
 
 app.MapControllerRoute(
 	name: "default",

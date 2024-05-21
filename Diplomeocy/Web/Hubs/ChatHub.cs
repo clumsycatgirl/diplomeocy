@@ -36,6 +36,6 @@ public class ChatHub : Hub {
 
 	public Task SendVoiceSignal(string signal) {
 		Debug.WriteLine($"Received voice signal: {signal}");
-		return Clients.All.SendAsync("ReceiveVoiceSignal", signal);
+		return Clients.AllExcept(Context.ConnectionId).SendAsync("ReceiveVoiceSignal", signal);
 	}
 }
