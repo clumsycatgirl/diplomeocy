@@ -26,7 +26,7 @@ html {
 
 body {
 	height: 100%;
-	background-color: rgb(51 123 168);
+	background-color: #6fa8dca1;
 	margin-bottom: 60px;
 }
 
@@ -45,10 +45,11 @@ table, td, th, tr, thead {
 	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	font-style: normal;
 	border-width: 1px;
-	border-color: rgb(33 82 114);
-	background-color: rgb(123 168 202);
+	border: 1px solid #01182e;
+	background-color: #003366d1;
 	text-align: center;
 	vertical-align: central;
+	color: #cfe4ea;
 }
 
 form {
@@ -56,39 +57,51 @@ form {
 	margin: 0 auto;
 	text-align: center;
 }
-form input[type="submit"]{
-	margin-top:4%;
-}
 
 form input[type="text"],
 form input[type="number"],
 form input[type="email"],
 form input[type="password"],
-input[type="submit"],
+form input[type="submit"],
+form input[type="edit"],
 form text,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="submit"]:focus,
-input[type="radio"]:focus{
-	color:black;
-	width: 100%;
+input[type="submit"]:focus{
+	width: 90%;
 	padding: 10px;
 	height: 40px;
-	margin-bottom: 10px;
+	margin:5%;
+	margin-bottom: 2.5%;
+	margin-top:2.5%;
+	margin-left:5%;
+	margin-right:5%;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	text-align: center;
+	color: #cfe4ea;
 	align-content: center;
 	vertical-align: middle;
-	background-color: rgb(123 168 202);
-	border-color: #217aa59f;
-	box-shadow: inset 0 2px 4px 0 rgb(123 168 202);
+	background-color: #001f3dd0;
+	border: 1px solid #01182e;
+	box-shadow: inset 0 2px 4px 0 #01182e;
 }
-
-input[type="submit"]:hover {
-	background-color: rgb(123 168 202);
-	border-color: #0891b25e;
-	color: black;
+.user-button {
+	@apply font-serif italic antialiased font-medium oldstyle-nums tracking-wide;
+	color: #cfe4ea;
+	vertical-align: central;
+	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	width: 75%;
+	position:relative;
+	padding: 10px;
+	height: 40px;
+	margin-top: 4%;
+	margin-bottom: 10px;
+	border: 1px solid #01182e;
+	border-radius: 5px;
+	text-align: center;
+	background-color: #001f3dd0;
+	box-shadow: inset 0 2px 4px 0 #01182e;
 }
 
 .logo-image {
@@ -109,7 +122,7 @@ input[type="submit"]:hover {
 }
 .user-details-cat-image {
 	@apply bottom-0 right-0;
-	filter: drop-shadow(10px 7px 10px rgb(51 123 168));
+	filter: drop-shadow(10px 7px 10px #01182e);
 	position: relative;
 	width: 75px;
 	height: 150px;
@@ -120,8 +133,8 @@ input[type="submit"]:hover {
 }
 .user-details-form {
 	position: relative;
-	background-color: rgb(33 82 114);
-	border-color: #172554;
+	background-color: #003366d1;
+	border: 1px solid #003366;
 	text-align: center;
 	border-radius: 10px;
 	margin: 0 auto;
@@ -129,22 +142,23 @@ input[type="submit"]:hover {
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
 	width: 30%;
+	color: #cfe4ea;
 	padding-block-start: auto;
-	box-shadow: 0 25px 50px -12px rgb(33 82 114);
+	box-shadow: 0 25px 50px -12px #003366;
 }
 .login-form {
 	border-radius: 10px;
-	background-color: rgb(33 82 114);
-	border-color: #172554;
+	background-color: #003366d1;
+	border: 1px solid #003366;
 	margin: 0 auto;
 	position: relative;
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
 	width: fit-content;
 	padding-block-start: auto;
-	box-shadow: 0 25px 50px -12px rgb(33 82 114);
+	box-shadow: 0 25px 50px -12px #003366;
+	color: #cfe4ea;
 }
-
 
 .cat-form {
 	display: flex;
@@ -153,19 +167,7 @@ input[type="submit"]:hover {
 	margin-left: 10%;
 	margin-right: 10%;
 }
-.user-button {
-	color: black;
-	width: 75%;
-	padding: 10px;
-	height: 40px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	text-align: center;
-	background-color: rgb(123 168 202);
-	border-color: #2d93c59f;
-	box-shadow: inset 0 2px 4px 0 rgb(123 168 202);
-}
+
 .create-user-cat-div {
 	display: flex;
 	flex-direction: column;
@@ -178,10 +180,10 @@ input[type="submit"]:hover {
 	width: 50px;
 	height: 100px;
 	margin-right: 2%;
-	filter: drop-shadow(10px 7px 10px rgb(51 123 168));
+	filter: drop-shadow(10px 7px 10px #01182e);
 }
 .blue-header {
-	background-color: rgb(33 82 114);
+	background-color: #6fa8dc;
 	border-color: #172554;
 }
 

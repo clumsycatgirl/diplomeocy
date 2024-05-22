@@ -11,19 +11,19 @@
         <form id="log-in-form">
             @Html.AntiForgeryToken()
             <div class="form-group">
-                <label asp-for="Username"></label>
+                <label asp-for="Username" class="text-blue-50"></label>
                 <input asp-for="Username" class="form-control" required id="username"/>
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Password"></label>
+                <label asp-for="Password" class="font-label"></label>
                 <input asp-for="Password" class="form-control" required id="password" type="password"/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="button" value="Log In" class="user-button btn btn-primary" id="loginButton" />
+                <input type="button" value="Log In" class="user-button" id="loginButton" />
             </div>
 
         </form>

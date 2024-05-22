@@ -1,15 +1,11 @@
-﻿@model Web.Models.Tables
-
+﻿
+@model Web.Models.UsersPlay
 @{
     ViewData["Title"] = "Create";
 
     Random rand = new Random();
     int i = rand.Next(999999);
     DateOnly date = DateOnly.FromDateTime(DateTime.Now);
-
-
-    //User? user = HttpContext.Session.Get<User>("User");
-
 }
 
 <h1>Create</h1>
@@ -18,15 +14,17 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label">Id Table</label>
                 <input asp-for="Id" class="form-control"  value="@i" disabled   />
-                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input asp-for="Date" class="form-control" value="@date" hidden />
+            </div>
+            <div class="form-group">
+                <input asp-for="Host" class="form-control" value="@Model.Host" hidden />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

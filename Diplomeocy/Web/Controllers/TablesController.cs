@@ -51,7 +51,7 @@ namespace Web.Controllers
         // GET: Tables/Create
         public IActionResult Create()
         {
-            return View(new UsersPlay {});
+            return View(new UsersPlay {Id=0, Date = DateOnly.FromDateTime(DateTime.Now), Host= HttpContext.Session.Get<User>("User").Id });
         }
 
         // POST: Tables/Create
@@ -66,6 +66,8 @@ namespace Web.Controllers
             {
                 _context.Add(tables);
                 await _context.SaveChangesAsync();
+				
+
                 return RedirectToAction(nameof(Index));
             }
             return View(tables);

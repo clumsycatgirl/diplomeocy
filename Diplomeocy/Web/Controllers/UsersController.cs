@@ -78,7 +78,7 @@ namespace Web.Controllers {
 				HttpContext.Session.Set("User", user);
 			}
 
-			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Index")!);
+			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Details/"+user.Id.ToString())!);
 		}
 		// GET: Users/Create
 		public IActionResult Create() {
@@ -91,8 +91,6 @@ namespace Web.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Name,Surname,Username,Password,PathImage")] User user) {
-			Log.WriteLine("meow");
-			Debug.WriteLine("meow");
 
 			if (ModelState.IsValid) {
 				context.Add(user);
