@@ -1,0 +1,14 @@
+@model Web.Models.GameViewModel;
+
+@{
+
+    ViewData["Title"] = $"Diplomeocy - {Model.Game.Id}";
+}
+
+<div class="w-full h-full">
+    <img src="~/assets/images/map.svg" alt="Map" class="object-cover w-full h-full">
+</div>
+
+@section Scripts {
+    <script type="module" src="~/js/game/index.js"></script>
+}

@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-
-using Diplomacy.Utils;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Web.Models;
@@ -23,7 +19,7 @@ namespace Web.Controllers {
 						Problem("Entity set 'DatabaseContext.Users'  is null.");
 		}
 
-		public async Task<IActionResult> Me() {
+		public IActionResult Me() {
 			User? user = HttpContext.Session.Get<User>("User");
 			return user is not null ? View(user) : Problem("login first");
 		}
@@ -78,7 +74,7 @@ namespace Web.Controllers {
 				HttpContext.Session.Set("User", user);
 			}
 
-			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Details/"+user.Id.ToString())!);
+			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Details", new { user.Id })!);
 		}
 		// GET: Users/Create
 		public IActionResult Create() {

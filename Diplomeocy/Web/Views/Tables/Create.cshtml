@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Create";
 
-    Random rand = new Random();
-    int i = rand.Next(999999);
+    Random rand = new Random(Guid.NewGuid().GetHashCode());
+    int id = rand.Next(999999);
     DateOnly date = DateOnly.FromDateTime(DateTime.Now);
 }
 
@@ -14,11 +14,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" >
+        <form id="form" >
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label">Id Table</label>
-                <input asp-for="Id" class="form-control"  value="@i" disabled   />
+                <input asp-for="Id" class="form-control" value="@id" disabled />
+                <input type="hidden" asp-for="Id" value="@id" />
             </div>
             <div class="form-group">
                 <input asp-for="Date" class="form-control" value="@date" hidden />
@@ -37,3 +39,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script type="module" src="~/js/tables/create.js"></script>
+}

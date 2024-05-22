@@ -393,9 +393,6 @@ public class GameHandler {
 				Order order = orders[i];
 				List<Order> dependencies = dependencyGraph.GetValueOrDefault(order, new());
 
-				if (order.Unit.Location == Board.Territory(Territories.London))
-					;
-
 				if (order.Resolved) continue;
 				Log.WriteLine($"\nlooking at {order} with \n\t{String.Join("\n\t", dependencyGraph.GetValueOrDefault(order, new()))}");
 

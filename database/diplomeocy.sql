@@ -79,7 +79,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `PathImage`) VALUES
-(1, '[meow', 'meow', 'meow', 'meow', ''),
+(1, 'meow', 'meow', 'meow', 'meow', ''),
 (2, 'mr', 'meow', 'meow', 'meow', '/assets/images/kittators/Giorgio.png');
 
 --

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 namespace Web.Hubs;
 
 public class ChatHub : Hub {
+#pragma warning disable CS8618
 	public class MessageData {
 		public enum MessageDataAction { JoinGroup, LeaveGroup, SendMessageToGroup, }
 
@@ -15,6 +16,7 @@ public class ChatHub : Hub {
 		public string Sender { get; set; }
 		public string? Message { get; set; }
 	}
+#pragma warning restore CS8618
 
 	public Task JoinGroup(string json) {
 		MessageData? data = JsonConvert.DeserializeObject<MessageData>(json);

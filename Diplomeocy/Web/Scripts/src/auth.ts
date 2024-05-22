@@ -1,27 +1,9 @@
 import Swal from 'sweetalert2'
-
-type ResultError = {
-	field: string
-	errors: string[]
-}
-type ErrorResult = {
-	success: false
-	errors: ResultError[]
-}
-type NotFoundResult = {
-	success: false
-	what: string
-}
-type RedirectResult = {
-	success: true
-	destination: string
-}
-
-type Result = { success: boolean } & (
-	| ErrorResult
-	| NotFoundResult
-	| RedirectResult
-)
+import Result, {
+	isErrorResult,
+	isNotFoundResult,
+	isRedirectResult,
+} from './results'
 
 // input field will reset errors when focusing
 $(() => {
@@ -169,12 +151,3 @@ $(() => {
 		}
 	})
 })
-
-const isErrorResult = (result: Result): result is ErrorResult =>
-	result.success === false && 'errors' in result
-
-const isNotFoundResult = (result: Result): result is NotFoundResult =>
-	result.success === false && 'what' in result
-
-const isRedirectResult = (result: Result): result is RedirectResult =>
-	result.success === true && 'destination' in result

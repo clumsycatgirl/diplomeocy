@@ -166,19 +166,25 @@ const start = async () => {
 		}
 	}
 
-	let __i = 0
+	let iceCandidateNumber = 0
 	const handleICECandidate = async (candidateData: any) => {
-		console.log(__i + ' Received ICE Candidate from SignalR', candidateData)
+		console.log(
+			iceCandidateNumber + ' Received ICE Candidate from SignalR',
+			candidateData,
+		)
 		if (candidateData.candidate) {
 			const candidate = new RTCIceCandidate(candidateData)
 			console.log('Adding ICE Candidate ', candidate)
 			try {
 				await peerConnection.addIceCandidate(candidate)
 			} catch (err) {
-				console.error(__i + ' Failed to handle ICE candidate:', err)
+				console.error(
+					iceCandidateNumber + ' Failed to handle ICE candidate:',
+					err,
+				)
 			}
 		}
-		__i++
+		iceCandidateNumber++
 	}
 
 	const remoteStream = new MediaStream()

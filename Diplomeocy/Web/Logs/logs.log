@@ -1,9 +1,0 @@
------- [logs] ------
---- [project configuration] ---
- - Name: 'Web'
- - Version: '1.0.0.0'
- - Author: 'Web'
- - Build: 'Debug'
-
-
-meow
