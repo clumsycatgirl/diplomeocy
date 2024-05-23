@@ -46,7 +46,7 @@ namespace Web.Controllers {
 		// GET: Table/Create
 		public IActionResult Create() {
 			return View(new UsersPlay {
-				Id = 0,
+				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				Date = DateOnly.FromDateTime(DateTime.Now),
 				Host = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
 					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
@@ -60,8 +60,6 @@ namespace Web.Controllers {
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Date,Host")] Table table) {
 			if (ModelState.IsValid) {
-				System.Diagnostics.Debug.WriteLine($"table.Id={table.Id}");
-
 				context.Add(table);
 				await context.SaveChangesAsync();
 

@@ -37,7 +37,7 @@ public class GameHandler {
 				Units = new() {
 					new Unit {
 						Country = ECountries.England,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.London),
 					},
 					new Unit {
@@ -47,7 +47,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.England,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Edinburgh),
 					},
 				}
@@ -61,6 +61,7 @@ public class GameHandler {
 							Board.Territory(Territories.Berlin),
 							Board.Territory(Territories.Munich),
 							Board.Territory(Territories.Ruhr),
+							Board.Territory(Territories.Kiel),
 							Board.Territory(Territories.Silesia),
 							Board.Territory(Territories.Prussia),
 						}
@@ -79,7 +80,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.Germany,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Kiel),
 					},
 				}
@@ -112,7 +113,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.Austria,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Trieste),
 					},
 				}
@@ -134,7 +135,7 @@ public class GameHandler {
 				Units = new() {
 					new Unit {
 						Country = ECountries.Turkey,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Ankara),
 					},
 					new Unit {
@@ -177,7 +178,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.France,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Brest),
 					},
 				}
@@ -205,7 +206,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.Italy,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.Naples),
 					},
 					new Unit {
@@ -239,7 +240,7 @@ public class GameHandler {
 					},
 					new Unit {
 						Country = ECountries.Russia,
-						Type = UnitType.Army,
+						Type = UnitType.Fleet,
 						Location = Board.Territory(Territories.SaintPetersburg),
 					},
 					new Unit {

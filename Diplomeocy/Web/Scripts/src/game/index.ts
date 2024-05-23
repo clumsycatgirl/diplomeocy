@@ -38,6 +38,19 @@ const colors: { [key: string]: string } = {
 const gameId: string = $('#group').val() as string
 console.log(`Loaded game: '${gameId}'`)
 
+let provinceData: {
+	[name: string]: {
+		unit: {
+			x: number
+			y: number
+		}
+		dislodgedUnit: {
+			x: number
+			y: number
+		}
+	}
+} = {}
+
 $(() => {
 	gameConnection
 		.start()
@@ -48,6 +61,34 @@ $(() => {
 		.catch((error) => {
 			console.error("Error in 'gameConnection': ", error)
 		})
+
+	$('jdipns\\:province').each(function () {
+		const $provinceDataElement = $(this)
+		const name = $provinceDataElement.attr('name')
+
+		provinceData[name] = {
+			unit: {
+				x: parseFloat(
+					$provinceDataElement.find('jdipns\\:unit').attr('x'),
+				),
+				y: parseFloat(
+					$provinceDataElement.find('jdipns\\:unit').attr('y'),
+				),
+			},
+			dislodgedUnit: {
+				x: parseFloat(
+					$provinceDataElement
+						.find('jdipns\\:dislodged_unit')
+						.attr('x'),
+				),
+				y: parseFloat(
+					$provinceDataElement
+						.find('jdipns\\:dislodged_unit')
+						.attr('y'),
+				),
+			},
+		}
+	})
 })
 
 gameConnection.on('JoinGameGroupConfirm', (groupId) => {
@@ -62,9 +103,9 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 	console.log(data)
 
 	data.forEach((player) => {
+		const color = colors[player.Countries[0].Name]
 		player.Countries.forEach((country) => {
-			const color = colors[country.Name]
-			country.Territories.forEach((territory) => {
+			country.Territories.forEach(async (territory) => {
 				$(`#m-${territory.Name.toLowerCase()}`).each(function () {
 					$(this)
 						.removeClass('nopower')
@@ -73,11 +114,16 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 				$(`#${territory.Name.toLowerCase()}`).on('click', function () {
 					console.log(`Clicked ${territory.Name.toLowerCase()}`)
 				})
-				console.log(
-					territory.Name.toLowerCase(),
-					$(`#${territory.Name.toLowerCase()}`),
-				)
 			})
+		})
+
+		const unitLayer = $('#UnitLayer').get(0)
+		player.Units.forEach((unit) => {
+			const unitType = unit.Type === 0 ? 'Army' : 'Fleet'
+			const coordinates = provinceData[unit.Location!.toLowerCase()]
+			unitLayer.innerHTML += `<use x="${coordinates.unit.x}" y="${
+				coordinates.unit.y
+			}" height="30" width="30" xlink:href="#${unitType}" class="unit${player.Countries[0].Name.toLowerCase()}" />`
 		})
 	})
 })

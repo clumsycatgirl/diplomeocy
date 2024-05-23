@@ -2,10 +2,6 @@
 @model Web.Models.UsersPlay
 @{
     ViewData["Title"] = "Create";
-
-    Random rand = new Random(Guid.NewGuid().GetHashCode());
-    int id = rand.Next(999999);
-    DateOnly date = DateOnly.FromDateTime(DateTime.Now);
 }
 
 <h1>Create</h1>
@@ -19,11 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label">Id Table</label>
-                <input asp-for="Id" class="form-control" value="@id" disabled />
-                <input type="hidden" asp-for="Id" value="@id" />
+                <input asp-for="Id" class="form-control" value="@Model.Id" disabled />
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
             </div>
             <div class="form-group">
-                <input asp-for="Date" class="form-control" value="@date" hidden />
+                <input asp-for="Date" class="form-control" value="@Model.Date" hidden />
             </div>
             <div class="form-group">
                 <input asp-for="Host" class="form-control" value="@Model.Host" hidden />
