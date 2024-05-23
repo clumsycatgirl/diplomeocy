@@ -123,7 +123,7 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 			const coordinates = provinceData[unit.Location!.toLowerCase()]
 			unitLayer.innerHTML += `<use x="${coordinates.unit.x}" y="${
 				coordinates.unit.y
-			}" height="30" width="30" xlink:href="#${unitType}" class="unit${player.Countries[0].Name.toLowerCase()}" />`
+			}" height="40" width="40" xlink:href="#${unitType}" class="unit${player.Countries[0].Name.toLowerCase()}" />`
 		})
 	})
 })
