@@ -7,99 +7,184 @@
       "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\playerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\players\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\players\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\userplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\userplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\tables\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\tables\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\wwwroot\\assets\\images\\map.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\wwwroot\\assets\\images\\map.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\game\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\game\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\serializers\\game\\playerconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\serializers\\game\\playerconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\orders\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\orders\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\countries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\countries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\gamehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\gamehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\players\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\players\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\home\\chatvoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\home\\chatvoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\utils\\controllerextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\utils\\controllerextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\web.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\web.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\home\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\home\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\orders\\moveorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\orders\\moveorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\orders\\convoyorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\orders\\convoyorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Vi\\AppData\\Local\\Temp\\.vsdbgsrc\\06c6a1aa80d425bb2439708ca6e1e8b63b3a1b76222385270c822fa0fd2cc7e6\\Enumerable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Vi\\AppData\\Local\\SourceServer\\27d92565de1991ee762fbf61b0a16843482a4bda10ed15b0fa93cefba8eb7709\\src\\libraries\\System.Private.CoreLib\\src\\System\\Collections\\Generic\\Dictionary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\orders\\holdorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\orders\\holdorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\orders\\supportorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\orders\\supportorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\unittype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\unittype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\territory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\territory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\territories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\territories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\season.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\season.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\gameturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\gameturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\game\\diplomacy\\gamephase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A93DE77D-DF5E-410F-AD3B-1F2FEA8DC7C3}|Game\\Game.csproj|solutionrelative:game\\diplomacy\\gamephase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 328,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 1219,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "Web\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "Web\\wwwroot\\css\\site.css",
-              "ViewState": "AQIAADUAAAAAAAAAAAAmwEUAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-05-10T13:13:54.809Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Web\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Web\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAswEwAAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T13:06:14.589Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserPlayer.cs",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\UserPlayer.cs",
-              "RelativeDocumentMoniker": "Web\\Models\\UserPlayer.cs",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\UserPlayer.cs",
-              "RelativeToolTip": "Web\\Models\\UserPlayer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:46:01.78Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TablesController.cs",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
-              "RelativeDocumentMoniker": "Web\\Controllers\\TablesController.cs",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
-              "RelativeToolTip": "Web\\Controllers\\TablesController.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAMwF0AAABPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:21:44.766Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -109,54 +194,518 @@
               "RelativeDocumentMoniker": "Web\\Controllers\\PlayersController.cs",
               "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\PlayersController.cs",
               "RelativeToolTip": "Web\\Controllers\\PlayersController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowEEAAAADAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAAwCoAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:17:43.579Z",
+              "WhenOpened": "2024-05-23T13:26:14.343Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Create.cshtml",
-              "RelativeDocumentMoniker": "Web\\Views\\Players\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Create.cshtml",
-              "RelativeToolTip": "Web\\Views\\Players\\Create.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-23T12:18:03.312Z",
-              "EditorCaption": ""
+              "DocumentIndex": 1,
+              "Title": "Web.csproj",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+              "RelativeDocumentMoniker": "Web\\Web.csproj",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+              "RelativeToolTip": "Web\\Web.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-23T13:26:14.393Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Tables\\Create.cshtml",
               "RelativeDocumentMoniker": "Web\\Views\\Tables\\Create.cshtml",
               "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Tables\\Create.cshtml",
               "RelativeToolTip": "Web\\Views\\Tables\\Create.cshtml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-23T12:33:34.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T13:26:14.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PlayerConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Serializers\\Game\\PlayerConverter.cs",
+              "RelativeDocumentMoniker": "Web\\Serializers\\Game\\PlayerConverter.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Serializers\\Game\\PlayerConverter.cs",
+              "RelativeToolTip": "Web\\Serializers\\Game\\PlayerConverter.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAowCQAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "map.svg",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\assets\\images\\map.svg",
+              "RelativeDocumentMoniker": "Web\\wwwroot\\assets\\images\\map.svg",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\assets\\images\\map.svg",
+              "RelativeToolTip": "Web\\wwwroot\\assets\\images\\map.svg",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAJAAAA",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQKSURBVDhPrVRbTCNVGP5OOzO9TKEWSrGUttpdpV2ua7ioaDa7ullcdVe8rHFNjPFBY4hGY0wIJprw5ItmCdEXL/FRE4MQsw9LiCthIcFFxA3hFiEsLQUKpaW03XZmOuOZaQsY9W2/5J/zz3/55j///OfgrkJRFFJQD9DX13elrq7uXVWnfk2KugpZlpHJZJBKpYa6u7u7gsFgWHP8HyjhHE2Sc7ncf4okSfLMzIw8NTUl9/f3/xgIBGoKqRr0hfUAHR0dXW1tbXaZFiQJccjpWyDJbyBsfQ9x46oW81dIRHNLG0wmk4/juOr19fVbUQrV9w9CrvVl4m9s7VpIG\u002BxL6\u002BMolb6EaesrSOFhgNRAVtyQIhMIbgPeB1ths9kYs9l8vKyszD0/P39jnyJPSAj4hy7YPE\u002B/\u002BUmJ0/NkS4DlzlRegXXzGmZWmvBT4j0sGy6jvvE85O05JEUeN6ZXMT09jUQioafEgdHR0R/i8XiYUfmMdees3ovvfPhEc/VbL9Qvm5vljxBdTGM81YMl33MICiZMLG8iJa7iRUct/I3HUA0HBEGAxWLB7OysVpcKnfpwdLzd3haoePVS7WRpS/oDsjeTwTrpRbqiE2wK4EUJnvuqcHM7h7HY/SAlHtjt5XA6nbBardDr9QdToBF6nZbOZ/1z5Q3i52RnSoS54TvUP9yJSyedeKXBjuTGNmycAYQ3YSrKYiejpVFQkiOjpULb8omK\u002BOOPWL81JVeM\u002BEL8GKFfWYjSn/Qn0GDQucsxKGd0YDkWK9tZxPYFVJUaVS7a/8MZVcFUORnu9YZr1ezaMrmu\u002B1ThW84Sn0IrKATlSRWIdwTaMxFZSYKk2jS36skTFkmZ0ILnYmzlZ8Nk8g1lzn0u99vEor6p0kwUeiLUIJVQTSR0MF202ka3BQ4Lp9nydHnCIhglEX5p67Yrez13GmJKYXgTq2v32clJFw\u002BrkUEiI2JyNYa1WFrNhNtmhoXaDzkOyVQwmVCmPZYy/DK\u002ByZzwMHFvpc9FhjfSGF7agkK3yHAMcpZyxHJm7EZ28ZSOgKVShFb/kQp10h4xne/JXg5v7ny2OLcSvb2xrwh8CeicgBx/AFmXFxF6h0QiUfiMEp6pqwSnL/7lf0Pf8xocp\u002B6N\u002BW6OL4x5nayYjIv\u002BRFLmQ5E9RHfiuBPdBbu/h9p7GLx/\u002BhjKeNo/erK02mhlhOpra2sYHBz8mp6asJ7O62R4E2cC3NYpV2Rs1lndaD776GN\u002BB5tDjZVBaxWPC7UOPN9UBSOrTVl\u002Bn4VdE52OEgYxNDSkEeatR9Db2zumXl\u002BiKBZEkEUhL/SoFSR7sKoxIyMjstvtblHzC588BG3w7wMDA\u002B0FXRP1Ui02vmgrigpa2R902dVe7i6AvwHcTSP/8z9AyQAAAABJRU5ErkJggg==",
+              "WhenOpened": "2024-05-23T13:26:14.283Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Player.cs",
-              "RelativeDocumentMoniker": "Web\\Models\\Player.cs",
-              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Player.cs",
-              "RelativeToolTip": "Web\\Models\\Player.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAVAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Program.cs",
+              "RelativeDocumentMoniker": "Game\\Program.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Program.cs",
+              "RelativeToolTip": "Game\\Program.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAADYGAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:17:48.197Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T13:26:14.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\GameController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\GameController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\GameController.cs",
+              "RelativeToolTip": "Web\\Controllers\\GameController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Web\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\User.cs",
+              "RelativeToolTip": "Web\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Game.cs",
+              "RelativeDocumentMoniker": "Web\\Models\\Game.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Game.cs",
+              "RelativeToolTip": "Web\\Models\\Game.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Game\\Index.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Game\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Game\\Index.cshtml",
+              "RelativeToolTip": "Web\\Views\\Game\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T13:26:14.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Web\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBgAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TablesController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\TablesController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
+              "RelativeToolTip": "Web\\Controllers\\TablesController.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAlwEcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Table.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Table.cs",
+              "RelativeDocumentMoniker": "Web\\Models\\Table.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Table.cs",
+              "RelativeToolTip": "Web\\Models\\Table.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Index.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Players\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Index.cshtml",
+              "RelativeToolTip": "Web\\Views\\Players\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T13:26:14.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DatabaseContext.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\DatabaseContext.cs",
+              "RelativeDocumentMoniker": "Web\\DatabaseContext.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\DatabaseContext.cs",
+              "RelativeToolTip": "Web\\DatabaseContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ChatVoice.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Home\\ChatVoice.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Home\\ChatVoice.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Home\\ChatVoice.cshtml",
+              "RelativeToolTip": "Web\\Views\\Home\\ChatVoice.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T13:26:14.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ControllerExtension.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Utils\\ControllerExtension.cs",
+              "RelativeDocumentMoniker": "Web\\Utils\\ControllerExtension.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Utils\\ControllerExtension.cs",
+              "RelativeToolTip": "Web\\Utils\\ControllerExtension.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Users\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Users\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Users\\Create.cshtml",
+              "RelativeToolTip": "Web\\Views\\Users\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T13:26:14.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Web",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+              "RelativeDocumentMoniker": "Web\\Web.csproj",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Web.csproj",
+              "RelativeToolTip": "Web\\Web.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-23T13:26:14.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\appsettings.json",
+              "RelativeDocumentMoniker": "Web\\appsettings.json",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\appsettings.json",
+              "RelativeToolTip": "Web\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-23T13:26:14.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Web\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Web\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-23T13:26:14.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Hubs\\ChatHub.cs",
+              "RelativeDocumentMoniker": "Web\\Hubs\\ChatHub.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Hubs\\ChatHub.cs",
+              "RelativeToolTip": "Web\\Hubs\\ChatHub.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Chat.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Home\\Chat.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Home\\Chat.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Home\\Chat.cshtml",
+              "RelativeToolTip": "Web\\Views\\Home\\Chat.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T13:26:14.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Web\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.596Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Enumerable.cs",
+              "DocumentMoniker": "C:\\Users\\Vi\\AppData\\Local\\Temp\\.vsdbgsrc\\06c6a1aa80d425bb2439708ca6e1e8b63b3a1b76222385270c822fa0fd2cc7e6\\Enumerable.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Vi\\AppData\\Local\\Temp\\.vsdbgsrc\\06c6a1aa80d425bb2439708ca6e1e8b63b3a1b76222385270c822fa0fd2cc7e6\\Enumerable.cs",
+              "ToolTip": "C:\\Users\\Vi\\AppData\\Local\\Temp\\.vsdbgsrc\\06c6a1aa80d425bb2439708ca6e1e8b63b3a1b76222385270c822fa0fd2cc7e6\\Enumerable.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Vi\\AppData\\Local\\Temp\\.vsdbgsrc\\06c6a1aa80d425bb2439708ca6e1e8b63b3a1b76222385270c822fa0fd2cc7e6\\Enumerable.cs",
+              "ViewState": "AQIAAOQdAAAAAAAAAAAawPwdAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T15:56:58.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Dictionary.cs",
+              "DocumentMoniker": "C:\\Users\\Vi\\AppData\\Local\\SourceServer\\27d92565de1991ee762fbf61b0a16843482a4bda10ed15b0fa93cefba8eb7709\\src\\libraries\\System.Private.CoreLib\\src\\System\\Collections\\Generic\\Dictionary.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Vi\\AppData\\Local\\SourceServer\\27d92565de1991ee762fbf61b0a16843482a4bda10ed15b0fa93cefba8eb7709\\src\\libraries\\System.Private.CoreLib\\src\\System\\Collections\\Generic\\Dictionary.cs",
+              "ToolTip": "C:\\Users\\Vi\\AppData\\Local\\SourceServer\\27d92565de1991ee762fbf61b0a16843482a4bda10ed15b0fa93cefba8eb7709\\src\\libraries\\System.Private.CoreLib\\src\\System\\Collections\\Generic\\Dictionary.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Vi\\AppData\\Local\\SourceServer\\27d92565de1991ee762fbf61b0a16843482a4bda10ed15b0fa93cefba8eb7709\\src\\libraries\\System.Private.CoreLib\\src\\System\\Collections\\Generic\\Dictionary.cs",
+              "ViewState": "AQIAAFoCAAAAAAAAAAAawHICAABaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T15:56:44.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "UnitType.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\UnitType.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\UnitType.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\UnitType.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\UnitType.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Territories.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Territories.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Territories.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Territories.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Territories.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Season.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Season.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Season.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Season.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Season.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "GameTurn.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GameTurn.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\GameTurn.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GameTurn.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\GameTurn.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "GamePhase.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GamePhase.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\GamePhase.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GamePhase.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\GamePhase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Country.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Country.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Country.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Country.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Country.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Countries.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Countries.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Countries.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Countries.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Countries.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "HoldOrder.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\HoldOrder.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Orders\\HoldOrder.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\HoldOrder.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Orders\\HoldOrder.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ConvoyOrder.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\ConvoyOrder.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Orders\\ConvoyOrder.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\ConvoyOrder.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Orders\\ConvoyOrder.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GameHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GameHandler.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\GameHandler.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\GameHandler.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\GameHandler.cs",
+              "ViewState": "AQIAAHMBAAAAAAAAAAAowIkBAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "MoveOrder.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\MoveOrder.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Orders\\MoveOrder.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\MoveOrder.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Orders\\MoveOrder.cs",
+              "ViewState": "AQIAADQBAAAAAAAAAAAlwFIBAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "SupportOrder.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\SupportOrder.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Orders\\SupportOrder.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\SupportOrder.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Orders\\SupportOrder.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\Order.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Orders\\Order.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Orders\\Order.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Orders\\Order.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAkwGsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Player.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Player.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Player.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Player.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Territory.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Territory.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Territory.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Territory.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Territory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Unit.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Unit.cs",
+              "RelativeDocumentMoniker": "Game\\Diplomacy\\Unit.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Game\\Diplomacy\\Unit.cs",
+              "RelativeToolTip": "Game\\Diplomacy\\Unit.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Program.cs",
+              "RelativeDocumentMoniker": "Web\\Program.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Program.cs",
+              "RelativeToolTip": "Web\\Program.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAkwFIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:26:14.72Z"
             }
           ]
         },
         {
-          "DockedHeight": 44,
+          "DockedWidth": 117,
           "SelectedChildIndex": -1,
           "Children": [
             {
