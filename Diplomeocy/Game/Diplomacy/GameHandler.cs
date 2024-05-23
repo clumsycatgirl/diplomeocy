@@ -24,11 +24,14 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "England",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.London),
 							Board.Territory(Territories.Liverpool),
 							Board.Territory(Territories.Edinburgh),
-							}
+							Board.Territory(Territories.Wales),
+							Board.Territory(Territories.Yorkshire),
+							Board.Territory(Territories.Clyde),
+						}
 					},
 				},
 				Units = new() {
@@ -54,10 +57,12 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "Germany",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Berlin),
 							Board.Territory(Territories.Munich),
-							Board.Territory(Territories.Kiel),
+							Board.Territory(Territories.Ruhr),
+							Board.Territory(Territories.Silesia),
+							Board.Territory(Territories.Prussia),
 						}
 					},
 				},
@@ -84,10 +89,13 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "Austria",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Vienna),
 							Board.Territory(Territories.Budapest),
 							Board.Territory(Territories.Trieste),
+							Board.Territory(Territories.Tyrolia),
+							Board.Territory(Territories.Bohemia),
+							Board.Territory(Territories.Galicia),
 						}
 					},
 				},
@@ -114,10 +122,12 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "Turkey",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Ankara),
 							Board.Territory(Territories.Constantinople),
 							Board.Territory(Territories.Smyrna),
+							Board.Territory(Territories.Armenia),
+							Board.Territory(Territories.Syria),
 						}
 					},
 				},
@@ -144,10 +154,13 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "France",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Paris),
 							Board.Territory(Territories.Marseilles),
 							Board.Territory(Territories.Brest),
+							Board.Territory(Territories.Picardy),
+							Board.Territory(Territories.Burgundy),
+							Board.Territory(Territories.Gascony),
 						}
 					},
 				},
@@ -174,10 +187,13 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "Italy",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Rome),
 							Board.Territory(Territories.Naples),
 							Board.Territory(Territories.Venice),
+							Board.Territory(Territories.Piedmont),
+							Board.Territory(Territories.Tuscany),
+							Board.Territory(Territories.Apuleia),
 						}
 					},
 				},
@@ -204,11 +220,14 @@ public class GameHandler {
 				Countries = new() {
 					new Country {
 						Name = "Russia",
-						HomeTerritories = new() {
+						Territories = new() {
 							Board.Territory(Territories.Moscow),
 							Board.Territory(Territories.SaintPetersburg),
 							Board.Territory(Territories.Warsaw),
 							Board.Territory(Territories.Sevastopol),
+							Board.Territory(Territories.Ukraine),
+							Board.Territory(Territories.Livonia),
+							Board.Territory(Territories.Finland),
 						}
 					},
 				},
@@ -236,6 +255,35 @@ public class GameHandler {
 				}
 			},
 		};
+
+		Players[0].Unit(Territories.London).Location!.IsSupplyPoint = true;
+		Players[0].Unit(Territories.Liverpool).Location!.IsSupplyPoint = true;
+		Players[0].Unit(Territories.Edinburgh).Location!.IsSupplyPoint = true;
+
+		Players[1].Unit(Territories.Berlin).Location!.IsSupplyPoint = true;
+		Players[1].Unit(Territories.Munich).Location!.IsSupplyPoint = true;
+		Players[1].Unit(Territories.Kiel).Location!.IsSupplyPoint = true;
+
+		Players[2].Unit(Territories.Vienna).Location!.IsSupplyPoint = true;
+		Players[2].Unit(Territories.Budapest).Location!.IsSupplyPoint = true;
+		Players[2].Unit(Territories.Trieste).Location!.IsSupplyPoint = true;
+
+		Players[3].Unit(Territories.Ankara).Location!.IsSupplyPoint = true;
+		Players[3].Unit(Territories.Constantinople).Location!.IsSupplyPoint = true;
+		Players[3].Unit(Territories.Smyrna).Location!.IsSupplyPoint = true;
+
+		Players[4].Unit(Territories.Paris).Location!.IsSupplyPoint = true;
+		Players[4].Unit(Territories.Marseilles).Location!.IsSupplyPoint = true;
+		Players[4].Unit(Territories.Brest).Location!.IsSupplyPoint = true;
+
+		Players[5].Unit(Territories.Venice).Location!.IsSupplyPoint = true;
+		Players[5].Unit(Territories.Rome).Location!.IsSupplyPoint = true;
+		Players[5].Unit(Territories.Naples).Location!.IsSupplyPoint = true;
+
+		Players[6].Unit(Territories.Warsaw).Location!.IsSupplyPoint = true;
+		Players[6].Unit(Territories.Moscow).Location!.IsSupplyPoint = true;
+		Players[6].Unit(Territories.Sevastopol).Location!.IsSupplyPoint = true;
+		Players[6].Unit(Territories.SaintPetersburg).Location!.IsSupplyPoint = true;
 
 		GameTurn = new GameTurn {
 			Phase = GamePhase.Diplomacy,

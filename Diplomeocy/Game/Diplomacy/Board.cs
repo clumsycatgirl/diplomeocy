@@ -1,5 +1,7 @@
 ﻿namespace Diplomacy;
 
+using System.Text.Encodings.Web;
+
 using ETerritories = Diplomacy.Territories;
 
 public class Board {
@@ -9,14 +11,21 @@ public class Board {
 	public Territory Territory(ETerritories territory) => Territories.First(t => t.Name.ToLower().Equals(territory.ToString().ToLower()));
 
 	public Board() {
-		Territories = Enum.GetValues(typeof(ETerritories))
-						.Cast<ETerritories>()
+		Territories = Enum.GetNames(typeof(ETerritories))
 				  		.Select(territory =>
-							new Territory {
-								Name = nameof(territory),
-								AdjacentTerritories = TerritoryAdjacency(this, territory)
-							})
+							new Territory { Name = territory, })
 				  		.ToList();
+		// Territories
+		// 	.Where(territory => Enum.GetNames<ETerritories>().Contains(territory.Name) && TerritoryAdjacencyMap.Any(kvp => kvp.Key == ))
+		// 	.ToList()
+		// 	.ForEach(territory =>
+		// 		territory.AdjacentTerritories = TerritoryAdjacency(this, (ETerritories)Enum.Parse(typeof(ETerritories), territory.Name)));
+
+		Territories
+			.Select(territory => (territory, territoryEnum: Enum.Parse<ETerritories>(territory.Name)))
+			.Where(pair => TerritoryAdjacencyMap.Any(kvp => kvp.Key == pair.territoryEnum))
+			.ToList()
+			.ForEach(pair => pair.territory.AdjacentTerritories = TerritoryAdjacency(this, pair.territoryEnum));
 	}
 
 	public static readonly Dictionary<Territories, List<Territories>> TerritoryAdjacencyMap = new();

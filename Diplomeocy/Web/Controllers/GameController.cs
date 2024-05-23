@@ -39,7 +39,7 @@ namespace Web.Controllers {
 						country =>
 							country.TerritoriesSerializationNames.ForEach(
 								territoryName =>
-									country.HomeTerritories.Add(handler.Board.Territory(territoryName)))));
+									country.Territories.Add(handler.Board.Territory(territoryName)))));
 				gameHandler.Add(id.ToString(), handler);
 			}
 

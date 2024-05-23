@@ -31,7 +31,7 @@ class PlayerConverter : JsonConverter<Player> {
 		foreach (JToken countryToken in playerObject["Countries"]!) {
 			Country country = new Country {
 				Name = countryToken["Name"]?.ToString() ?? "[serialization-error]",
-				HomeTerritories = new List<Territory>()
+				Territories = new List<Territory>()
 			};
 
 			foreach (JToken territoryToken in countryToken["Territories"]!) {
@@ -61,7 +61,7 @@ class PlayerConverter : JsonConverter<Player> {
 			new JProperty("Countries", JArray.FromObject(value.Countries.Select(country =>
 				new JObject(
 					new JProperty("Name", country.Name),
-					new JProperty("Territories", JArray.FromObject(country.HomeTerritories.Select(territory =>
+					new JProperty("Territories", JArray.FromObject(country.Territories.Select(territory =>
 						new JObject(
 							new JProperty("Name", territory.Name)
 						)

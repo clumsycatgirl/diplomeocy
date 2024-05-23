@@ -70,9 +70,12 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 						.removeClass('nopower')
 						.addClass(country.Name.toLowerCase())
 				})
+				$(`#${territory.Name.toLowerCase()}`).on('click', function () {
+					console.log(`Clicked ${territory.Name.toLowerCase()}`)
+				})
 				console.log(
 					territory.Name.toLowerCase(),
-					$(`#m-${territory.Name.toLowerCase()}`),
+					$(`#${territory.Name.toLowerCase()}`),
 				)
 			})
 		})
