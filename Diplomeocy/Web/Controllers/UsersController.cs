@@ -38,7 +38,7 @@ namespace Web.Controllers {
 
 			return View(user);
 		}
-		// GET: Users/LogIn/5
+		// GET: Users/LogIn
 		public IActionResult LogIn() {
 
 			return View();

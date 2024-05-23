@@ -42,6 +42,21 @@ namespace Web.Controllers {
 
 			return View(tables);
 		}
+		// GET: StartGame
+		public async Task<IActionResult> StartGame(int? id) {
+			if (id is null || context.Tables is null) {
+				return NotFound();
+			}
+
+			var tables = await context.Tables
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (tables is null) {
+				return NotFound();
+			}
+			
+
+			return View(await context.Tables.ToListAsync());
+		}
 
 		// GET: Table/Create
 		public IActionResult Create() {
