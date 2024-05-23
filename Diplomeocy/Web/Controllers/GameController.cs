@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 using Web.Models;
+using Web.Serializers.Game;
 
 using MGame = Web.Models.Game;
 
@@ -29,10 +30,22 @@ namespace Web.Controllers {
 
 			if (!gameHandler.TryGetValue(id.ToString(), out GameHandler? handler)) {
 				handler = new GameHandler {
-					Players = JsonConvert.DeserializeObject<List<Diplomacy.Player>>(game.PlayerCountries)!,
+					Players = JsonConvert.DeserializeObject<List<Diplomacy.Player>>(game.PlayerCountries, new JsonSerializerSettings {
+						Converters = { new PlayerConverter() }
+					})!,
 				};
+				handler.Players.ForEach(
+					player => player.Countries.ForEach(
+						country =>
+							country.TerritoriesSerializationNames.ForEach(
+								territoryName =>
+									country.HomeTerritories.Add(handler.Board.Territory(territoryName)))));
 				gameHandler.Add(id.ToString(), handler);
 			}
+
+			string svgFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "assets", "images", "map.svg");
+			string svgContent = System.IO.File.ReadAllText(svgFilePath);
+			ViewBag.SvgContent = svgContent;
 
 			return View(new GameViewModel {
 				Game = game,

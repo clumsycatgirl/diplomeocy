@@ -4,4 +4,6 @@
 public class Country {
 	public string Name { get; init; }
 	public List<Territory> HomeTerritories { get; init; }
+
+	public readonly List<string> TerritoriesSerializationNames = new();
 }

@@ -6,4 +6,6 @@ public class Territory {
 	public List<Territory> AdjacentTerritories { get; set; } = new();
 
 	public override string ToString() => $"({Name} occupied by {OccupyingUnit?.ToString() ?? "none"})";
+
+	public static implicit operator string(Territory territory) => territory.Name;
 }

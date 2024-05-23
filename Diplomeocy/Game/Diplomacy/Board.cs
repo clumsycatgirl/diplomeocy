@@ -9,568 +9,581 @@ public class Board {
 	public Territory Territory(ETerritories territory) => Territories.First(t => t.Name.ToLower().Equals(territory.ToString().ToLower()));
 
 	public Board() {
-		Territories = Enum.GetNames(typeof(ETerritories))
-				  .Select(name => new Territory { Name = name })
-				  .ToList();
+		Territories = Enum.GetValues(typeof(ETerritories))
+						.Cast<ETerritories>()
+				  		.Select(territory =>
+							new Territory {
+								Name = nameof(territory),
+								AdjacentTerritories = TerritoryAdjacency(this, territory)
+							})
+				  		.ToList();
+	}
 
-		Territory(ETerritories.Trieste).AdjacentTerritories = new() {
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Vienna),
-			Territory(ETerritories.Albania),
-			Territory(ETerritories.AdriaticSea),
-			Territory(ETerritories.Budapest),
-			Territory(ETerritories.Serbia),
-		};
-		Territory(ETerritories.AdriaticSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.Albania),
-			Territory(ETerritories.IonianSea),
-			Territory(ETerritories.Apuleia),
-		};
-		Territory(ETerritories.AegeanSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Greece),
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Constantinople),
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.EasternMediterranean),
-			Territory(ETerritories.IonianSea),
-		};
-		Territory(ETerritories.Apuleia).AdjacentTerritories = new() {
-			Territory(ETerritories.AdriaticSea),
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.Naples),
-			Territory(ETerritories.IonianSea),
-		};
-		Territory(ETerritories.Albania).AdjacentTerritories = new() {
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Serbia),
-			Territory(ETerritories.Greece),
-			Territory(ETerritories.IonianSea),
-			Territory(ETerritories.AdriaticSea),
-		};
-		Territory(ETerritories.Ankara).AdjacentTerritories = new() {
-			Territory(ETerritories.Constantinople),
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.Armenia),
-			Territory(ETerritories.BlackSea),
-		};
-		Territory(ETerritories.Armenia).AdjacentTerritories = new() {
-			Territory(ETerritories.Ankara),
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.Sevastopol),
-			Territory(ETerritories.BlackSea),
-			Territory(ETerritories.Syria),
-		};
-		Territory(ETerritories.BalticSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Denmark),
-			Territory(ETerritories.Sweden),
-			Territory(ETerritories.Livonia),
-			Territory(ETerritories.Prussia),
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.GulfOfBothania),
-		};
-		Territory(ETerritories.BarentsSea).AdjacentTerritories = new() {
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.SaintPetersburg),
-		};
-		Territory(ETerritories.Belgium).AdjacentTerritories = new() {
-			Territory(ETerritories.Holland),
-			Territory(ETerritories.Ruhr),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Picardy),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.NorthSea),
-		};
-		Territory(ETerritories.Bohemia).AdjacentTerritories = new() {
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Silesia),
-			Territory(ETerritories.Galicia),
-			Territory(ETerritories.Vienna),
-		};
-		Territory(ETerritories.Berlin).AdjacentTerritories = new() {
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Prussia),
-			Territory(ETerritories.Silesia),
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.BalticSea),
-		};
-		Territory(ETerritories.BlackSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.Sevastopol),
-			Territory(ETerritories.Armenia),
-			Territory(ETerritories.Ankara),
-			Territory(ETerritories.Constantinople),
-		};
-		Territory(ETerritories.Brest).AdjacentTerritories = new() {
-			Territory(ETerritories.Paris),
-			Territory(ETerritories.Picardy),
-			Territory(ETerritories.MidAtlanticOcean),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.Gascony),
-		};
-		Territory(ETerritories.Budapest).AdjacentTerritories = new() {
-			Territory(ETerritories.Vienna),
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Serbia),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.Galicia),
-		};
-		Territory(ETerritories.Bulgaria).AdjacentTerritories = new() {
-			Territory(ETerritories.Constantinople),
-			Territory(ETerritories.Greece),
-			Territory(ETerritories.Serbia),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.BlackSea),
-			Territory(ETerritories.AegeanSea),
-		};
-		Territory(ETerritories.Burgundy).AdjacentTerritories = new() {
-			Territory(ETerritories.Paris),
-			Territory(ETerritories.Picardy),
-			Territory(ETerritories.Belgium),
-			Territory(ETerritories.Marseilles),
-			Territory(ETerritories.Ruhr),
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.Gascony),
-		};
-		Territory(ETerritories.Clyde).AdjacentTerritories = new() {
-			Territory(ETerritories.Edinburgh),
-			Territory(ETerritories.NorthAtlanticOcean),
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.Liverpool),
-		};
-		Territory(ETerritories.Constantinople).AdjacentTerritories = new() {
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.Ankara),
-			Territory(ETerritories.BlackSea),
-			Territory(ETerritories.AegeanSea),
-		};
-		Territory(ETerritories.Denmark).AdjacentTerritories = new() {
-			Territory(ETerritories.Sweden),
-			Territory(ETerritories.Skagerrak),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.BalticSea),
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.HelgolandBight),
-		};
-		Territory(ETerritories.EasternMediterranean).AdjacentTerritories = new() {
-			Territory(ETerritories.AegeanSea),
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.Syria),
-			Territory(ETerritories.IonianSea),
-		};
-		Territory(ETerritories.Edinburgh).AdjacentTerritories = new() {
-			Territory(ETerritories.Clyde),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.Yorkshire),
-			Territory(ETerritories.Liverpool),
-		};
-		Territory(ETerritories.EnglishChannel).AdjacentTerritories = new() {
-			Territory(ETerritories.London),
-			Territory(ETerritories.Wales),
-			Territory(ETerritories.IrishSea),
-			Territory(ETerritories.MidAtlanticOcean),
-			Territory(ETerritories.Brest),
-			Territory(ETerritories.Picardy),
-			Territory(ETerritories.Belgium),
-			Territory(ETerritories.NorthSea),
-		};
-		Territory(ETerritories.Finland).AdjacentTerritories = new() {
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.SaintPetersburg),
-			Territory(ETerritories.GulfOfBothania),
-			Territory(ETerritories.Sweden),
-		};
-		Territory(ETerritories.Galicia).AdjacentTerritories = new() {
-			Territory(ETerritories.Warsaw),
-			Territory(ETerritories.Ukraine),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.Budapest),
-			Territory(ETerritories.Vienna),
-			Territory(ETerritories.Bohemia),
-			Territory(ETerritories.Bohemia),
-		};
-		Territory(ETerritories.Gascony).AdjacentTerritories = new() {
-			Territory(ETerritories.Brest),
-			Territory(ETerritories.Paris),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Marseilles),
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.GulfOfLyon),
-			Territory(ETerritories.MidAtlanticOcean),
-		};
-		Territory(ETerritories.Greece).AdjacentTerritories = new() {
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Serbia),
-			Territory(ETerritories.Albania),
-			Territory(ETerritories.IonianSea),
-			Territory(ETerritories.AegeanSea),
-		};
-		Territory(ETerritories.GulfOfLyon).AdjacentTerritories = new() {
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.Marseilles),
-			Territory(ETerritories.Piedmont),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.Tuscany),
-		};
-		Territory(ETerritories.GulfOfBothania).AdjacentTerritories = new() {
-			Territory(ETerritories.Sweden),
-			Territory(ETerritories.Finland),
-			Territory(ETerritories.BalticSea),
-			Territory(ETerritories.SaintPetersburg),
-			Territory(ETerritories.Livonia),
-		};
-		Territory(ETerritories.HelgolandBight).AdjacentTerritories = new() {
-			Territory(ETerritories.Denmark),
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Holland),
-			Territory(ETerritories.NorthSea),
-		};
-		Territory(ETerritories.Holland).AdjacentTerritories = new() {
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Ruhr),
-			Territory(ETerritories.Belgium),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.HelgolandBight),
-		};
-		Territory(ETerritories.IonianSea).AdjacentTerritories = new() {
-			Territory(ETerritories.AdriaticSea),
-			Territory(ETerritories.Apuleia),
-			Territory(ETerritories.Naples),
-			Territory(ETerritories.Tunis),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.EasternMediterranean),
-			Territory(ETerritories.AegeanSea),
-			Territory(ETerritories.Greece),
-			Territory(ETerritories.Albania),
-		};
-		Territory(ETerritories.IrishSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Liverpool),
-			Territory(ETerritories.Wales),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.MidAtlanticOcean),
-			Territory(ETerritories.NorthAtlanticOcean),
-		};
-		Territory(ETerritories.Kiel).AdjacentTerritories = new() {
-			Territory(ETerritories.Denmark),
-			Territory(ETerritories.Holland),
-			Territory(ETerritories.Ruhr),
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.BalticSea),
-			Territory(ETerritories.HelgolandBight),
-		};
-		Territory(ETerritories.Liverpool).AdjacentTerritories = new() {
-			Territory(ETerritories.Edinburgh),
-			Territory(ETerritories.Clyde),
-			Territory(ETerritories.NorthAtlanticOcean),
-			Territory(ETerritories.IrishSea),
-			Territory(ETerritories.Wales),
-			Territory(ETerritories.Yorkshire),
-		};
-		Territory(ETerritories.Livonia).AdjacentTerritories = new() {
-			Territory(ETerritories.SaintPetersburg),
-			Territory(ETerritories.Moscow),
-			Territory(ETerritories.Warsaw),
-			Territory(ETerritories.Prussia),
-			Territory(ETerritories.BalticSea),
-			Territory(ETerritories.GulfOfBothania),
-		};
-		Territory(ETerritories.London).AdjacentTerritories = new() {
-			Territory(ETerritories.Wales),
-			Territory(ETerritories.Yorkshire),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.EnglishChannel),
-		};
-		Territory(ETerritories.Marseilles).AdjacentTerritories = new() {
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.Gascony),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Piedmont),
-			Territory(ETerritories.GulfOfLyon),
-		};
-		Territory(ETerritories.MidAtlanticOcean).AdjacentTerritories = new() {
-			Territory(ETerritories.IrishSea),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.Brest),
-			Territory(ETerritories.Gascony),
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.Portugal),
-			Territory(ETerritories.NorthAtlanticOcean),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.NorthAfrica),
-		};
-		Territory(ETerritories.Moscow).AdjacentTerritories = new() {
-			Territory(ETerritories.SaintPetersburg),
-			Territory(ETerritories.Livonia),
-			Territory(ETerritories.Ukraine),
-			Territory(ETerritories.Sevastopol),
-			Territory(ETerritories.Warsaw),
-		};
-		Territory(ETerritories.Munich).AdjacentTerritories = new() {
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Ruhr),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Bohemia),
-			Territory(ETerritories.Silesia),
-		};
-		Territory(ETerritories.Naples).AdjacentTerritories = new() {
-			Territory(ETerritories.Rome),
-			Territory(ETerritories.Apuleia),
-			Territory(ETerritories.IonianSea),
-			Territory(ETerritories.TyrrhenianSea),
-		};
-		Territory(ETerritories.NorthAfrica).AdjacentTerritories = new() {
-			Territory(ETerritories.MidAtlanticOcean),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.Tunis),
-		};
-		Territory(ETerritories.NorthAtlanticOcean).AdjacentTerritories = new() {
-			Territory(ETerritories.IrishSea),
-			Territory(ETerritories.Liverpool),
-			Territory(ETerritories.Clyde),
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.MidAtlanticOcean),
-		};
-		Territory(ETerritories.NorthSea).AdjacentTerritories = new() {
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.Edinburgh),
-			Territory(ETerritories.Yorkshire),
-			Territory(ETerritories.London),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.Belgium),
-			Territory(ETerritories.Holland),
-			Territory(ETerritories.HelgolandBight),
-			Territory(ETerritories.Denmark),
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.Skagerrak),
-		};
-		Territory(ETerritories.Norway).AdjacentTerritories = new() {
-			Territory(ETerritories.NorwegianSea),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.Skagerrak),
-			Territory(ETerritories.Sweden),
-			Territory(ETerritories.Finland),
-			Territory(ETerritories.BarentsSea),
-		};
-		Territory(ETerritories.NorwegianSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.Clyde),
-			Territory(ETerritories.Edinburgh),
-			Territory(ETerritories.NorthAtlanticOcean),
-			Territory(ETerritories.BarentsSea),
-		};
-		Territory(ETerritories.Paris).AdjacentTerritories = new() {
-			Territory(ETerritories.Brest),
-			Territory(ETerritories.Picardy),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Gascony),
-		};
-		Territory(ETerritories.Picardy).AdjacentTerritories = new() {
-			Territory(ETerritories.Belgium),
-			Territory(ETerritories.Burgundy),
-			Territory(ETerritories.Paris),
-			Territory(ETerritories.Brest),
-			Territory(ETerritories.EnglishChannel),
-		};
-		Territory(ETerritories.Portugal).AdjacentTerritories = new() {
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.MidAtlanticOcean),
-		};
-		Territory(ETerritories.Piedmont).AdjacentTerritories = new() {
-			Territory(ETerritories.Marseilles),
-			Territory(ETerritories.Tuscany),
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.GulfOfLyon),
-		};
-		Territory(ETerritories.Prussia).AdjacentTerritories = new() {
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.Silesia),
-			Territory(ETerritories.Livonia),
-			Territory(ETerritories.Warsaw),
-			Territory(ETerritories.BalticSea),
-		};
-		Territory(ETerritories.Rome).AdjacentTerritories = new() {
-			Territory(ETerritories.Naples),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.Tuscany),
-		};
-		Territory(ETerritories.Ruhr).AdjacentTerritories = new() {
-			Territory(ETerritories.Holland),
-			Territory(ETerritories.Kiel),
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.Burgundy),
-		};
-		Territory(ETerritories.Rumania).AdjacentTerritories = new() {
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Serbia),
-			Territory(ETerritories.Budapest),
-			Territory(ETerritories.Ukraine),
-			Territory(ETerritories.Galicia),
-			Territory(ETerritories.BlackSea),
-			Territory(ETerritories.Sevastopol),
-			Territory(ETerritories.Constantinople),
-		};
-		Territory(ETerritories.Serbia).AdjacentTerritories = new() {
-			Territory(ETerritories.Bulgaria),
-			Territory(ETerritories.Greece),
-			Territory(ETerritories.Albania),
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Budapest),
-			Territory(ETerritories.Rumania),
-		};
-		Territory(ETerritories.Smyrna).AdjacentTerritories = new() {
-			Territory(ETerritories.Ankara),
-			Territory(ETerritories.Armenia),
-			Territory(ETerritories.Syria),
-			Territory(ETerritories.EasternMediterranean),
-			Territory(ETerritories.AegeanSea),
-			Territory(ETerritories.Constantinople),
-		};
-		Territory(ETerritories.Sevastopol).AdjacentTerritories = new() {
-			Territory(ETerritories.Armenia),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.Ukraine),
-			Territory(ETerritories.Moscow),
-			Territory(ETerritories.BlackSea),
-		};
-		Territory(ETerritories.Skagerrak).AdjacentTerritories = new() {
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.NorthSea),
-			Territory(ETerritories.Denmark),
-			Territory(ETerritories.Sweden),
-		};
-		Territory(ETerritories.Silesia).AdjacentTerritories = new() {
-			Territory(ETerritories.Berlin),
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.Bohemia),
-			Territory(ETerritories.Galicia),
-			Territory(ETerritories.Warsaw),
-			Territory(ETerritories.Prussia),
-		};
-		Territory(ETerritories.Spain).AdjacentTerritories = new() {
-			Territory(ETerritories.Portugal),
-			Territory(ETerritories.Marseilles),
-			Territory(ETerritories.Gascony),
-			Territory(ETerritories.GulfOfLyon),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.MidAtlanticOcean),
-		};
-		Territory(ETerritories.SaintPetersburg).AdjacentTerritories = new() {
-			Territory(ETerritories.Finland),
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.Livonia),
-			Territory(ETerritories.Moscow),
-			Territory(ETerritories.GulfOfBothania),
-			Territory(ETerritories.BarentsSea),
-		};
-		Territory(ETerritories.Sweden).AdjacentTerritories = new() {
-			Territory(ETerritories.Norway),
-			Territory(ETerritories.Finland),
-			Territory(ETerritories.GulfOfBothania),
-			Territory(ETerritories.BalticSea),
-			Territory(ETerritories.Skagerrak),
-			Territory(ETerritories.Denmark),
-		};
-		Territory(ETerritories.Syria).AdjacentTerritories = new() {
-			Territory(ETerritories.Smyrna),
-			Territory(ETerritories.Armenia),
-			Territory(ETerritories.EasternMediterranean),
-		};
-		Territory(ETerritories.Tunis).AdjacentTerritories = new() {
-			Territory(ETerritories.NorthAfrica),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.IonianSea),
-		};
-		Territory(ETerritories.Tuscany).AdjacentTerritories = new() {
-			Territory(ETerritories.Piedmont),
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.Rome),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.GulfOfLyon),
-		};
-		Territory(ETerritories.Tyrolia).AdjacentTerritories = new() {
-			Territory(ETerritories.Munich),
-			Territory(ETerritories.Bohemia),
-			Territory(ETerritories.Vienna),
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Venice),
-			Territory(ETerritories.Piedmont),
-		};
-		Territory(ETerritories.TyrrhenianSea).AdjacentTerritories = new() {
-			Territory(ETerritories.Tunis),
-			Territory(ETerritories.WesternMediterranean),
-			Territory(ETerritories.GulfOfLyon),
-			Territory(ETerritories.Piedmont),
-			Territory(ETerritories.Tuscany),
-			Territory(ETerritories.Rome),
-			Territory(ETerritories.Naples),
-			Territory(ETerritories.IonianSea),
-		};
-		Territory(ETerritories.Ukraine).AdjacentTerritories = new() {
-			Territory(ETerritories.Warsaw),
-			Territory(ETerritories.Moscow),
-			Territory(ETerritories.Sevastopol),
-			Territory(ETerritories.Rumania),
-			Territory(ETerritories.Galicia),
-		};
-		Territory(ETerritories.Venice).AdjacentTerritories = new() {
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Piedmont),
-			Territory(ETerritories.Tuscany),
-			Territory(ETerritories.Apuleia),
-			Territory(ETerritories.AdriaticSea),
-			Territory(ETerritories.Trieste),
-		};
-		Territory(ETerritories.Vienna).AdjacentTerritories = new() {
-			Territory(ETerritories.Tyrolia),
-			Territory(ETerritories.Bohemia),
-			Territory(ETerritories.Trieste),
-			Territory(ETerritories.Budapest),
-			Territory(ETerritories.Galicia),
-		};
-		Territory(ETerritories.Wales).AdjacentTerritories = new() {
-			Territory(ETerritories.London),
-			Territory(ETerritories.Yorkshire),
-			Territory(ETerritories.EnglishChannel),
-			Territory(ETerritories.IrishSea),
-			Territory(ETerritories.Liverpool),
-		};
-		Territory(ETerritories.Warsaw).AdjacentTerritories = new() {
-			Territory(ETerritories.Livonia),
-			Territory(ETerritories.Moscow),
-			Territory(ETerritories.Ukraine),
-			Territory(ETerritories.Galicia),
-			Territory(ETerritories.Silesia),
-			Territory(ETerritories.Prussia),
-		};
-		Territory(ETerritories.WesternMediterranean).AdjacentTerritories = new() {
-			Territory(ETerritories.NorthAfrica),
-			Territory(ETerritories.Tunis),
-			Territory(ETerritories.TyrrhenianSea),
-			Territory(ETerritories.GulfOfLyon),
-			Territory(ETerritories.Spain),
-			Territory(ETerritories.MidAtlanticOcean),
-		};
-		Territory(ETerritories.Yorkshire).AdjacentTerritories = new() {
-			Territory(ETerritories.Edinburgh),
-			Territory(ETerritories.Liverpool),
-			Territory(ETerritories.London),
-			Territory(ETerritories.NorthSea),
+	public static readonly Dictionary<Territories, List<Territories>> TerritoryAdjacencyMap = new();
+	public static List<Territory> TerritoryAdjacency(Board board, Territories territory) =>
+		TerritoryAdjacencyMap[territory]
+			.Select(territory => board.Territory(territory))
+			.ToList();
+
+	static Board() {
+		Board.TerritoryAdjacencyMap[ETerritories.Trieste] = new() {
+			ETerritories.Venice,
+			ETerritories.Tyrolia,
+			ETerritories.Vienna,
+			ETerritories.Albania,
+			ETerritories.AdriaticSea,
+			ETerritories.Budapest,
+			ETerritories.Serbia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.AdriaticSea] = new() {
+			ETerritories.Trieste,
+			ETerritories.Venice,
+			ETerritories.Albania,
+			ETerritories.IonianSea,
+			ETerritories.Apuleia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.AegeanSea] = new() {
+			ETerritories.Greece,
+			ETerritories.Bulgaria,
+			ETerritories.Constantinople,
+			ETerritories.Smyrna,
+			ETerritories.EasternMediterranean,
+			ETerritories.IonianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Apuleia] = new() {
+			ETerritories.AdriaticSea,
+			ETerritories.Venice,
+			ETerritories.Naples,
+			ETerritories.IonianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Albania] = new() {
+			ETerritories.Trieste,
+			ETerritories.Serbia,
+			ETerritories.Greece,
+			ETerritories.IonianSea,
+			ETerritories.AdriaticSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Ankara] = new() {
+			ETerritories.Constantinople,
+			ETerritories.Smyrna,
+			ETerritories.Armenia,
+			ETerritories.BlackSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Armenia] = new() {
+			ETerritories.Ankara,
+			ETerritories.Smyrna,
+			ETerritories.Sevastopol,
+			ETerritories.BlackSea,
+			ETerritories.Syria,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.BalticSea] = new() {
+			ETerritories.Denmark,
+			ETerritories.Sweden,
+			ETerritories.Livonia,
+			ETerritories.Prussia,
+			ETerritories.Kiel,
+			ETerritories.Berlin,
+			ETerritories.GulfOfBothania,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.BarentsSea] = new() {
+			ETerritories.NorwegianSea,
+			ETerritories.Norway,
+			ETerritories.SaintPetersburg,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Belgium] = new() {
+			ETerritories.Holland,
+			ETerritories.Ruhr,
+			ETerritories.Burgundy,
+			ETerritories.Picardy,
+			ETerritories.EnglishChannel,
+			ETerritories.NorthSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Bohemia] = new() {
+			ETerritories.Munich,
+			ETerritories.Tyrolia,
+			ETerritories.Silesia,
+			ETerritories.Galicia,
+			ETerritories.Vienna,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Berlin] = new() {
+			ETerritories.Kiel,
+			ETerritories.Prussia,
+			ETerritories.Silesia,
+			ETerritories.Munich,
+			ETerritories.BalticSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.BlackSea] = new() {
+			ETerritories.Bulgaria,
+			ETerritories.Rumania,
+			ETerritories.Sevastopol,
+			ETerritories.Armenia,
+			ETerritories.Ankara,
+			ETerritories.Constantinople,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Brest] = new() {
+			ETerritories.Paris,
+			ETerritories.Picardy,
+			ETerritories.MidAtlanticOcean,
+			ETerritories.EnglishChannel,
+			ETerritories.Gascony,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Budapest] = new() {
+			ETerritories.Vienna,
+			ETerritories.Trieste,
+			ETerritories.Serbia,
+			ETerritories.Rumania,
+			ETerritories.Galicia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Bulgaria] = new() {
+			ETerritories.Constantinople,
+			ETerritories.Greece,
+			ETerritories.Serbia,
+			ETerritories.Rumania,
+			ETerritories.BlackSea,
+			ETerritories.AegeanSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Burgundy] = new() {
+			ETerritories.Paris,
+			ETerritories.Picardy,
+			ETerritories.Belgium,
+			ETerritories.Marseilles,
+			ETerritories.Ruhr,
+			ETerritories.Munich,
+			ETerritories.Gascony,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Clyde] = new() {
+			ETerritories.Edinburgh,
+			ETerritories.NorthAtlanticOcean,
+			ETerritories.NorwegianSea,
+			ETerritories.Liverpool,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Constantinople] = new() {
+			ETerritories.Bulgaria,
+			ETerritories.Smyrna,
+			ETerritories.Ankara,
+			ETerritories.BlackSea,
+			ETerritories.AegeanSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Denmark] = new() {
+			ETerritories.Sweden,
+			ETerritories.Skagerrak,
+			ETerritories.NorthSea,
+			ETerritories.BalticSea,
+			ETerritories.Kiel,
+			ETerritories.HelgolandBight,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.EasternMediterranean] = new() {
+			ETerritories.AegeanSea,
+			ETerritories.Smyrna,
+			ETerritories.Syria,
+			ETerritories.IonianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Edinburgh] = new() {
+			ETerritories.Clyde,
+			ETerritories.NorthSea,
+			ETerritories.NorwegianSea,
+			ETerritories.Yorkshire,
+			ETerritories.Liverpool,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.EnglishChannel] = new() {
+			ETerritories.London,
+			ETerritories.Wales,
+			ETerritories.IrishSea,
+			ETerritories.MidAtlanticOcean,
+			ETerritories.Brest,
+			ETerritories.Picardy,
+			ETerritories.Belgium,
+			ETerritories.NorthSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Finland] = new() {
+			ETerritories.Norway,
+			ETerritories.SaintPetersburg,
+			ETerritories.GulfOfBothania,
+			ETerritories.Sweden,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Galicia] = new() {
+			ETerritories.Warsaw,
+			ETerritories.Ukraine,
+			ETerritories.Rumania,
+			ETerritories.Budapest,
+			ETerritories.Vienna,
+			ETerritories.Bohemia,
+			ETerritories.Bohemia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Gascony] = new() {
+			ETerritories.Brest,
+			ETerritories.Paris,
+			ETerritories.Burgundy,
+			ETerritories.Marseilles,
+			ETerritories.Spain,
+			ETerritories.GulfOfLyon,
+			ETerritories.MidAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Greece] = new() {
+			ETerritories.Bulgaria,
+			ETerritories.Serbia,
+			ETerritories.Albania,
+			ETerritories.IonianSea,
+			ETerritories.AegeanSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.GulfOfLyon] = new() {
+			ETerritories.Spain,
+			ETerritories.Marseilles,
+			ETerritories.Piedmont,
+			ETerritories.TyrrhenianSea,
+			ETerritories.WesternMediterranean,
+			ETerritories.Tuscany,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.GulfOfBothania] = new() {
+			ETerritories.Sweden,
+			ETerritories.Finland,
+			ETerritories.BalticSea,
+			ETerritories.SaintPetersburg,
+			ETerritories.Livonia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.HelgolandBight] = new() {
+			ETerritories.Denmark,
+			ETerritories.Kiel,
+			ETerritories.Holland,
+			ETerritories.NorthSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Holland] = new() {
+			ETerritories.Kiel,
+			ETerritories.Ruhr,
+			ETerritories.Belgium,
+			ETerritories.NorthSea,
+			ETerritories.HelgolandBight,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.IonianSea] = new() {
+			ETerritories.AdriaticSea,
+			ETerritories.Apuleia,
+			ETerritories.Naples,
+			ETerritories.Tunis,
+			ETerritories.TyrrhenianSea,
+			ETerritories.EasternMediterranean,
+			ETerritories.AegeanSea,
+			ETerritories.Greece,
+			ETerritories.Albania,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.IrishSea] = new() {
+			ETerritories.Liverpool,
+			ETerritories.Wales,
+			ETerritories.EnglishChannel,
+			ETerritories.MidAtlanticOcean,
+			ETerritories.NorthAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Kiel] = new() {
+			ETerritories.Denmark,
+			ETerritories.Holland,
+			ETerritories.Ruhr,
+			ETerritories.Berlin,
+			ETerritories.Munich,
+			ETerritories.BalticSea,
+			ETerritories.HelgolandBight,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Liverpool] = new() {
+			ETerritories.Edinburgh,
+			ETerritories.Clyde,
+			ETerritories.NorthAtlanticOcean,
+			ETerritories.IrishSea,
+			ETerritories.Wales,
+			ETerritories.Yorkshire,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Livonia] = new() {
+			ETerritories.SaintPetersburg,
+			ETerritories.Moscow,
+			ETerritories.Warsaw,
+			ETerritories.Prussia,
+			ETerritories.BalticSea,
+			ETerritories.GulfOfBothania,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.London] = new() {
+			ETerritories.Wales,
+			ETerritories.Yorkshire,
+			ETerritories.NorthSea,
+			ETerritories.EnglishChannel,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Marseilles] = new() {
+			ETerritories.Spain,
+			ETerritories.Gascony,
+			ETerritories.Burgundy,
+			ETerritories.Piedmont,
+			ETerritories.GulfOfLyon,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.MidAtlanticOcean] = new() {
+			ETerritories.IrishSea,
+			ETerritories.EnglishChannel,
+			ETerritories.Brest,
+			ETerritories.Gascony,
+			ETerritories.Spain,
+			ETerritories.Portugal,
+			ETerritories.NorthAtlanticOcean,
+			ETerritories.WesternMediterranean,
+			ETerritories.NorthAfrica,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Moscow] = new() {
+			ETerritories.SaintPetersburg,
+			ETerritories.Livonia,
+			ETerritories.Ukraine,
+			ETerritories.Sevastopol,
+			ETerritories.Warsaw,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Munich] = new() {
+			ETerritories.Berlin,
+			ETerritories.Kiel,
+			ETerritories.Ruhr,
+			ETerritories.Burgundy,
+			ETerritories.Tyrolia,
+			ETerritories.Bohemia,
+			ETerritories.Silesia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Naples] = new() {
+			ETerritories.Rome,
+			ETerritories.Apuleia,
+			ETerritories.IonianSea,
+			ETerritories.TyrrhenianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.NorthAfrica] = new() {
+			ETerritories.MidAtlanticOcean,
+			ETerritories.WesternMediterranean,
+			ETerritories.Tunis,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.NorthAtlanticOcean] = new() {
+			ETerritories.IrishSea,
+			ETerritories.Liverpool,
+			ETerritories.Clyde,
+			ETerritories.NorwegianSea,
+			ETerritories.MidAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.NorthSea] = new() {
+			ETerritories.NorwegianSea,
+			ETerritories.Edinburgh,
+			ETerritories.Yorkshire,
+			ETerritories.London,
+			ETerritories.EnglishChannel,
+			ETerritories.Belgium,
+			ETerritories.Holland,
+			ETerritories.HelgolandBight,
+			ETerritories.Denmark,
+			ETerritories.Norway,
+			ETerritories.Skagerrak,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Norway] = new() {
+			ETerritories.NorwegianSea,
+			ETerritories.NorthSea,
+			ETerritories.Skagerrak,
+			ETerritories.Sweden,
+			ETerritories.Finland,
+			ETerritories.BarentsSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.NorwegianSea] = new() {
+			ETerritories.Norway,
+			ETerritories.NorthSea,
+			ETerritories.Clyde,
+			ETerritories.Edinburgh,
+			ETerritories.NorthAtlanticOcean,
+			ETerritories.BarentsSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Paris] = new() {
+			ETerritories.Brest,
+			ETerritories.Picardy,
+			ETerritories.Burgundy,
+			ETerritories.Gascony,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Picardy] = new() {
+			ETerritories.Belgium,
+			ETerritories.Burgundy,
+			ETerritories.Paris,
+			ETerritories.Brest,
+			ETerritories.EnglishChannel,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Portugal] = new() {
+			ETerritories.Spain,
+			ETerritories.MidAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Piedmont] = new() {
+			ETerritories.Marseilles,
+			ETerritories.Tuscany,
+			ETerritories.Tyrolia,
+			ETerritories.Venice,
+			ETerritories.GulfOfLyon,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Prussia] = new() {
+			ETerritories.Berlin,
+			ETerritories.Silesia,
+			ETerritories.Livonia,
+			ETerritories.Warsaw,
+			ETerritories.BalticSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Rome] = new() {
+			ETerritories.Naples,
+			ETerritories.TyrrhenianSea,
+			ETerritories.Tuscany,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Ruhr] = new() {
+			ETerritories.Holland,
+			ETerritories.Kiel,
+			ETerritories.Berlin,
+			ETerritories.Munich,
+			ETerritories.Burgundy,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Rumania] = new() {
+			ETerritories.Bulgaria,
+			ETerritories.Serbia,
+			ETerritories.Budapest,
+			ETerritories.Ukraine,
+			ETerritories.Galicia,
+			ETerritories.BlackSea,
+			ETerritories.Sevastopol,
+			ETerritories.Constantinople,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Serbia] = new() {
+			ETerritories.Bulgaria,
+			ETerritories.Greece,
+			ETerritories.Albania,
+			ETerritories.Trieste,
+			ETerritories.Budapest,
+			ETerritories.Rumania,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Smyrna] = new() {
+			ETerritories.Ankara,
+			ETerritories.Armenia,
+			ETerritories.Syria,
+			ETerritories.EasternMediterranean,
+			ETerritories.AegeanSea,
+			ETerritories.Constantinople,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Sevastopol] = new() {
+			ETerritories.Armenia,
+			ETerritories.Rumania,
+			ETerritories.Ukraine,
+			ETerritories.Moscow,
+			ETerritories.BlackSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Skagerrak] = new() {
+			ETerritories.Norway,
+			ETerritories.NorthSea,
+			ETerritories.Denmark,
+			ETerritories.Sweden,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Silesia] = new() {
+			ETerritories.Berlin,
+			ETerritories.Munich,
+			ETerritories.Bohemia,
+			ETerritories.Galicia,
+			ETerritories.Warsaw,
+			ETerritories.Prussia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Spain] = new() {
+			ETerritories.Portugal,
+			ETerritories.Marseilles,
+			ETerritories.Gascony,
+			ETerritories.GulfOfLyon,
+			ETerritories.WesternMediterranean,
+			ETerritories.MidAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.SaintPetersburg] = new() {
+			ETerritories.Finland,
+			ETerritories.Norway,
+			ETerritories.Livonia,
+			ETerritories.Moscow,
+			ETerritories.GulfOfBothania,
+			ETerritories.BarentsSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Sweden] = new() {
+			ETerritories.Norway,
+			ETerritories.Finland,
+			ETerritories.GulfOfBothania,
+			ETerritories.BalticSea,
+			ETerritories.Skagerrak,
+			ETerritories.Denmark,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Syria] = new() {
+			ETerritories.Smyrna,
+			ETerritories.Armenia,
+			ETerritories.EasternMediterranean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Tunis] = new() {
+			ETerritories.NorthAfrica,
+			ETerritories.WesternMediterranean,
+			ETerritories.TyrrhenianSea,
+			ETerritories.IonianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Tuscany] = new() {
+			ETerritories.Piedmont,
+			ETerritories.Venice,
+			ETerritories.Rome,
+			ETerritories.TyrrhenianSea,
+			ETerritories.GulfOfLyon,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Tyrolia] = new() {
+			ETerritories.Munich,
+			ETerritories.Bohemia,
+			ETerritories.Vienna,
+			ETerritories.Trieste,
+			ETerritories.Venice,
+			ETerritories.Piedmont,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.TyrrhenianSea] = new() {
+			ETerritories.Tunis,
+			ETerritories.WesternMediterranean,
+			ETerritories.GulfOfLyon,
+			ETerritories.Piedmont,
+			ETerritories.Tuscany,
+			ETerritories.Rome,
+			ETerritories.Naples,
+			ETerritories.IonianSea,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Ukraine] = new() {
+			ETerritories.Warsaw,
+			ETerritories.Moscow,
+			ETerritories.Sevastopol,
+			ETerritories.Rumania,
+			ETerritories.Galicia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Venice] = new() {
+			ETerritories.Tyrolia,
+			ETerritories.Piedmont,
+			ETerritories.Tuscany,
+			ETerritories.Apuleia,
+			ETerritories.AdriaticSea,
+			ETerritories.Trieste,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Vienna] = new() {
+			ETerritories.Tyrolia,
+			ETerritories.Bohemia,
+			ETerritories.Trieste,
+			ETerritories.Budapest,
+			ETerritories.Galicia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Wales] = new() {
+			ETerritories.London,
+			ETerritories.Yorkshire,
+			ETerritories.EnglishChannel,
+			ETerritories.IrishSea,
+			ETerritories.Liverpool,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Warsaw] = new() {
+			ETerritories.Livonia,
+			ETerritories.Moscow,
+			ETerritories.Ukraine,
+			ETerritories.Galicia,
+			ETerritories.Silesia,
+			ETerritories.Prussia,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.WesternMediterranean] = new() {
+			ETerritories.NorthAfrica,
+			ETerritories.Tunis,
+			ETerritories.TyrrhenianSea,
+			ETerritories.GulfOfLyon,
+			ETerritories.Spain,
+			ETerritories.MidAtlanticOcean,
+		};
+		Board.TerritoryAdjacencyMap[ETerritories.Yorkshire] = new() {
+			ETerritories.Edinburgh,
+			ETerritories.Liverpool,
+			ETerritories.London,
+			ETerritories.NorthSea,
 		};
 	}
 }

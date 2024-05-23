@@ -23,10 +23,26 @@ class PlayerConverter : JsonConverter<Player> {
 		JObject playerObject = JObject.Load(reader);
 
 		Player player = new Player {
-			Name = ((string?)playerObject["Name"])!,
-			Countries = playerObject["Countries"]!.ToObject<List<Country>>(serializer)!,
-			Units = playerObject["Units"]!.ToObject<List<Unit>>(serializer)!
+			Name = playerObject["Name"]?.ToString() ?? "[serialization-error]",
+			Countries = new List<Country>(),
+			Units = new List<Unit>(),
 		};
+
+		foreach (JToken countryToken in playerObject["Countries"]!) {
+			Country country = new Country {
+				Name = countryToken["Name"]?.ToString() ?? "[serialization-error]",
+				HomeTerritories = new List<Territory>()
+			};
+
+			foreach (JToken territoryToken in countryToken["Territories"]!) {
+				string? territoryName = territoryToken["Name"]?.ToString();
+				if (territoryName is not null) {
+					country.TerritoriesSerializationNames.Add(territoryName);
+				}
+			}
+
+			player.Countries.Add(country);
+		}
 
 		return player;
 	}
