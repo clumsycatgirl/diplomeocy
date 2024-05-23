@@ -1,7 +1,8 @@
-﻿@model Web.Models.Player
+﻿@model Web.Models.UserPlayer
 
 @{
     ViewData["Title"] = "Create";
+    Console.WriteLine(Model.User);
 }
 
 <h1>Create</h1>
@@ -14,13 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdTable" class="control-label"></label>
-                <input asp-for="IdTable" class="form-control" />
+                <input asp-for="IdTable" class="form-control"/>
                 <span asp-validation-for="IdTable" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
+                <input asp-for="User" class="form-control" value="@Model.User" hidden/>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

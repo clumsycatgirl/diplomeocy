@@ -1,0 +1,175 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\playerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\playerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\tablescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\players\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\players\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\userplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\userplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\views\\tables\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\views\\tables\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|c:\\users\\corrado\\documents\\github\\diplomeocy\\diplomeocy\\diplomeocy\\web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{D652C415-1B12-4647-BAF3-DF73066056C4}|Web\\Web.csproj|solutionrelative:web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 328,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Web\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Web\\wwwroot\\css\\site.css",
+              "ViewState": "AQIAADUAAAAAAAAAAAAmwEUAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-10T13:13:54.809Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Web\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAAswEwAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T13:06:14.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserPlayer.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\UserPlayer.cs",
+              "RelativeDocumentMoniker": "Web\\Models\\UserPlayer.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\UserPlayer.cs",
+              "RelativeToolTip": "Web\\Models\\UserPlayer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T12:46:01.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TablesController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\TablesController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\TablesController.cs",
+              "RelativeToolTip": "Web\\Controllers\\TablesController.cs",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAMwF0AAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T12:21:44.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayersController.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\PlayersController.cs",
+              "RelativeDocumentMoniker": "Web\\Controllers\\PlayersController.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Controllers\\PlayersController.cs",
+              "RelativeToolTip": "Web\\Controllers\\PlayersController.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAowEEAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T12:17:43.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Players\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Players\\Create.cshtml",
+              "RelativeToolTip": "Web\\Views\\Players\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T12:18:03.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Tables\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web\\Views\\Tables\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Views\\Tables\\Create.cshtml",
+              "RelativeToolTip": "Web\\Views\\Tables\\Create.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-23T12:33:34.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Player.cs",
+              "RelativeDocumentMoniker": "Web\\Models\\Player.cs",
+              "ToolTip": "C:\\Users\\Corrado\\Documents\\GitHub\\diplomeocy\\diplomeocy\\Diplomeocy\\Web\\Models\\Player.cs",
+              "RelativeToolTip": "Web\\Models\\Player.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T12:17:48.197Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 44,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

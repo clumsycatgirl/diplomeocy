@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 using Web;
 using Web.Models;
+using Web.Utils;
 
 namespace Web.Controllers {
 	public class PlayersController : Controller {
@@ -42,7 +45,12 @@ namespace Web.Controllers {
 
 		// GET: Players/Create
 		public IActionResult Create() {
-			return View();
+			return View(new UserPlayer {
+				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
+				IdTable = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
+				User = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
+					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
+			});
 		}
 
 		// POST: Players/Create
@@ -51,8 +59,16 @@ namespace Web.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,IdTable,IdUser")] Player players) {
+			int? userId = HttpContext.Session.Get<User>("User")?.Id;
+			if (userId is null) return NotFound();
+			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result) 
+				return RedirectToAction(nameof(Index));
+			
 			if (ModelState.IsValid) {
-				context.Add(players);
+				context.Add(new Models.Player {
+					IdTable = players.IdTable,
+					IdUser = (int)userId,
+				});
 				await context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}

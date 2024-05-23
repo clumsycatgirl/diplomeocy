@@ -45,7 +45,7 @@ namespace Web.Controllers {
 
 		// GET: Table/Create
 		public IActionResult Create() {
-			return View(new UsersPlay {
+			return View(new HostGame {
 				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				Date = DateOnly.FromDateTime(DateTime.Now),
 				Host = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
@@ -69,7 +69,7 @@ namespace Web.Controllers {
 					IdTable = table.Id,
 					IdUser = (int)userId,
 				});
-
+				await context.SaveChangesAsync();
 				Random random = new Random(Guid.NewGuid().GetHashCode());
 				int gameId = random.Next(100000, 1000000);
 				while (context.Games.Any(game => game.Id == gameId)) {
@@ -85,13 +85,14 @@ namespace Web.Controllers {
 						Converters = { new Serializers.Game.PlayerConverter() }
 					}),
 				});
-
+				
 				await context.SaveChangesAsync();
-
+				
 				gameHandlers.Add(game.Entity.Id.ToString(), handler);
 
-				// return RedirectToAction(nameof(Index));
+				//return RedirectToAction(nameof(Index));
 				return this.JsonRedirect(Url.Action("Index", "Game", new { game.Entity.Id })!);
+
 			}
 			// return View(table);
 			return this.JsonError(("Sorry", "Something went wrong"));

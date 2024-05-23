@@ -98,7 +98,7 @@ namespace Web.Controllers {
 				HttpContext.Session.Set<User>("User", user);
 
 				// we just return *where* to go
-				return Json(new { success = true, destination = Url.Action("Index") });
+				return Json(new { success = true, destination = Url.Action("Details", new { user.Id }) });
 			}
 
 			// this refreshes the page
