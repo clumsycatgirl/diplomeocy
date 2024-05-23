@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Diplomacy;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+
+using Newtonsoft.Json;
 
 using Web.Models;
 using Web.Utils;
@@ -9,10 +13,12 @@ namespace Web.Controllers {
 	public class TablesController : Controller {
 		private readonly DatabaseContext context;
 		private readonly ILogger<TablesController> logger;
+		private readonly Dictionary<string, GameHandler> gameHandlers;
 
-		public TablesController(DatabaseContext context, ILogger<TablesController> logger) {
+		public TablesController(DatabaseContext context, ILogger<TablesController> logger, Dictionary<string, GameHandler> gameHandlers) {
 			this.context = context;
 			this.logger = logger;
+			this.gameHandlers = gameHandlers;
 		}
 
 		// GET: Table
@@ -61,16 +67,30 @@ namespace Web.Controllers {
 
 				int? userId = HttpContext.Session.Get<User>("User")?.Id;
 				if (userId is null) return NotFound();
-				context.Add(new Player {
+				context.Add(new Models.Player {
 					IdTable = table.Id,
 					IdUser = (int)userId,
 				});
 
+				Random random = new Random(Guid.NewGuid().GetHashCode());
+				int gameId = random.Next(100000, 1000000);
+				while (context.Games.Any(game => game.Id == gameId)) {
+					gameId = random.Next(100000, 1000000);
+				}
+
+				GameHandler handler = new GameHandler();
+				handler.StartGame();
 				EntityEntry<Models.Game> game = context.Add(new Models.Game {
+					Id = gameId,
 					IdTable = table.Id,
+					PlayerCountries = JsonConvert.SerializeObject(handler!.Players, new JsonSerializerSettings {
+						Converters = { new Serializers.Game.PlayerConverter() }
+					}),
 				});
 
 				await context.SaveChangesAsync();
+
+				gameHandlers.Add(game.Entity.Id.ToString(), handler);
 
 				// return RedirectToAction(nameof(Index));
 				return this.JsonRedirect(Url.Action("Index", "Game", new { game.Entity.Id })!);

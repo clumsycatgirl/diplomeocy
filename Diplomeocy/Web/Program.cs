@@ -11,13 +11,13 @@ builder.Services.AddSignalR();
 
 builder.Services.AddSession();
 
-builder.Services.AddLogging(logging => {
+builder.Services.AddLogging((logging) =>
 	logging.SetMinimumLevel(LogLevel.Debug)
 		.AddConsole()
 		.AddDebug()
 		.AddTraceSource("Information, ActivityTracing")
-		.AddEventSourceLogger();
-});
+		.AddEventSourceLogger()
+);
 
 // used for api requests to backend
 builder.Services.AddScoped<HttpClient>();
@@ -41,11 +41,12 @@ builder.Logging
 	.AddDebug()
 	.AddEventSourceLogger();
 
-builder.Services.AddCors((options) => {
-	options.AddPolicy("cors", (policy) => {
-		policy.AllowAnyOrigin();
-	});
-});
+builder.Services.AddCors((options) =>
+	options.AddPolicy("cors", (policy) =>
+		policy.AllowAnyOrigin())
+);
+
+builder.Services.AddSingleton<Dictionary<string, Diplomacy.GameHandler>>();
 
 var app = builder.Build();
 
@@ -78,5 +79,6 @@ app.MapControllerRoute(
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chat/text");
+app.MapHub<GameHub>("/hubs/game");
 
 app.Run();

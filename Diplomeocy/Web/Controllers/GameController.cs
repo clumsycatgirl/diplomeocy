@@ -1,5 +1,9 @@
+using Diplomacy;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+using Newtonsoft.Json;
 
 using Web.Models;
 
@@ -10,16 +14,25 @@ namespace Web.Controllers {
 	public class GameController : Controller {
 		private readonly DatabaseContext context;
 		private readonly ILogger<GameController> logger;
+		private readonly Dictionary<string, GameHandler> gameHandler;
 
-		public GameController(DatabaseContext context, ILogger<GameController> logger) {
+		public GameController(DatabaseContext context, ILogger<GameController> logger, Dictionary<string, GameHandler> gameHandeler) {
 			this.context = context;
 			this.logger = logger;
+			this.gameHandler = gameHandeler;
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> Index(int id) {
 			MGame? game = await context.Games.FirstOrDefaultAsync(g => g.Id == id);
 			if (game is null) return NotFound("gaem not found");
+
+			if (!gameHandler.TryGetValue(id.ToString(), out GameHandler? handler)) {
+				handler = new GameHandler {
+					Players = JsonConvert.DeserializeObject<List<Diplomacy.Player>>(game.PlayerCountries)!,
+				};
+				gameHandler.Add(id.ToString(), handler);
+			}
 
 			return View(new GameViewModel {
 				Game = game,

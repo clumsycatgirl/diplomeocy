@@ -11,11 +11,11 @@ using Utils;
 using ECountries = Diplomacy.Countries;
 
 public class GameHandler {
-	public List<Player> Players { get; private set; } = new();
-	public Board Board { get; private set; } = new();
-	public GameTurn GameTurn { get; private set; } = new();
+	public List<Player> Players { get; set; } = new();
+	public Board Board { get; set; } = new();
+	public GameTurn GameTurn { get; set; } = new();
 
-	public void StartGame() {
+	public GameHandler StartGame() {
 		Board = new();
 
 		Players = new() {
@@ -242,6 +242,8 @@ public class GameHandler {
 			Year = 1901,
 			Season = Season.Spring,
 		};
+
+		return this;
 	}
 
 	public void AdvanceTurn() {
