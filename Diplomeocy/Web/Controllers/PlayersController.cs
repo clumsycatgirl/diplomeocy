@@ -12,26 +12,26 @@ using Web.Models;
 
 namespace Web.Controllers {
 	public class PlayersController : Controller {
-		private readonly DatabaseContext _context;
+		private readonly DatabaseContext context;
 
 		public PlayersController(DatabaseContext context) {
-			_context = context;
+			this.context = context;
 		}
 
 		// GET: Players
 		public async Task<IActionResult> Index() {
-			return _context.Players != null ?
-						View(await _context.Players.ToListAsync()) :
+			return context.Players != null ?
+						View(await context.Players.ToListAsync()) :
 						Problem("Entity set 'DatabaseContext.Players'  is null.");
 		}
 
 		// GET: Players/Details/5
 		public async Task<IActionResult> Details(int? id) {
-			if (id == null || _context.Players == null) {
+			if (id == null || context.Players == null) {
 				return NotFound();
 			}
 
-			var players = await _context.Players
+			var players = await context.Players
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (players == null) {
 				return NotFound();
@@ -52,8 +52,8 @@ namespace Web.Controllers {
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,IdTable,IdUser")] Player players) {
 			if (ModelState.IsValid) {
-				_context.Add(players);
-				await _context.SaveChangesAsync();
+				context.Add(players);
+				await context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
 			return View(players);
@@ -61,11 +61,11 @@ namespace Web.Controllers {
 
 		// GET: Players/Edit/5
 		public async Task<IActionResult> Edit(int? id) {
-			if (id == null || _context.Players == null) {
+			if (id == null || context.Players == null) {
 				return NotFound();
 			}
 
-			var players = await _context.Players.FindAsync(id);
+			var players = await context.Players.FindAsync(id);
 			if (players == null) {
 				return NotFound();
 			}
@@ -84,8 +84,8 @@ namespace Web.Controllers {
 
 			if (ModelState.IsValid) {
 				try {
-					_context.Update(players);
-					await _context.SaveChangesAsync();
+					context.Update(players);
+					await context.SaveChangesAsync();
 				} catch (DbUpdateConcurrencyException) {
 					if (!PlayersExists(players.Id)) {
 						return NotFound();
@@ -100,11 +100,11 @@ namespace Web.Controllers {
 
 		// GET: Players/Delete/5
 		public async Task<IActionResult> Delete(int? id) {
-			if (id == null || _context.Players == null) {
+			if (id == null || context.Players == null) {
 				return NotFound();
 			}
 
-			var players = await _context.Players
+			var players = await context.Players
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (players == null) {
 				return NotFound();
@@ -117,20 +117,20 @@ namespace Web.Controllers {
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id) {
-			if (_context.Players == null) {
+			if (context.Players == null) {
 				return Problem("Entity set 'DatabaseContext.Players'  is null.");
 			}
-			var players = await _context.Players.FindAsync(id);
+			var players = await context.Players.FindAsync(id);
 			if (players != null) {
-				_context.Players.Remove(players);
+				context.Players.Remove(players);
 			}
 
-			await _context.SaveChangesAsync();
+			await context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
 
 		private bool PlayersExists(int id) {
-			return (_context.Players?.Any(e => e.Id == id)).GetValueOrDefault();
+			return (context.Players?.Any(e => e.Id == id)).GetValueOrDefault();
 		}
 	}
 }

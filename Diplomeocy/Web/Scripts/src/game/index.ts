@@ -1,7 +1,7 @@
 import * as signalR from '@microsoft/signalr'
 
-const iconHeight = 40
-const iconWidht = 40
+const iconHeight = 50
+const iconWidht = 50
 
 interface Territory {
 	Name: string

@@ -35,7 +35,9 @@ public static class Log {
 		};
 	}
 
+#pragma warning disable CA2211
 	public static bool LogToConsole = true;
+#pragma warning restore CA2211
 	private static TextWriter outputStream = Console.Out;
 	public static TextWriter OutputStream {
 		get => outputStream;
