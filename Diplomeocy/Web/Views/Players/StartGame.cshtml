@@ -8,16 +8,16 @@
 <h1>Start Game</h1>
 <div>
     
-        <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
-                <div class="form-group">
-                    <label class="control-label">Id Table</label>
-                    <input class="form-control" value="@Model.ElementAt(0).IdTable" disabled />
-                </div>
-        @if (i==7)
+    <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
+        <div class="form-group">
+            <label class="control-label">Id Table</label>
+            <input class="form-control" value="@Model.ElementAt(0).IdTable" disabled />
+        </div>
+        @if (i == 7)
         {
-            
-                <input type="submit" value="Edit" class="user-button" />
-            
+
+            <input type="submit" value="Edit" class="user-button" />
+
         }
     </form>
     

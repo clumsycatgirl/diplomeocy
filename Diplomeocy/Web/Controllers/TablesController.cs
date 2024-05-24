@@ -95,7 +95,7 @@ namespace Web.Controllers {
 				gameHandlers.Add(game.Entity.Id.ToString(), handler);
 
 				//return RedirectToAction(nameof(Index));
-				return table is null ? this.JsonNotFound("tables") : this.JsonRedirect(Url.Action("StartGame", new { id = table.Id })!);
+				return table is null ? this.JsonNotFound("tables") : this.JsonRedirect(Url.Action("StartGame","Players", new { id = table.Id })!);
 			}
 			// return View(table);
 			return this.JsonError(("Sorry", "Something went wrong"));
