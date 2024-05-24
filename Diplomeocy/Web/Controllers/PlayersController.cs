@@ -43,6 +43,7 @@ namespace Web.Controllers {
 
 			return View(players);
 		}
+
 		// GET: StartGame
 		public async Task<IActionResult> StartGame(int? id) {
 			if (id == null || context.Players == null) {
@@ -57,6 +58,7 @@ namespace Web.Controllers {
 
 			return View(players);
 		}
+
 		// GET: Players/Create
 		public IActionResult Create() {
 			return base.View(new UserPlayer {

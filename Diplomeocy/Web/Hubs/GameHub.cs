@@ -211,7 +211,44 @@ public class GameHub : Hub {
 			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
 		}
 
-		string json = JsonConvert.SerializeObject(GetConvoyMovements(handler));
+		Dictionary<Territories, List<string>> convoyRoutes = GetConvoyMovements(handler)
+			.SelectMany(kvp => kvp.Value)
+			.ToDictionary(
+				kvp => kvp.Key,
+				kvp => kvp.Value
+			);
+
+		convoyRoutes.ToList().ForEach(kvp => { Debug.WriteLine(kvp.Key); kvp.Value.ForEach(val => Debug.WriteLine($"\t{val}")); });
+
+		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+
+		Dictionary<string, Dictionary<string, List<string>>> result = new();
+		// result["units"] = new();
+		// result["destinations"] = new();
+
+		player.Units
+			.Where(unit => unit.Location is not null)
+			.Where(unit => Board.WaterTerritories.Contains(Enum.Parse<Territories>(unit.Location!.Name)))
+			.ToList()
+			.ForEach(unit => {
+				string unitLocation = unit.Location!.Name;
+
+				result[unitLocation] = new();
+
+				// result[unitLocation]["units"];
+
+				unit.Location!.AdjacentTerritories
+					.Where(territory => territory.OccupyingUnit is not null)
+					.Where(territory => territory.OccupyingUnit?.Type == UnitType.Army)
+					.Select(territory => territory.Name)
+					.ToList()
+					.ForEach(unit => {
+						convoyRoutes.TryGetValue(Enum.Parse<Territories>(unit), out List<string>? destinations);
+						result[unitLocation][unit] = destinations ?? new();
+					});
+			});
+
+		string json = JsonConvert.SerializeObject(result);
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestConvoyRoutesResponse", json);
 	}
 
@@ -223,7 +260,7 @@ public class GameHub : Hub {
 		Dictionary<Player, Dictionary<Territories, List<string>>> convoyMovements = new();
 
 		handler.Players.ForEach(player => player.Units
-		   .Where(unit => unit.Location is not null)
+		   .Where(unit => unit.Location is not null) // will be useless after I add the retreat phase
 		   .Where(unit => Board.CoastalTerritories.Contains(Enum.Parse<Territories>(unit.Location!)))
 		   .Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
 		   .ToList()
