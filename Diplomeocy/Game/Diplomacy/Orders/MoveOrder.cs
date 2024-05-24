@@ -198,7 +198,7 @@ public class MoveOrder : Order {
 				if (closestConvoy is not null && closestConvoy.IsUnbrokenChainOfFleets(convoyOrders)) {
 					//Status = OrderStatus.Succeeded;
 					//set all dependencies for the cancelled support order to pending
-					if (forwardDependency is SupportOrder _forwardSupportOrder && _forwardSupportOrder.Resolved && !convoyOrders.Any(convoyOrder => convoyOrder.Unit.Location == _forwardSupportOrder.SupportedOrder.Target)) {
+					if (forwardDependency is SupportOrder _forwardSupportOrder && _forwardSupportOrder.Resolved && !convoyOrders.Any(convoyOrder => convoyOrder.Unit.Location == _forwardSupportOrder.SupportedOrder?.Target)) {
 						HandleSupportOrder(_forwardSupportOrder, effectiveStrength, dependencyGraph);
 					}
 
@@ -257,7 +257,7 @@ public class MoveOrder : Order {
 	}
 
 	private void HandleSupportOrder(SupportOrder forwardSupportOrder, int effectiveStrength, Dictionary<Order, List<Order>> dependencyGraph) {
-		if (forwardSupportOrder.SupportedOrder.Target == Unit.Location) {
+		if (forwardSupportOrder.SupportedOrder?.Target == Unit.Location) {
 			// cannot cut support order as it's trying to support against *our* location
 
 			// if we cannot dislodge the unit we can't cut the support and thus we fail
@@ -267,18 +267,22 @@ public class MoveOrder : Order {
 			}
 
 			// if we're stronger we can dislodge the unit and cut the support
-			forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
-			forwardSupportOrder.SupportedOrder.Strength--;
+			if (forwardSupportOrder.SupportedOrder is not null) {
+				forwardSupportOrder.SupportedOrder.SetDependenciesToPending(dependencyGraph!);
+				forwardSupportOrder.SupportedOrder.Strength--;
+			}
 			forwardSupportOrder.Status = OrderStatus.Failed;
 			Status = OrderStatus.Succeeded;
 			return;
 		}
 
 		forwardSupportOrder.Status = forwardSupportOrder.Strength < effectiveStrength ? OrderStatus.Dislodged : OrderStatus.Failed;
-		forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
-		forwardSupportOrder.SupportedOrder.Strength--;
+		if (forwardSupportOrder.SupportedOrder is not null) {
+			forwardSupportOrder.SupportedOrder.Status = OrderStatus.Pending;
+			forwardSupportOrder.SupportedOrder.Strength--;
 
-		forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+			forwardSupportOrder.SupportedOrder.SetBackwardsDependenciesToPending(dependencyGraph!);
+		}
 
 		// shouldn't need idr it was late but I'm not gonna go cehck
 		Status = forwardSupportOrder.Status == OrderStatus.Dislodged ? OrderStatus.Succeeded : OrderStatus.Failed;

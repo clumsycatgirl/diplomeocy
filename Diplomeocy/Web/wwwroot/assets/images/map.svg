@@ -426,6 +426,7 @@
         .water {fill:#c5dfea; stroke:#000000; stroke-width:1}
 
         .highlight {fill:pink;    stroke:#000000; stroke-width:1}
+        .highlight-unit {fill:purple;    stroke:#000000; stroke-width:1}
 
         .neutral {fill:lightgray; stroke:#000000; stroke-width:1}
 

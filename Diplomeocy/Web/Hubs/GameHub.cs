@@ -3,6 +3,8 @@ using System.Diagnostics;
 using Diplomacy;
 using Diplomacy.Orders;
 
+using Game.Utils;
+
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -73,7 +75,7 @@ public class GameHub : Hub {
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestAvailableMovementsResponse", json);
 	}
 
-	public Task AddOrder(string gameId, string country, string from, string to, string type) {
+	public Task AddOrder(string gameId, string country, string from, string to, string type, string? unit = null) {
 		Debug.WriteLine($"received {gameId} {country} {from} {to} {type}");
 		// return Task.CompletedTask;
 		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
@@ -82,30 +84,45 @@ public class GameHub : Hub {
 
 		Territories territoryFrom = Enum.Parse<Territories>(from);
 		Territories territoryTo = Enum.Parse<Territories>(to);
+		Enum.TryParse(unit, true, out Territories territoryUnit);
 
 		Player player = handler.Players.First(player => player.Countries[0].Name == country);
 
-		if (player.Orders.FirstOrDefault(order => order.Unit == player.Unit(territoryFrom)) is Order existingOrder) {
-			player.Orders.Remove(existingOrder);
-		}
 
 		Order? order = null;
 
 		if (type == "move") {
+			if (player.Orders.FirstOrDefault(order => order.Unit == player.Unit(territoryFrom)) is Order existingOrder) {
+				player.Orders.Remove(existingOrder);
+			}
 			order = new MoveOrder {
 				Unit = player.Unit(territoryFrom),
 				Target = handler.Board.Territory(territoryTo)
 			};
 		} else if (type == "hold") {
+			if (player.Orders.FirstOrDefault(order => order.Unit == player.Unit(territoryFrom)) is Order existingOrder) {
+				player.Orders.Remove(existingOrder);
+			}
 			order = new HoldOrder {
 				Unit = player.Unit(territoryFrom),
+			};
+		} else if (type == "support") {
+			if (player.Orders.FirstOrDefault(order => order.Unit == player.Unit(territoryUnit)) is Order existingOrder) {
+				player.Orders.Remove(existingOrder);
+			}
+			order = new SupportOrder {
+				Unit = player.Unit(territoryUnit),
+				SupportedOrder = null,
+				WillSupport = (territoryFrom, territoryTo),
 			};
 		}
 
 		if (order is null) return Task.FromCanceled(CancellationToken.None);
 		player.Orders.Add(order);
 
-		Debug.WriteLine($"Adding {order} to {country}");
+		Debug.WriteLine($"Adding {order} to {country} now has {player.Orders.Count} orders with {player.Units.Count} units");
+
+		player.Orders.ForEach(order => Debug.WriteLine(order));
 
 		if (player.Orders.Count == player.Units.Count) {
 			handler.Players.ForEach(player => {
@@ -126,6 +143,25 @@ public class GameHub : Hub {
 								.ForEach(unit => player.Orders.Add(new HoldOrder {
 									Unit = unit,
 								})));
+				handler.Players
+					.ForEach(player => player.Orders
+						.OfType<SupportOrder>()
+						.Where(so => so.SupportedOrder is null)
+						.ToList()
+						.ForEach(so => {
+							Order? supportedOrder = handler.Players
+								.SelectMany(player => player.Orders)
+								.FirstOrDefault(order =>
+									order.Unit.Location == handler.Board.Territory(so.WillSupport.From)
+									&& (order.Target is null
+										|| (order.Target is not null
+											&& order.Target == handler.Board.Territory(so.WillSupport.To))));
+							if (order is null) {
+								so.Status = OrderStatus.Failed;
+							} else {
+								so.SupportedOrder = supportedOrder;
+							}
+						}));
 				handler.ResolveOrderResolutionPhase();
 				handler.GameTurn.Phase = GamePhase.AdvanceTurn;
 				handler.IsPlayerReady.Clear();
@@ -135,6 +171,37 @@ public class GameHub : Hub {
 		}
 
 		return Clients.Client(Context.ConnectionId).SendAsync("AddOrderResponse");
+	}
+
+	public Task RequestAvailableSupports(string gameId, string country) {
+		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
+			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
+		}
+
+		Player player = handler!.Players.First(p => p.Countries[0].Name == country);
+		Dictionary<string, Dictionary<string, List<string>>> supportLocations = player.Units
+			.ToDictionary(
+				unit =>
+					unit.Location!.Name,
+				unit =>
+					unit.Location!.AdjacentTerritories
+						.SelectMany(adjacency => adjacency.AdjacentTerritories)
+						.Concat(unit.Location!.AdjacentTerritories)
+						.Distinct()
+						.Where(adjacency => adjacency.OccupyingUnit is not null)
+						.Where(adjacency => unit.Location != adjacency)
+						.ToDictionary(
+							from => from.Name,
+							from => from.AdjacentTerritories
+								.Intersect(unit.Location!.AdjacentTerritories
+									.Where(territory =>
+										unit.Location != territory))
+								.Select(territory => territory.Name)
+								.ToList()
+						)
+				);
+
+		return Clients.Client(Context.ConnectionId).SendAsync("RequestAvailableSupportsResponse", JsonConvert.SerializeObject(supportLocations));
 	}
 
 	public Task Meow() {
