@@ -118,8 +118,12 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 	const data: Player[] = JSON.parse(json)
 	console.log(data)
 
+	const orderLayer = $('#OrderLayer #Layer2').get(0)
+	orderLayer.innerHTML = ''
+
+	const unitLayer = $('#UnitLayer').get(0)
+	unitLayer.innerHTML = ''
 	data.forEach((player) => {
-		const color = colors[player.Countries[0].Name]
 		player.Countries.forEach((country) => {
 			country.Territories.forEach(async (territory) => {
 				$(`#m-${territory.Name.toLowerCase()}`).each(function () {
@@ -133,11 +137,6 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 			})
 		})
 
-		const orderLayer = $('#OrderLayer #Layer2').get(0)
-		orderLayer.innerHTML = ''
-
-		const unitLayer = $('#UnitLayer').get(0)
-		unitLayer.innerHTML = ''
 		player.Units.forEach((unit) => {
 			const unitType = unit.Type === 0 ? 'Army' : 'Fleet'
 			const coordinates = provinceData[unit.Location!.toLowerCase()]
@@ -202,8 +201,9 @@ gameConnection.on('RequestAvailableMovementsResponse', (json: string) => {
 						.off('click')
 						.on('click', function () {
 							secondTerritorySelection = adjacency
+
 							console.log(
-								`selected territories ${firstTerritorySelection} -> ${secondTerritorySelection}`,
+								`MoveOrder: ${firstTerritorySelection} -> ${secondTerritorySelection}`,
 							)
 
 							gameConnection
@@ -213,7 +213,7 @@ gameConnection.on('RequestAvailableMovementsResponse', (json: string) => {
 									country,
 									firstTerritorySelection,
 									secondTerritorySelection,
-									'movement',
+									'move',
 								)
 								.catch((error) =>
 									console.error(
@@ -265,6 +265,27 @@ gameConnection.on('RequestAvailableMovementsResponse', (json: string) => {
 							resetTerritories()
 						})
 				})
+
+				$(`#${territory.toLowerCase()}`)
+					.off('click')
+					.on('click', function () {
+						secondTerritorySelection = territory
+
+						gameConnection.invoke(
+							'AddOrder',
+							gameId,
+							country,
+							firstTerritorySelection,
+							secondTerritorySelection,
+							'hold',
+						)
+
+						console.log(`HoldOrder: ${firstTerritorySelection}`)
+
+						firstTerritorySelection = null
+						secondTerritorySelection = null
+						resetTerritories()
+					})
 			})
 		})
 	}

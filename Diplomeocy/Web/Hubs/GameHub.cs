@@ -89,10 +89,20 @@ public class GameHub : Hub {
 			player.Orders.Remove(existingOrder);
 		}
 
-		Order order = new MoveOrder {
-			Unit = player.Unit(territoryFrom),
-			Target = handler.Board.Territory(territoryTo)
-		};
+		Order? order = null;
+
+		if (type == "move") {
+			order = new MoveOrder {
+				Unit = player.Unit(territoryFrom),
+				Target = handler.Board.Territory(territoryTo)
+			};
+		} else if (type == "hold") {
+			order = new HoldOrder {
+				Unit = player.Unit(territoryFrom),
+			};
+		}
+
+		if (order is null) return Task.FromCanceled(CancellationToken.None);
 		player.Orders.Add(order);
 
 		Debug.WriteLine($"Adding {order} to {country}");
@@ -106,6 +116,16 @@ public class GameHub : Hub {
 
 			if (handler.IsPlayerReady.All(kvp => kvp.Value) || true /* REMBER TO DELTE THSI */) {
 				// everyone's ready
+
+				handler.Players
+					.Where(player => player.Orders.Count != player.Units.Count)
+					.ToList()
+					.ForEach(player =>
+								player.Units.Where(unit => !player.Orders.Any(order => order.Unit == unit))
+								.ToList()
+								.ForEach(unit => player.Orders.Add(new HoldOrder {
+									Unit = unit,
+								})));
 				handler.ResolveOrderResolutionPhase();
 				handler.GameTurn.Phase = GamePhase.AdvanceTurn;
 				handler.IsPlayerReady.Clear();
