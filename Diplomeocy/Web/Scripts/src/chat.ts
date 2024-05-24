@@ -15,12 +15,14 @@ chatData.connect(() => {
 	sendButton.disabled = false
 	joinGroupButton.disabled = false
 
-	chatData.user = 'meow !!! rember to change thsi'
+	chatData.user = userInput.value
 	userInput.value = chatData.user
 	chatData.joinGroup('all')
 })
 
 const userInput = document.getElementById('user-input') as HTMLInputElement
+console.log(userInput)
+console.log(userInput.value)
 const messageInput = document.getElementById(
 	'message-input',
 ) as HTMLInputElement
@@ -28,7 +30,7 @@ const messageInput = document.getElementById(
 sendButton.onclick = (_: Event) => {
 	const user: string = userInput.value
 	const message: string = messageInput.value
-
+	
 	chatData.user = user
 	chatData.sendMessageToGroup(message)
 	messageInput.value = ''

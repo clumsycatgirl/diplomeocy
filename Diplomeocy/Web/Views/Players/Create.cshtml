@@ -2,31 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    Console.WriteLine(Model.User);
-    List<string> l = new List<string>();
-    l.Add("Italy");
-    l.Add("Austria");
-    l.Add("England");
-    l.Add("Germany");
-    l.Add("France");
-    l.Add("Russia");
-    l.Add("Turkey");
-    /*
-     * <div class="form-group">
-                <label asp-for="States" class="control-label"></label>
-                <select asp-for="States">
-                    <option value="Italy">Italy</option>
-                    <option value="Austria">Austria</option>
-                    <option value="England">England</option>
-                    <option value="Germany">Germany</option>
-                    <option value="France">France</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Turkey">Turkey</option>
-                </select>
-                <input asp-for="States" class="form-control" />
-                <span asp-validation-for="States" class="text-danger"></span>
-                    </div>
-    */
 }
 
 <h1>Create</h1>
@@ -34,7 +9,7 @@
 <h4>Players</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="user-details-form">
         <form id="form">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -49,7 +24,7 @@
             </div>
 
             <div class="form-group">
-                <input type="button" id="button" value="Create" class="btn btn-primary" />
+                <input type="button" id="button" value="Create" class="user-button" />
             </div>
         </form>
     </div>

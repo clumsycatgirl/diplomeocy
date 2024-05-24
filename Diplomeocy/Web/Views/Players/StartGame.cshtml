@@ -11,22 +11,23 @@
     <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
         <div class="form-group">
             <label class="control-label">Id Table</label>
-            <input class="form-control" value="@Model.ElementAt(0).IdTable" disabled />
+            <input class="chat-input" value="@Model.ElementAt(0).IdTable" disabled />
         </div>
         @if (i == 7)
         {
 
-            <input type="submit" value="Edit" class="user-button" />
+            <input type="submit" value="Start" class="user-button" />
 
         }
     </form>
     
     
-
+    <div style="display: flex;
+	flex-direction: row;">
     @foreach (var item in Model)
     {
-        <div>
-            <div class="user-details-form">
+
+            <div class="player-form">
                 <div class="relative">
                     <h2 class="user-details-text">@Html.DisplayNameFor(model => model.Username):</h2>
                     <h3 class="">@item.Username</h3>
@@ -36,9 +37,9 @@
                     <img src="@item.PathImage" alt="Meow" class="user-details-cat-image" />
                 </div>
             </div>
-        </div>
+       
     }
-
+        </div>
 </div>
 
 
