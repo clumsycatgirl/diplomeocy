@@ -186,11 +186,10 @@ public class GameHub : Hub {
 								co.ConvoyedOrder = (MoveOrder)convoyedOrder;
 							}
 						}));
-				handler.ResolveOrderResolutionPhase();
-				handler.GameTurn.Phase = GamePhase.AdvanceTurn;
+				handler.AdvanceTurn();
 				handler.IsPlayerReady.Clear();
 				// handler.Players.ForEach(p => handler.IsPlayerReady.Add(p, false));
-				Clients.Group(gameId).SendAsync("AdvanceTurn");
+				Clients.Group(gameId).SendAsync("AdvanceTurn", handler.GameTurn);
 			}
 		}
 

@@ -324,6 +324,10 @@ public class GameHandler {
 				GameTurn.Phase = GamePhase.OrderResolution;
 				break;
 			case GamePhase.OrderResolution:
+				ResolveOrderResolutionPhase();
+				GameTurn.Phase = GamePhase.Retreat;
+				break;
+			case GamePhase.Retreat:
 				GameTurn.Phase = GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.AdvanceTurn:
@@ -531,51 +535,3 @@ public class GameHandler {
 		Log.WriteLine("\n");
 	}
 }
-
-#region backups cause I'm a pussy and I don't trust git I'm sorry linus
-// rember to fix double checks
-//Players.ForEach(player =>
-//	player.Orders.ForEach(order => {
-//		Log.WriteLine(order);
-//		if (order is MoveOrder moveOrder) {
-//			destinations[moveOrder.Unit] = moveOrder.Target ?? throw new InvalidOperationException();
-//		} else if (order is SupportOrder supportOrder && Players.Any(player => player.Orders.Contains(supportOrder.SupportedOrder))) {
-//			Log.WriteLine("adding support for " + supportOrder.Unit);
-//			supportCounts[supportOrder.SupportedOrder.Unit] = supportCounts.GetValueOrDefault(supportOrder.SupportedOrder.Unit, 0) + 1;
-//		}
-//	}));
-
-//Log.WriteLine("\n--Calculated supports--");
-//supportCounts.ToList().ForEach(pair => Log.WriteLine($"support: {pair.Key} -> {pair.Value}"));
-//Log.WriteLine("");
-//destinations.ToList().ForEach(pair => {
-//	Unit unit = pair.Key;
-//	Territory territory = pair.Value;
-
-//	if (destinations.Count(kvp => kvp.Value == territory) == 1) {
-//		unit.Location = territory;
-//		territory.OccupyingUnit = unit;
-//		return;
-//	}
-
-//	Log.WriteLine($"contesting {territory}");
-//	List<KeyValuePair<Unit, Territory>> attackingUnits = destinations
-//		.Where(pair => pair.Value == territory)
-//		.ToList();
-
-//	attackingUnits.ToList().ForEach(kvp => Log.WriteLine($"{kvp.Key}: {kvp.Value} with support {supportCounts.GetValueOrDefault(kvp.Key, 0)}"));
-
-//	KeyValuePair<Unit, int> maxSupportUnit = attackingUnits
-//		.Select(unit => new KeyValuePair<Unit, int>(unit.Key, supportCounts.GetValueOrDefault(unit.Key, 0)))
-//		.OrderByDescending(pair => pair.Value)
-//		.First();
-
-//	bool isTie = attackingUnits
-//		.Any(unit => supportCounts.GetValueOrDefault(unit.Key, 0) == maxSupportUnit.Value && unit.Key != maxSupportUnit.Key);
-
-//	if (!isTie && maxSupportUnit.Key == unit) {
-//		unit.Location = territory;
-//		territory.OccupyingUnit = unit;
-//	}
-//});
-#endregion
