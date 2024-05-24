@@ -59,15 +59,16 @@ public class GameHub : Hub {
 
 		handler!.Players.ForEach(player => Debug.WriteLine($"{player.Countries[0].Name} -> {player.Units.Count}"));
 
-		Dictionary<Territories, List<string>> adjacencies =
-			handler.Players
-				.First(player => player.Countries[0].Name == country)
+		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+		Dictionary<Territories, List<string>> adjacencies = player
 				.Units
 				.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
 				.ToDictionary(
 					territory => territory,
 					territory => Board
 									.TerritoryAdjacency(handler.Board, territory)
+									.Where(adjacency =>
+										Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
 									.Select(adjacency => adjacency.Name)
 									.ToList()
 				);
