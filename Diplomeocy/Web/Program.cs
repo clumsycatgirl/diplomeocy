@@ -74,8 +74,13 @@ app.UseSession();
 app.UseCors("cors");
 
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+		name: "default",
+		pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+	name: "StartGame",
+	pattern: "Players/StartGame/{id}",
+	defaults: new { controller = "Players", action = "StartGame" });
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chat/text");

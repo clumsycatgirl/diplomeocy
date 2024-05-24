@@ -1,14 +1,8 @@
 ﻿import Swal from 'sweetalert2'
-import Result, {
-	isErrorResult,
-	isNotFoundResult,
-	isRedirectResult,
-} from '../results'
+import Result, { isErrorResult, isNotFoundResult, isRedirectResult } from '../results'
 
 // input field will reset errors when focusing
 $(() => {
-
-	
 	$('input').on('focus', function () {
 		console.log('meow')
 		$(this).removeClass('is-invalid')
@@ -16,7 +10,6 @@ $(() => {
 	})
 
 	$('#button').on('click', async function (event) {
-		
 		// avoid empty submit but we're not using the form so shouldn't need
 		event.preventDefault()
 
@@ -24,9 +17,7 @@ $(() => {
 		const formData = new FormData(form) // automatically genegerate data to send with given inputs inside form
 
 		// cross-site request forgery token
-		const csrfToken = $(
-			'input[name="__RequestVerificationToken"]',
-		).val() as string
+		const csrfToken = $('input[name="__RequestVerificationToken"]').val() as string
 
 		// console.table(formData) // check what you're sending to the backend
 
@@ -39,21 +30,19 @@ $(() => {
 					RequestVerificationToken: csrfToken,
 				},
 			})
-			
+
 			// check if not 200
 			if (!response.ok) {
 				console.error(await response.text())
 				throw new Error(`HTTP error! status: ${response.status}`)
 			}
-			
+
 			// parse received response into json
 			const result: Result = await response.json()
-			return;
 			console.table(result) // view data inside json if you need to
 
 			if (isRedirectResult(result)) {
 				// redirect
-				
 				//window.location.href = result.destination
 			}
 
@@ -81,6 +70,4 @@ $(() => {
 			console.error('Error:', error)
 		}
 	})
-
-	
 })
