@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
@@ -42,15 +43,26 @@ namespace Web.Controllers {
 
 			return View(players);
 		}
+		// GET: StartGame
+		public async Task<IActionResult> StartGame(int? id) {
+			if (id is null || context.Players is null) {
+				return NotFound();
+			}
 
+			var tables = await context.Players
+				.FirstOrDefaultAsync(m => m.IdTable == id);
+			if (tables is null) {
+				return NotFound();
+			}
+			return View();
+		}
 		// GET: Players/Create
 		public IActionResult Create() {
-			return View(new UserPlayer {
+			return base.View(new UserPlayer {
 				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				IdTable = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				User = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
-					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
-			});
+					?? throw new Exception("you can only create a table when logged so go log in you dumbass") });
 		}
 
 		// POST: Players/Create

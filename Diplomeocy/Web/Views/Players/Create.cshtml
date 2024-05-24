@@ -3,6 +3,30 @@
 @{
     ViewData["Title"] = "Create";
     Console.WriteLine(Model.User);
+    List<string> l = new List<string>();
+    l.Add("Italy");
+    l.Add("Austria");
+    l.Add("England");
+    l.Add("Germany");
+    l.Add("France");
+    l.Add("Russia");
+    l.Add("Turkey");
+    /*
+     * <div class="form-group">
+                <label asp-for="States" class="control-label"></label>
+                <select asp-for="States">
+                    <option value="Italy">Italy</option>
+                    <option value="Austria">Austria</option>
+                    <option value="England">England</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Turkey">Turkey</option>
+                </select>
+                <input asp-for="States" class="form-control" />
+                <span asp-validation-for="States" class="text-danger"></span>
+                    </div>
+    */
 }
 
 <h1>Create</h1>
@@ -18,9 +42,11 @@
                 <input asp-for="IdTable" class="form-control"/>
                 <span asp-validation-for="IdTable" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <input asp-for="User" class="form-control" value="@Model.User" hidden/>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

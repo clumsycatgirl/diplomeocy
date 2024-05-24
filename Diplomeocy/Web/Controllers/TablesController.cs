@@ -1,4 +1,6 @@
-﻿using Diplomacy;
+﻿using System;
+
+using Diplomacy;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,26 +44,16 @@ namespace Web.Controllers {
 
 			return View(tables);
 		}
-		// GET: StartGame
-		public async Task<IActionResult> StartGame(int? id) {
-			if (id is null || context.Tables is null) {
-				return NotFound();
-			}
-
-			var tables = await context.Tables
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (tables is null) {
-				return NotFound();
-			}
-
-
-			return View(await context.Tables.ToListAsync());
-		}
 
 		// GET: Table/Create
 		public IActionResult Create() {
+			Random r = new Random(Guid.NewGuid().GetHashCode());
+			int id = r.Next(100000, 999999 + 1);
+			while (context.Tables.Any(table => table.Id == id)) {
+				id = r.Next(100000, 999999 + 1);
+			}
 			return View(new HostGame {
-				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
+				Id = id,
 				Date = DateOnly.FromDateTime(DateTime.Now),
 				Host = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
 					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
@@ -85,11 +77,8 @@ namespace Web.Controllers {
 					IdUser = (int)userId,
 				});
 				await context.SaveChangesAsync();
-				Random random = new Random(Guid.NewGuid().GetHashCode());
-				int gameId = random.Next(100000, 1000000);
-				while (context.Games.Any(game => game.Id == gameId)) {
-					gameId = random.Next(100000, 1000000);
-				}
+				int gameId = table.Id;
+				
 
 				GameHandler handler = new GameHandler();
 				handler.StartGame();
