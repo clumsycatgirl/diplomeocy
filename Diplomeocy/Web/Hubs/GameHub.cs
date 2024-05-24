@@ -121,6 +121,11 @@ public class GameHub : Hub {
 				SupportedOrder = null,
 				WillSupport = (territoryFrom, territoryTo),
 			};
+		} else if (type == "convoy") {
+			order = new ConvoyOrder {
+				Unit = player.Unit(territoryUnit),
+				WillConvoy = (territoryFrom, territoryTo),
+			};
 		}
 
 		if (order is null) return Task.FromCanceled(CancellationToken.None);
@@ -164,6 +169,23 @@ public class GameHub : Hub {
 								so.SupportedOrder = supportedOrder;
 							}
 						}));
+				handler.Players
+					.ForEach(player => player.Orders
+						.OfType<ConvoyOrder>()
+						.Where(co => co.ConvoyedOrder is null)
+						.ToList()
+						.ForEach(co => {
+							Order? convoyedOrder = handler.Players
+								.SelectMany(player => player.Orders)
+								.FirstOrDefault(order =>
+									order.Unit.Location == handler.Board.Territory(co.WillConvoy.From)
+									&& order.Target == handler.Board.Territory(co.WillConvoy.To));
+							if (convoyedOrder is null) {
+								co.Status = OrderStatus.Failed;
+							} else {
+								co.ConvoyedOrder = (MoveOrder)convoyedOrder;
+							}
+						}));
 				handler.ResolveOrderResolutionPhase();
 				handler.GameTurn.Phase = GamePhase.AdvanceTurn;
 				handler.IsPlayerReady.Clear();
@@ -199,6 +221,7 @@ public class GameHub : Hub {
 									.Where(territory =>
 										unit.Location != territory))
 								.Select(territory => territory.Name)
+								.Distinct()
 								.ToList()
 						)
 				);
@@ -222,6 +245,7 @@ public class GameHub : Hub {
 
 		Player player = handler.Players.First(player => player.Countries[0].Name == country);
 
+		// {unit} -> {who} -> [where]
 		Dictionary<string, Dictionary<string, List<string>>> result = new();
 		// result["units"] = new();
 		// result["destinations"] = new();
@@ -237,15 +261,48 @@ public class GameHub : Hub {
 
 				// result[unitLocation]["units"];
 
-				unit.Location!.AdjacentTerritories
-					.Where(territory => territory.OccupyingUnit is not null)
-					.Where(territory => territory.OccupyingUnit?.Type == UnitType.Army)
-					.Select(territory => territory.Name)
-					.ToList()
-					.ForEach(unit => {
-						convoyRoutes.TryGetValue(Enum.Parse<Territories>(unit), out List<string>? destinations);
-						result[unitLocation][unit] = destinations ?? new();
-					});
+				// unit.Location!.AdjacentTerritories
+				// 	.Where(territory => territory.OccupyingUnit is not null)
+				// 	.Where(territory => territory.OccupyingUnit?.Type == UnitType.Army)
+				// 	.Select(territory => territory.Name)
+				// 	.ToList()
+				// 	.ForEach(adjacentTerritory => {
+				// convoyRoutes.TryGetValue(Enum.Parse<Territories>(adjacentTerritory), out List<string>? destinations);
+				// destinations ??= new();
+
+				HashSet<Territories> visited = new();
+				Stack<Territory> territoriesToVisit = new();
+				territoriesToVisit.Push(unit.Location!);
+
+				List<string> destinations = new();
+
+				while (territoriesToVisit.Any()) {
+					Territory currentTerritory = territoriesToVisit.Pop();
+					Territories currentAsEnum = Enum.Parse<Territories>(currentTerritory.Name);
+
+					if (visited.Contains(currentAsEnum)) continue;
+					visited.Add(currentAsEnum);
+
+					IEnumerable<string> landNearMe = Board.TerritoryAdjacency(handler.Board, currentAsEnum)
+						.Select(adjacentTerritory => Enum.Parse<Territories>(adjacentTerritory.Name))
+						.Where(adjacentTerritory => Board.CoastalTerritories.Contains(adjacentTerritory))
+						.Select(adjacentTerritory => adjacentTerritory.ToString());
+
+					destinations.AddRange(landNearMe);
+
+					Board.TerritoryAdjacency(handler.Board, currentAsEnum)
+						.Where(adjacentTerritory => Board.WaterTerritories.Contains(Enum.Parse<Territories>(adjacentTerritory.Name)))
+						.ToList()
+						.ForEach(territoriesToVisit.Push);
+				}
+
+				result[unitLocation]["destinations"] = destinations;
+				result[unitLocation]["units"] = destinations
+					.Select(territory => handler.Board.Territory(territory).OccupyingUnit)
+					.Where(unit => unit is not null && unit.Location is not null)
+					.Select(unit => unit!.Location!.Name)
+					.ToList();
+				// });
 			});
 
 		string json = JsonConvert.SerializeObject(result);
@@ -306,4 +363,57 @@ public class GameHub : Hub {
 
 		return convoyMovements;
 	}
+
+	private static Dictionary<Player, Dictionary<Territories, List<string>>> GetConvoyMovementsThroughTerritory(GameHandler handler, Territories targetTerritory) {
+		Dictionary<Player, Dictionary<Territories, List<string>>> convoyMovements = new();
+
+		handler.Players.ForEach(player => player.Units
+		   .Where(unit => unit.Location is not null) // will be useless after I add the retreat phase
+		   .Where(unit => Board.CoastalTerritories.Contains(Enum.Parse<Territories>(unit.Location!)))
+		   .Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
+		   .ToList()
+		   .ForEach(t => {
+			   convoyMovements.TryAdd(player, new());
+
+			   Stack<Territories> territories = new();
+			   territories.Push(t);
+			   List<Territories> waterVisited = new();
+
+			   while (territories.Any()) {
+				   Territories currentTerritory = territories.Pop();
+
+				   if (waterVisited.Contains(currentTerritory)) continue;
+				   waterVisited.Add(currentTerritory);
+
+				   Debug.WriteLine("Looking at " + currentTerritory);
+				   IEnumerable<Territories> landAdjacencies = Board.TerritoryAdjacency(handler.Board, currentTerritory)
+					   .Where(terr => !Board.WaterTerritories.Contains(Enum.Parse<Territories>(terr)))
+					   .Select(terr => Enum.Parse<Territories>(terr.Name));
+				   IEnumerable<Territories> waterAdjacencies = Board.TerritoryAdjacency(handler.Board, currentTerritory)
+					   .Where(terr => terr.OccupyingUnit is not null && Board.WaterTerritories.Contains(Enum.Parse<Territories>(terr)))
+					   .Select(terr => Enum.Parse<Territories>(terr.Name));
+
+				   if (currentTerritory == targetTerritory) {
+					   if (!convoyMovements[player].TryGetValue(t, out List<string>? movements)) {
+						   movements = new();
+						   convoyMovements[player].Add(t, movements);
+					   }
+					   movements.AddRange(landAdjacencies.Select(adj => adj.ToString()));
+				   }
+				   waterAdjacencies.ToList().ForEach(territories.Push);
+			   }
+		   }));
+
+		convoyMovements.Keys.ToList().ForEach(player =>
+			convoyMovements[player]
+				.Keys
+				.ToList()
+				.ForEach(key =>
+					convoyMovements[player][key] = convoyMovements[player][key]
+						.Distinct()
+						.ToList()));
+
+		return convoyMovements;
+	}
+
 }
