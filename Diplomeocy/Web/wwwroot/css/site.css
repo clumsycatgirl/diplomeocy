@@ -52,6 +52,19 @@ table, td, th, tr, thead {
 	color: #cfe4ea;
 }
 
+aside {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+}
+.sidebar {
+	position: relative;
+	@apply bottom-0 left-0;
+	width: 500px;
+}
+.map{
+	position:relative;
+}
 form {
 	width: 300px;
 	margin: 0 auto;
@@ -78,6 +91,45 @@ input[type="submit"]:focus{
 	margin-top:2.5%;
 	margin-left:5%;
 	margin-right:5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	color: #cfe4ea;
+	align-content: center;
+	vertical-align: middle;
+	background-color: #001f3dd0;
+	border: 1px solid #01182e;
+	box-shadow: inset 0 2px 4px 0 #01182e;
+
+}
+.chat-dropdown {
+	width: 90%;
+	padding: 10px;
+	height: 40px;
+	margin: 5%;
+	margin-bottom: 2.5%;
+	margin-top: 2.5%;
+	margin-left: 5%;
+	margin-right: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	color: #cfe4ea;
+	align-content: center;
+	vertical-align: middle;
+	background-color: #001f3dd0;
+	border: 1px solid #01182e;
+	box-shadow: inset 0 2px 4px 0 #01182e;
+}
+.chat-input {
+	width: 90%;
+	padding: 10px;
+	height: 40px;
+	margin: 5%;
+	margin-bottom: 2.5%;
+	margin-top: 2.5%;
+	margin-left: 5%;
+	margin-right: 5%;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	text-align: center;
@@ -144,6 +196,22 @@ input[type="submit"]:focus{
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
 	width: 30%;
+	color: #cfe4ea;
+	padding-block-start: auto;
+	box-shadow: 0 25px 50px -12px #003366;
+}
+.player-form {
+	position: relative;
+	background-color: #003366d1;
+	border: 1px solid #003366;
+	text-align: center;
+	border-radius: 10px;
+	margin: 0 auto;
+	position: relative;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+	margin-right: 2.5%;
+	width: 15%;
 	color: #cfe4ea;
 	padding-block-start: auto;
 	box-shadow: 0 25px 50px -12px #003366;

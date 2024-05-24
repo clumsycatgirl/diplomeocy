@@ -60,7 +60,6 @@ namespace Web.Controllers {
 						Id = user.Id,
 						IdTable = player.IdTable,
 						IdGame = game.Id,
-						Host = host.Host,
 						Username = user.Username,
 						PathImage = user.PathImage
 					});

@@ -13,6 +13,7 @@ using Web.Models;
 using Web.Serializers.Game;
 
 using MGame = Web.Models.Game;
+using Web.Utils;
 
 namespace Web.Controllers {
 	[Route("[controller]")]
@@ -65,15 +66,43 @@ namespace Web.Controllers {
 			string svgContent = System.IO.File.ReadAllText(svgFilePath);
 			ViewBag.SvgContent = svgContent;
 
+			var playerList = await context.Players.Where(m => m.IdTable == game.IdTable).ToListAsync();
+
+			List<PlayerModel> userList = new List<PlayerModel>();
+			List<PlayerModel> meowList = new List<PlayerModel>();
+
+			meowList.Add(new PlayerModel {
+				Id = 0,
+				IdTable = 0,
+				IdGame = game.Id,
+				Username = "meow",
+				PathImage = "meow"
+			});
+
+			foreach (var p in playerList) {
+				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == p.IdUser);
+				if (user != null) {
+					userList.Add(new PlayerModel {
+						Id = user.Id,
+						IdTable = game.IdTable,
+						IdGame = game.Id,
+						Username = user.Username,
+						PathImage = user.PathImage
+					});
+				}
+			}
+			
 			return View(new GameViewModel {
 				Game = game,
-				OwnCountry = HttpContext.Session.Get<string>($"{game.Id}-country") ?? throw new Exception("no country in session"),
-				Players = context.Players.Where(player => player.IdTable == game.IdTable).ToList(),
-				Table = context.Tables.FirstOrDefault(table => table.Id == game.IdTable) ?? throw new Exception("no this is impossible"),
-			});
+				User = HttpContext.Session.Get<User>("User"),
+				OwnCountry = "Russia",
+				Players = userList.Any() ? userList : meowList,
+				Table = context.Tables.FirstOrDefault(table => table.Id == game.IdTable)
+					?? throw new Exception("This is impossible"),
+			}) ;
 		}
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+			[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error() {
 			return View("Error!");
 		}

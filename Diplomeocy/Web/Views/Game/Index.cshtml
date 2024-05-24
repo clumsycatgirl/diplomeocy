@@ -1,30 +1,76 @@
 @model Web.Models.GameViewModel;
 
 @{
-
     ViewData["Title"] = $"Diplomeocy - {Model.Game.Id}";
 }
 
 <input type="hidden" id="group" value="@Model.Game.Id">
 <input type="hidden" id="own-country" value="@Model.OwnCountry">
 
-<div class="" id="svg-container">
-    @* <img src="~/assets/images/map.svg" alt="Map" class="object-cover w-full h-full"> *@
-    @Html.Raw(ViewBag.SvgContent)
-</div>
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <section class="sidebar">
+        <div class="container">
+            <div class="row p-1">
+                <label class="col-1">User</label>
+                <input type="text" class="chat-input" id="user-input" value="@Model.User.Username" disabled/>
+            </div>
+            <div class="row p-1">
+                <label class="col-1">Message</label>
+                <input type="text" class="chat-input" id="message-input" />
+            </div>
+            <div class="row p-1">
+                <div class="col-6 text-end">
+                    <input type="button" class="user-button" id="send-button" value="send message" />
+                </div>
+            </div>
+           
+        </div>
+        <div>
+            <select id="users" class="chat-dropdown">
+                <option value="all" selected>all</option>
+                @foreach (var item in Model.Players)
+                {
+                    <option value="@item.Username">@item.Username</option>
+                }
+            </select>
+        </div>
 
-<div>
-    <input type="radio" name="type" id="regular" value="regular" checked>
-    <label for="regular">Regular</label>
+        <input id="join-group-input" class="chat-input" type="text" list="groups" value="all" />
+        <input type="button" class="user-button" value="join group" id="join-group">
 
-    <input type="radio" value="support" name="type" id="support">
-    <label for="support">Support</label>
+        <div class="row p-1">
+            <div class="col-6">
+                <hr />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6">
+                <ul id="messages-list"></ul>
+            </div>
+        </div>
+    </section>
+    <section class="map">
+        <div id="svg-container">
+            <!-- Your SVG content goes here -->
+            @Html.Raw(ViewBag.SvgContent)
+        </div>
 
-    <input type="radio" value="convoy" name="type" id="convoy">
-    <label for="convoy">Convoy</label>
-</div>
+        <div>
+            <input type="radio" name="type" id="regular" value="regular" checked>
+            <label for="regular">Regular</label>
+
+            <input type="radio" value="support" name="type" id="support">
+            <label for="support">Support</label>
+
+            <input type="radio" value="convoy" name="type" id="convoy">
+            <label for="convoy">Convoy</label>
+        </div>
+    </section>
+</aside>
 
 
 @section Scripts {
     <script type="module" src="~/js/game/index.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script type="module" src="~/js/chat.js"></script>
 }
