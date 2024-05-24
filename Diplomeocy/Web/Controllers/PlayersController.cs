@@ -45,13 +45,18 @@ namespace Web.Controllers {
 		}
 
 		// GET: StartGame
-		public IActionResult StartGame(int? id) {
-			if (id is null || context.Players is null) {
+		public async Task<IActionResult> StartGame(int? id) {
+			if (id == null || context.Players == null) {
 				return NotFound();
 			}
 
+			var players = await context.Players
+				.FirstOrDefaultAsync(m => m.IdTable == id);
+			if (players == null) {
+				return NotFound();
+			}
 
-			return View();
+			return View(players);
 		}
 
 		// GET: Players/Create
