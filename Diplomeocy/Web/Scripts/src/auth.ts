@@ -18,7 +18,7 @@ $(() => {
 		event.preventDefault()
 
 		const form = document.getElementById('form') as HTMLFormElement
-		const formData = new FormData(form) // automatically gengerate data to send with given inputs inside form
+		const formData = new FormData(form) // automatically genegerate data to send with given inputs inside form
 
 		// cross-site request forgery token
 		const csrfToken = $(
