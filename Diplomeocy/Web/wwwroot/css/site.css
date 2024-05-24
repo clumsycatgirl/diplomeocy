@@ -60,6 +60,8 @@ form {
 
 form input[type="text"],
 form input[type="number"],
+form input[type="text"]:disabled,
+form input[type="number"]:disabled,
 form input[type="email"],
 form input[type="password"],
 form input[type="submit"],

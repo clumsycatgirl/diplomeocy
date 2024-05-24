@@ -1,4 +1,13 @@
 ﻿
+
+
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.EntityFrameworkCore.ChangeTracking;
+
+@using Web.Utils;
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,10 +40,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Create">Sign Up</a>
                         </li>
+                        @if (Context.Session.Get<User>("User") is not null)
+                        {
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tables" asp-action="Create">Crea Partita</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Create">Entra in Partita</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        
+                       
                     </ul>
                 </div>
             </div>
