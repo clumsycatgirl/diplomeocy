@@ -39,7 +39,8 @@ const colors: { [key: string]: string } = {
 }
 
 const gameId: string = $('#group').val() as string
-console.log(`Loaded game: '${gameId}'`)
+const country: string = $('#own-country').val() as string
+console.log(`Loaded game: '${gameId}' as '${country}'`)
 
 let provinceData: {
 	[name: string]: {
@@ -92,12 +93,24 @@ $(() => {
 			},
 		}
 	})
+
+	Object.keys(provinceData).forEach((province) => {
+		$(province.toLowerCase()).off('click')
+		$(`m-${province.toLowerCase()}`).off('click')
+	})
+})
+
+gameConnection.on('RequestError', (error: string) => {
+	console.log('[RequestError received]')
+	console.error(error)
 })
 
 gameConnection.on('JoinGameGroupConfirm', (groupId) => {
 	console.log('[JoinGameGroupConfirm received]')
 	gameConnection.invoke('RequestState', groupId)
 	console.log('[RequestState sending]')
+	gameConnection.invoke('RequestAvailableMovements', groupId, country)
+	console.log('[RequestAvailableMovements sending]')
 })
 
 gameConnection.on('RequestStateResponse', (json: string) => {
@@ -120,7 +133,11 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 			})
 		})
 
+		const orderLayer = $('#OrderLayer #Layer2').get(0)
+		orderLayer.innerHTML = ''
+
 		const unitLayer = $('#UnitLayer').get(0)
+		unitLayer.innerHTML = ''
 		player.Units.forEach((unit) => {
 			const unitType = unit.Type === 0 ? 'Army' : 'Fleet'
 			const coordinates = provinceData[unit.Location!.toLowerCase()]
@@ -131,7 +148,136 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 	})
 })
 
-gameConnection.on('RequestError', (error: string) => {
-	console.log('[RequestError received]')
-	console.error(error)
+let firstTerritorySelection: string = null
+let secondTerritorySelection: string = null
+gameConnection.on('RequestAvailableMovementsResponse', (json: string) => {
+	const data: {
+		[territory: string]: string[]
+	} = JSON.parse(json)
+
+	const previousClasses: { [territory: string]: string } = {}
+
+	const resetTerritories = () => {
+		Object.keys(data).forEach((territory) => {
+			// console.log(territory, ' restoring to ', previousClasses[territory])
+			// console.log('fuck1 ', territory)
+			if ($(`#m-${territory.toLowerCase()}`).hasClass('highlight'))
+				$(`#m-${territory.toLowerCase()}`).attr(
+					'class',
+					previousClasses[territory],
+				)
+			$(`#m-${territory.toLowerCase()}`).removeClass('highlight')
+
+			$(`#${territory.toLowerCase()}`).off('click')
+
+			data[territory].forEach((adjacency) => {
+				if ($(`#m-${adjacency.toLowerCase()}`).hasClass('highlight'))
+					$(`#m-${adjacency.toLowerCase()}`).attr(
+						'class',
+						previousClasses[adjacency],
+					)
+				$(`#m-${adjacency.toLowerCase()}`).removeClass('highlight')
+
+				$(`#${adjacency.toLowerCase()}`).off('click')
+			})
+		})
+
+		Object.keys(data).forEach((territory) => {
+			$(`#${territory.toLowerCase()}`).on('click', function () {
+				if (firstTerritorySelection !== null) return
+				// console.log('started order from ' + territory)
+
+				firstTerritorySelection = territory
+
+				const adjacencies = data[territory]
+				adjacencies.forEach((adjacency) => {
+					previousClasses[adjacency] = $(
+						`#m-${adjacency.toLowerCase()}`,
+					).attr('class')
+					$(`#m-${adjacency.toLowerCase()}`).attr(
+						'class',
+						'highlight',
+					)
+					$(`#${adjacency.toLowerCase()}`)
+						.off('click')
+						.on('click', function () {
+							secondTerritorySelection = adjacency
+							console.log(
+								`selected territories ${firstTerritorySelection} -> ${secondTerritorySelection}`,
+							)
+
+							gameConnection
+								.invoke(
+									'AddOrder',
+									gameId,
+									country,
+									firstTerritorySelection,
+									secondTerritorySelection,
+									'movement',
+								)
+								.catch((error) =>
+									console.error(
+										'Error sending ordwer',
+										error,
+									),
+								)
+
+							const coordFirst =
+								provinceData[
+									firstTerritorySelection.toLowerCase()
+								].unit
+							const coordSecond =
+								provinceData[
+									secondTerritorySelection.toLowerCase()
+								].unit
+
+							$('#Layer2 line').each(function () {
+								const $line = $(this)
+								if (
+									parseFloat($line.attr('x1')) ===
+										coordFirst.x &&
+									parseFloat($line.attr('y1')) ===
+										coordFirst.y
+								) {
+									$line.remove()
+								}
+							})
+
+							const $arrow = $(
+								document.createElementNS(
+									'http://www.w3.org/2000/svg',
+									'line',
+								),
+							)
+							$arrow
+								.attr('x1', coordFirst.x)
+								.attr('y1', coordFirst.y)
+								.attr('x2', coordSecond.x)
+								.attr('y2', coordSecond.y)
+								.attr('stroke', 'black')
+								.attr('stroke-width', '8')
+								.attr('marker-end', 'url(#arrow)')
+
+							$('#Layer2').append($arrow)
+
+							firstTerritorySelection = null
+							secondTerritorySelection = null
+							resetTerritories()
+						})
+				})
+			})
+		})
+	}
+
+	resetTerritories()
+
+	console.log(data)
+})
+
+gameConnection.on('AdvanceTurn', () => {
+	console.log('[AdvanceTurn received]')
+	gameConnection.invoke('RequestState', gameId)
+	console.log('[RequestState sending]')
+	gameConnection.invoke('RequestAvailableMovements', gameId, country)
+	console.log('[RequestAvailableMovements sending]')
 })

@@ -10,4 +10,5 @@ public class Player {
 
 	public Unit Unit(Territories territory) => Units.First(u => u.Location?.Name == territory.ToString());
 
+	public readonly List<(string type, string location)> UnitsSerializationData = new();
 }

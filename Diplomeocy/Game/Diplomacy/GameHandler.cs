@@ -14,6 +14,7 @@ public class GameHandler {
 	public List<Player> Players { get; set; } = new();
 	public Board Board { get; set; } = new();
 	public GameTurn GameTurn { get; set; } = new();
+	public readonly Dictionary<Player, bool> IsPlayerReady = new();
 
 	public GameHandler StartGame() {
 		Board = new();

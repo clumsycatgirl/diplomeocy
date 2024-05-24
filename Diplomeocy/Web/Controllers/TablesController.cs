@@ -53,7 +53,7 @@ namespace Web.Controllers {
 			if (tables is null) {
 				return NotFound();
 			}
-			
+
 
 			return View(await context.Tables.ToListAsync());
 		}
@@ -100,9 +100,9 @@ namespace Web.Controllers {
 						Converters = { new Serializers.Game.PlayerConverter() }
 					}),
 				});
-				
+
 				await context.SaveChangesAsync();
-				
+
 				gameHandlers.Add(game.Entity.Id.ToString(), handler);
 
 				//return RedirectToAction(nameof(Index));

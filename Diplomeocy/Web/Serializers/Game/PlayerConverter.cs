@@ -44,6 +44,15 @@ class PlayerConverter : JsonConverter<Player> {
 			player.Countries.Add(country);
 		}
 
+		foreach (JToken unitToken in playerObject["Units"]) {
+			string? unitType = unitToken["Type"]?.ToString();
+			string? unitLocation = unitToken["Location"]?.ToString();
+
+			if (unitToken is not null && unitLocation is not null) {
+				player.UnitsSerializationData.Add((unitType!, unitLocation!));
+			}
+		}
+
 		return player;
 	}
 

@@ -1,0 +1,266 @@
+------ [logs] ------
+--- [project configuration] ---
+ - Name: 'Web'
+ - Version: '1.0.0.0'
+ - Author: 'Web'
+ - Build: 'Debug'
+
+
+--dependency graph--
+
+looking at [Pending][1] (Fleet in SaintPetersburg) moves targets (Finland occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Prussia occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (BlackSea occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Moscow) moves targets (Ukraine occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Prussia) moves targets (Silesia occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Ukraine) moves targets (Rumania occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Constantinople occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Finland) moves targets (Sweden occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Silesia) moves targets (Berlin occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Sweden) moves targets (Denmark occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Constantinople) moves targets (Smyrna occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Rumania) moves targets (Budapest occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+[Pending][1] (Army in Berlin) moves targets (Kiel occupied by none): 
+	[Pending][1] (Fleet in Denmark) moves targets (Kiel occupied by none)
+[Pending][1] (Fleet in Denmark) moves targets (Kiel occupied by none): 
+	[Pending][1] (Army in Berlin) moves targets (Kiel occupied by none)
+
+looking at [Pending][1] (Fleet in Denmark) moves targets (Kiel occupied by none) with 
+	[Pending][1] (Army in Berlin) moves targets (Kiel occupied by none)
+
+looking at [Pending][1] (Fleet in Smyrna) moves targets (Constantinople occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Budapest) moves targets (Trieste occupied by none) with 
+	
+--orders review--
+[Failed][1] (Army in Berlin) moves targets (Kiel occupied by none): 
+	[Failed][1] (Fleet in Denmark) moves targets (Kiel occupied by none)
+[Failed][1] (Fleet in Denmark) moves targets (Kiel occupied by none): 
+	[Failed][1] (Army in Berlin) moves targets (Kiel occupied by none)
+
+
+--dependency graph--
+
+looking at [Pending][1] (Fleet in Constantinople) moves targets (BlackSea occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Trieste) moves targets (Serbia occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Berlin) moves targets (Prussia occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Denmark) moves targets (Sweden occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Fleet in Sweden) moves targets (Finland occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Prussia) moves targets (Warsaw occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Sevastopol occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Serbia) moves targets (Rumania occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+[Pending][1] (Army in Rumania) moves targets (Sevastopol occupied by ([Russia] Fleet in Sevastopol)): 
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Pending][1] (Army in Rumania) moves targets (Sevastopol occupied by ([Russia] Fleet in Sevastopol))
+
+looking at [Pending][1] (Fleet in Finland) moves targets (SaintPetersburg occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Livonia occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Rumania) moves targets (Sevastopol occupied by ([Russia] Fleet in Sevastopol)) with 
+	[Pending][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+--orders review--
+[Failed][1] (Army in Rumania) moves targets (Sevastopol occupied by ([Russia] Fleet in Sevastopol)): 
+	[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania))
+[Failed][1] (Fleet in Sevastopol) moves targets (Rumania occupied by ([Russia] Army in Rumania)): 
+	[Failed][1] (Army in Rumania) moves targets (Sevastopol occupied by ([Russia] Fleet in Sevastopol))
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Rumania) moves targets (Ukraine occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (BlackSea occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Livonia) moves targets (Warsaw occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in SaintPetersburg) moves targets (Finland occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Ukraine) moves targets (Moscow occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Finland) moves targets (SaintPetersburg occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Livonia occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Sevastopol occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Livonia) moves targets (Warsaw occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Moscow) moves targets (Ukraine occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in SaintPetersburg) moves targets (Finland occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (BlackSea occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Ukraine) moves targets (Rumania occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Sevastopol occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Moscow occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Finland) moves targets (SaintPetersburg occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (BlackSea occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Rumania) moves targets (Ukraine occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Moscow) moves targets (Warsaw occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in SaintPetersburg) moves targets (Finland occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+[Pending][1] (Army in Warsaw) moves targets (Moscow occupied by none): 
+	[Pending][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
+[Pending][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)): 
+	[Pending][1] (Army in Warsaw) moves targets (Moscow occupied by none)
+
+looking at [Pending][1] (Fleet in Finland) moves targets (SaintPetersburg occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Moscow occupied by none) with 
+	[Pending][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
+
+looking at [Pending][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)) with 
+	[Succeeded][1] (Army in Warsaw) moves targets (Moscow occupied by none)
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Sevastopol occupied by none) with 
+	
+--orders review--
+[Succeeded][1] (Army in Warsaw) moves targets (Moscow occupied by none): 
+	[Succeeded][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw))
+[Succeeded][1] (Army in Ukraine) moves targets (Warsaw occupied by ([Russia] Army in Warsaw)): 
+	[Succeeded][1] (Army in Warsaw) moves targets (Moscow occupied by none)
+
+
+--dependency graph--
+
+looking at [Pending][1] (Army in Warsaw) moves targets (Prussia occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Sevastopol) moves targets (BlackSea occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in SaintPetersburg) moves targets (Finland occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Moscow) moves targets (Livonia occupied by none) with 
+	
+--orders review--
+
+
+--dependency graph--
+
+looking at [Pending][1] (Fleet in BlackSea) moves targets (Sevastopol occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Prussia) moves targets (Warsaw occupied by none) with 
+	
+
+looking at [Pending][1] (Army in Livonia) moves targets (Moscow occupied by none) with 
+	
+
+looking at [Pending][1] (Fleet in Finland) moves targets (SaintPetersburg occupied by none) with 
+	
+--orders review--
+
+
