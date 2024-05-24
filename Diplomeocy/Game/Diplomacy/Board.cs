@@ -595,4 +595,96 @@ public class Board {
 			ETerritories.NorthSea,
 		};
 	}
+
+	public static bool CanUnitGoThere(Unit unit, ETerritories territory) {
+		List<ETerritories> landTerritories = new List<ETerritories> {
+			ETerritories.Bohemia,
+			ETerritories.Berlin,
+			ETerritories.Brest,
+			ETerritories.Budapest,
+			ETerritories.Bulgaria,
+			ETerritories.Burgundy,
+			ETerritories.Clyde,
+			ETerritories.Constantinople,
+			ETerritories.Denmark,
+			ETerritories.Edinburgh,
+			ETerritories.Finland,
+			ETerritories.Galicia,
+			ETerritories.Gascony,
+			ETerritories.Greece,
+			ETerritories.Holland,
+			ETerritories.Kiel,
+			ETerritories.Liverpool,
+			ETerritories.Livonia,
+			ETerritories.London,
+			ETerritories.Marseilles,
+			ETerritories.Moscow,
+			ETerritories.Munich,
+			ETerritories.Naples,
+			ETerritories.NorthAfrica,
+			ETerritories.Norway,
+			ETerritories.Paris,
+			ETerritories.Picardy,
+			ETerritories.Portugal,
+			ETerritories.Piedmont,
+			ETerritories.Prussia,
+			ETerritories.Rome,
+			ETerritories.Ruhr,
+			ETerritories.Rumania,
+			ETerritories.Serbia,
+			ETerritories.Smyrna,
+			ETerritories.Sevastopol,
+			ETerritories.Silesia,
+			ETerritories.Spain,
+			ETerritories.SaintPetersburg,
+			ETerritories.Sweden,
+			ETerritories.Switzerland,
+			ETerritories.Syria,
+			ETerritories.Tunis,
+			ETerritories.Tuscany,
+			ETerritories.Tyrolia,
+			ETerritories.Ukraine,
+			ETerritories.Venice,
+			ETerritories.Vienna,
+			ETerritories.Wales,
+			ETerritories.Warsaw,
+			ETerritories.Yorkshire
+		};
+		List<ETerritories> waterTerritories = new List<ETerritories> {
+			ETerritories.AdriaticSea,
+			ETerritories.AegeanSea,
+			ETerritories.BalticSea,
+			ETerritories.BarentsSea,
+			ETerritories.WesternMediterranean,
+			ETerritories.TyrrhenianSea,
+			ETerritories.Skagerrak,
+			ETerritories.NorwegianSea,
+			ETerritories.NorthAtlanticOcean,
+			ETerritories.MidAtlanticOcean,
+			ETerritories.IonianSea,
+			ETerritories.IrishSea,
+			ETerritories.GulfOfLyon,
+			ETerritories.GulfOfBothania,
+			ETerritories.EnglishChannel,
+			ETerritories.EasternMediterranean,
+			ETerritories.BlackSea,
+			ETerritories.HelgolandBight,
+			ETerritories.NorthSea,
+		};
+		List<ETerritories> coastalTerritories = new List<ETerritories> {
+ETerritories.Trieste,
+			ETerritories.Apuleia,
+			ETerritories.Albania,
+			ETerritories.Ankara,
+			ETerritories.Armenia,
+			ETerritories.Belgium,
+
+		};
+
+		if (unit.Type == UnitType.Army) {
+			return !waterTerritories.Contains(territory);
+		} else {
+			return !landTerritories.Contains(territory);
+		}
+	}
 }

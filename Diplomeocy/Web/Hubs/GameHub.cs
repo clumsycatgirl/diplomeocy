@@ -120,10 +120,6 @@ public class GameHub : Hub {
 		if (order is null) return Task.FromCanceled(CancellationToken.None);
 		player.Orders.Add(order);
 
-		Debug.WriteLine($"Adding {order} to {country} now has {player.Orders.Count} orders with {player.Units.Count} units");
-
-		player.Orders.ForEach(order => Debug.WriteLine(order));
-
 		if (player.Orders.Count == player.Units.Count) {
 			handler.Players.ForEach(player => {
 				if (!handler.IsPlayerReady.TryAdd(player, true)) {
