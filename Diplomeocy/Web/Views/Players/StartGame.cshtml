@@ -1,22 +1,26 @@
 ﻿@model IEnumerable<Web.Models.PlayerModel>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Start Game";
+    int i = Model.Count();
 }
 
-<h1>Details</h1>
+<h1>Start Game</h1>
 <div>
-    <div>@Model.ElementAt(0).IdTable</div>
-
-    @foreach (var item in Model)
-    {
-        @if (item.Id == item.Host)
+    
+        <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
+                <div class="form-group">
+                    <label class="control-label">Id Table</label>
+                    <input class="form-control" value="@Model.ElementAt(0).IdTable" disabled />
+                </div>
+        @if (i==7)
         {
-            <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
+            
                 <input type="submit" value="Edit" class="user-button" />
-            </form>
+            
         }
-    }
+    </form>
+    
     
 
     @foreach (var item in Model)

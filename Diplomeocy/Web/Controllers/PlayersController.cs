@@ -51,7 +51,6 @@ namespace Web.Controllers {
 				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == player.IdUser);
 				var host = await context.Tables.FirstOrDefaultAsync(t => t.Id == player.IdTable);
 				var game = await context.Games.FirstOrDefaultAsync(t => t.IdTable == player.IdTable);
-
 				if (user is not null && host is not null && game is not null) {
 					userList.Add(new PlayerModel {
 						Id = user.Id,
