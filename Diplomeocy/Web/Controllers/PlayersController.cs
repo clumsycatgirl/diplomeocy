@@ -49,13 +49,17 @@ namespace Web.Controllers {
 
 			foreach (var player in playerList) {
 				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == player.IdUser);
+				var host = await context.Tables.FirstOrDefaultAsync(t => t.Id == player.IdTable);
+				var game = await context.Games.FirstOrDefaultAsync(t => t.IdTable == player.IdTable);
 
-				if (user != null) {
+				if (user is not null && host is not null && game is not null) {
 					userList.Add(new PlayerModel {
-						Id = player.IdUser,
+						Id = user.Id,
 						IdTable = player.IdTable,
-						Username = user.Username, 
-						PathImage = user.PathImage 
+						IdGame = game.Id,
+						Host = host.Host,
+						Username = user.Username,
+						PathImage = user.PathImage
 					});
 				}
 			}

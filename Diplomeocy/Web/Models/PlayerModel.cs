@@ -4,6 +4,8 @@
 public class PlayerModel {
 	public int Id { get; set; }
 	public int IdTable { get; set; }
+	public int IdGame { get; set; }
+	public int Host { get; set; }
 	public string Username { get; set; }
 	public string PathImage { get; set; }
 

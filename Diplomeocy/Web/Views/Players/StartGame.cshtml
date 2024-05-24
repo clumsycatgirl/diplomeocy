@@ -10,6 +10,17 @@
 
     @foreach (var item in Model)
     {
+        @if (item.Id == item.Host)
+        {
+            <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
+                <input type="submit" value="Edit" class="user-button" />
+            </form>
+        }
+    }
+    
+
+    @foreach (var item in Model)
+    {
         <div>
             <div class="user-details-form">
                 <div class="relative">
