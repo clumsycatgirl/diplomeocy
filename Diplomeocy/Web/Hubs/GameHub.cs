@@ -60,20 +60,32 @@ public class GameHub : Hub {
 		GetConvoyMovements(handler).TryGetValue(player, out Dictionary<Territories, List<string>>? convoyMovements);
 		if (convoyMovements is null) convoyMovements = new();
 
+		// Dictionary<Territories, List<string>> adjacencies = player
+		// 		.Units
+		// 		.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
+		// 		.ToDictionary(
+		// 			territory => territory,
+		// 			territory => Board
+		// 							.TerritoryAdjacency(handler.Board, territory)
+		// 							.Where(adjacency =>
+		// 								Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
+		// 							.Select(adjacency => adjacency.Name)
+		// 							.Concat(convoyMovements.GetValueOrDefault(territory, new()))
+		// 							.Distinct()
+		// 							.ToList()
+		// 		);
 		Dictionary<Territories, List<string>> adjacencies = player
-				.Units
-				.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
-				.ToDictionary(
-					territory => territory,
-					territory => Board
-									.TerritoryAdjacency(handler.Board, territory)
-									.Where(adjacency =>
-										Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
-									.Select(adjacency => adjacency.Name)
-									.Concat(convoyMovements.GetValueOrDefault(territory, new()))
-									.Distinct()
-									.ToList()
-				);
+			.Units
+			.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
+			.ToDictionary(
+				territory => territory,
+				territory => Board
+								.TerritoryAdjacency(handler.Board, territory)
+								.Where(adjacency =>
+									Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
+								.Select(adjacency => adjacency.Name)
+								.ToList()
+			);
 		string json = JsonConvert.SerializeObject(adjacencies);
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestAvailableMovementsResponse", json);
 	}
@@ -188,6 +200,7 @@ public class GameHub : Hub {
 						}));
 				handler.AdvanceTurn();
 				handler.IsPlayerReady.Clear();
+				handler.Players.ForEach(p => p.Orders.Clear());
 				// handler.Players.ForEach(p => handler.IsPlayerReady.Add(p, false));
 				Clients.Group(gameId).SendAsync("AdvanceTurn", handler.GameTurn);
 			}
@@ -306,6 +319,27 @@ public class GameHub : Hub {
 
 		string json = JsonConvert.SerializeObject(result);
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestConvoyRoutesResponse", json);
+	}
+
+	public Task RequestRetreats(string gameId, string country) {
+		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
+			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
+		}
+
+		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+
+		Dictionary<string, List<string>> retreats = player.Units
+			.Where(unit => unit.Location is null)
+			.Select(unit => Enum.Parse<Territories>(unit.PreviousLocation!.Name))
+			.ToDictionary(
+				unit => unit.ToString(),
+				unit => Board.TerritoryAdjacency(handler.Board, unit)
+					.Where(territory => Board.CanUnitGoThere(player.Unit(unit), Enum.Parse<Territories>(territory.Name)))
+					.Select(territory => territory.Name)
+					.ToList()
+			);
+
+		return Clients.Client(Context.ConnectionId).SendAsync("RequestRetreatsResponse", JsonConvert.SerializeObject(retreats));
 	}
 
 	public Task Meow() {

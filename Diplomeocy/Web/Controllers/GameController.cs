@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Newtonsoft.Json;
 
+using Web.Utils;
+
 using Web.Hubs;
 using Web.Models;
 using Web.Serializers.Game;
@@ -65,7 +67,7 @@ namespace Web.Controllers {
 
 			return View(new GameViewModel {
 				Game = game,
-				OwnCountry = "Russia",
+				OwnCountry = HttpContext.Session.Get<string>($"{game.Id}-country") ?? throw new Exception("no country in session"),
 				Players = context.Players.Where(player => player.IdTable == game.IdTable).ToList(),
 				Table = context.Tables.FirstOrDefault(table => table.Id == game.IdTable) ?? throw new Exception("no this is impossible"),
 			});

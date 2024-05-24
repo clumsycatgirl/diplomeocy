@@ -27,7 +27,7 @@ interface Player {
 const gameConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl('/hubs/game').build()
 
 const gameId: string = $('#group').val() as string
-const country: string = $('#own-country').val() as string
+export let country: string = $('#own-country').val() as string
 console.log(`Loaded game: '${gameId}' as '${country}'`)
 
 let provinceData: {
@@ -138,6 +138,9 @@ gameConnection.on('RequestAvailableMovementsResponse', (json: string) => {
 	const data: {
 		[territory: string]: string[]
 	} = JSON.parse(json)
+
+	console.log('[RequestAvailableMovementsResponse received]')
+	console.log(data)
 
 	const $movementType = $(`input[type="radio"][name="type"][value="regular"]`)
 
@@ -609,11 +612,36 @@ gameConnection.on('RequestConvoyRoutesResponse', (json: string) => {
 	})
 })
 
-gameConnection.on('AdvanceTurn', (json: string) => {
-	console.log('[AdvanceTurn received]', json)
+gameConnection.on('AdvanceTurn', (data: { phase: string; year: number; season: string }) => {
+	console.log('[AdvanceTurn received]')
 
-	const data = JSON.parse(json)
+	const phases = ['Diplomacy', 'OrderResolution', 'Retreat', 'Build', 'AdvanceYear']
+	const seasons = ['Spring', 'Autumn']
+	data.phase = phases[parseInt(data.phase)]
+	data.season = seasons[parseInt(data.season)]
 
 	console.log(data)
+
+	if (data.phase === 'AdvanceYear') {
+		$('#year').text(data.year)
+		$('#season').text(data.season)
+	}
+
+	if (data.phase === 'OrderResolution') {
+		getAllData()
+	}
+
+	if (data.phase === 'Retreat') {
+		gameConnection.invoke('RequestRetreats', gameId, country)
+	}
+})
+
+gameConnection.on('RequestRetreatsResponse', (json: string) => {
+	const data: {
+		[unit: string]: string[]
+	} = JSON.parse(json)
+
+	console.log(data)
+
 	getAllData()
 })

@@ -94,8 +94,24 @@ namespace Web.Controllers {
 
 				gameHandlers.Add(game.Entity.Id.ToString(), handler);
 
+				List<Countries> availableCountries = Enum.GetValues<Countries>()
+						.Where(country => !handler.Players.Any(player => player.Countries.Any(c => c.Name == country.ToString())))
+						.ToList();
+
+				Countries country = availableCountries[new Random(Guid.NewGuid().GetHashCode()).Next(0, availableCountries.Count)];
+				(Country country, List<Unit> units) playerData = handler.CreatePlayerData(country);
+
+				handler!.Players.Add(new Diplomacy.Player {
+					Name = context.Users.Find(userId)?.Username ?? "Unknown",
+					Countries = new List<Country>() {
+							playerData.country,
+						},
+					Units = playerData.units,
+				});
+				HttpContext.Session.Set<string>($"{gameId}-country", playerData.country.Name);
+
 				//return RedirectToAction(nameof(Index));
-				return table is null ? this.JsonNotFound("tables") : this.JsonRedirect(Url.Action("StartGame","Players", new { id = table.Id })!);
+				return table is null ? this.JsonNotFound("tables") : this.JsonRedirect(Url.Action("StartGame", "Players", new { id = table.Id })!);
 			}
 			// return View(table);
 			return this.JsonError(("Sorry", "Something went wrong"));

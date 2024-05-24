@@ -1,5 +1,7 @@
 ﻿using System.Collections.Specialized;
 
+using Diplomacy;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +11,11 @@ using Web.Utils;
 namespace Web.Controllers {
 	public class PlayersController : Controller {
 		private readonly DatabaseContext context;
+		private readonly Dictionary<string, GameHandler> gameHandlers;
 
-		public PlayersController(DatabaseContext context) {
+		public PlayersController(DatabaseContext context, Dictionary<string, GameHandler> gameHandlers) {
 			this.context = context;
+			this.gameHandlers = gameHandlers;
 		}
 
 		// GET: Players
@@ -41,16 +45,16 @@ namespace Web.Controllers {
 			if (id == null || context.Players == null) {
 				return NotFound();
 			}
-			var playerList = await context.Players.Where(m => m.IdTable == id).ToListAsync();
+			List<Web.Models.Player> playerList = await context.Players.Where(m => m.IdTable == id).ToListAsync();
 			if (playerList is null) {
 				return RedirectToAction(nameof(Create));
 			}
 			List<PlayerModel> userList = new List<PlayerModel>();
 
 			foreach (var player in playerList) {
-				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == player.IdUser);
-				var host = await context.Tables.FirstOrDefaultAsync(t => t.Id == player.IdTable);
-				var game = await context.Games.FirstOrDefaultAsync(t => t.IdTable == player.IdTable);
+				Models.User? user = await context.Users.FirstOrDefaultAsync(u => u.Id == player.IdUser);
+				Models.Table? host = await context.Tables.FirstOrDefaultAsync(t => t.Id == player.IdTable);
+				Models.Game? game = await context.Games.FirstOrDefaultAsync(t => t.IdTable == player.IdTable);
 				if (user is not null && host is not null && game is not null) {
 					userList.Add(new PlayerModel {
 						Id = user.Id,
@@ -80,14 +84,19 @@ namespace Web.Controllers {
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,IdTable,IdUser")] Player players) {
+		public async Task<IActionResult> Create([Bind("Id,IdTable,IdUser")] Web.Models.Player players) {
 			int? userId = HttpContext.Session.Get<User>("User")?.Id;
 			if (userId is null) return NotFound();
 			//if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result)
 			//	return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
 
-			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result)
+			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result) {
+				if (gameHandlers.TryGetValue(players.IdTable.ToString(), out GameHandler? handler)) {
+					Diplomacy.Player? player = handler.Players.FirstOrDefault(player => player.UserId == userId);
+					HttpContext.Session.Set<string>($"{players.IdTable}-country", player.Countries[0].Name);
+				}
 				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
+			}
 			var playercount = context.Players.Count(m => m.IdTable == players.IdTable);
 			if (playercount >= 7) {
 				return this.JsonRedirect(nameof(Create));
@@ -95,9 +104,27 @@ namespace Web.Controllers {
 			if (ModelState.IsValid) {
 				context.Add(new Models.Player {
 					IdTable = players.IdTable,
-					IdUser = (int)userId,
+					IdUser = (int)userId!,
 				});
 				await context.SaveChangesAsync();
+				if (gameHandlers.TryGetValue(players.IdTable.ToString(), out GameHandler? handler)) {
+					List<Countries> availableCountries = Enum.GetValues<Countries>()
+						.Where(country => !handler.Players.Any(player => player.Countries.Any(c => c.Name == country.ToString())))
+						.ToList();
+
+					Countries country = availableCountries[new Random(Guid.NewGuid().GetHashCode()).Next(0, availableCountries.Count)];
+					(Country country, List<Unit> units) playerData = handler.CreatePlayerData(country);
+
+					handler!.Players.Add(new Diplomacy.Player {
+						UserId = userId,
+						Name = context.Users.Find(userId)?.Username ?? "Unknown",
+						Countries = new List<Country>() {
+							playerData.country,
+						},
+						Units = playerData.units,
+					});
+					HttpContext.Session.Set<string>($"{players.IdTable}-country", playerData.country.Name);
+				}
 				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
 			}
 			return View(players);
@@ -121,7 +148,7 @@ namespace Web.Controllers {
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,IdTable,IdUser")] Player players) {
+		public async Task<IActionResult> Edit(int id, [Bind("Id,IdTable,IdUser")] Web.Models.Player players) {
 			if (id != players.Id) {
 				return NotFound();
 			}

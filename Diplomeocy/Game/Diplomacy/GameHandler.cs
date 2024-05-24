@@ -2,7 +2,9 @@
 
 namespace Diplomacy;
 
+using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
 
 using Diplomacy.Orders;
 
@@ -309,6 +311,8 @@ public class GameHandler {
 		Players[6].Unit(Territories.SaintPetersburg).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.SaintPetersburg).Location!.OccupyingUnit = Players[6].Unit(Territories.SaintPetersburg);
 
+		Players.Clear();
+
 		GameTurn = new GameTurn {
 			Phase = GamePhase.Diplomacy,
 			Year = 1901,
@@ -322,12 +326,16 @@ public class GameHandler {
 		switch (GameTurn.Phase) {
 			case GamePhase.Diplomacy:
 				GameTurn.Phase = GamePhase.OrderResolution;
+				AdvanceTurn();
 				break;
 			case GamePhase.OrderResolution:
 				ResolveOrderResolutionPhase();
 				GameTurn.Phase = GamePhase.Retreat;
 				break;
 			case GamePhase.Retreat:
+				GameTurn.Phase = GamePhase.Build;
+				break;
+			case GamePhase.Build:
 				GameTurn.Phase = GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.AdvanceTurn:
@@ -520,6 +528,11 @@ public class GameHandler {
 			.ToImmutableList()
 			.ForEach(kvp => Log.WriteLine($"{kvp.Key}: \n\t{String.Join("\n\t", kvp.Value)}"));
 
+		Players
+			.SelectMany(player => player.Units)
+			.ToList()
+			.ForEach(unit => unit.PreviousLocation = unit.Location);
+
 		orders
 			.AsParallel()
 			.Where(order => order.Status != OrderStatus.Succeeded)
@@ -533,5 +546,288 @@ public class GameHandler {
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 
 		Log.WriteLine("\n");
+	}
+
+	public (Country country, List<Unit> units) CreatePlayerData(Countries country) {
+		if (country == ECountries.England) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "England",
+				Territories = new() {
+					Board.Territory(Territories.London),
+					Board.Territory(Territories.Liverpool),
+					Board.Territory(Territories.Edinburgh),
+					Board.Territory(Territories.Wales),
+					Board.Territory(Territories.Yorkshire),
+					Board.Territory(Territories.Clyde),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.England,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.London),
+					},
+					new Unit {
+						Country = ECountries.England,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Liverpool),
+					},
+					new Unit {
+						Country = ECountries.England,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Edinburgh),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.London.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.London.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.London.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Liverpool.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Liverpool.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Liverpool.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Edinburgh.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Edinburgh.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Edinburgh.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.Germany) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "Germany",
+				Territories = new() {
+					Board.Territory(Territories.Berlin),
+					Board.Territory(Territories.Munich),
+					Board.Territory(Territories.Ruhr),
+					Board.Territory(Territories.Kiel),
+					Board.Territory(Territories.Silesia),
+					Board.Territory(Territories.Prussia),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.Germany,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Berlin),
+					},
+					new Unit {
+						Country = ECountries.Germany,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Munich),
+					},
+					new Unit {
+						Country = ECountries.Germany,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Kiel),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Berlin.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Berlin.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Berlin.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Munich.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Munich.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Munich.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Kiel.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Kiel.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Kiel.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.Austria) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "Austria",
+				Territories = new() {
+					Board.Territory(Territories.Vienna),
+					Board.Territory(Territories.Budapest),
+					Board.Territory(Territories.Trieste),
+					Board.Territory(Territories.Tyrolia),
+					Board.Territory(Territories.Bohemia),
+					Board.Territory(Territories.Galicia),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.Austria,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Vienna),
+					},
+					new Unit {
+						Country = ECountries.Austria,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Budapest),
+					},
+					new Unit {
+						Country = ECountries.Austria,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Trieste),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Vienna.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Vienna.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Vienna.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Budapest.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Budapest.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Budapest.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Trieste.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Trieste.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Trieste.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.Turkey) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "Turkey",
+				Territories = new() {
+					Board.Territory(Territories.Ankara),
+					Board.Territory(Territories.Constantinople),
+					Board.Territory(Territories.Smyrna),
+					Board.Territory(Territories.Armenia),
+					Board.Territory(Territories.Syria),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.Turkey,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Ankara),
+					},
+					new Unit {
+						Country = ECountries.Turkey,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Constantinople),
+					},
+					new Unit {
+						Country = ECountries.Turkey,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Smyrna),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Ankara.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Ankara.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Ankara.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Constantinople.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Constantinople.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Constantinople.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Smyrna.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Smyrna.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Smyrna.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.France) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "France",
+				Territories = new() {
+					Board.Territory(Territories.Paris),
+					Board.Territory(Territories.Marseilles),
+					Board.Territory(Territories.Brest),
+					Board.Territory(Territories.Picardy),
+					Board.Territory(Territories.Burgundy),
+					Board.Territory(Territories.Gascony),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.France,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Paris),
+					},
+					new Unit {
+						Country = ECountries.France,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Marseilles),
+					},
+					new Unit {
+						Country = ECountries.France,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Brest),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Paris.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Paris.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Paris.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Marseilles.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Marseilles.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Marseilles.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Brest.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Brest.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Brest.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.Italy) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "Italy",
+				Territories = new() {
+					Board.Territory(Territories.Rome),
+					Board.Territory(Territories.Naples),
+					Board.Territory(Territories.Venice),
+					Board.Territory(Territories.Piedmont),
+					Board.Territory(Territories.Tuscany),
+					Board.Territory(Territories.Apuleia),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.Italy,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Rome),
+					},
+					new Unit {
+						Country = ECountries.Italy,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Naples),
+					},
+					new Unit {
+						Country = ECountries.Italy,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Venice),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Rome.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Rome.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Rome.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Naples.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Naples.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Naples.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Venice.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Venice.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Venice.ToString());
+
+			return data;
+		}
+
+		if (country == ECountries.Russia) {
+			(Country country, List<Unit> units) data = (new Country {
+				Name = "Russia",
+				Territories = new() {
+					Board.Territory(Territories.Moscow),
+					Board.Territory(Territories.SaintPetersburg),
+					Board.Territory(Territories.Warsaw),
+					Board.Territory(Territories.Sevastopol),
+					Board.Territory(Territories.Ukraine),
+					Board.Territory(Territories.Livonia),
+					Board.Territory(Territories.Finland),
+				}
+			}, new() {
+					new Unit {
+						Country = ECountries.Russia,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Moscow),
+					},
+					new Unit {
+						Country = ECountries.Russia,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.SaintPetersburg),
+					},
+					new Unit {
+						Country = ECountries.Russia,
+						Type = UnitType.Army,
+						Location = Board.Territory(Territories.Warsaw),
+					},
+					new Unit {
+						Country = ECountries.Russia,
+						Type = UnitType.Fleet,
+						Location = Board.Territory(Territories.Sevastopol),
+					},
+				});
+
+			data.units.First(unit => unit.Location!.Name == Territories.Moscow.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Moscow.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Moscow.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.SaintPetersburg.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.SaintPetersburg.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.SaintPetersburg.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Warsaw.ToString()).Location!.IsSupplyPoint = true;
+			data.units.First(unit => unit.Location!.Name == Territories.Warsaw.ToString()).Location!.OccupyingUnit = data.units.First(unit => unit.Location!.Name == Territories.Warsaw.ToString());
+			data.units.First(unit => unit.Location!.Name == Territories.Sevastopol.ToString()).Location!.IsSupplyPoint = true;
+
+			return data;
+		}
+
+		throw new UnreachableException();
 	}
 }
