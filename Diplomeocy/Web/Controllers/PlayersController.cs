@@ -49,7 +49,7 @@ namespace Web.Controllers {
 				return NotFound();
 			}
 
-			
+
 			return View();
 		}
 		// GET: Players/Create
@@ -58,7 +58,8 @@ namespace Web.Controllers {
 				Id = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				IdTable = new Random(Guid.NewGuid().GetHashCode()).Next(100000, 999999 + 1),
 				User = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
-					?? throw new Exception("you can only create a table when logged so go log in you dumbass") });
+					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
+			});
 		}
 
 		// POST: Players/Create

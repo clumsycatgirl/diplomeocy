@@ -93,6 +93,8 @@ const getAllData = () => {
 	console.log('[RequestAvailableMovements sending]')
 	gameConnection.invoke('RequestAvailableSupports', gameId, country)
 	console.log('[RequestAvailableSupports sending]')
+	gameConnection.invoke('RequestConvoyRoutes', gameId, country)
+	console.log('[RequestConvoyRoutes sending]')
 }
 
 gameConnection.on('RequestError', (error: string) => {
@@ -416,6 +418,12 @@ gameConnection.on('RequestAvailableSupportsResponse', (json: string) => {
 		resetTerritories()
 	})
 
+	console.log(data)
+})
+
+gameConnection.on('RequestConvoyRoutesResponse', (json: string) => {
+	console.log('[RequestConvoyRoutesResponse received]')
+	const data = JSON.parse(json)
 	console.log(data)
 })
 

@@ -2,14 +2,12 @@
 import Result, { isErrorResult, isRedirectResult } from '../results'
 
 $(() => {
-	$('#form').on('click', async function (event) {
+	$('#button').on('click', async function (event) {
 		event.preventDefault()
 
-		const formData = new FormData(this as HTMLFormElement)
+		const formData = new FormData($('#form').get(0) as HTMLFormElement)
 
-		const csrfToken = $(
-			'input[name="__RequestVerificationToken"]',
-		).val() as string
+		const csrfToken = $('input[name="__RequestVerificationToken"]').val() as string
 
 		try {
 			const response: Response = await fetch('/Player/StartGame', {
