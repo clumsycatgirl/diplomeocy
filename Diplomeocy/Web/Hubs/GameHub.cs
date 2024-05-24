@@ -76,6 +76,7 @@ public class GameHub : Hub {
 		// 		);
 		Dictionary<Territories, List<string>> adjacencies = player
 			.Units
+			.Where(unit => unit.Location is not null)
 			.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
 			.ToDictionary(
 				territory => territory,
@@ -84,6 +85,7 @@ public class GameHub : Hub {
 								.Where(adjacency =>
 									Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
 								.Select(adjacency => adjacency.Name)
+								.Concat(convoyMovements.GetValueOrDefault(territory, new()))
 								.ToList()
 			);
 		string json = JsonConvert.SerializeObject(adjacencies);
@@ -215,28 +217,78 @@ public class GameHub : Hub {
 		}
 
 		Player player = handler!.Players.First(p => p.Countries[0].Name == country);
-		Dictionary<string, Dictionary<string, List<string>>> supportLocations = player.Units
-			.ToDictionary(
-				unit =>
-					unit.Location!.Name,
-				unit =>
-					unit.Location!.AdjacentTerritories
-						.SelectMany(adjacency => adjacency.AdjacentTerritories)
-						.Concat(unit.Location!.AdjacentTerritories)
-						.Distinct()
-						.Where(adjacency => adjacency.OccupyingUnit is not null)
-						.Where(adjacency => unit.Location != adjacency)
-						.ToDictionary(
-							from => from.Name,
-							from => from.AdjacentTerritories
-								.Intersect(unit.Location!.AdjacentTerritories
-									.Where(territory =>
-										unit.Location != territory))
-								.Select(territory => territory.Name)
-								.Distinct()
-								.ToList()
-						)
-				);
+		//Dictionary<string, Dictionary<string, List<string>>> supportLocations = player.Units
+		//	.Where(unit => unit.Location is not null)
+		//	.ToDictionary(
+		//		unit =>
+		//			unit.Location!.Name,
+		//		unit =>
+		//			unit.Location!.AdjacentTerritories
+		//				.SelectMany(adjacency => adjacency.AdjacentTerritories)
+		//				.Concat(unit.Location!.AdjacentTerritories)
+		//				.Distinct()
+		//				.Where(adjacency => adjacency.OccupyingUnit is not null)
+		//				.Where(adjacency => unit.Location != adjacency)
+		//				.ToDictionary(
+		//					from => from.Name,
+		//					from => from.AdjacentTerritories
+		//						.Intersect(unit.Location!.AdjacentTerritories
+		//							.Where(territory =>
+		//								unit.Location != territory))
+		//						.Select(territory => territory.Name)
+		//						.Distinct()
+		//						.ToList()
+		//				)
+		//		);
+		Dictionary<string, Dictionary<string, List<string>>> supportLocations = new Dictionary<string, Dictionary<string, List<string>>>();
+
+		foreach (Unit unit in player.Units) {
+			if (unit.Location == null) {
+				continue;
+			}
+
+			string unitLocationName = unit.Location.Name;
+			if (!supportLocations.ContainsKey(unitLocationName)) {
+				supportLocations[unitLocationName] = new Dictionary<string, List<string>>();
+			}
+
+			HashSet<string> adjacentTerritoryNames = new HashSet<string>();
+
+			// Collect all adjacent territories and their adjacent territories
+			foreach (Territory adjacency in unit.Location.AdjacentTerritories) {
+				foreach (Territory adjacentAdjacency in adjacency.AdjacentTerritories) {
+					adjacentTerritoryNames.Add(adjacentAdjacency.Name);
+				}
+				adjacentTerritoryNames.Add(adjacency.Name);
+			}
+
+			// Remove the unit's own location from the set
+			adjacentTerritoryNames.Remove(unitLocationName);
+
+			// Iterate over the unique set of adjacent territories
+			foreach (string adjacentTerritoryName in adjacentTerritoryNames) {
+				Territory? adjacentTerritory = unit.Location.AdjacentTerritories.FirstOrDefault(at => at.Name == adjacentTerritoryName);
+				if (adjacentTerritory is null || adjacentTerritory.OccupyingUnit is null) {
+					continue;
+				}
+
+				if (!supportLocations[unitLocationName].ContainsKey(adjacentTerritoryName)) {
+					supportLocations[unitLocationName][adjacentTerritoryName] = new List<string>();
+				}
+
+				foreach (Territory territory in adjacentTerritory.AdjacentTerritories) {
+					bool isAdjacent = unit.Location.AdjacentTerritories.Any(at => at.Name == territory.Name);
+					if (isAdjacent && unitLocationName != territory.Name) {
+						supportLocations[unitLocationName][adjacentTerritoryName].Add(territory.Name);
+					}
+				}
+
+				// Remove duplicates from the list
+				List<string> distinctTerritories = supportLocations[unitLocationName][adjacentTerritoryName].Distinct().ToList();
+				supportLocations[unitLocationName][adjacentTerritoryName] = distinctTerritories;
+			}
+		}
+
 
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestAvailableSupportsResponse", JsonConvert.SerializeObject(supportLocations));
 	}
@@ -326,18 +378,46 @@ public class GameHub : Hub {
 			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
 		}
 
-		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+		Player? player = handler.Players.FirstOrDefault(player => player.Countries[0].Name == country);
+		if (player is null) return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid country: '{country}'");
 
-		Dictionary<string, List<string>> retreats = player.Units
-			.Where(unit => unit.Location is null)
-			.Select(unit => Enum.Parse<Territories>(unit.PreviousLocation!.Name))
-			.ToDictionary(
-				unit => unit.ToString(),
-				unit => Board.TerritoryAdjacency(handler.Board, unit)
-					.Where(territory => Board.CanUnitGoThere(player.Unit(unit), Enum.Parse<Territories>(territory.Name)))
-					.Select(territory => territory.Name)
-					.ToList()
-			);
+		// Dictionary<string, List<string>> retreats = player.Units
+		// .Where(unit => unit.Location is null && unit.PreviousLocation is not null)
+		// .ToDictionary(
+		// 	unit => unit.PreviousLocation!.Name,
+		// 	unit => {
+		// 		Territories previousLocation = Enum.Parse<Territories>(unit.PreviousLocation!.Name);
+		// 		List<string> possibleRetreats = Board.TerritoryAdjacency(handler.Board, previousLocation)
+		// 			.Where(territory => Board.CanUnitGoThere(player.Unit(previousLocation), Enum.Parse<Territories>(territory.Name)))
+		// 			.Select(territory => territory.Name)
+		// 			.ToList();
+
+		// 		return possibleRetreats.Any() ? possibleRetreats : new List<string>();
+		// 	});
+		Dictionary<string, List<string>> retreats = new Dictionary<string, List<string>>();
+
+		foreach (Unit unit in player.Units) {
+			if (unit.Location is null && unit.PreviousLocation is not null) {
+				string previousLocationName = unit.PreviousLocation.Name;
+				Territories previousLocation = (Territories)Enum.Parse(typeof(Territories), previousLocationName);
+
+				Debug.WriteLine($"Retired unit: {previousLocationName}");
+
+				List<string> possibleRetreats = new List<string>();
+
+				foreach (Territory territory in Board.TerritoryAdjacency(handler.Board, previousLocation)) {
+					if (Board.CanUnitGoThere(unit, (Territories)Enum.Parse(typeof(Territories), territory.Name)) && territory.OccupyingUnit is null) {
+						possibleRetreats.Add(territory.Name);
+					}
+				}
+
+				if (!retreats.ContainsKey(previousLocationName)) {
+					retreats[previousLocationName] = possibleRetreats.Any() ? possibleRetreats : new List<string>();
+				}
+
+				possibleRetreats.ForEach(t => Debug.WriteLine($"\t{t}"));
+			}
+		}
 
 		return Clients.Client(Context.ConnectionId).SendAsync("RequestRetreatsResponse", JsonConvert.SerializeObject(retreats));
 	}

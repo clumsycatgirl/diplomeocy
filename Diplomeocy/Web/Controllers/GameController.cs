@@ -91,18 +91,18 @@ namespace Web.Controllers {
 					});
 				}
 			}
-			
+
 			return View(new GameViewModel {
 				Game = game,
 				User = HttpContext.Session.Get<User>("User"),
-				OwnCountry = "Russia",
+				OwnCountry = HttpContext.Session.Get<string>($"{game.Id}-country") ?? throw new Exception("no country in session"),
 				Players = userList.Any() ? userList : meowList,
 				Table = context.Tables.FirstOrDefault(table => table.Id == game.IdTable)
 					?? throw new Exception("This is impossible"),
-			}) ;
+			});
 		}
 
-			[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error() {
 			return View("Error!");
 		}

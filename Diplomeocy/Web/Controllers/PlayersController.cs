@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-
-using Diplomacy;
+﻿using Diplomacy;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -92,6 +90,25 @@ namespace Web.Controllers {
 			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result) {
 				if (gameHandlers.TryGetValue(players.IdTable.ToString(), out GameHandler? handler)) {
 					Diplomacy.Player? player = handler.Players.FirstOrDefault(player => player.UserId == userId);
+					if (player is null) {
+						List<Countries> availableCountries = Enum.GetValues<Countries>()
+						.Where(country => !handler.Players.Any(player => player.Countries.Any(c => c.Name == country.ToString())))
+						.ToList();
+
+						Countries country = availableCountries[new Random(Guid.NewGuid().GetHashCode()).Next(0, availableCountries.Count)];
+						(Country country, List<Unit> units) playerData = handler.CreatePlayerData(country);
+
+						player = new Diplomacy.Player {
+							UserId = userId,
+							Name = context.Users.Find(userId)?.Username ?? "Unknown",
+							Countries = new List<Country>() {
+							playerData.country,
+						},
+							Units = playerData.units,
+						};
+
+						handler!.Players.Add(player);
+					}
 					HttpContext.Session.Set<string>($"{players.IdTable}-country", player.Countries[0].Name);
 				}
 				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
