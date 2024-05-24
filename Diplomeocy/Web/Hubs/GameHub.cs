@@ -7,7 +7,9 @@ using Game.Utils;
 
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Build.Framework;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Localization;
 
 using Newtonsoft.Json;
 
@@ -58,8 +60,41 @@ public class GameHub : Hub {
 		}
 
 		handler!.Players.ForEach(player => Debug.WriteLine($"{player.Countries[0].Name} -> {player.Units.Count}"));
-
 		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+
+		Dictionary<Territories, List<string>> convoyMovements = new();
+		player.Units
+			.Where(unit => Board.CoastalTerritories.Contains(Enum.Parse<Territories>(unit.Location!)))
+			.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
+			.ToList()
+			.ForEach(t => {
+				Stack<Territories> territories = new();
+				territories.Push(t);
+				List<Territories> waterVisited = new();
+				while (territories.Any()) {
+					Territories territory = territories.Pop();
+
+					if (waterVisited.Contains(territory)) continue;
+					waterVisited.Add(territory);
+
+					Debug.WriteLine("Looking at " + territory);
+					IEnumerable<Territories> landAdjacencies = Board.TerritoryAdjacency(handler.Board, territory)
+						.Where(terr => !Board.WaterTerritories.Contains(Enum.Parse<Territories>(terr)))
+						.Select(terr => Enum.Parse<Territories>(terr.Name));
+					IEnumerable<Territories> waterAdjacencies = Board.TerritoryAdjacency(handler.Board, territory)
+						.Where(terr => terr.OccupyingUnit is not null && Board.WaterTerritories.Contains(Enum.Parse<Territories>(terr)))
+						.Select(terr => Enum.Parse<Territories>(terr.Name));
+
+					if (!convoyMovements.TryGetValue(t, out List<string>? movements)) {
+						movements = new();
+						convoyMovements.Add(t, movements);
+					}
+
+					movements.AddRange(landAdjacencies.Select(adj => adj.ToString()));
+					waterAdjacencies.ToList().ForEach(territories.Push);
+				}
+			});
+
 		Dictionary<Territories, List<string>> adjacencies = player
 				.Units
 				.Select(unit => Enum.Parse<Territories>(unit.Location!.Name))
@@ -70,6 +105,8 @@ public class GameHub : Hub {
 									.Where(adjacency =>
 										Board.CanUnitGoThere(player.Unit(territory), Enum.Parse<Territories>(adjacency.Name)))
 									.Select(adjacency => adjacency.Name)
+									.Concat(convoyMovements.GetValueOrDefault(territory, new()))
+									.Distinct()
 									.ToList()
 				);
 		string json = JsonConvert.SerializeObject(adjacencies);
@@ -98,6 +135,7 @@ public class GameHub : Hub {
 			}
 			order = new MoveOrder {
 				Unit = player.Unit(territoryFrom),
+				IsConvoyed = true,
 				Target = handler.Board.Territory(territoryTo)
 			};
 		} else if (type == "hold") {

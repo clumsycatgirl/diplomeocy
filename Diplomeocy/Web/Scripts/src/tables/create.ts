@@ -7,9 +7,7 @@ $(() => {
 
 		const formData = new FormData(this as HTMLFormElement)
 
-		const csrfToken = $(
-			'input[name="__RequestVerificationToken"]',
-		).val() as string
+		const csrfToken = $('input[name="__RequestVerificationToken"]').val() as string
 
 		try {
 			const response: Response = await fetch('/Tables/Create', {

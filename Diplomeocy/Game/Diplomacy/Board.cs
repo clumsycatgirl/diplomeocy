@@ -537,7 +537,6 @@ public class Board {
 			ETerritories.Tunis,
 			ETerritories.WesternMediterranean,
 			ETerritories.GulfOfLyon,
-			ETerritories.Piedmont,
 			ETerritories.Tuscany,
 			ETerritories.Rome,
 			ETerritories.Naples,
@@ -596,8 +595,7 @@ public class Board {
 		};
 	}
 
-	public static bool CanUnitGoThere(Unit unit, ETerritories territory) {
-		List<ETerritories> landTerritories = new List<ETerritories> {
+	public static readonly List<ETerritories> LandTerritories = new List<ETerritories> {
 			ETerritories.Bohemia,
 			ETerritories.Budapest,
 			ETerritories.Burgundy,
@@ -614,7 +612,7 @@ public class Board {
 			ETerritories.Vienna,
 			ETerritories.Warsaw,
 		};
-		List<ETerritories> waterTerritories = new List<ETerritories> {
+	public static readonly List<ETerritories> WaterTerritories = new List<ETerritories> {
 			ETerritories.AdriaticSea,
 			ETerritories.AegeanSea,
 			ETerritories.BalticSea,
@@ -635,7 +633,7 @@ public class Board {
 			ETerritories.HelgolandBight,
 			ETerritories.NorthSea,
 		};
-		List<ETerritories> coastalTerritories = new List<ETerritories> {
+	public static readonly List<ETerritories> CoastalTerritories = new List<ETerritories> {
 			ETerritories.Trieste,
 			ETerritories.Apuleia,
 			ETerritories.Albania,
@@ -680,10 +678,11 @@ public class Board {
 			ETerritories.Yorkshire
 		};
 
+	public static bool CanUnitGoThere(Unit unit, ETerritories territory) {
 		if (unit.Type == UnitType.Army) {
-			return !waterTerritories.Contains(territory);
+			return !WaterTerritories.Contains(territory);
 		} else {
-			return !landTerritories.Contains(territory);
+			return !LandTerritories.Contains(territory);
 		}
 	}
 }
