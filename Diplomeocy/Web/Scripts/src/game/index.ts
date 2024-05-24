@@ -609,7 +609,11 @@ gameConnection.on('RequestConvoyRoutesResponse', (json: string) => {
 	})
 })
 
-gameConnection.on('AdvanceTurn', () => {
-	console.log('[AdvanceTurn received]')
+gameConnection.on('AdvanceTurn', (json: string) => {
+	console.log('[AdvanceTurn received]', json)
+
+	const data = JSON.parse(json)
+
+	console.log(data)
 	getAllData()
 })
