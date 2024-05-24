@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Specialized;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Web.Models;
@@ -39,14 +41,25 @@ namespace Web.Controllers {
 			if (id == null || context.Players == null) {
 				return NotFound();
 			}
-
-			var players = await context.Players
-				.FirstOrDefaultAsync(m => m.IdTable == id);
-			if (players == null) {
-				return NotFound();
+			var playerList = await context.Players.Where(m => m.IdTable == id).ToListAsync();
+			if(playerList is null) {
+				return RedirectToAction(nameof(Create));
 			}
+			List<PlayerModel> userList = new List<PlayerModel>();
 
-			return View(players);
+			foreach (var player in playerList) {
+				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == player.IdUser);
+
+				if (user != null) {
+					userList.Add(new PlayerModel {
+						Id = player.IdUser,
+						IdTable = player.IdTable,
+						Username = user.Username, 
+						PathImage = user.PathImage 
+					});
+				}
+			}
+			return View(userList);
 		}
 
 		// GET: Players/Create
@@ -69,14 +82,17 @@ namespace Web.Controllers {
 			if (userId is null) return NotFound();
 			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result)
 				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
-
+			var playercount = context.Players.Count(m => m.IdTable == players.IdTable);
+			if (playercount>=7) {
+				return this.JsonRedirect(nameof(Create));
+			}
 			if (ModelState.IsValid) {
 				context.Add(new Models.Player {
 					IdTable = players.IdTable,
 					IdUser = (int)userId,
 				});
 				await context.SaveChangesAsync();
-				return this.JsonRedirect(Url.Action("FUCKYOU", "Players", new { id = players.IdTable })!);
+				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
 			}
 			return View(players);
 		}
