@@ -43,6 +43,7 @@ namespace Web.Controllers {
 
 			return View(players);
 		}
+
 		// GET: StartGame
 		public IActionResult StartGame(int? id) {
 			if (id is null || context.Players is null) {
@@ -52,6 +53,7 @@ namespace Web.Controllers {
 
 			return View();
 		}
+
 		// GET: Players/Create
 		public IActionResult Create() {
 			return base.View(new UserPlayer {

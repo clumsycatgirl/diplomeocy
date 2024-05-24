@@ -78,7 +78,7 @@ namespace Web.Controllers {
 				});
 				await context.SaveChangesAsync();
 				int gameId = table.Id;
-				
+
 
 				GameHandler handler = new GameHandler();
 				handler.StartGame();
