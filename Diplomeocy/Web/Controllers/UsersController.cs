@@ -154,7 +154,7 @@ namespace Web.Controllers {
 						throw;
 					}
 				}
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(LogIn));
 			}
 			return View(user);
 		}
