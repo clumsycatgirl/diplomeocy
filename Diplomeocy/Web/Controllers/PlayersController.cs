@@ -42,7 +42,7 @@ namespace Web.Controllers {
 				return NotFound();
 			}
 			var playerList = await context.Players.Where(m => m.IdTable == id).ToListAsync();
-			if(playerList is null) {
+			if (playerList is null) {
 				return RedirectToAction(nameof(Create));
 			}
 			List<PlayerModel> userList = new List<PlayerModel>();
@@ -83,10 +83,13 @@ namespace Web.Controllers {
 		public async Task<IActionResult> Create([Bind("Id,IdTable,IdUser")] Player players) {
 			int? userId = HttpContext.Session.Get<User>("User")?.Id;
 			if (userId is null) return NotFound();
+			//if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result)
+			//	return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
+
 			if (context.Players.AnyAsync(m => m.IdUser == userId && m.IdTable == players.IdTable).Result)
 				return players is null ? this.JsonNotFound("players") : this.JsonRedirect(Url.Action("StartGame", new { id = players.IdTable })!);
 			var playercount = context.Players.Count(m => m.IdTable == players.IdTable);
-			if (playercount>=7) {
+			if (playercount >= 7) {
 				return this.JsonRedirect(nameof(Create));
 			}
 			if (ModelState.IsValid) {

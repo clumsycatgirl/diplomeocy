@@ -1,12 +1,11 @@
 ﻿namespace Diplomacy.Orders;
 public class ConvoyOrder : Order {
 
-#pragma warning disable CS8618
-	private MoveOrder convoyedOrder;
-#pragma warning restore CS8618
+	private MoveOrder? convoyedOrder;
+	public (Territories From, Territories To) WillConvoy { get; set; }
 
-	public required MoveOrder ConvoyedOrder {
-		get => convoyedOrder;
+	public MoveOrder ConvoyedOrder {
+		get => convoyedOrder!;
 		set {
 			convoyedOrder = value;
 			convoyedOrder.IsConvoyed = true;
@@ -23,6 +22,11 @@ public class ConvoyOrder : Order {
 	}
 
 	public override void Execute(Dictionary<Order, List<Order>>? dependencyGraph, Order? forwardDependency) {
+		if (convoyedOrder is null) {
+			Status = OrderStatus.Failed;
+			return;
+		}
+
 		Status = OrderStatus.Succeeded;
 	}
 

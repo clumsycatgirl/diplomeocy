@@ -26,16 +26,6 @@ interface Player {
 
 const gameConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl('/hubs/game').build()
 
-const colors: { [key: string]: string } = {
-	England: 'blue',
-	France: 'lavander',
-	Germany: 'grey',
-	Austria: 'red',
-	Italy: 'green',
-	Russia: 'purple',
-	Turkey: 'yellow',
-}
-
 const gameId: string = $('#group').val() as string
 const country: string = $('#own-country').val() as string
 console.log(`Loaded game: '${gameId}' as '${country}'`)
@@ -421,10 +411,202 @@ gameConnection.on('RequestAvailableSupportsResponse', (json: string) => {
 	console.log(data)
 })
 
+let convoyOrderCounter = 0
 gameConnection.on('RequestConvoyRoutesResponse', (json: string) => {
 	console.log('[RequestConvoyRoutesResponse received]')
-	const data = JSON.parse(json)
+	const data: {
+		[unit: string]: {
+			units: string[]
+			destinations: string[]
+		}
+	} = JSON.parse(json)
 	console.log(data)
+
+	const resetTerritories = () => {
+		console.log(previousClasses)
+
+		Object.keys(data).forEach((convoyingUnit) => {
+			const convoyableUnits = data[convoyingUnit].units
+			const convoyDestinations = data[convoyingUnit].destinations
+
+			const $convoyingUnit = $(`#${convoyingUnit.toLowerCase()}`)
+			const $convoyingUnitM = $(`#m-${convoyingUnit.toLowerCase()}`)
+
+			// console.log('restoring ', previousClasses[convoyingUnit], ' to ', $convoyingUnitM)
+
+			if ($convoyingUnitM.hasClass('highlight') || $convoyingUnitM.hasClass('highlight-unit')) {
+				$convoyingUnitM.attr('class', previousClasses[convoyingUnit])
+			}
+			$convoyingUnitM.removeClass('highlight').removeClass('highlight-unit')
+			$convoyingUnit.off('click')
+
+			convoyableUnits.forEach((convoyableUnit) => {
+				const $convoyableUnitM = $(`#m-${convoyableUnit.toLowerCase()}`)
+				const $convoyableUnit = $(`#${convoyableUnit.toLowerCase()}`)
+
+				// console.log('restoring ', previousClasses[convoyableUnit], ' to ', $convoyableUnitM)
+
+				if ($convoyableUnitM.hasClass('highlight') || $convoyableUnitM.hasClass('highlight-unit')) {
+					$convoyableUnitM.attr('class', previousClasses[convoyableUnit])
+				}
+				$convoyableUnitM.removeClass('highlight').removeClass('highlight-unit')
+				$convoyableUnit.off('click')
+
+				convoyDestinations.forEach((convoyDestination) => {
+					const $convoyDestionationM = $(`#m-${convoyDestination.toLowerCase()}`)
+					const $convoyDestionation = $(`#${convoyDestination.toLowerCase()}`)
+
+					// console.log('restoring ', previousClasses[convoyDestination], ' to ', $convoyDestionationM)
+
+					if ($convoyDestionationM.hasClass('highlight') || $convoyDestionationM.hasClass('highlight-unit')) {
+						$convoyDestionationM.attr('class', previousClasses[convoyDestination])
+					}
+					$convoyDestionationM.removeClass('highlight').removeClass('highlight-unit')
+					$convoyDestionation.off('click')
+				})
+			})
+		})
+
+		Object.keys(data).forEach((convoyingUnit) => {
+			const $convoyingUnit = $(`#${convoyingUnit.toLowerCase()}`)
+			const $convoyingUnitM = $(`#m-${convoyingUnit.toLowerCase()}`)
+
+			$convoyingUnit.on('click', function () {
+				Object.keys(data).forEach((unit) => $(`#${unit.toLowerCase()}`).off('click'))
+				Object.keys(data).forEach((unit) => $(`#m-${unit.toLowerCase()}`).off('click'))
+
+				if (!$convoyingUnitM.hasClass('highlight') && !$convoyingUnitM.hasClass('highlight-unit'))
+					previousClasses[convoyingUnit] = $convoyingUnitM.attr('class')
+				$convoyingUnitM.attr('class', 'highlight-unit')
+
+				const convoyableUnits = data[convoyingUnit].units
+				const convoyDestinations = data[convoyingUnit].destinations
+
+				convoyableUnits.forEach((convoyableUnit) => {
+					const $convoyableUnit = $(`#${convoyableUnit.toLowerCase()}`)
+					const $convoyableUnitM = $(`#m-${convoyableUnit.toLowerCase()}`)
+
+					if (!$convoyableUnitM.hasClass('highlight') && !$convoyableUnitM.hasClass('highlight-unit'))
+						previousClasses[convoyableUnit] = $convoyableUnitM.attr('class')
+					$convoyableUnitM.attr('class', 'highlight')
+
+					$convoyableUnit.on('click', function () {
+						resetTerritories()
+
+						Object.keys(data).forEach((unit) => $(`#${unit.toLowerCase()}`).off('click'))
+						Object.keys(data).forEach((unit) => $(`#m-${unit.toLowerCase()}`).off('click'))
+
+						const $convoyableUnit = $(`#${convoyableUnit.toLowerCase()}`)
+						const $convoyableUnitM = $(`#m-${convoyableUnit.toLowerCase()}`)
+
+						if (!$convoyableUnitM.hasClass('highlight') && !$convoyableUnitM.hasClass('highlight-unit'))
+							previousClasses[convoyableUnit] = $convoyableUnitM.attr('class')
+						$convoyableUnitM.attr('class', 'highlight-unit')
+
+						convoyDestinations.forEach((convoyDestination) => {
+							const $convoyDestination = $(`#${convoyDestination.toLowerCase()}`)
+							const $convoyDestinationM = $(`#m-${convoyDestination.toLowerCase()}`)
+
+							if (convoyDestination === 'Sweden') console.log('die', $convoyDestinationM)
+							if (!$convoyDestinationM.hasClass('highlight') && !$convoyDestinationM.hasClass('highlight-unit'))
+								previousClasses[convoyDestination] = $convoyDestinationM.attr('class')
+							$convoyDestinationM.attr('class', 'highlight')
+
+							$convoyDestination.on('click', function () {
+								console.log('convoy ', convoyingUnit, ' from ', convoyableUnit, ' to ', convoyDestination)
+
+								gameConnection.invoke('AddOrder', gameId, country, convoyableUnit, convoyDestination, 'convoy', convoyingUnit)
+
+								const coordFirst = provinceData[convoyableUnit.toLowerCase()].unit
+								const coordSecond = provinceData[convoyDestination.toLowerCase()].unit
+								const coordUnit = provinceData[convoyingUnit.toLowerCase()].unit
+
+								const midX = (coordFirst.x + coordSecond.x) / 2
+								const midY = (coordFirst.y + coordSecond.y) / 2
+
+								let convoyOrderCounter: number
+								$('#Layer2 line').each(function () {
+									const $line = $(this)
+									if (parseFloat($line.attr('x1')) === coordUnit.x && parseFloat($line.attr('y1')) === coordUnit.y) {
+										$line.remove()
+										convoyOrderCounter = parseInt($line.attr('data-co-count'))
+									}
+								})
+
+								console.log('deleting ', convoyOrderCounter)
+								$('#Layer2 line').each(function () {
+									const $line = $(this)
+									if (parseInt($line.attr('data-co-count')) === convoyOrderCounter) {
+										$line.remove()
+									}
+								})
+
+								const arrowExists = (x1: number, y1: number, x2: number, y2: number) => {
+									let exists = false
+									$('#Layer2 line').each(function () {
+										const $line = $(this)
+										if (
+											parseFloat($line.attr('x1')) === x1 &&
+											parseFloat($line.attr('y1')) === y1 &&
+											parseFloat($line.attr('x2')) === x2 &&
+											parseFloat($line.attr('y2')) === y2
+										) {
+											exists = true
+											return false
+										}
+									})
+									return exists
+								}
+
+								if (!arrowExists(coordFirst.x, coordFirst.y, coordSecond.x, coordSecond.y)) {
+									const $greyArrow = $(document.createElementNS('http://www.w3.org/2000/svg', 'line'))
+									$greyArrow
+										.attr('x1', coordFirst.x)
+										.attr('y1', coordFirst.y)
+										.attr('x2', coordSecond.x)
+										.attr('y2', coordSecond.y)
+										.attr('stroke', 'white')
+										.attr('stroke-dasharray', '5, 5')
+										.attr('stroke-width', '8')
+										.attr('marker-end', 'url(#arrow)')
+										.attr('data-co-count', convoyOrderCounter)
+									$('#Layer2').append($greyArrow)
+								}
+
+								const $blackArrow = $(document.createElementNS('http://www.w3.org/2000/svg', 'line'))
+								$blackArrow
+									.attr('x1', coordUnit.x)
+									.attr('y1', coordUnit.y)
+									.attr('x2', midX)
+									.attr('y2', midY)
+									.attr('stroke', 'black')
+									.attr('stroke-dasharray', '5, 5')
+									.attr('stroke-width', '8')
+									.attr('marker-end', 'url(#arrow)')
+									.attr('data-co-count', convoyOrderCounter)
+								$('#Layer2').append($blackArrow)
+
+								convoyOrderCounter++
+
+								firstTerritorySelection = null
+								secondTerritorySelection = null
+								unit = null
+								resetTerritories()
+							})
+						})
+					})
+				})
+			})
+		})
+	}
+
+	const $movementType = $(`input[type="radio"][name="type"][value="convoy"]`)
+	$movementType.on('change', function () {
+		if (!$(this).is(':checked')) return
+
+		console.log('chcked convoy')
+		resetTerritories()
+	})
 })
 
 gameConnection.on('AdvanceTurn', () => {
