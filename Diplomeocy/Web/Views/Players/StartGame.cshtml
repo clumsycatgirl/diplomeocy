@@ -1,4 +1,4 @@
-﻿@model Web.Models.Player
+﻿@model IEnumerable<Web.Models.PlayerModel>
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +6,34 @@
 
 <h1>Details</h1>
 <div>
+    <div>@Model.ElementAt(0).IdTable</div>
 
+    @foreach (var item in Model)
+    {
+        @if (item.Id == item.Host)
+        {
+            <form method="GET" asp-controller="Game" asp-action="Index" asp-route-id="@Model.ElementAt(0).IdGame">
+                <input type="submit" value="Edit" class="user-button" />
+            </form>
+        }
+    }
+    
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <div class="user-details-form">
+                <div class="relative">
+                    <h2 class="user-details-text">@Html.DisplayNameFor(model => model.Username):</h2>
+                    <h3 class="">@item.Username</h3>
+                </div>
+                <div class="relative">
+                    <h2 class="user-details-text">Image:</h2>
+                    <img src="@item.PathImage" alt="Meow" class="user-details-cat-image" />
+                </div>
+            </div>
+        </div>
+    }
 
 </div>
 

@@ -43,7 +43,7 @@ $(() => {
 
 			if (isRedirectResult(result)) {
 				// redirect
-				//window.location.href = result.destination
+				window.location.href = result.destination
 			}
 
 			if (isErrorResult(result)) {
