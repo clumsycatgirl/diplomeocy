@@ -6,9 +6,7 @@ import chatData from './chat_data'
 const sendButton = document.getElementById('send-button') as HTMLButtonElement
 sendButton.disabled = true
 
-const joinGroupButton = document.getElementById(
-	'join-group',
-) as HTMLButtonElement
+const joinGroupButton = document.getElementById('join-group') as HTMLButtonElement
 joinGroupButton.disabled = true
 
 chatData.connect(() => {
@@ -23,23 +21,20 @@ chatData.connect(() => {
 const userInput = document.getElementById('user-input') as HTMLInputElement
 console.log(userInput)
 console.log(userInput.value)
-const messageInput = document.getElementById(
-	'message-input',
-) as HTMLInputElement
+const messageInput = document.getElementById('message-input') as HTMLInputElement
 
 sendButton.onclick = (_: Event) => {
 	const user: string = userInput.value
 	const message: string = messageInput.value
-	
+
 	chatData.user = user
 	chatData.sendMessageToGroup(message)
 	messageInput.value = ''
 }
 
-const joinGroupInput = document.getElementById(
-	'join-group-input',
-) as HTMLInputElement
+const joinGroupInput = document.getElementById('join-group-input') as HTMLSelectElement
 joinGroupButton.onclick = async (_: Event) => {
+	console.log(joinGroupInput.value)
 	if (joinGroupInput.value === '') return
 
 	const newGroup = joinGroupInput.value

@@ -7,12 +7,14 @@
 <input type="hidden" id="group" value="@Model.Game.Id">
 <input type="hidden" id="own-country" value="@Model.OwnCountry">
 
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+<aside id="default-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    aria-label="Sidebar">
     <section class="sidebar">
         <div class="container">
             <div class="row p-1">
                 <label class="col-1">User</label>
-                <input type="text" class="chat-input" id="user-input" value="@Model.User.Username" disabled/>
+                <input type="text" class="chat-input" id="user-input" value="@Model.User.Username" disabled />
             </div>
             <div class="row p-1">
                 <label class="col-1">Message</label>
@@ -22,27 +24,26 @@
                 <div class="col-6 text-end">
                     <input type="button" class="user-button" id="send-button" value="send message" />
                 </div>
+                <div class="col-6 text-start">
+                    <input type="button" class="user-button" value="join group" id="join-group">
+                </div>
             </div>
-           
+
         </div>
         <div>
-            <select id="users" class="chat-dropdown">
+            <select class="chat-dropdown" id="join-group-input">
                 <option value="all" selected>all</option>
-                @foreach (var item in Model.Players)
-                {
-                    <option value="@item.Username">@item.Username</option>
-                }
+                <option value="meow-1" >meow-1</option>
+                <option value="meow-2" >meow-2</option>
+                <option value="meow-3"  >meow-3</option>
+                <option value="meow-4"  >meow-4</option>
+                <option value="meow-5"  >meow-5</option>
+                <option value="meow-6"  >meow-6</option>
+                <option value="meow-7"  >meow-7</option>
             </select>
+
         </div>
 
-        <input id="join-group-input" class="chat-input" type="text" list="groups" value="all" />
-        <input type="button" class="user-button" value="join group" id="join-group">
-
-        <div class="row p-1">
-            <div class="col-6">
-                <hr />
-            </div>
-        </div>
         <div class="row p-1">
             <div class="col-6">
                 <ul id="messages-list"></ul>
