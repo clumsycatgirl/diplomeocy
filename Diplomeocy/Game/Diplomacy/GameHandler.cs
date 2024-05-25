@@ -326,32 +326,51 @@ public class GameHandler {
 		switch (GameTurn.Phase) {
 			case GamePhase.Diplomacy:
 				GameTurn.Phase = GamePhase.OrderResolution;
-				AdvanceTurn();
+				ResolveOrderResolutionPhase();
+				GameTurn.Phase = GamePhase.Retreat;
 				break;
 			case GamePhase.OrderResolution:
 				ResolveOrderResolutionPhase();
 				GameTurn.Phase = GamePhase.Retreat;
 				break;
 			case GamePhase.Retreat:
-				GameTurn.Phase = GamePhase.Build;
+				ResolveRetreatPhase();
+				GameTurn.Phase = (GameTurn.Season == Season.Winter) ? GamePhase.Build : GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.Build:
+				// ResolveBuildPhase();
 				GameTurn.Phase = GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.AdvanceTurn:
 				GameTurn.Season = GameTurn.Season switch {
 					Season.Spring => Season.Winter,
 					Season.Winter => Season.Spring,
-					_ => throw new InvalidOperationException(),
+					_ => throw new InvalidOperationException("Invalid season"),
 				};
 
-				if (GameTurn.Season == Season.Spring)
+				if (GameTurn.Season == Season.Spring) {
 					GameTurn.Year++;
+				}
 
 				GameTurn.Phase = GamePhase.Diplomacy;
 				break;
 		}
+
+		if (GameTurn.Phase == GamePhase.AdvanceTurn) {
+			GameTurn.Season = GameTurn.Season switch {
+				Season.Spring => Season.Winter,
+				Season.Winter => Season.Spring,
+				_ => throw new InvalidOperationException("Invalid season"),
+			};
+
+			if (GameTurn.Season == Season.Spring) {
+				GameTurn.Year++;
+			}
+
+			GameTurn.Phase = GamePhase.Diplomacy;
+		}
 	}
+
 
 	public void ResolveTurns() {
 		switch (GameTurn.Phase) {
@@ -546,6 +565,38 @@ public class GameHandler {
 		Parallel.ForEach(Players, player => player.Orders.Clear());
 
 		Log.WriteLine("\n");
+	}
+
+	public void ResolveRetreatPhase() {
+		// check for all the players if any two orders are trying to retreat to the same place 
+		// if yes they both fail and lose the army if not retreat the army
+
+		// assume list is clear from previous phase and has only retreats orders
+
+		// orders are moveorders cause yes
+		List<MoveOrder> retreatOrders = Players
+			.SelectMany(player => player.Orders)
+			.OfType<MoveOrder>()
+			.ToList();
+
+		retreatOrders.ForEach(order => {
+			if (retreatOrders.Count(o => o.Target == order.Target) > 1) {
+				// get all the orders that are trying to retreat to the same place
+				List<MoveOrder> conflictingOrders = retreatOrders
+					.Where(o => o.Target == order.Target)
+					.ToList();
+				// we all lose the army in this case
+				conflictingOrders.ForEach(conflictingOrder => Players
+						.First(player => player.Units.Contains(conflictingOrder.Unit))
+						.Units
+						.Remove(conflictingOrder.Unit));
+			} else {
+				// only one order is trying to retreat to this place
+				// we can safely move the unit
+				order.Unit.PreviousLocation = order.Unit.Location;
+				order.Unit.Move(order.Target!);
+			}
+		});
 	}
 
 	public (Country country, List<Unit> units) CreatePlayerData(Countries country) {

@@ -622,9 +622,11 @@ gameConnection.on('AdvanceTurn', (data: { phase: string; year: number; season: s
 
 	console.log(data)
 
-	if (data.phase === 'AdvanceYear') {
-		$('#year').text(data.year)
-		$('#season').text(data.season)
+	$('#year').text(data.year)
+	$('#season').text(data.season)
+
+	if (data.phase === 'Diplomacy') {
+		getAllData()
 	}
 
 	if (data.phase === 'OrderResolution') {
@@ -633,15 +635,76 @@ gameConnection.on('AdvanceTurn', (data: { phase: string; year: number; season: s
 
 	if (data.phase === 'Retreat') {
 		gameConnection.invoke('RequestRetreats', gameId, country)
+		console.log('[RequestRetreats sending]')
 	}
 })
 
 gameConnection.on('RequestRetreatsResponse', (json: string) => {
-	const data: {
-		[unit: string]: string[]
-	} = JSON.parse(json)
+	const data = JSON.parse(json) as {
+		own: { [unit: string]: string[] }
+		others: { [unit: string]: string[] }
+		units: { [country: string]: string[] }
+	}
 
-	console.log(data)
+	// Clear previous units and orders
+	$('#UnitLayer').get(0).innerHTML = ''
+	$('#OrderLayer #Layer2').get(0).innerHTML = ''
+	$('#DislodgedUnitLayer').get(0).innerHTML = ''
 
-	getAllData()
+	// Display all units
+	Object.entries(data.units).forEach(([country, units]) => {
+		units.forEach((unitStr) => {
+			if (!unitStr) return
+			const unit = JSON.parse(unitStr)
+			const unitType = unit.type === 0 ? 'Army' : 'Fleet'
+			const coordinates = provinceData[unit.location.toLowerCase()]
+			$('#UnitLayer').get(0).innerHTML += `<use x="${coordinates.unit.x}" y="${
+				coordinates.unit.y
+			}" height="${iconHeight}" width="${iconWidht}" xlink:href="#${unitType}" class="unit${country.toLowerCase()}" />`
+		})
+	})
+
+	// Display dislodged units
+	Object.entries(data.others)
+		.concat(Object.entries(data.own))
+		.forEach(([unit, territories]) => {
+			const coordinates = provinceData[unit.toLowerCase()]
+			const $unit = $(`#UnitLayer use[x="${coordinates.unit.x}"][y="${coordinates.unit.y}"]`)
+			$unit.attr('xlink:href', $unit.attr('xlink:href') === '#Army' ? '#DislodgedArmy' : '#DislodgedFleet')
+			$('#DislodgedUnitLayer').get(0).innerHTML += $unit.html()
+		})
+
+	// Handle own dislodged units
+	Object.entries(data.own).forEach(([unit, retreatLocations]) => {
+		const $unit = $(`#${unit.toLowerCase()}`)
+		$unit.off('click').on('click', () => {
+			// Highlight possible retreat locations
+			retreatLocations.forEach((location) => {
+				const $location = $(`#${location.toLowerCase()}`)
+				const $locationM = $(`#m-${location.toLowerCase()}`)
+
+				if ($locationM.attr('class') !== 'highlight') previousClasses[location] = $locationM.attr('class')
+				$locationM.attr('class', 'highlight')
+
+				$location.off('click').on('click', () => {
+					// Send retreat order to server
+					gameConnection.invoke('AddRetreat', gameId, country, unit, location)
+
+					// Draw arrow from unit to retreat location
+					const start = provinceData[unit.toLowerCase()].dislodgedUnit
+					const end = provinceData[location.toLowerCase()].unit
+					$('#Layer2').get(0).innerHTML += $(
+						`<line x1="${start.x}" y1="${start.y}" x2="${end.x}" y2="${end.y}" stroke="black" stroke-width="8" marker-end="url(#arrow)" />`,
+					).html()
+
+					// Reset highlights
+					retreatLocations.forEach((location) => $(`#m-${location.toLowerCase()}`).attr('class', previousClasses[location]))
+				})
+			})
+		})
+	})
+})
+
+gameConnection.on('AddRetreatResponse', () => {
+	console.log('[AddRetreatResponse received]')
 })
