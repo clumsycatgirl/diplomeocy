@@ -40,4 +40,11 @@ public class ChatHub : Hub {
 		Debug.WriteLine($"Received voice signal: {signal}");
 		return Clients.AllExcept(Context.ConnectionId).SendAsync("ReceiveVoiceSignal", signal);
 	}
+
+
+	public Task SendVoiceGroupSignal(string group, string signal) {
+		Debug.WriteLine($"Received voice signal: {signal}");
+		return Clients.Group(group).SendAsync("ReceiveVoiceSignal", signal);
+	}
+
 }

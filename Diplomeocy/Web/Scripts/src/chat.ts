@@ -2,6 +2,7 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 import { MessageData } from './message_data'
 
 import chatData from './chat_data'
+import { ChatRoom } from './chat_voice_multi'
 
 const sendButton = document.getElementById('send-button') as HTMLButtonElement
 sendButton.disabled = true
@@ -33,12 +34,18 @@ sendButton.onclick = (_: Event) => {
 }
 
 const joinGroupInput = document.getElementById('join-group-input') as HTMLSelectElement
+let chatRoom: ChatRoom = null
 joinGroupButton.onclick = async (_: Event) => {
 	console.log(joinGroupInput.value)
 	if (joinGroupInput.value === '') return
 
 	const newGroup = joinGroupInput.value
 
+	document.querySelector('#messages-list').innerHTML = ''
+
 	await chatData.leaveGroup(chatData.group)
-	await chatData.joinGroup(newGroup)
+	await chatData.joinGroup(`${(document.getElementById('group') as HTMLInputElement).value}-${newGroup}`)
+
+	chatRoom = new ChatRoom(newGroup)
+	await chatRoom.start()
 }
