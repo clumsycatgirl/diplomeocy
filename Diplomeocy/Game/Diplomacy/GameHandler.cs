@@ -311,6 +311,19 @@ public class GameHandler {
 		Players[6].Unit(Territories.SaintPetersburg).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.SaintPetersburg).Location!.OccupyingUnit = Players[6].Unit(Territories.SaintPetersburg);
 
+		Board.Territory(Territories.Norway).IsSupplyPoint = true;
+		Board.Territory(Territories.Sweden).IsSupplyPoint = true;
+		Board.Territory(Territories.Portugal).IsSupplyPoint = true;
+		Board.Territory(Territories.Spain).IsSupplyPoint = true;
+		Board.Territory(Territories.Tunis).IsSupplyPoint = true;
+		Board.Territory(Territories.Belgium).IsSupplyPoint = true;
+		Board.Territory(Territories.Holland).IsSupplyPoint = true;
+		Board.Territory(Territories.Denmark).IsSupplyPoint = true;
+		Board.Territory(Territories.Greece).IsSupplyPoint = true;
+		Board.Territory(Territories.Serbia).IsSupplyPoint = true;
+		Board.Territory(Territories.Bulgaria).IsSupplyPoint = true;
+		Board.Territory(Territories.Rumania).IsSupplyPoint = true;
+
 		Players.Clear();
 
 		GameTurn = new GameTurn {
@@ -338,7 +351,7 @@ public class GameHandler {
 				GameTurn.Phase = (GameTurn.Season == Season.Winter) ? GamePhase.Build : GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.Build:
-				// ResolveBuildPhase();
+				ResolveBuildPhase();
 				GameTurn.Phase = GamePhase.AdvanceTurn;
 				break;
 			case GamePhase.AdvanceTurn:
@@ -356,6 +369,10 @@ public class GameHandler {
 				break;
 		}
 
+		if (GameTurn.Phase == GamePhase.Build) {
+			ResolveConquerTerritories();
+		}
+
 		if (GameTurn.Phase == GamePhase.AdvanceTurn) {
 			GameTurn.Season = GameTurn.Season switch {
 				Season.Spring => Season.Winter,
@@ -370,7 +387,6 @@ public class GameHandler {
 			GameTurn.Phase = GamePhase.Diplomacy;
 		}
 	}
-
 
 	public void ResolveTurns() {
 		switch (GameTurn.Phase) {
@@ -597,6 +613,30 @@ public class GameHandler {
 				order.Unit.Move(order.Target!);
 			}
 		});
+	}
+
+	public void ResolveBuildPhase() {
+
+	}
+
+	public void ResolveConquerTerritories() {
+		Players
+			.ForEach(player =>
+				player.Units.ForEach(unit => {
+					Territory territory = unit.Location!;
+
+					if (Board.WaterTerritories.Contains(Enum.Parse<Territories>(territory.Name))) {
+						return;
+					}
+
+					if (!player.Countries[0].Territories.Contains(territory)) {
+						Player? previousOwnwer = Players
+							.FirstOrDefault(p =>
+								p.Countries[0].Territories.Contains(territory));
+						previousOwnwer?.Countries[0].Territories.Remove(territory);
+						player.Countries[0].Territories.Add(territory);
+					}
+				}));
 	}
 
 	public (Country country, List<Unit> units) CreatePlayerData(Countries country) {

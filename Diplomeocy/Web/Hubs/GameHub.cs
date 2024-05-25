@@ -154,7 +154,7 @@ public class GameHub : Hub {
 				}
 			});
 
-			if (handler.IsPlayerReady.All(kvp => kvp.Value) || true /* REMBER TO DELTE THSI */) {
+			if (handler.IsPlayerReady.All(kvp => kvp.Value) /* REMBER TO DELTE THSI */) {
 				// everyone's ready
 
 				handler.Players
@@ -450,11 +450,13 @@ public class GameHub : Hub {
 		}
 
 		// if no one has any unit to retreat just go on to the next phase/turn
-		if (handler.Players.All(player => player.Orders.Count == player.Units.Count(unit => unit.IsRetired))) {
-			// everyone retired what they had to retire
-			AdvanceTurn(handler, gameId);
-		} else if (retreats["own"].Count == 0 && retreats["others"].Count == 0) {
-			AdvanceTurn(handler, gameId);
+		if (handler.GameTurn.Phase == GamePhase.Retreat) {
+			if (handler.Players.All(player => player.Orders.Count == player.Units.Count(unit => unit.IsRetired))) {
+				// everyone retired what they had to retire
+				AdvanceTurn(handler, gameId);
+			} else if (retreats["own"].Count == 0 && retreats["others"].Count == 0) {
+				AdvanceTurn(handler, gameId);
+			}
 		}
 
 		if (handler.GameTurn.Phase == GamePhase.Retreat) {
@@ -485,12 +487,108 @@ public class GameHub : Hub {
 			Target = handler.Board.Territory(territoryDestionation)
 		});
 
-		if (handler.Players.All(player => player.Orders.Count == player.Units.Count(unit => unit.IsRetired))) {
-			// everyone retired what they had to retire
-			AdvanceTurn(handler, gameId);
+		if (handler.GameTurn.Phase == GamePhase.Retreat) {
+			if (handler.Players.All(player => player.Orders.Count == player.Units.Count(unit => unit.IsRetired))) {
+				// everyone retired what they had to retire
+				AdvanceTurn(handler, gameId);
+			}
 		}
 
 		return Clients.Client(Context.ConnectionId).SendAsync("AddRetreatResponse");
+	}
+
+	public Task RequestBuilds(string gameId, string country) {
+		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
+			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
+		}
+
+		Player? player = handler.Players.FirstOrDefault(player => player.Countries[0].Name == country);
+		if (player is null) return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid country: '{country}'");
+
+		Dictionary<string, object> data = new() {
+			["builds"] = new Dictionary<string, List<string>>(),
+			["disbands"] = new List<string>(),
+			["buildsAvailable"] = 0,
+			["disbandsRequired"] = 0,
+		};
+
+		if (handler.GameTurn.Phase == GamePhase.Build) {
+			int buildsAvailable = player.Countries[0].Territories.Count(territory => territory.IsSupplyPoint) - player.Units.Count;
+			// Debug.WriteLine($"{player.Countries[0].Name} has {buildsAvailable} builds available with {player.Countries[0].Territories.Count(territory => territory.IsSupplyPoint)} supply points and {player.Units.Count} units");
+			if (buildsAvailable > 0) {
+				((Dictionary<string, List<string>>)data["builds"])["Army"] = player.Countries[0].Territories
+				.Where(territory =>
+					territory.OccupyingUnit is null
+					&& territory.IsSupplyPoint
+					&& !Board.WaterTerritories.Contains(Enum.Parse<Territories>(territory.Name)))
+				.Select(territory => territory.Name)
+				.ToList();
+				((Dictionary<string, List<string>>)data["builds"])["Fleet"] = player.Countries[0].Territories
+					.Where(territory =>
+						territory.OccupyingUnit is null
+						&& territory.IsSupplyPoint
+						&& !Board.LandTerritories.Contains(Enum.Parse<Territories>(territory.Name)))
+					.Select(territory => territory.Name)
+					.ToList();
+				data["buildsAvailable"] = buildsAvailable;
+			}
+
+			int disbandsRequired = player.Units.Count - player.Countries[0].Territories.Count(territory => territory.IsSupplyPoint);
+			Debug.WriteLine($"{player.Countries[0].Name} has {disbandsRequired} disbands required with {player.Units.Count} units and {player.Countries[0].Territories.Count(t => t.IsSupplyPoint)} supply points");
+			if (disbandsRequired > 0) {
+				data["disbands"] = player.Units
+					.Where(unit => unit.Location is not null)
+					.Select(unit => unit.Location!.Name)
+					.ToList();
+				data["disbandsRequired"] = disbandsRequired;
+			}
+		}
+
+		return Clients.Client(Context.ConnectionId).SendAsync("RequestBuildsResponse", JsonConvert.SerializeObject(data));
+	}
+
+	public Task AddBuild(string gameId, string country, string location, string unitType) {
+		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
+			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
+		}
+
+		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+		Territories territory = Enum.Parse<Territories>(location);
+		UnitType type = Enum.Parse<UnitType>(unitType);
+
+		player.Units.Add(new Unit {
+			Country = Enum.Parse<Countries>(player.Countries[0].Name),
+			Type = type,
+			Location = handler.Board.Territory(territory),
+		});
+
+		if (handler.GameTurn.Phase == GamePhase.Build) {
+			if (handler.Players.All(player => player.Units.Count == player.Countries[0].Territories.Count(territory => territory.IsSupplyPoint))) {
+				Debug.WriteLine("advancing from build");
+				AdvanceTurn(handler, gameId);
+			}
+		}
+
+		return Clients.Client(Context.ConnectionId).SendAsync("AddBuildResponse");
+	}
+
+	public Task AddDisband(string gameId, string country, string location) {
+		if (!gameHandlers.TryGetValue(gameId, out GameHandler? handler)) {
+			return Clients.Client(Context.ConnectionId).SendAsync("RequestError", $"invalid gameId: '{gameId}'");
+		}
+
+		Player player = handler.Players.First(player => player.Countries[0].Name == country);
+		Territories territory = Enum.Parse<Territories>(location);
+
+		player.Units.Remove(player.Unit(territory));
+
+		if (handler.GameTurn.Phase == GamePhase.Build) {
+			if (handler.Players.All(player => player.Units.Count == player.Countries[0].Territories.Count(territory => territory.IsSupplyPoint))) {
+				AdvanceTurn(handler, gameId);
+			}
+		}
+
+		return Clients.Client(Context.ConnectionId).SendAsync("AddDisbandResponse");
 	}
 
 	public Task Meow() {
@@ -498,6 +596,7 @@ public class GameHub : Hub {
 	}
 
 	private void AdvanceTurn(GameHandler handler, string gameId) {
+		Debug.WriteLine($"advancing from {handler.GameTurn.Phase}");
 		handler.AdvanceTurn();
 		handler.IsPlayerReady.Clear();
 		handler.Players.ForEach(p => p.Orders.Clear());

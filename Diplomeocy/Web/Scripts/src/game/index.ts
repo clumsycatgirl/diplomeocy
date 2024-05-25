@@ -111,10 +111,7 @@ gameConnection.on('RequestStateResponse', (json: string) => {
 		player.Countries.forEach((country) => {
 			country.Territories.forEach(async (territory) => {
 				$(`#m-${territory.Name.toLowerCase()}`).each(function () {
-					$(this).removeClass('nopower').addClass(country.Name.toLowerCase())
-				})
-				$(`#${territory.Name.toLowerCase()}`).on('click', function () {
-					console.log(`Clicked ${territory.Name.toLowerCase()}`)
+					$(this).attr('class', country.Name.toLowerCase())
 				})
 			})
 		})
@@ -613,13 +610,12 @@ gameConnection.on('RequestConvoyRoutesResponse', (json: string) => {
 })
 
 gameConnection.on('AdvanceTurn', (data: { phase: string; year: number; season: string }) => {
-	console.log('[AdvanceTurn received]')
-
 	const phases = ['Diplomacy', 'OrderResolution', 'Retreat', 'Build', 'AdvanceYear']
 	const seasons = ['Spring', 'Autumn']
 	data.phase = phases[parseInt(data.phase)]
 	data.season = seasons[parseInt(data.season)]
 
+	console.log('[AdvanceTurn received]')
 	console.log(data)
 
 	$('#year').text(data.year)
@@ -631,6 +627,14 @@ gameConnection.on('AdvanceTurn', (data: { phase: string; year: number; season: s
 
 	if (data.phase === 'OrderResolution') {
 		getAllData()
+	}
+
+	if (data.phase === 'Build') {
+		getAllData()
+		gameConnection.invoke('RequestState', gameId)
+		console.log('[RequestState sending]')
+		gameConnection.invoke('RequestBuilds', gameId, country)
+		console.log('[RequestBuilds sending]')
 	}
 
 	if (data.phase === 'Retreat') {
@@ -703,6 +707,97 @@ gameConnection.on('RequestRetreatsResponse', (json: string) => {
 			})
 		})
 	})
+})
+
+gameConnection.on('RequestBuildsResponse', (json: string) => {
+	console.log('[RequestBuildsResponse received]')
+	const data: {
+		builds: {
+			[unitType: string]: string[]
+		}
+		disbands: string[]
+		buildsAvailable: number
+		disbandsRequired: number
+	} = JSON.parse(json)
+
+	console.log(data)
+
+	let selectedBuilds: { location: string; unitType: string }[] = []
+	let selectedDisbands: string[] = []
+
+	let sentBuild = false
+	let sentDisband = false
+
+	// Handle builds
+	Object.keys(data.builds).forEach((unitType) => {
+		data.builds[unitType].forEach((location) => {
+			const $location = $(`#${location.toLowerCase()}`)
+			$location.off('click').on('click', () => {
+				if (sentBuild) return
+
+				const unitType = $('input[name="new-unit-type"]:checked').val() === 'army' ? 'Army' : 'Fleet'
+				const index = selectedBuilds.findIndex((build) => build.location === location && build.unitType === unitType)
+				if (index > -1) {
+					// Cancel the selection
+					selectedBuilds.splice(index, 1)
+					$(`#UnitLayer .temp-unit[data-location="${location}"][data-unit-type="${unitType}"]`).remove()
+				} else if (selectedBuilds.length < data.buildsAvailable) {
+					// Select a new build location
+					selectedBuilds.push({ location, unitType })
+					const coordinates = provinceData[location.toLowerCase()]
+					$('#UnitLayer').get(
+						0,
+					).innerHTML += `<use x="${coordinates.unit.x}" y="${coordinates.unit.y}" height="${iconHeight}" width="${iconWidht}" xlink:href="#${unitType}" class="temp-unit" data-location="${location}" data-unit-type="${unitType}" />`
+					console.log($('#UnitLayer'))
+				}
+
+				// Send build orders to server when all builds have been selected
+				if (selectedBuilds.length === data.buildsAvailable) {
+					selectedBuilds.forEach((build) => {
+						console.log(`BuildOrder: ${build.location} -> ${build.unitType}`)
+						gameConnection.invoke('AddBuild', gameId, country, build.location, build.unitType)
+					})
+					selectedBuilds = []
+					sentBuild = true
+				}
+			})
+		})
+	})
+
+	// Handle disbands
+	data.disbands.forEach((unit) => {
+		const $unit = $(`#${unit.toLowerCase()}`)
+		$unit.off('click').on('click', () => {
+			if (sentDisband) return
+
+			const index = selectedDisbands.indexOf(unit)
+			const coords = provinceData[unit.toLowerCase()]
+			if (index > -1) {
+				// Cancel the selection
+				selectedDisbands.splice(index, 1)
+				const $disbandedUnit = $(`#UnitLayer use[data-x="${coords.unit.x}"][data-y="${coords.unit.y}"]`)
+				$disbandedUnit.attr('xlink:href', $disbandedUnit.attr('xlink:href') === '#DisbandedArmy' ? '#Army' : '#Fleet')
+			} else if (selectedDisbands.length < data.disbandsRequired) {
+				// Select a new unit to disband
+				selectedDisbands.push(unit)
+				const $disbandedUnit = $(`#UnitLayer use[data-x="${coords.unit.x}"][data-y="${coords.unit.y}"]`)
+				$disbandedUnit.attr('xlink:href', $disbandedUnit.attr('xlink:href') === '#Army' ? '#DisbandedArmy' : '#DisbandedFleet')
+			}
+
+			// Send disband orders to server when all disbands have been selected
+			if (selectedDisbands.length === data.disbandsRequired) {
+				selectedDisbands.forEach((unit) => {
+					gameConnection.invoke('AddDisband', gameId, country, unit)
+				})
+				selectedDisbands = []
+				sentDisband = true
+			}
+		})
+	})
+})
+
+gameConnection.on('AddBuildResponse', () => {
+	console.log('[AddBuildResponse received]')
 })
 
 gameConnection.on('AddRetreatResponse', () => {

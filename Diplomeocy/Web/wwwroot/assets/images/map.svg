@@ -427,6 +427,7 @@
 
         .highlight {fill:pink;    stroke:#000000; stroke-width:1}
         .highlight-unit {fill:purple;    stroke:#000000; stroke-width:1}
+        .temp-unit {fill:lightblue;   stroke:#000000; stroke-width:1}
 
         .neutral {fill:lightgray; stroke:#000000; stroke-width:1}
 

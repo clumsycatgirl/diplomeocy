@@ -3,7 +3,7 @@
 public class Territory {
 	public required string Name { get; init; }
 	public Unit? OccupyingUnit { get; set; } = null;
-	public bool IsSupplyPoint { get; internal set; } = true;
+	public bool IsSupplyPoint { get; internal set; } = false;
 	public List<Territory> AdjacentTerritories { get; set; } = new();
 
 	public override string ToString() => $"({Name} occupied by {OccupyingUnit?.ToString() ?? "none"})";
