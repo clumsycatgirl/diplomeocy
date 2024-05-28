@@ -1,16 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './Pages/**/*.razor',
-    './Pages/**/*.html',
-    './Pages/**/*.cshtml',
-    './Views/**/*.razor',
-    './Views/**/*.html',
-    './Views/**/*.cshtml',
+    '../Views/**/*.cshtml',
+    '../Components/**/*.razor',
+    './node_modules/preline/dist/*.js',
   ],
+  
   theme: {
     extend: {},
+    fontFamily: {
+      lobster: ['Lobster', 'cursive'],
+    }
   },
-  plugins: [],
+  
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('preline/plugin'),
+  ],
+  
+  darkMode: 'class',
 }
 

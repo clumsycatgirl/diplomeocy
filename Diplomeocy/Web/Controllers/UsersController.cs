@@ -193,5 +193,11 @@ namespace Web.Controllers {
 		private bool UserExists(int id) {
 			return (context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
 		}
+
+		[HttpGet, ActionName("LogOut")]
+		public IActionResult LogOut() {
+			HttpContext.Session.Remove("User");
+			return RedirectToAction("Index", "Home");
+		}
 	}
 }

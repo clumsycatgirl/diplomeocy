@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddServerSideBlazor();
+
 builder.Services.AddSignalR();
 
 builder.Services.AddSession();
@@ -32,6 +34,12 @@ else {
 // setup swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddServerSideBlazor();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Logging
 	.ClearProviders()
@@ -85,5 +93,7 @@ app.MapControllerRoute(
 app.MapControllers();
 app.MapHub<ChatHub>("/chat/text");
 app.MapHub<GameHub>("/hubs/game");
+
+app.MapBlazorHub();
 
 app.Run();

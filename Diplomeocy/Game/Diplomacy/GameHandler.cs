@@ -4,7 +4,6 @@ namespace Diplomacy;
 
 using System.Diagnostics;
 using System.Linq;
-using System.Security.AccessControl;
 
 using Diplomacy.Orders;
 
@@ -260,57 +259,57 @@ public class GameHandler {
 			},
 		};
 
-		Players[0].Unit(Territories.London).Location!.IsSupplyPoint = true;
 		Players[0].Unit(Territories.London).Location!.OccupyingUnit = Players[0].Unit(Territories.London);
-		Players[0].Unit(Territories.Liverpool).Location!.IsSupplyPoint = true;
 		Players[0].Unit(Territories.Liverpool).Location!.OccupyingUnit = Players[0].Unit(Territories.Liverpool);
-		Players[0].Unit(Territories.Edinburgh).Location!.IsSupplyPoint = true;
 		Players[0].Unit(Territories.Edinburgh).Location!.OccupyingUnit = Players[0].Unit(Territories.Edinburgh);
 
-		Players[1].Unit(Territories.Berlin).Location!.IsSupplyPoint = true;
 		Players[1].Unit(Territories.Berlin).Location!.OccupyingUnit = Players[1].Unit(Territories.Berlin);
-		Players[1].Unit(Territories.Munich).Location!.IsSupplyPoint = true;
 		Players[1].Unit(Territories.Munich).Location!.OccupyingUnit = Players[1].Unit(Territories.Munich);
-		Players[1].Unit(Territories.Kiel).Location!.IsSupplyPoint = true;
 		Players[1].Unit(Territories.Kiel).Location!.OccupyingUnit = Players[1].Unit(Territories.Kiel);
 
-		Players[2].Unit(Territories.Vienna).Location!.IsSupplyPoint = true;
 		Players[2].Unit(Territories.Vienna).Location!.OccupyingUnit = Players[2].Unit(Territories.Vienna);
-		Players[2].Unit(Territories.Budapest).Location!.IsSupplyPoint = true;
 		Players[2].Unit(Territories.Budapest).Location!.OccupyingUnit = Players[2].Unit(Territories.Budapest);
-		Players[2].Unit(Territories.Trieste).Location!.IsSupplyPoint = true;
 		Players[2].Unit(Territories.Trieste).Location!.OccupyingUnit = Players[2].Unit(Territories.Trieste);
 
-		Players[3].Unit(Territories.Ankara).Location!.IsSupplyPoint = true;
 		Players[3].Unit(Territories.Ankara).Location!.OccupyingUnit = Players[3].Unit(Territories.Ankara);
-		Players[3].Unit(Territories.Constantinople).Location!.IsSupplyPoint = true;
 		Players[3].Unit(Territories.Constantinople).Location!.OccupyingUnit = Players[3].Unit(Territories.Constantinople);
-		Players[3].Unit(Territories.Smyrna).Location!.IsSupplyPoint = true;
 		Players[3].Unit(Territories.Smyrna).Location!.OccupyingUnit = Players[3].Unit(Territories.Smyrna);
 
-		Players[4].Unit(Territories.Paris).Location!.IsSupplyPoint = true;
 		Players[4].Unit(Territories.Paris).Location!.OccupyingUnit = Players[4].Unit(Territories.Paris);
-		Players[4].Unit(Territories.Marseilles).Location!.IsSupplyPoint = true;
 		Players[4].Unit(Territories.Marseilles).Location!.OccupyingUnit = Players[4].Unit(Territories.Marseilles);
-		Players[4].Unit(Territories.Brest).Location!.IsSupplyPoint = true;
 		Players[4].Unit(Territories.Brest).Location!.OccupyingUnit = Players[4].Unit(Territories.Brest);
 
-		Players[5].Unit(Territories.Venice).Location!.IsSupplyPoint = true;
 		Players[5].Unit(Territories.Venice).Location!.OccupyingUnit = Players[5].Unit(Territories.Venice);
-		Players[5].Unit(Territories.Rome).Location!.IsSupplyPoint = true;
 		Players[5].Unit(Territories.Rome).Location!.OccupyingUnit = Players[5].Unit(Territories.Rome);
-		Players[5].Unit(Territories.Naples).Location!.IsSupplyPoint = true;
 		Players[5].Unit(Territories.Naples).Location!.OccupyingUnit = Players[5].Unit(Territories.Naples);
 
-		Players[6].Unit(Territories.Warsaw).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.Warsaw).Location!.OccupyingUnit = Players[6].Unit(Territories.Warsaw);
-		Players[6].Unit(Territories.Moscow).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.Moscow).Location!.OccupyingUnit = Players[6].Unit(Territories.Moscow);
-		Players[6].Unit(Territories.Sevastopol).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.Sevastopol).Location!.OccupyingUnit = Players[6].Unit(Territories.Sevastopol);
-		Players[6].Unit(Territories.SaintPetersburg).Location!.IsSupplyPoint = true;
 		Players[6].Unit(Territories.SaintPetersburg).Location!.OccupyingUnit = Players[6].Unit(Territories.SaintPetersburg);
 
+		Board.Territory(Territories.London).IsSupplyPoint = true;
+		Board.Territory(Territories.Liverpool).IsSupplyPoint = true;
+		Board.Territory(Territories.Edinburgh).IsSupplyPoint = true;
+		Board.Territory(Territories.Berlin).IsSupplyPoint = true;
+		Board.Territory(Territories.Munich).IsSupplyPoint = true;
+		Board.Territory(Territories.Kiel).IsSupplyPoint = true;
+		Board.Territory(Territories.Vienna).IsSupplyPoint = true;
+		Board.Territory(Territories.Budapest).IsSupplyPoint = true;
+		Board.Territory(Territories.Trieste).IsSupplyPoint = true;
+		Board.Territory(Territories.Ankara).IsSupplyPoint = true;
+		Board.Territory(Territories.Constantinople).IsSupplyPoint = true;
+		Board.Territory(Territories.Smyrna).IsSupplyPoint = true;
+		Board.Territory(Territories.Paris).IsSupplyPoint = true;
+		Board.Territory(Territories.Marseilles).IsSupplyPoint = true;
+		Board.Territory(Territories.Brest).IsSupplyPoint = true;
+		Board.Territory(Territories.Venice).IsSupplyPoint = true;
+		Board.Territory(Territories.Rome).IsSupplyPoint = true;
+		Board.Territory(Territories.Naples).IsSupplyPoint = true;
+		Board.Territory(Territories.Warsaw).IsSupplyPoint = true;
+		Board.Territory(Territories.Moscow).IsSupplyPoint = true;
+		Board.Territory(Territories.Sevastopol).IsSupplyPoint = true;
+		Board.Territory(Territories.SaintPetersburg).IsSupplyPoint = true;
 		Board.Territory(Territories.Norway).IsSupplyPoint = true;
 		Board.Territory(Territories.Sweden).IsSupplyPoint = true;
 		Board.Territory(Territories.Portugal).IsSupplyPoint = true;
@@ -324,7 +323,7 @@ public class GameHandler {
 		Board.Territory(Territories.Bulgaria).IsSupplyPoint = true;
 		Board.Territory(Territories.Rumania).IsSupplyPoint = true;
 
-		Players.Clear();
+		Players.Clear(); // yeag I just needed that for testing you know 
 
 		GameTurn = new GameTurn {
 			Phase = GamePhase.Diplomacy,

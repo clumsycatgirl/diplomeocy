@@ -1,76 +1,49 @@
 ﻿
-
-
 @using Microsoft.EntityFrameworkCore;
 @using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 @using Web.Utils;
 
-
+@{
+    string? theme = ViewContext.HttpContext.Session.GetString("Theme");
+    if (string.IsNullOrEmpty(theme)) {
+        theme = "light";
+    }
+}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="@theme">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
+
     @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
-    <header>
-        <nav class="blue-header navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-[#172554] border-bottom border-sky-900 box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="LogIn">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Create">Sign Up</a>
-                        </li>
-                        @if (Context.Session.Get<User>("User") is not null)
-                        {
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tables" asp-action="Create">New Game</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Create">Join Game</a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                       
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+<body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
+    @(await Html.RenderComponentAsync<Header>(RenderMode.ServerPrerendered))
+    <div class="container w-full h-full">
+        <main role="main" class="pb-3 w-full h-full">
             @RenderBody()
         </main>
     </div>
 
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/htmx/htmx.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="~/js/site.js"></script>
+    @* <script src="../../Scripts/node_modules/preline/dist/preline.js"></script> *@
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-
