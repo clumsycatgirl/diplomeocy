@@ -13,6 +13,10 @@
     <section class="sidebar">
         <div class="container">
             <div class="row p-1">
+                <label class="col-1">Country</label>
+                <input type="text" class="chat-input" id="country-input" value="@Model.OwnCountry" disabled />
+            </div>
+            <div class="row p-1">
                 <label class="col-1">User</label>
                 <input type="text" class="chat-input" id="user-input" value="@Model.User.Username" disabled />
             </div>
