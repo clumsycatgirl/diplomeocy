@@ -16,8 +16,28 @@ namespace Web.Controllers {
 			return View();
 		}
 
-		public IActionResult Privacy() {
-			return View();
+		[HttpGet]
+		[Route("Privacy")]
+		public string Privacy() {
+			return nameof(Privacy);
+		}
+
+		[HttpGet]
+		[Route("TermsOfServices")]
+		public string TermsOfServices() {
+			return nameof(TermsOfServices);
+		}
+
+		[HttpGet]
+		[Route("Rulebook")]
+		public string Rulebook() {
+			return nameof(Rulebook);
+		}
+
+		[HttpGet]
+		[Route("Documentation")]
+		public string Documentation() {
+			return nameof(Documentation);
 		}
 
 		public IActionResult Chat() => View();
