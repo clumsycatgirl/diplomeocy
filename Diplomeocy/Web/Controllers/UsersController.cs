@@ -43,8 +43,10 @@ namespace Web.Controllers {
 
 			return View();
 		}
+
 		// POST: Users/LogIn
 		[HttpPost]
+		[Route("Auth/Login")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> LogIn(String? username, String? password) {
 			List<(string Field, string ErrorMessage)> errors = new();

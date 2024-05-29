@@ -3,3 +3,7 @@
 }
 
 @(await Html.RenderComponentAsync<AuthForm>(RenderMode.Server))
+
+@section Scripts {
+    <script type="module" src="~/js/auth.js"></script>   
+}
