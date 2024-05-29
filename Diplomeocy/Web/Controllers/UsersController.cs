@@ -44,7 +44,6 @@ namespace Web.Controllers {
 			return View();
 		}
 
-		// POST: Users/LogIn
 		[HttpPost]
 		[Route("Auth/Login")]
 		[ValidateAntiForgeryToken]
@@ -76,50 +75,61 @@ namespace Web.Controllers {
 				HttpContext.Session.Set("User", user);
 			}
 
-			return user is null ? this.JsonNotFound("user") : this.JsonRedirect(Url.Action("Details", new { user.Id })!);
+			if (user is null) {
+				if (await context.Users!.FirstOrDefaultAsync(u => u.Username == username) is not null) {
+					return this.JsonError(("password", "Invalid password"));
+				} else {
+					return this.JsonNotFound("user");
+				}
+			}
+
+			return this.JsonRedirect(Url.Action("Details", new { user.Id })!);
 		}
 		// GET: Users/Create
 		public IActionResult Create() {
 			return View();
 		}
 
-		// POST: Users/Create
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Surname,Username,Password,PathImage")] User user) {
+		[Route("Auth/Register")]
+		// [ValidateAntiForgeryToken]
+		public async Task<IActionResult> Register(string? username, string? password, string? passwordConfirmation, string? picturePath) {
+			List<(string Field, string ErrorMessage)> errors = new();
 
-			if (ModelState.IsValid) {
-				context.Add(user);
-				await context.SaveChangesAsync();
-				// return RedirectToAction(nameof(Index)); // automatic redirect 
-				// we can't use this with async requests as it'd give us the html as response and then we'd have to do bad stuff
-
-				// set the user in the session
-				HttpContext.Session.Set<User>("User", user);
-
-				// we just return *where* to go
-				return Json(new { success = true, destination = Url.Action("Details", new { user.Id }) });
+			if (string.IsNullOrEmpty(username)) {
+				errors.Add(("username", "Username is required"));
+			} else {
+				User? existingUser = await context.Users.FirstOrDefaultAsync(user => user.Username == username);
+				if (existingUser is not null) {
+					// return this.JsonError(("username", "User already registered"));
+					errors.Add(("username", "User already registered"));
+				}
+			}
+			if (string.IsNullOrEmpty(password)) {
+				errors.Add(("password", "Password is required"));
+			}
+			if (string.IsNullOrEmpty(passwordConfirmation)) {
+				errors.Add(("passwordConfirmation", "Password confirmation is required"));
+			}
+			if (password is not null && passwordConfirmation is not null && password != passwordConfirmation) {
+				errors.Add(("passwordConfirmation", "Passwords do not match"));
 			}
 
-			// this refreshes the page
-			// return View(user);
+			if (errors.Any()) {
+				return this.JsonError(errors.ToArray());
+			}
 
-			// get all errors and maps them to objects with { Field = state.Key, Errors = [ ...error.ErrorMessage ] }
-			List<object> errorList = ModelState
-				.Where(state => state.Value is not null && state.Value.Errors.Any())
-				.Select(state => new {
-					Field = state.Key,
-					Errors = state.Value!.Errors.Select(error => error.ErrorMessage).ToList()
-				})
-				.Cast<object>()
-				.ToList();
+			User user = new() {
+				Username = username!,
+				Password = password!,
+				PathImage = picturePath!
+			};
+			context.Users.Add(user);
+			await context.SaveChangesAsync();
 
-			// Json is like View inherited from base class
-			// automatically parses to json
-			// that's an anonymous type cause I was too lazy to make a record for this
-			return Json(new { success = false, errors = errorList });
+			// return this.JsonRedirect(Url.Action("Details", new { user.Id })!);
+
+			return await LogIn(username, password); // lol
 		}
 
 		// GET: Users/Edit/5

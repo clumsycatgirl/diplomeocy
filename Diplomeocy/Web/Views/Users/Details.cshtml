@@ -5,7 +5,7 @@
 }
 
 <h1>Details</h1>
-
+@*
 <div>
     <h4>User</h4>
     <hr />
@@ -22,10 +22,10 @@
             <h2 class="user-details-text">@Html.DisplayNameFor(model => model.Username):</h2>
             <h3 class="">@Html.DisplayFor(model => model.Username)</h3>
         </div>
-        @* <div class="relative">
+        <div class="relative">
             <h2 class="user-details-text">@Html.DisplayNameFor(model => model.Password):</h2>
             <h3 class="">@Html.DisplayFor(model => model.Password)</h3>
-        </div> *@
+        </div>
         <div class="relative">
             <h2 class="user-details-text">Image:</h2>
             <img src="@Html.DisplayFor(model => model.PathImage)" alt="Meow" class="user-details-cat-image" />
@@ -37,3 +37,4 @@
     </div>
     
 </div>
+ *@

@@ -2,8 +2,13 @@
     ViewData["Title"] = "Diplomeocy";
 }
 
-@(await Html.RenderComponentAsync<AuthForm>(RenderMode.Server))
+@* @(await Html.RenderComponentAsync<AuthForm>(RenderMode.ServerPrerendered)) *@
+<component type="typeof(AuthForm)" render-mode="ServerPrerendered">
 
 @section Scripts {
-    <script type="module" src="~/js/auth.js"></script>   
+    <script type="module" src="js/auth.js"></script>
+
+    @* <script>
+        console.log(document.querySelector("button[type='button'].w-full"));
+    </script> *@
 }
