@@ -38,11 +38,10 @@ namespace Web.Controllers {
 
 			return View(user);
 		}
-		// GET: Users/LogIn
-		public IActionResult LogIn() {
 
-			return View();
-		}
+		[HttpGet]
+		[Route("Auth")]
+		public IActionResult Auth() => View();
 
 		[HttpPost]
 		[Route("Auth/Login")]
@@ -129,7 +128,7 @@ namespace Web.Controllers {
 
 			// return this.JsonRedirect(Url.Action("Details", new { user.Id })!);
 
-			return await LogIn(username, password); // lol
+			return await LogIn(username, password); // lol    
 		}
 
 		// GET: Users/Edit/5

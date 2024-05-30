@@ -175,7 +175,7 @@ aria-expanded="false" aria-label="Toggle navigation">
     Debug.WriteLine($"User: {User}");
   }
 
-  public string GetLogSignHref() => !IsLoggedIn ? "/Users/LogIn" : "/Users/LogOut";
+  public string GetLogSignHref() => !IsLoggedIn ? "/Auth" : "/Users/LogOut";
   public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
 
   public bool IsLoggedIn => User is not null;
