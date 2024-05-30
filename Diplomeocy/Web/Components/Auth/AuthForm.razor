@@ -24,8 +24,7 @@
                             required="">
                         <span asp-validation-for="password" class="text-danger text-xs text-red-600 mt-2"></span>
                     </div>
-                    @if (IsRegistration)
-                    {
+                    @if (IsRegistration) {
                         <div>
                             <label for="passwordconfirmation"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password
@@ -56,8 +55,7 @@
                             </div>
                         </div>
                     }
-                    @if (HttpContextAccessor.HttpContext is not null)
-                    {
+                    @if (HttpContextAccessor.HttpContext is not null) {
                         <input type="hidden" id="antiforgery-token"
                             name="__RequestVerificationToken"
                             value="@Antiforgery.GetAndStoreTokens(HttpContextAccessor.HttpContext).RequestToken" />
@@ -69,12 +67,9 @@
                         @GetActionText()
                     </button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        @if (IsRegistration)
-                        {
+                        @if (IsRegistration) {
                             <span>Already have an account? </span>
-                        }
-                        else
-                        {
+                        } else {
                             <span>Don't have an account? </span>
                         }
                         <button type="button" class="font-medium text-primary-600 hover:underline dark:text-primary-300"
@@ -94,28 +89,25 @@
     public bool IsRegistration { get; set; } = false;
 
     public void SetIsRegister(bool value) =>
-    IsRegistration = value;
+        IsRegistration = value;
 
     public string GetActionText() =>
-    IsRegistration ? "Register" : "Login";
+        IsRegistration ? "Register" : "Login";
 
     public string GetReverseActionText() =>
-    IsRegistration ? "Login" : "Register";
+        IsRegistration ? "Login" : "Register";
 
     public string GetActionFields() =>
         "#username, #password" + (IsRegistration ? ", #passwordconfirmation, #profile-picture" : "");
 
     public string GetCallback() =>
-    (IsRegistration ? "register" : "login") + "Callback(htmx, this, event)";
+        (IsRegistration ? "register" : "login") + "Callback(htmx, this, event)";
 
-
-    protected override void OnAfterRender(bool firstRender)
-    {
+    protected override void OnAfterRender(bool firstRender) {
         base.OnAfterRender(firstRender);
         JSRuntime.InvokeVoidAsync("window.reloadComponentHtmx");
 
-        if (IsRegistration)
-        {
+        if (IsRegistration) {
             JSRuntime.InvokeVoidAsync("window.reloadAuth");
         }
     }
