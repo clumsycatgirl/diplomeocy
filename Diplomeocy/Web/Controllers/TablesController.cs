@@ -24,7 +24,8 @@ namespace Web.Controllers {
 		}
 
 		// GET: Table
-		public async Task<IActionResult> Index() {
+		[Route("/Table/i/{id}")]
+		public async Task<IActionResult> Index(int id) {
 			return context.Tables is not null ?
 						View(await context.Tables.ToListAsync()) :
 						Problem("Entity set 'DatabaseContext.Table'  is null.");
@@ -47,17 +48,25 @@ namespace Web.Controllers {
 
 		// GET: Table/Create
 		public IActionResult Create() {
-			Random r = new Random(Guid.NewGuid().GetHashCode());
-			int id = r.Next(100000, 999999 + 1);
-			while (context.Tables.Any(table => table.Id == id)) {
-				id = r.Next(100000, 999999 + 1);
+			User? user = HttpContext.Session.Get<User>("User");
+			if (user is null) {
+				return Redirect(Url.Action("Index", "Home")!);
 			}
-			return View(new HostGame {
-				Id = id,
+
+			Random rng = new Random(Guid.NewGuid().GetHashCode());
+			int tableId = rng.Next(100000, 999999 + 1);
+			while (context.Tables.Any(table => table.Id == tableId)) {
+				tableId = rng.Next(100000, 999999 + 1);
+			}
+
+			context.Tables.Add(new Table {
+				Id = tableId,
+				Host = user.Id,
 				Date = DateOnly.FromDateTime(DateTime.Now),
-				Host = HttpContext.Session.Get<User>("User")?.Id // Get<User> returns User? so it could be null (if there's no "User" key stored it returns null)
-					?? throw new Exception("you can only create a table when logged so go log in you dumbass")
 			});
+			context.SaveChanges();
+
+			return Redirect(Url.Action("i", "Table", new { Id = tableId })!);
 		}
 
 		// POST: Table/Create
