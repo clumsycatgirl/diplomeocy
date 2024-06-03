@@ -84,6 +84,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
+app.UseMiddleware<Web.Middleware.AuthMiddleware>();
 
 app.UseCors("cors");
 
@@ -99,6 +100,7 @@ app.MapControllerRoute(
 app.MapControllers();
 app.MapHub<ChatHub>("/chat/text");
 app.MapHub<GameHub>("/hubs/game");
+app.MapHub<TableHub>("/hubs/table");
 
 app.MapBlazorHub();
 

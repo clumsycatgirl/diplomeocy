@@ -30,14 +30,14 @@
     @(await Html.RenderComponentAsync<Header>(RenderMode.ServerPrerendered))
 
     <div class="w-full h-[90vh]">
-        <main role="main" class="pb-3 w-full h-full">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
 
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
-    <script src="_framework/blazor.server.js"></script>
+    <script src="/_framework/blazor.server.js"></script>
     <script src="/js/htmx-blazor.js"></script>
 
     <script src="/lib/jquery/dist/jquery.min.js"></script>

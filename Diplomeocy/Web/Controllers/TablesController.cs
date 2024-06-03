@@ -26,9 +26,24 @@ namespace Web.Controllers {
 		// GET: Table
 		[Route("/Table/i/{id}")]
 		public async Task<IActionResult> Index(int id) {
-			return context.Tables is not null ?
-						View(await context.Tables.ToListAsync()) :
-						Problem("Entity set 'DatabaseContext.Table'  is null.");
+			Table? table = await context.Tables.FindAsync(id);
+			if (table is null) return Redirect(Url.Action("Index", "Home")!);
+
+			Models.Game game = await context.Games.FirstAsync(game => game.IdTable == table.Id);
+			// Models.TableViewModel.PlayerData[] players = await context.Players.Where(player => player.IdTable == table.Id).ToArrayAsync();
+			Models.TableViewModel.PlayerData[] playersData = await context.Players.Join(context.Users,
+				player => player.IdUser,
+				user => user.Id,
+				(player, user) => new Models.TableViewModel.PlayerData {
+					Player = player,
+					User = user,
+				}).Where(playerData => playerData.Player.IdTable == table.Id).ToArrayAsync();
+
+			return View(new Models.TableViewModel {
+				Table = table,
+				Players = playersData,
+				Game = game,
+			});
 		}
 
 		// GET: Table/Details/5
@@ -59,10 +74,18 @@ namespace Web.Controllers {
 				tableId = rng.Next(100000, 999999 + 1);
 			}
 
-			context.Tables.Add(new Table {
+			context.Tables.Add(new Models.Table {
 				Id = tableId,
 				Host = user.Id,
 				Date = DateOnly.FromDateTime(DateTime.Now),
+			});
+			context.SaveChanges();
+			context.Players.Add(new Models.Player {
+				IdTable = tableId,
+				IdUser = user.Id,
+			});
+			context.Games.Add(new Models.Game {
+				IdTable = tableId,
 			});
 			context.SaveChanges();
 
