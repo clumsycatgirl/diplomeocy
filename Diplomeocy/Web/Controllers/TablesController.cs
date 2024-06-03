@@ -31,7 +31,7 @@ namespace Web.Controllers {
 
 			Models.Game game = await context.Games.FirstAsync(game => game.IdTable == table.Id);
 			// Models.TableViewModel.PlayerData[] players = await context.Players.Where(player => player.IdTable == table.Id).ToArrayAsync();
-			Models.TableViewModel.PlayerData[] playersData = await context.Players.Join(context.Users,
+			Models.TableViewModel.PlayerData[] playersData = await context.Players.Join(inner: context.Users,
 				player => player.IdUser,
 				user => user.Id,
 				(player, user) => new Models.TableViewModel.PlayerData {
@@ -46,19 +46,26 @@ namespace Web.Controllers {
 			});
 		}
 
-		// GET: Table/Details/5
-		public async Task<IActionResult> Details(int? id) {
-			if (id is null || context.Tables is null) {
-				return NotFound();
-			}
+		[HttpPost]
+		[Route("/Table/Join/{id}")]
+		public async Task<IActionResult> Join(int id) {
+			if (!TablesExists(id)) return this.JsonNotFound("table");
 
-			var tables = await context.Tables
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (tables is null) {
-				return NotFound();
-			}
+			bool isPlayerAlreadyInTable = await context.Players.AnyAsync(player => player.IdTable == id && player.IdUser == HttpContext.Session.Get<User>("User")!.Id);
+			if (isPlayerAlreadyInTable) return this.JsonRedirect(Url.Action("i", "Table", new { Id = id })!);
 
-			return View(tables);
+			int playersInTable = await context.Players.CountAsync(player => player.IdTable == id);
+			if (playersInTable >= 7) return this.JsonError(("table", "is full"));
+
+			User user = HttpContext.Session.Get<User>("User")!;
+
+			await context.Players.AddAsync(new Models.Player {
+				IdTable = id,
+				IdUser = user.Id,
+			});
+			await context.SaveChangesAsync();
+
+			return this.JsonRedirect(Url.Action("i", "Table", new { Id = id })!);
 		}
 
 		// GET: Table/Create
@@ -147,76 +154,6 @@ namespace Web.Controllers {
 			}
 			// return View(table);
 			return this.JsonError(("Sorry", "Something went wrong"));
-		}
-
-		// GET: Table/Edit/5
-		public async Task<IActionResult> Edit(int? id) {
-			if (id is null || context.Tables is null) {
-				return NotFound();
-			}
-
-			var tables = await context.Tables.FindAsync(id);
-			if (tables is null) {
-				return NotFound();
-			}
-			return View(tables);
-		}
-
-		// POST: Table/Edit/5
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Host")] Table tables) {
-			if (id != tables.Id) {
-				return NotFound();
-			}
-
-			if (ModelState.IsValid) {
-				try {
-					context.Update(tables);
-					await context.SaveChangesAsync();
-				} catch (DbUpdateConcurrencyException) {
-					if (!TablesExists(tables.Id)) {
-						return NotFound();
-					} else {
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Index));
-			}
-			return View(tables);
-		}
-
-		// GET: Table/Delete/5
-		public async Task<IActionResult> Delete(int? id) {
-			if (id is null || context.Tables is null) {
-				return NotFound();
-			}
-
-			var tables = await context.Tables
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (tables is null) {
-				return NotFound();
-			}
-
-			return View(tables);
-		}
-
-		// POST: Table/Delete/5
-		[HttpPost, ActionName("Delete")]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> DeleteConfirmed(int id) {
-			if (context.Tables is null) {
-				return Problem("Entity set 'DatabaseContext.Table'  is null.");
-			}
-			var tables = await context.Tables.FindAsync(id);
-			if (tables is not null) {
-				context.Tables.Remove(tables);
-			}
-
-			await context.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
 		}
 
 		private bool TablesExists(int id) {

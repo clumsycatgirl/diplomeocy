@@ -1,44 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
-@* <header>
-<nav class="bg-[#172554] border-b border-sky-900 shadow mb-3">
-<div class="container mx-auto px-4">
-<div class="flex justify-between items-center">
-<a class="text-black text-lg font-bold" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
-<button class="navbar-toggler block sm:hidden text-black" type="button" data-bs-toggle="collapse"
-data-bs-target="#navbarNav" aria-controls="navbarNav"
-aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="navbar-collapse collapse sm:flex sm:items-center" id="navbarNav">
-<ul class="navbar-nav flex flex-col sm:flex-row sm:ml-auto">
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-</li>
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Users" asp-action="LogIn">Log In</a>
-</li>
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Users" asp-action="Create">Sign Up</a>
-</li>
-@if (user is not null) {
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Tables" asp-action="Create">New Game</a>
-</li>
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Players" asp-action="Create">Join Game</a>
-</li>
-}
-<li class="nav-item">
-<a class="nav-link text-black hover:text-sky-300" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</nav>
-</header> *@
-
 <style>
     .transition-all {
         transition: all 0.3s ease-in-out;
@@ -171,7 +132,7 @@ aria-expanded="false" aria-label="Toggle navigation">
                             <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
                                 <svg class="flex-shrink-0 size-4 text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                             </div>
-                            <input type="text" id="join-input" class="py-2 px-4 ps-11 pe-20 block w-44 md:w-44 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="123456">
+                            <input type="text" id="join-input" maxlength="6" class="py-2 px-4 ps-11 pe-20 block w-44 md:w-44 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="123456">
                         </div>
                         <div class="absolute inset-y-0 end-0 flex items-center z-20 pe-4 transition-all">
                             <button id="join-submit-button" class="text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white">Join</button>

@@ -1,3 +1,5 @@
+import Result, { RedirectResult, isRedirectResult } from './results'
+
 $(function () {
 	const $joinLink = $('#join-link')
 	const $inputContainer = $('#join-input-container')
@@ -29,5 +31,26 @@ $(function () {
 		if (e.which === 13) {
 			$submitButton.trigger('click')
 		}
+	})
+
+	$submitButton.on('click', async function () {
+		const tableId = $input.val() as string
+		console.log(tableId)
+
+		let response: Response
+		try {
+			response = await fetch(`/Table/Join/${tableId}`, {
+				method: 'POST',
+			})
+		} catch (error) {}
+
+		const result: Result = await response.json()
+
+		if (isRedirectResult(result)) {
+			window.location.href = result.destination
+			return
+		}
+
+		// not gonna handle errors for this I just don't feel like it
 	})
 })

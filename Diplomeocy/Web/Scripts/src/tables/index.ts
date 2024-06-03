@@ -5,6 +5,8 @@ const connection: signalR.HubConnection = new signalR.HubConnectionBuilder().wit
 const maxConnectionAttempts: number = 5
 let connectionAttempts: number = 0
 $(async function setup() {
+	if (!connection.onclose) connection.onclose = setup
+
 	if (connectionAttempts === maxConnectionAttempts) {
 		console.error('Connection to the hub failed')
 		return
@@ -41,6 +43,11 @@ $(async function setup() {
 
 connection.on('EnableGameStart', () => {
 	$('#start-game-button').prop('disabled', false)
+})
+
+connection.on('UserJoin', (user: string) => {
+	console.log('User joined', user)
+	$('input[value="Waiting..."]').first().val(user)
 })
 
 $('#start-game-button').on('click', async function () {

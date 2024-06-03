@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SignalR;
 
 using Newtonsoft.Json;
 
+using Web.Utils;
+
 namespace Web.Hubs;
 
 public class TableHub : Hub {
@@ -16,6 +18,9 @@ public class TableHub : Hub {
 
 		GroupCounts[gameId]++;
 		Groups.AddToGroupAsync(Context.ConnectionId, gameId);
+
+		Web.Models.User user = Context.GetHttpContext()!.Session.Get<Web.Models.User>("User")!;
+		Clients.GroupExcept(gameId, Context.ConnectionId).SendAsync("UserJoin", user.Username);
 
 		if (GroupCounts[gameId] == 7)
 			Clients.Group(gameId).SendAsync("EnableGameStart");
