@@ -12,7 +12,6 @@ using Web.Hubs;
 using Web.Models;
 using Web.Serializers.Game;
 
-using MGame = Web.Models.Game;
 using Web.Utils;
 
 namespace Web.Controllers {
@@ -30,12 +29,13 @@ namespace Web.Controllers {
 			this.hubContext = hubContext;
 		}
 
-		[HttpGet("{id}")]
-		public async Task<IActionResult> Index(int id) {
-			MGame? game = await context.Games.FirstOrDefaultAsync(g => g.Id == id);
+		[HttpGet]
+		[Route("Game/{tableId}")]
+		public async Task<IActionResult> Index(int tableId) {
+			Models.Game? game = await context.Games.FirstOrDefaultAsync(g => g.IdTable == tableId);
 			if (game is null) return NotFound("gaem not found");
 
-			if (!gameHandler.TryGetValue(id.ToString(), out GameHandler? handler)) {
+			if (!gameHandler.TryGetValue(tableId.ToString(), out GameHandler? handler)) {
 				handler = new GameHandler {
 					Players = JsonConvert.DeserializeObject<List<Diplomacy.Player>>(game.PlayerCountries, new JsonSerializerSettings {
 						Converters = { new PlayerConverter() }
@@ -59,7 +59,7 @@ namespace Web.Controllers {
 					if (!handler.IsPlayerReady.ContainsKey(player)) handler.IsPlayerReady.Add(player, false);
 					else handler.IsPlayerReady[player] = false;
 				});
-				gameHandler.Add(id.ToString(), handler);
+				gameHandler.Add(tableId.ToString(), handler);
 			}
 
 			string svgFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "assets", "images", "map.svg");
@@ -78,7 +78,7 @@ namespace Web.Controllers {
 				Username = "meow",
 				PathImage = "meow"
 			});
-
+  
 			foreach (var p in playerList) {
 				var user = await context.Users.FirstOrDefaultAsync(u => u.Id == p.IdUser);
 				if (user != null) {

@@ -51,5 +51,11 @@ connection.on('UserJoin', (user: string) => {
 })
 
 $('#start-game-button').on('click', async function () {
-	//
+	console.log('starting game')
+	const gameId = $('#group-id').val() as string
+	connection.send('ForceStartGame', gameId)
+})
+
+connection.on('GetForcedIdiot', (destionation: string) => {
+	window.location.href = destionation
 })
