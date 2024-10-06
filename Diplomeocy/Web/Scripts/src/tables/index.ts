@@ -55,7 +55,3 @@ $('#start-game-button').on('click', async function () {
 	const gameId = $('#group-id').val() as string
 	connection.send('ForceStartGame', gameId)
 })
-
-connection.on('GetForcedIdiot', (destionation: string) => {
-	window.location.href = destionation
-})

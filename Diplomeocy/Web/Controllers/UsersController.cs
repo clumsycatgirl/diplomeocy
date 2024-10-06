@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Web.Models;
@@ -129,6 +131,22 @@ namespace Web.Controllers {
 			// return this.JsonRedirect(Url.Action("Details", new { user.Id })!);
 
 			return await LogIn(username, password); // lol    
+		}
+
+
+		[HttpGet]
+		[Route("Users/Tables")]
+		public IActionResult Tables() {
+			int userId = HttpContext.Session.Get<User>("User")?.Id ?? throw new Exception("must be logged in");
+			IEnumerable<Table> tables = context.Players
+				.Where(player => player.IdUser == userId)
+				.Join(
+					context.Tables,
+					player => player.IdTable,
+					table => table.Id,
+					(player, table) => table)
+				.Distinct();
+			return View(tables);
 		}
 
 		// GET: Users/Edit/5

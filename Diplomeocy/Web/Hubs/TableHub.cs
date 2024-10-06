@@ -1,10 +1,4 @@
-
-using System.Diagnostics;
-
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-
-using Newtonsoft.Json;
 
 using Web.Utils;
 
@@ -46,6 +40,7 @@ public class TableHub : Hub {
 	}
 
 	public Task ForceStartGame(string gameId) {
+		System.Diagnostics.Debug.WriteLine("--ForceStartGame called--");
 		return Clients.Group(gameId).SendAsync("GetForcedIdiot", $"/Game/{gameId}");
 	}
 }
