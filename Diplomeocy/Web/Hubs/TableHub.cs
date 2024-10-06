@@ -6,6 +6,7 @@ namespace Web.Hubs;
 
 public class TableHub : Hub {
 	private readonly DatabaseContext dbContext;
+
 	private readonly static Dictionary<string, int> GroupCounts = new();
 
 	public TableHub(DatabaseContext dbContext) {
