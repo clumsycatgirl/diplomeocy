@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: diplomeocy-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MikuMikuForcefemBeam
+      MYSQL_DATABASE: diplomeocy-db
+      MYSQL_USER: HatsuneMiku
+      MYSQL_PASSWORD: MikuMikuForcefemBeam
+    ports:
+      - "5306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  web:
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    container_name: diplomeocy-web
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=db;Database=mydatabase;User=HatsuneMiku;Password=MikuMikuForcefemBeam;
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./Web:/app
+
+  scripts:
+    build:
+      context: .
+      dockerfile: Scripts/Dockerfile
+    container_name: diplomeocy-scripts
+    restart: always
+    depends_on:
+      - web
+    ports:
+      - "5001:80"
+    command: npm run build -- --watch
+
+volumes:
+  mysql_data:
