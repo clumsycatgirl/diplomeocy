@@ -9,143 +9,143 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Web
 build_property.RootNamespace = Web
-build_property.ProjectDir = c:\Users\Vi\Desktop\code\c#\diplomeocy 2.0\Web\
+build_property.ProjectDir = C:\Users\Vi\Desktop\code\c#\diplomeocy 2.0\Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\Vi\Desktop\code\c#\diplomeocy 2.0\Web
+build_property.MSBuildProjectDirectory = C:\Users\Vi\Desktop\code\c#\diplomeocy 2.0\Web
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/Auth/AuthForm.razor]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/Auth/AuthForm.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXEF1dGhGb3JtLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/Header.razor]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/Header.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xIZWFkZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/_Imports.razor]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Game/Index.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Game/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Chat.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Chat.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGF0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/ChatVoice.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/ChatVoice.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGF0Vm9pY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Index.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Privacy.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Ruels.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Home/Ruels.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSdWVscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Create.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Delete.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Details.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Edit.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Index.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/StartGame.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Players/StartGame.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xTdGFydEdhbWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/Error.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/_Layout.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Create.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Delete.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Details.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Edit.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Index.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Tables/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Auth.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Auth.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQXV0aC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Delete.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Details.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Edit.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Index.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/LogIn.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/LogIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9nSW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Me.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Me.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Tables.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/Users/Tables.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcVGFibGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/_ViewImports.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/_ViewStart.cshtml]
+[C:/Users/Vi/Desktop/code/c\#/diplomeocy 2.0/Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

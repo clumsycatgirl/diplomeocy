@@ -1,0 +1,417 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\dittatori.pdf",
+      "PackagePath": "staticwebassets\\assets\\images\\dittatori.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\home\\hand.png",
+      "PackagePath": "staticwebassets\\assets\\images\\home\\hand.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\home\\hat.png",
+      "PackagePath": "staticwebassets\\assets\\images\\home\\hat.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\home\\logo.png",
+      "PackagePath": "staticwebassets\\assets\\images\\home\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Churchill.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Churchill.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Elisabetta.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Elisabetta.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Giorgio.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Giorgio.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Kitler.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Kitler.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Leonin.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Leonin.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Meowmed.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Meowmed.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Meowssolini.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Meowssolini.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\kittators\\Stalin.png",
+      "PackagePath": "staticwebassets\\assets\\images\\kittators\\Stalin.png"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\logo-black.svg",
+      "PackagePath": "staticwebassets\\assets\\images\\logo-black.svg"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\logo-gold.svg",
+      "PackagePath": "staticwebassets\\assets\\images\\logo-gold.svg"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\map-no-labels.svg",
+      "PackagePath": "staticwebassets\\assets\\images\\map-no-labels.svg"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\assets\\images\\map.svg",
+      "PackagePath": "staticwebassets\\assets\\images\\map.svg"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\css\\site.old.css",
+      "PackagePath": "staticwebassets\\css\\site.old.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\auth.d.js",
+      "PackagePath": "staticwebassets\\js\\auth.d.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\auth.js",
+      "PackagePath": "staticwebassets\\js\\auth.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\auth.old.js",
+      "PackagePath": "staticwebassets\\js\\auth.old.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\chat_data.js",
+      "PackagePath": "staticwebassets\\js\\chat_data.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\chat_voice.js",
+      "PackagePath": "staticwebassets\\js\\chat_voice.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\chat_voice_multi.js",
+      "PackagePath": "staticwebassets\\js\\chat_voice_multi.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\game\\index.js",
+      "PackagePath": "staticwebassets\\js\\game\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\header.js",
+      "PackagePath": "staticwebassets\\js\\header.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\htmx-blazor.js",
+      "PackagePath": "staticwebassets\\js\\htmx-blazor.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\index.js",
+      "PackagePath": "staticwebassets\\js\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\message_data.js",
+      "PackagePath": "staticwebassets\\js\\message_data.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\players\\StartGame.js",
+      "PackagePath": "staticwebassets\\js\\players\\StartGame.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\results.js",
+      "PackagePath": "staticwebassets\\js\\results.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\tables\\create.js",
+      "PackagePath": "staticwebassets\\js\\tables\\create.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\js\\tables\\index.js",
+      "PackagePath": "staticwebassets\\js\\tables\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\htmx\\htmx.min.js",
+      "PackagePath": "staticwebassets\\lib\\htmx\\htmx.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js",
+      "PackagePath": "staticwebassets\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\select2\\select2.min.css",
+      "PackagePath": "staticwebassets\\lib\\select2\\select2.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy 2.0\\Web\\wwwroot\\lib\\select2\\select2.min.js",
+      "PackagePath": "staticwebassets\\lib\\select2\\select2.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Web.props",
+      "PackagePath": "build\\Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Web.props",
+      "PackagePath": "buildMultiTargeting\\Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Web.props",
+      "PackagePath": "buildTransitive\\Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

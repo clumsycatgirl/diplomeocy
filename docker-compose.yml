@@ -17,18 +17,21 @@ services:
   web:
     build:
       context: .
-      dockerfile: Web/Dockerfile
+      dockerfile: ./Dockerfile
     container_name: diplomeocy-web
     restart: always
     depends_on:
       - db
+      - scripts
     environment:
+      - ASPNETCORE_HTTP_PORT=https://+:5001
+      - ASPNETCORE_URLS=http://+:5000
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=db;Database=mydatabase;User=HatsuneMiku;Password=MikuMikuForcefemBeam;
     ports:
       - "5000:5000"
     volumes:
-      - ./Web:/app
+      - scripts_build:/app/wwwroot/scripts
 
   scripts:
     build:
@@ -36,11 +39,11 @@ services:
       dockerfile: Scripts/Dockerfile
     container_name: diplomeocy-scripts
     restart: always
-    depends_on:
-      - web
     ports:
       - "5001:80"
-    command: npm run build -- --watch
+    volumes:
+      - scripts_build:/usr/share/nginx/html/scripts
 
 volumes:
   mysql_data:
+  scripts_build:
