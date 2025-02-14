@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"outDir": "../DiplomeocyWeb/wwwroot/js/",
+		"noImplicitAny": true,
+		"module": "es6",
+		"target": "ES6",
+		"allowJs": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true
+	},
+	"exclude": ["**/*.d.ts"]
+}

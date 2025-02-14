@@ -1,6 +1,6 @@
 setlocal
 
-set "relative_folder=.\Diplomeocy\Web\Scripts"
+set "relative_folder=.\Scripts"
 
 cd /d "%~dp0%relative_folder%"
 

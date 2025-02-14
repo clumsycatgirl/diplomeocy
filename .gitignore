@@ -1,11 +1,18 @@
 # Added for tailwind
 **/node_modules
-Diplomeocy/Web/wwwroot/css/styles.css
+DiplomeocyWeb/wwwroot/css/styles.css
 
-Diplomeocy/Game/bin
-Diplomeocy/Game/obj
+Game/bin
+Game/obj
 
-Diplomeocy/Web/bin
-Diplomeocy/Web/obj
+DiplomeocyWeb/bin
+DiplomeocyWeb/obj
+
+RazorComponents/bin
+RazorComponents/obj
+
+Scripts/node_modules
+
+Database/Data
 
 **/.vs
