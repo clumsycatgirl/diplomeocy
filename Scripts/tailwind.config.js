@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    '../DiplomeocyWeb/Views/**/*.cshtml',
+    '../RazorComponents/**/*.razor',
     './node_modules/preline/dist/*.js',
   ],
   

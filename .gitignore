@@ -1,10 +1,8 @@
-# Added for tailwind
-**/node_modules
-DiplomeocyWeb/wwwroot/css/styles.css
 
 Game/bin
 Game/obj
 
+DiplomeocyWeb/wwwroot/css/styles.css
 DiplomeocyWeb/bin
 DiplomeocyWeb/obj
 

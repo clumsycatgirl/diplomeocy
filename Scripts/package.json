@@ -6,8 +6,8 @@
     "scripts": {
         "build": "npx tsc",
         "watch": "webpack --watch",
-        "css:build": "npx tailwindcss -i ../DiplomeocyWeb/wwwroot/css/site.css -o ../DiplomeocyWeb/wwwroot/css/styles.css --minify",
-        "css:watch": "npx tailwindcss --watch -i ../DiplomeocyWeb/wwwroot/css/site.css -o ../DiplomeocyWeb/wwwroot/css/styles.css --minify"
+        "css:build": "npx tailwindcss -o ../DiplomeocyWeb/wwwroot/css/styles.css --minify",
+        "css:watch": "npx tailwindcss --watch -o ../DiplomeocyWeb/wwwroot/css/styles.css --minify"
     },
     "devDependencies": {
         "ts-loader": "^9.2.5",
