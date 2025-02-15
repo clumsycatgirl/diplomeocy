@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiplomeocyWeb.Database;
+namespace Diplomeocy.Database;
 
 public class DatabaseContext : DbContext, IDataProtectionKeyContext {
 	public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-	public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
+	public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = default!;
+
+	public DbSet<Models.User> Users { get; set; } = default!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		base.OnModelCreating(modelBuilder);

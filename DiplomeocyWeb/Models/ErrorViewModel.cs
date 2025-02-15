@@ -1,4 +1,4 @@
-namespace DiplomeocyWeb.Models;
+namespace Diplomeocy.Web.Models;
 
 public class ErrorViewModel {
 	public string? RequestId { get; set; }

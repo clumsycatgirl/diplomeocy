@@ -28,7 +28,7 @@ builder.Logging
 builder.Services.AddScoped<HttpClient>();
 
 if (builder.Configuration.GetConnectionString("DefaultConnection") is string connectionString) {
-	builder.Services.AddDbContext<DiplomeocyWeb.Database.DatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+	builder.Services.AddDbContext<Diplomeocy.Database.DatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 } else {
 	Console.Error.WriteLine("No connection string found");
 }

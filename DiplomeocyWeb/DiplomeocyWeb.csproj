@@ -6,7 +6,16 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>72f5e7ba-e672-473b-8bd2-fabc8b2eeacf</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>Diplomeocy.Web</RootNamespace>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Components\**" />
+	  <Content Remove="Components\**" />
+	  <EmbeddedResource Remove="Components\**" />
+	  <None Remove="Components\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.13" />
@@ -29,11 +38,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Game\Game.csproj" />
+		<ProjectReference Include="..\Database\Database.csproj" />
 		<ProjectReference Include="..\RazorComponents\RazorComponents.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Components\" />
 	</ItemGroup>
 
 </Project>

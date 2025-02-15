@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 
-using DiplomeocyWeb.Models;
+using Diplomeocy.Web.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiplomeocyWeb.Controllers;
+namespace Diplomeocy.Web.Controllers;
 public class ErrorController : Controller {
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Index() {
