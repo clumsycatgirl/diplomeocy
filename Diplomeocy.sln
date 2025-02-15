@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorComponents", "RazorCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{3EB528F7-F60F-4D12-83EC-2C7620415B4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{4FF9E0E9-B442-4D2E-A108-8A375296E556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3EB528F7-F60F-4D12-83EC-2C7620415B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB528F7-F60F-4D12-83EC-2C7620415B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB528F7-F60F-4D12-83EC-2C7620415B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF9E0E9-B442-4D2E-A108-8A375296E556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF9E0E9-B442-4D2E-A108-8A375296E556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF9E0E9-B442-4D2E-A108-8A375296E556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF9E0E9-B442-4D2E-A108-8A375296E556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

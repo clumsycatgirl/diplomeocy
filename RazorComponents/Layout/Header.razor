@@ -1,4 +1,4 @@
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@rendermode InteractiveServer
 
 <style>
     .transition-all {
@@ -58,37 +58,7 @@
                 <a class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
                    href="/Documentation">Documentation</a>
 
-                <div class="ml-3 mr-6">
-                    <button type="button"
-                            class="hs-dark-mode-active:hidden block hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
-                            onclick="document.querySelector('html').className = 'dark'" hx-trigger="click" hx-get="/theme?theme=dark"
-                            hx-swap="none">
-                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M12 8a2 2 0 1 0 4 4" />
-                            <path d="M12 2v2" />
-                            <path d="M12 20v2" />
-                            <path d="m4.93 4.93 1.41 1.41" />
-                            <path d="m17.66 17.66 1.41 1.41" />
-                            <path d="M2 12h2" />
-                            <path d="M20 12h2" />
-                            <path d="m6.34 17.66-1.41 1.41" />
-                            <path d="m19.07 4.93-1.41 1.41" />
-                        </svg>
-                    </button>
-                    <button type="button"
-                            class="hs-dark-mode-active:block hidden hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
-                            onclick="document.querySelector('html').className = 'light'" hx-trigger="click" hx-get="/theme?theme=light"
-                            hx-swap="none">
-                        <svg class=" flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                        </svg>
-                    </button>
-                </div>
+                <Components.Layout.HeaderComponents.ThemeButton />
 
                 <a class="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:py-0 sm:my-6 sm:ps-6 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500"
                    href="@GetLogSignHref()">
@@ -143,23 +113,17 @@
     </nav>
 }
 @code {
-    // public User? User = new();
-
-    public String Theme = "light";
+    [Inject] private IHttpContextAccessor HttpContextAccessor { get; set; }
+    public User? User = null;
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        // User = HttpContextAccessor.HttpContext?.Session.Get<User>("User");
-
-        // byte[]? theme = HttpContextAccessor.HttpContext?.Session.Get("Theme");
-        // Theme = theme is not null ? System.Text.Encoding.UTF8.GetString(theme) : "light";
-
-        // Debug.WriteLine($"User: {User}");
+        User = HttpContextAccessor.HttpContext?.Session.Get<User>("User");
     }
 
     public string GetLogSignHref() => !IsLoggedIn ? "/Auth" : "/Users/LogOut";
     public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
 
-    // public bool IsLoggedIn => User is not null;
-        public bool IsLoggedIn => false;
+    public bool IsLoggedIn => User is not null;
+        // public bool IsLoggedIn => false;
 }

@@ -65,7 +65,7 @@ app.UseStaticFiles();
 //app.UseHttpLogging();
 app.UseRouting();
 //app.UseAuthorization();
-//app.UseSession();
+app.UseSession();
 app.UseCors("cors");
 
 app.MapControllers();

@@ -1,5 +1,12 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    byte[]? themeBytes = ViewContext.HttpContext.Session.Get<byte[]>("Theme");
+    string theme = themeBytes is not null
+        ? System.Text.Encoding.UTF8.GetString(themeBytes)
+        : "light";
+}
+
+<!DOCTYPE html>
+<html lang="en" class="@theme">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,13 +15,18 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
+    <base href="~/" />
+    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)"
+               render-mode="ServerPrerendered" />
+
     @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
-    @(await Html.RenderComponentAsync<Components.Layout.Header>(RenderMode.ServerPrerendered))
+<body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
+    @* @(await Html.RenderComponentAsync<Components.Layout.Header>(RenderMode.WebAssembly)) *@
+    <component type="typeof(Components.Layout.Header)" render-mode="ServerPrerendered" />
 
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container w-full h-[90vh]">
+        <main role="main" class="pb-3 w-full h-[90vh]">
             @RenderBody()
         </main>
     </div>
@@ -24,12 +36,14 @@
             &copy; 2025 - Diplomeocy
         </div>
     </footer>
+
+    <script src="~/lib/htmx/htmx.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <base href="~" />
     <script src="_framework/blazor.server.js"></script>
+    @* <script src="_framework/blazor.webassembly.js"></script> *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
