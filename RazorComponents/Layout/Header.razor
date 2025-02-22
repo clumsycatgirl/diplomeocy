@@ -1,23 +1,30 @@
-@rendermode InteractiveServer
+@rendermode InteractiveAuto
 
 <style>
     .transition-all {
         transition: all 0.3s ease-in-out;
     }
+
     .hidden-container {
-		position: absolute;
+        position: absolute;
         transform: translateX(100%);
         overflow: hidden;
-		opacity: 0;
+        opacity: 0;
     }
+
     .visible-container {
-		position: relative;
+        position: relative;
         transform: translateX(0);
         opacity: 1;
     }
 </style>
 
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm sm:py-0">
+<header class="fixed top-0 left-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm sm:py-0">
+    @*
+
+        <nav class="relative w-full max-w-screen-xl mx-auto px-4 flex flex-wrap items-center justify-between sm:px-6 lg:px-8">
+
+    *@
     <nav class="relative w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
          aria-label="Global">
         <div class="flex items-center justify-between">
@@ -81,15 +88,15 @@
         <div class="relative flex flex-row justify-between items-center gap-x-8 border-t sm:py-0 sm:border-gray-300 dark:border-neutral-700">
             <div class="flex items-center sm:w-[auto] w-full">
                 @* <span class="font-semibold whitespace-nowrap text-gray-800 border-e border-e-white/70 sm:border-transparent
-            pe-4 me-4 sm:py-3.5 dark:text-white">Meow!!! :3</span> *@
+                    pe-4 me-4 sm:py-3.5 dark:text-white">Meow!!! :3</span> *@
             </div>
 
             <div id="secondary-nav-toggle"
                  class="hs-collapse hidden overflow-hidden transition-all duration-300 absolute top-16 end-0 w-full rounded-lg sm:block sm:static sm:top-0 sm:w-full sm:max-h-full sm:bg-transparent sm:overflow-visible">
                 <div class="flex flex-col py-2 sm:flex-row sm:justify-end sm:gap-y-0 sm:gap-x-6 sm:py-0">
                     @* <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white"
-                href="/Users/Details">Account</a> *@
-					<div class="hidden translate-x-[-300%] translate-x-[-560%] translate-x-[-50%] translate-x-[-200%] opacity-0"></div>
+                        href="/Users/Details">Account</a> *@
+                    <div class="hidden translate-x-[-300%] translate-x-[-560%] translate-x-[-50%] translate-x-[-200%] opacity-0"></div>
                     <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-300%] transition-all"
                        href="/Users/Tables" id="my-tables-link">My Tables</a>
                     <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-50%] transition-all"
@@ -112,8 +119,10 @@
         </div>
     </nav>
 }
+
 @code {
     [Inject] private IHttpContextAccessor HttpContextAccessor { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
     public User? User = null;
 
     protected override void OnInitialized() {
@@ -121,9 +130,12 @@
         User = HttpContextAccessor.HttpContext?.Session.Get<User>("User");
     }
 
-    public string GetLogSignHref() => !IsLoggedIn ? "/Auth" : "/Users/LogOut";
+    public string GetLogSignHref() => IsLoggedIn
+        ? "/Auth/LogOut"
+        : (NavigationManager.Uri.Replace(NavigationManager.BaseUri, "") == "Auth"
+            ? "javascript:void(0);"
+            : "/Auth");
     public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
 
     public bool IsLoggedIn => User is not null;
-        // public bool IsLoggedIn => false;
 }

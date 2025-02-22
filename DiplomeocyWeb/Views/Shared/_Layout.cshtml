@@ -3,6 +3,8 @@
     string theme = themeBytes is not null
         ? System.Text.Encoding.UTF8.GetString(themeBytes)
         : "light";
+
+    Context.Response.Headers["Cache-Control"] = "no-store";
 }
 
 <!DOCTYPE html>
@@ -12,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DiplomeocyWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/select2/select2.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
@@ -22,29 +25,32 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
-    @* @(await Html.RenderComponentAsync<Components.Layout.Header>(RenderMode.WebAssembly)) *@
-    <component type="typeof(Components.Layout.Header)" render-mode="ServerPrerendered" />
+	@* @(await Html.RenderComponentAsync<Components.Layout.Header>(RenderMode.WebAssembly)) *@
+	<component type="typeof(Components.Layout.Header)" render-mode="ServerPrerendered" />
 
-    <div class="container w-full h-[90vh]">
-        <main role="main" class="pb-3 w-full h-[90vh]">
-            @RenderBody()
-        </main>
-    </div>
+	<div class="w-full h-[85vh]">
+		<main role="main" class="pb-3 w-full h-[85vh]">
+			@RenderBody()
+		</main>
+	</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Diplomeocy
-        </div>
-    </footer>
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2025 - Diplomeocy
+		</div>
+	</footer>
 
-    <script src="~/lib/htmx/htmx.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="~/js/index.js"></script>
+	<script src="~/lib/htmx/htmx.min.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/select2/select2.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	 <script src="~/lib/preline/dist/preline.js"></script> 
 
-    <script src="_framework/blazor.server.js"></script>
-    @* <script src="_framework/blazor.webassembly.js"></script> *@
+	<script src="_framework/blazor.server.js"></script>
+	@* <script src="_framework/blazor.webassembly.js"></script> *@
 
-    @await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSignalR();
 builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddLogging((ILoggingBuilder logging) => {
 	logging.SetMinimumLevel(LogLevel.Debug)
@@ -44,10 +45,6 @@ builder.Services.AddCors((CorsOptions options) => {
 	options.AddPolicy("cors", (policy) => policy.AllowAnyOrigin());
 });
 
-//builder.Services.AddDataProtection()
-//	.SetApplicationName("Diplomeocy")
-//	.PersistKeysToDbContext<DiplomeocyWeb.Database.DatabaseContext>();
-
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -62,12 +59,21 @@ if (!app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-//app.UseHttpLogging();
-app.UseRouting();
-//app.UseAuthorization();
 app.UseSession();
 app.UseCors("cors");
 
+app.Use(async (context, next) => {
+	context.Request.EnableBuffering();
+	StreamReader reader = new System.IO.StreamReader(context.Request.Body);
+	string body = await reader.ReadToEndAsync();
+	if (!string.IsNullOrEmpty(body))
+		Console.WriteLine($"Received Body: {body}");
+	context.Request.Body.Position = 0;
+	await next();
+});
+
+
+app.UseRouting();
 app.MapControllers();
 app.MapBlazorHub();
 
