@@ -1,32 +1,32 @@
 ﻿@{
-    byte[]? themeBytes = ViewContext.HttpContext.Session.Get<byte[]>("Theme");
-    string theme = themeBytes is not null
-        ? System.Text.Encoding.UTF8.GetString(themeBytes)
-        : "light";
+	byte[]? themeBytes = ViewContext.HttpContext.Session.Get<byte[]>("Theme");
+	string theme = themeBytes is not null
+		? System.Text.Encoding.UTF8.GetString(themeBytes)
+		: "light";
 
-    Context.Response.Headers["Cache-Control"] = "no-store";
+	Context.Response.Headers["Cache-Control"] = "no-store";
 }
 
 <!DOCTYPE html>
 <html lang="en" class="@theme">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DiplomeocyWeb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/select2/select2.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - DiplomeocyWeb</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/lib/select2/select2.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
-    <base href="~/" />
-    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)"
-               render-mode="ServerPrerendered" />
+	<base href="~/" />
+	<component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)"
+			   render-mode="ServerPrerendered" />
 
-    @await RenderSectionAsync("Styles", required: false)
+	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
-	@* @(await Html.RenderComponentAsync<Components.Layout.Header>(RenderMode.WebAssembly)) *@
-	<component type="typeof(Components.Layout.Header)" render-mode="ServerPrerendered" />
+	 @*@(await Html.RenderComponentAsync<Diplomeocy.Components.Layout.Header>(RenderMode.WebAssembly))*@ 
+	<component type="typeof(Diplomeocy.Components.Layout.Header)" render-mode="ServerPrerendered" />
 
 	<div class="w-full h-[85vh]">
 		<main role="main" class="pb-3 w-full h-[85vh]">
@@ -46,11 +46,12 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/lib/select2/select2.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	 <script src="~/lib/preline/dist/preline.js"></script> 
+	<script src="~/lib/preline/dist/preline.js"></script>
 
-	<script src="_framework/blazor.server.js"></script>
-	@* <script src="_framework/blazor.webassembly.js"></script> *@
+	@*<script src="_framework/blazor.webassembly.js"></script>*@
 
 	@await RenderSectionAsync("Scripts", required: false)
+
+	<script src="_framework/blazor.server.js"></script>
 </body>
 </html>

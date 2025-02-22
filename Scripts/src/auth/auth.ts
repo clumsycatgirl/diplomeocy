@@ -28,13 +28,22 @@ window.diplomeocy.auth = {
 		$image.attr('src', $element.val() as string)
 	},
 
-	login(htmx: any, element: HTMLElement, event: any): void {
-		const result = JSON.parse(event.detail.xhr.responseText)
+	async login(): Promise<void> {
+		const result: Result = await window.diplomeocy.Request('/Auth/Login', {
+			username: $('#username').val() as string,
+			password: $('#password').val() as string,
+			__RequestVerificationToken: $('#antiforgery-token').val() as string,
+		})
 		handleResult(result)
 	},
 
-	register(htmx: any, element: HTMLElement, event: any): void {
-		const result = JSON.parse(event.detail.xhr.responseText)
+	async register(): Promise<void> {
+		const result: Result = await window.diplomeocy.Request('/Auth/Register', {
+			username: $('#username').val() as string,
+			password: $('#password').val() as string,
+			passwordconfirmation: $('#passwordconfirmation').val() as string,
+			picturepath: $('#profile-picture').val() as string,
+		})
 		handleResult(result)
 	},
 }

@@ -7,6 +7,5 @@
 		"allowJs": true,
 		"moduleResolution": "node",
 		"esModuleInterop": true
-	},
-	"exclude": ["**/*.d.ts"]
+	}
 }
