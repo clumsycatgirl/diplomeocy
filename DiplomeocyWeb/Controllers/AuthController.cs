@@ -1,5 +1,6 @@
 ﻿using Diplomeocy.Database;
 using Diplomeocy.Database.Models;
+using Diplomeocy.Database.Services;
 using Diplomeocy.Extensions;
 
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Diplomeocy.Web.Controllers;
 public class AuthController : Controller {
+	private readonly ILogger<AuthController> logger;
 	private readonly DatabaseContext context;
+	private readonly UserService userService;
 
-	public AuthController(DatabaseContext context) {
+	public AuthController(ILogger<AuthController> logger, DatabaseContext context, UserService userService) {
 		this.context = context;
+		this.userService = userService;
+		this.logger = logger;
 	}
 
 	[HttpGet]
@@ -42,26 +47,20 @@ public class AuthController : Controller {
 		User? user = await context.Users!.FirstOrDefaultAsync(m => m.Username == username && m.Password == hashed);
 
 		if (user is not null) {
-			HttpContext.Session.Set("User", user);
+			userService.SetUser(user);
 		}
 
-		if (user is null) {
-			if (await context.Users!.FirstOrDefaultAsync(u => u.Username == username) is not null) {
-				return this.JsonError(("password", "Invalid password"));
-			} else {
-				return this.JsonNotFound("user");
-			}
-		}
-
-		return this.JsonRedirect("/");
+		return user is null
+			? await context.Users!.FirstOrDefaultAsync(u => u.Username == username) is not null
+				? this.JsonError(("password", "Invalid password"))
+				: (IActionResult)this.JsonNotFound("user")
+			: this.JsonRedirect("/");
 	}
 
 	[HttpPost]
 	[Route("Auth/Register")]
 	public async Task<IActionResult> Register(string? username, string? password, string? passwordConfirmation, string? picturePath) {
 		List<(string Field, string ErrorMessage)> errors = [];
-
-		Console.WriteLine($"{username}, {password}, {passwordConfirmation}, {picturePath}");
 
 		if (string.IsNullOrEmpty(username)) {
 			errors.Add(("username", "Username is required"));
@@ -99,7 +98,7 @@ public class AuthController : Controller {
 	[HttpGet]
 	[Route("Auth/LogOut")]
 	public IActionResult LogOut() {
-		HttpContext.Session.Remove("User");
+		userService.SetUser(null);
 		return RedirectToAction("Index", "Home");
 	}
 }

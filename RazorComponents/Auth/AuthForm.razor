@@ -102,5 +102,5 @@
         "#username, #password" + (IsRegistration ? ", #passwordconfirmation, #profile-picture" : "");
 
     public string GetCallback() =>
-        "window.diplomeocy.auth." + (IsRegistration ? "register" : "login") + "(htmx, this, event)";
+        "window.Diplomeocy.Auth." + (IsRegistration ? "register" : "login") + "(htmx, this, event)";
 }

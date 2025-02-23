@@ -1,1 +1,5 @@
-﻿<h3>Meow</h3>
+﻿<h3>@(UserService.CurrentUser?.Username??"unknown")</h3>
+
+@code {
+	[Inject] private UserService UserService { get; set; } = default!;
+}

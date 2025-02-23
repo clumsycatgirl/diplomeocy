@@ -19,3 +19,6 @@ C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\obj\Debug\net8.0\Database.dll
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\obj\Debug\net8.0\refint\Database.dll
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\obj\Debug\net8.0\Database.pdb
 C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\obj\Debug\net8.0\ref\Database.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\bin\Debug\net8.0\Utilities.dll
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\bin\Debug\net8.0\Utilities.pdb
+C:\Users\Vi\Desktop\code\c#\diplomeocy\Database\obj\Debug\net8.0\Database.csproj.Up2Date

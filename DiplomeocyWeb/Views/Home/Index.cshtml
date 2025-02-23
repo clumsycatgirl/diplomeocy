@@ -6,4 +6,6 @@
     <script type="module" src="/js/index.js"></script>
 }
 
-@(await Html.RenderComponentAsync<Diplomeocy.Components.Meow>(RenderMode.WebAssembly))
+@*@(await Html.RenderComponentAsync<Diplomeocy.Components.Meow>(RenderMode.WebAssembly))*@
+
+<component type="typeof(Diplomeocy.Components.Meow)" render-mode="ServerPrerendered">

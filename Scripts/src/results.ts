@@ -63,3 +63,17 @@ Promise.prototype.toResult = async function (this: Promise<Response>): Promise<R
 		}
 	}
 }
+
+export const ResultRequest = (endpoint: string, body: object, method: string = 'POST') => {
+	const formBody = Object.keys(body)
+		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(body[key as keyof typeof body] as string))
+		.join('&')
+
+	return fetch(endpoint, {
+		method: method.toUpperCase(),
+		body: formBody,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	}).toResult()
+}

@@ -1,147 +1,196 @@
 @rendermode InteractiveAuto
 
 <style>
-    .transition-all {
-        transition: all 0.3s ease-in-out;
-    }
+	.transition-all {
+		transition: all 0.3s ease-in-out;
+	}
 
-    .hidden-container {
-        position: absolute;
-        transform: translateX(100%);
-        overflow: hidden;
-        opacity: 0;
-    }
+	.hidden-container {
+		position: absolute;
+		transform: translateX(100%);
+		overflow: hidden;
+		opacity: 0;
+	}
 
-    .visible-container {
-        position: relative;
-        transform: translateX(0);
-        opacity: 1;
-    }
+	.visible-container {
+		position: relative;
+		transform: translateX(0);
+		opacity: 1;
+	}
 </style>
 
 <!-- header start-->
 <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm sm:py-0">
-    <nav class="relative w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
-         aria-label="Global">
-        <div class="flex items-center justify-between">
-            <a class="flex-none text-xl font-semibold dark:text-white" style="font-family: 'Lobster', cursive;" href="/"
-               aria-label="Diplomeocy">
-                <div>
-                    <img src="/assets/images/logo-gold.svg" class="w-32 h-auto" />
-                </div>
-            </a>
-            <div class="sm:hidden">
-                <button type="button"
-                        class="hs-collapse-toggle size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700"
-                        data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation"
-                        aria-label="Toggle navigation">
-                    <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" width="16" height="16" fill="currentColor"
-                         viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                    <svg class="hs-collapse-open:block flex-shrink-0 hidden size-4" width="16" height="16" fill="currentColor"
-                         viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <div id="navbar-collapse-with-animation"
-             class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-end md:py-0 sm:ps-7">
-                <NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
-                   data-hx-boost="true" href="/">Home</NavLink>
-                <NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
-                   href="/Rulebook">Rulebook</NavLink>
-                <NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
-                   href="/TermsOfServices">Terms of services</NavLink>
-                <NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
-                   href="/Privacy">Privacy</NavLink>
-                <NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
-                   href="/Documentation">Documentation</NavLink>
+	<nav class="relative w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+		 aria-label="Global">
+		<div class="flex items-center justify-between">
+			<NavLink class="flex-none text-xl font-semibold dark:text-white" style="font-family: 'Lobster', cursive;" href="/"
+					 aria-label="Diplomeocy">
+				<div>
+					<img src="/assets/images/logo-gold.svg" class="w-32 h-auto" />
+				</div>
+			</NavLink>
+			<div class="sm:hidden">
+				<button type="button"
+						class="hs-collapse-toggle size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700"
+						data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation"
+						aria-label="Toggle navigation">
+					<svg class="hs-collapse-open:hidden flex-shrink-0 size-4" width="16" height="16" fill="currentColor"
+						 viewBox="0 0 16 16">
+						<path fill-rule="evenodd"
+							  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+					</svg>
+					<svg class="hs-collapse-open:block flex-shrink-0 hidden size-4" width="16" height="16" fill="currentColor"
+						 viewBox="0 0 16 16">
+						<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+		<div id="navbar-collapse-with-animation"
+			 class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+			<div class="flex flex-col sm:flex-row sm:items-center sm:justify-end md:py-0 sm:ps-7">
+				<NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+						 data-hx-boost="true" href="/">Home</NavLink>
+				<NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+						 href="/Rulebook">Rulebook</NavLink>
+				<NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+						 href="/TermsOfServices">Terms of services</NavLink>
+				<NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+						 href="/Privacy">Privacy</NavLink>
+				<NavLink class="py-3 ps-px sm:px-3 font-medium text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+						 href="/Documentation">Documentation</NavLink>
 
 				<div class="py-3 ps-px sm:px-3">
 					<Diplomeocy.Components.Layout.HeaderComponents.ThemeButton />
 				</div>
 
-                <NavLink class="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:py-0 sm:my-6 sm:ps-6 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500"
-                   htmx-boost href="@GetLogSignHref()">
-                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                         stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    @GetLogSignText()
-                </NavLink>
-            </div>
-        </div>
-    </nav>
+				<NavLink class="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:py-0 sm:my-6 sm:ps-6 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500"
+						 htmx-boost href="@GetLogSignHref()">
+					<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						 stroke-linejoin="round">
+						<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+						<circle cx="12" cy="7" r="4" />
+					</svg>
+					@GetLogSignText()
+				</NavLink>
+			</div>
+		</div>
+	</nav>
 </header>
 <!-- end header -->
-
 <!-- Nav -->
 @if (IsLoggedIn) {
-    <nav class="mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative flex flex-row justify-between items-center gap-x-8 border-t sm:py-0 sm:border-gray-300 dark:border-neutral-700">
-            <div class="flex items-center sm:w-[auto] w-full">
-                @* <span class="font-semibold whitespace-nowrap text-gray-800 border-e border-e-white/70 sm:border-transparent
-                    pe-4 me-4 sm:py-3.5 dark:text-white">Meow!!! :3</span> *@
-            </div>
+	<!--<nav class="mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="relative flex flex-row justify-between items-center gap-x-8 border-t sm:py-0 sm:border-gray-300 dark:border-neutral-700">
+			<div class="flex items-center sm:w-[auto] w-full">-->
+	@* <span class="font-semibold whitespace-nowrap text-gray-800 border-e border-e-white/70 sm:border-transparent
+		pe-4 me-4 sm:py-3.5 dark:text-white">Meow!!! :3</span> *@
+	<!--</div>
 
-            <div id="secondary-nav-toggle"
-                 class="hs-collapse hidden overflow-hidden transition-all duration-300 absolute top-16 end-0 w-full rounded-lg sm:block sm:static sm:top-0 sm:w-full sm:max-h-full sm:bg-transparent sm:overflow-visible">
-                <div class="flex flex-col py-2 sm:flex-row sm:justify-end sm:gap-y-0 sm:gap-x-6 sm:py-0">
-                    @* <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white"
-                        href="/Users/Details">Account</a> *@
-                    <div class="hidden translate-x-[-300%] translate-x-[-560%] translate-x-[-50%] translate-x-[-200%] opacity-0"></div>
-                    <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-300%] transition-all"
-                       href="/Users/Tables" id="my-tables-link">My Tables</a>
-                    <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-50%] transition-all"
-                       href="/Tables/Create" id="create-table-link">Create New Table</a>
-                    <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white transition-all"
-                       href="javascript:void(0)" id="join-link">Join</a>
-                    <div class="hidden-container flex py-2 sm:py-3.5 transition-all ease-in-out hidden" id="join-input-container">
-                        <div class="relative">
-                            <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
-                                <svg class="flex-shrink-0 size-4 text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                            </div>
-                            <input type="text" id="join-input" maxlength="6" class="py-2 px-4 ps-11 pe-20 block w-44 md:w-44 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="123456">
-                        </div>
-                        <div class="absolute inset-y-0 end-0 flex items-center z-20 pe-4 transition-all">
-                            <button id="join-submit-button" class="text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white">Join</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+	<div id="secondary-nav-toggle"
+		 class="hs-collapse hidden overflow-hidden transition-all duration-300 absolute top-16 end-0 w-full rounded-lg sm:block sm:static sm:top-0 sm:w-full sm:max-h-full sm:bg-transparent sm:overflow-visible">
+		<div class="flex flex-col py-2 sm:flex-row sm:justify-end sm:gap-y-0 sm:gap-x-6 sm:py-0">-->
+	@* <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white"
+		href="/Users/Details">Account</a> *@
+	<!--<div class="hidden translate-x-[-300%] translate-x-[-560%] translate-x-[-50%] translate-x-[-200%] opacity-0"></div>
+					<NavLink class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-100%] transition-all"
+					   href="/Tables" id="my-tables-link">My Tables</NavLink>
+					<NavLink class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white transition-all"
+					   href="javascript:void(0)" id="join-link">Join</NavLink>
+					<div class="hidden-container flex py-2 sm:py-3.5 transition-all ease-in-out hidden" id="join-input-container">
+						<div class="relative">
+							<div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+								<svg class="flex-shrink-0 size-4 text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+							</div>
+							<input type="text" id="join-input" maxlength="6" class="py-2 px-4 ps-11 pe-20 block w-44 md:w-44 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="123456">
+						</div>
+						<div class="absolute inset-y-0 end-0 flex items-center z-20 pe-4 transition-all">
+							<button id="join-submit-button" class="text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white">Join</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>-->
+	<nav class="mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="relative flex flex-row justify-between items-center gap-x-8 border-t sm:py-0 sm:border-gray-300 dark:border-neutral-700">
+			<div class="flex items-center sm:w-[auto] w-full">
+			</div>
+
+			<!--<div id="secondary-nav-toggle"
+				 class="hs-collapse hidden overflow-hidden transition-all duration-300 absolute top-16 end-0 w-full rounded-lg sm:block sm:static sm:top-0 sm:w-full sm:max-h-full sm:bg-transparent sm:overflow-visible">
+				<div class="flex flex-col py-2 sm:flex-row sm:justify-end sm:gap-y-0 sm:gap-x-6 sm:py-0">-->
+			@* <a class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white"
+				href="/Users/Details">Account</a> *@
+			<!--<div class="hidden translate-x-[-300%] translate-x-[-560%] translate-x-[-50%] translate-x-[-200%] opacity-0"></div>
+					<NavLink class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white absolute translate-x-[-100%] transition-all"
+							 href="/Tables" id="my-tables-link">My Tables</NavLink>
+					<NavLink class="text-sm font-medium text-gray-800 hover:text-blue-600 sm:border-b-2 border-b-transparent py-2 mt-2 sm:py-3.5 dark:text-neutral-400 dark:hover:text-white transition-all"
+							 href="javascript:void(0)" id="join-link">Join</NavLink>
+					<div class="hidden-container flex py-2 sm:py-3.5 transition-all ease-in-out hidden" id="join-input-container">
+						<div class="relative">
+							<div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+								<svg class="flex-shrink-0 size-4 text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+							</div>
+							<input type="text" id="join-input" maxlength="6" class="py-2 px-4 ps-11 pe-20 block w-44 md:w-44 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="123456">
+						</div>
+						<div class="absolute inset-y-0 end-0 flex items-center z-20 pe-4 transition-all">
+							<button id="join-submit-button" class="text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white">Join</button>
+						</div>
+					</div>
+				</div>
+			</div>-->
+
+			<div class="hidden translate-x-[200%]"></div>
+			<div id="secondary-nav-toggle" class="hs-collapse hidden overflow-hidden transition-all duration-500 absolute top-16 end-0 w-full rounded-lg sm:block sm:static sm:top-0 sm:w-full sm:max-h-full sm:bg-transparent sm:overflow-visible">
+				<div class="flex flex-col py-2 sm:flex-row sm:justify-end sm:gap-y-0 sm:gap-x-6 sm:py-0">
+					<NavLink class="text-sm font-medium sm:border-b-2 border-b-transparent py-2 sm:py-3.5 text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500"
+							 href="/Tables">
+						My Tables
+					</NavLink>
+					<div class="relative w-[6rem]">
+						<div id="join-link" class="top-0 left-0 transition-all duration-500 text-sm font-medium sm:border-b-2 border-b-transparent py-2 sm:py-3.5 text-gray-500 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500 cursor-pointer">
+							Join Table
+						</div>
+						<div id="join-input-container" class="top-0 left-0 relative transition-all duration-500 translate-x-[100%] translate-y-[-100%] mx-auto">
+							<input id="join-input" type="text" placeholder="123456" maxlength="6" class="sm:block sm:bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-800 focus:z-10 focus:border-primary-900 focus:ring-primary-600 w-[6rem] placeholder:text-gray-500 dark:border-neutral-700 dark:text-neutral-500 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mx-auto my-auto" />
+							<div class="absolute inset-y-0 end-0 top-0 mx-2.5 my-[.725rem] items-center pointer-events-none z-20 ps-4">
+								<svg class="flex-shrink-0 size-4 text-sm font-medium text-gray-800 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 }
 
 @code {
-    [Inject] private IHttpContextAccessor HttpContextAccessor { get; set; }
-    [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private IJSRuntime JSRuntime { get; set; }
+	[Inject] private UserService UserService { get; set; }
+	[Inject] private NavigationManager NavigationManager { get; set; }
+	[Inject] private IJSRuntime JSRuntime { get; set; }
 
-    public User? User = null;
+	public User? User = null;
 
-    protected override void OnInitialized() {
-        base.OnInitialized();
-        User = HttpContextAccessor.HttpContext?.Session.Get<User>("User");
-    }
+	protected override void OnInitialized() {
+		base.OnInitialized();
+		User = UserService.CurrentUser;
+	}
 
-    public string GetLogSignHref() => IsLoggedIn
-        ? "/Auth/LogOut"
-        : (NavigationManager.Uri.Replace(NavigationManager.BaseUri, "") == "Auth"
-            ? "javascript:void(0);"
-            : "/Auth");
-    public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
+	public string GetLogSignHref() => IsLoggedIn
+		? "/Auth/LogOut"
+		: (NavigationManager.Uri.Replace(NavigationManager.BaseUri, "") == "Auth"
+			? "javascript:void(0);"
+			: "/Auth");
+	public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
 
-    public bool IsLoggedIn => User is not null;
+	public bool IsLoggedIn => User is not null;
 
-    protected override void OnAfterRender(bool firstRender) {
-        base.OnAfterRender(firstRender);
-        JSRuntime.InvokeVoidAsync("window.diplomeocy.reloadCollapse");
-    }
+	protected override void OnAfterRender(bool firstRender) {
+		base.OnAfterRender(firstRender);
+		JSRuntime.InvokeVoidAsync("window.Diplomeocy.reloadCollapse");
+		JSRuntime.InvokeVoidAsync("window.Diplomeocy.Header.setup");
+	}
 }

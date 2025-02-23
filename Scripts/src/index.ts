@@ -1,61 +1,47 @@
 import HSCollapse from '@preline/collapse'
 import Result from './results'
 
+export namespace Diplomeocy {
+	export function meow(): void {
+		console.log('meow')
+	}
+
+	export function updateTheme(theme: string): void {
+		document.documentElement.className = theme
+	}
+
+	export function reloadHtmx(): void {
+		console.log('htmx: reloading document.body')
+		window.htmx?.process(document.body)
+	}
+
+	export function reloadCollapse(): void {
+		HSCollapse.autoInit()
+	}
+
+	export namespace Auth {
+		export let login: ((htmx: any, element: HTMLElement, event: Event) => Promise<void>) | undefined
+		export let register: ((htmx: any, element: HTMLElement, event: Event) => Promise<void>) | undefined
+		export let pfpOnChange: (() => void) | undefined
+	}
+
+	export namespace Header {
+		export let setup: (() => void) | undefined
+	}
+}
+
 declare global {
 	interface Window {
+		Diplomeocy: typeof Diplomeocy
 		htmx: {
 			process: (element: HTMLElement) => void
 		}
-		diplomeocy: Diplomeocy
 	}
 }
 
-interface Diplomeocy {
-	meow?: () => void
-	updateTheme?: (theme: string) => void
-	reloadHtmx: () => void
-	reloadCollapse: () => void
+window.Diplomeocy = window.Diplomeocy || Diplomeocy
+window.Diplomeocy.meow?.()
 
-	Request: (endpoint: string, body: object, method?: string) => Promise<Result>
-
-	auth?: {
-		login: (htmx: any, element: HTMLElement, event: Event) => Promise<void>
-		register: (htmx: any, element: HTMLElement, event: Event) => Promise<void>
-		pfpOnChange: () => void
-	}
+export const onLoad = (callback: (this: Document, ev: Event) => any) => {
+	document.addEventListener('DOMContentLoaded', callback)
 }
-
-window.diplomeocy = window.diplomeocy || {
-	meow() {
-		console.log('meow')
-	},
-
-	updateTheme(theme: string) {
-		document.documentElement.className = theme
-	},
-
-	reloadHtmx() {
-		console.log('htmx: reloading document.body')
-		window.htmx?.process(document.body)
-	},
-
-	reloadCollapse() {
-		HSCollapse.autoInit()
-	},
-
-	Request(endpoint: string, body: object, method: string = 'POST') {
-		const formBody = Object.keys(body)
-			.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(body[key as keyof typeof body] as string))
-			.join('&')
-
-		return fetch(endpoint, {
-			method: method.toUpperCase(),
-			body: formBody,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
-		}).toResult()
-	},
-}
-
-window.diplomeocy.meow?.()

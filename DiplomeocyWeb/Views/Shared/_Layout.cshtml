@@ -25,7 +25,7 @@
 	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
-	 @*@(await Html.RenderComponentAsync<Diplomeocy.Components.Layout.Header>(RenderMode.WebAssembly))*@ 
+	@*@(await Html.RenderComponentAsync<Diplomeocy.Components.Layout.Header>(RenderMode.WebAssembly))*@
 	<component type="typeof(Diplomeocy.Components.Layout.Header)" render-mode="ServerPrerendered" />
 
 	<div class="w-full h-[85vh]">
@@ -41,6 +41,7 @@
 	</footer>
 
 	<script src="~/js/index.js"></script>
+	<script src="~/js/header.js"></script>
 	<script src="~/lib/htmx/htmx.min.js"></script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "LQbWUfwUWXnoVB7HSgelAxDM4gB1myA+cGlbyWrRGFg=",
+  "Hash": "DXC/pyplDRpcARKNmYuIZA9ZllQ/1YHYwl5aZoLxHtE=",
   "Source": "Database",
   "BasePath": "_content/Database",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj",
+      "Version": 2,
+      "Source": "Utilities",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

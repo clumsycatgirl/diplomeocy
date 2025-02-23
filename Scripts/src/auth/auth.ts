@@ -1,4 +1,4 @@
-import Result, { isErrorResult, isNotFoundResult, isRedirectResult } from '../results'
+import Result, { isErrorResult, isNotFoundResult, isRedirectResult, ResultRequest } from '../results'
 
 const handleResult = (result: Result): void => {
 	$('.is-invalid').removeClass('is-invalid')
@@ -20,7 +20,7 @@ const handleResult = (result: Result): void => {
 	}
 }
 
-window.diplomeocy.auth = {
+window.Diplomeocy.Auth = {
 	pfpOnChange() {
 		const $element = $('#profile-picture')
 		const $image = $('#profile-picture-preview')
@@ -29,7 +29,7 @@ window.diplomeocy.auth = {
 	},
 
 	async login(): Promise<void> {
-		const result: Result = await window.diplomeocy.Request('/Auth/Login', {
+		const result: Result = await ResultRequest('/Auth/Login', {
 			username: $('#username').val() as string,
 			password: $('#password').val() as string,
 			__RequestVerificationToken: $('#antiforgery-token').val() as string,
@@ -38,7 +38,7 @@ window.diplomeocy.auth = {
 	},
 
 	async register(): Promise<void> {
-		const result: Result = await window.diplomeocy.Request('/Auth/Register', {
+		const result: Result = await ResultRequest('/Auth/Register', {
 			username: $('#username').val() as string,
 			password: $('#password').val() as string,
 			passwordconfirmation: $('#passwordconfirmation').val() as string,

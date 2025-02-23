@@ -3,11 +3,15 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Diplomeocy.Web.Controllers;
-[Route("[controller]")]
 public class ThemeController : Controller {
-	[HttpGet("")]
+	private readonly ILogger<ThemeController> logger;
+
+	public ThemeController(ILogger<ThemeController> logger) {
+		this.logger = logger;
+	}
+
+	[HttpGet("/Theme")]
 	public void Index(string theme = "light") {
-		System.Diagnostics.Debug.WriteLine("meow");
 		HttpContext.Session.Set("theme", Encoding.UTF8.GetBytes(theme));
 	}
 }

@@ -3,5 +3,5 @@
 namespace Diplomeocy.Web.ViewModels;
 
 public class TablesViewModel {
-	public IEnumerable<Table> Tables { get; set; }
+	public List<Table> Tables { get; set; }
 }

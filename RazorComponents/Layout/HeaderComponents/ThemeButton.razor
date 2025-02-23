@@ -53,7 +53,7 @@
 
         HttpContextAccessor.HttpContext?.Session.Set<byte[]>("Theme", System.Text.Encoding.UTF8.GetBytes(Theme));
 
-        await JSRuntime.InvokeVoidAsync("window.diplomeocy.updateTheme", Theme);
+        await JSRuntime.InvokeVoidAsync("window.Diplomeocy.updateTheme", Theme);
     }
 
     public bool IsLightTheme => Theme == "light";
