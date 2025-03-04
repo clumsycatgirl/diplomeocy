@@ -3,18 +3,12 @@
 namespace Diplomeocy.Database.Services;
 
 public class TablesService {
-	public List<Table>? Tables { get; private set; } = null;
-
 	private readonly DatabaseContext context;
 	private readonly UserService userService;
 
 	public TablesService(DatabaseContext context, UserService userService) {
 		this.context = context;
 		this.userService = userService;
-	}
-
-	public void SetTables(List<Table>? tables) {
-		Tables = tables;
 	}
 
 	public Table CreateTable() {
@@ -33,8 +27,10 @@ public class TablesService {
 		context.Tables.Add(table);
 		context.SaveChanges();
 
-		(Tables ??= []).Add(table);
-
 		return table;
 	}
+
+	public IEnumerable<Table> Tables => context.Tables.Where(t =>
+		t.Host == userService.CurrentUser!.Id
+		|| context.Players.Any(player => player.IdTable == t.Id && player.IdUser == userService.CurrentUser!.Id)).ToList();
 }

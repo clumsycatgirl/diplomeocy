@@ -22,12 +22,6 @@ public class TableController : Controller {
 	[Route("Tables")]
 	public IActionResult Index() {
 		userService.RequireAuthentication();
-
-		tableService.SetTables(context.Tables
-			.Where(table => table.Host == userService.CurrentUser!.Id ||
-				context.Players.Any(player => player.IdTable == table.Id && player.IdUser == userService.CurrentUser!.Id))
-			.ToList());
-
 		return View();
 	}
 }
