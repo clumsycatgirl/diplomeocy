@@ -21,15 +21,13 @@ public class TableController : Controller {
 	[HttpGet]
 	[Route("Tables")]
 	public IActionResult Index() {
-		if (userService.CurrentUser is null) {
-			return RedirectToAction("Index", "Auth");
-		}
+		userService.RequireAuthentication();
 
 		tableService.SetTables(context.Tables
 			.Where(table => table.Host == userService.CurrentUser!.Id ||
 				context.Players.Any(player => player.IdTable == table.Id && player.IdUser == userService.CurrentUser!.Id))
 			.ToList());
 
-		return View(new TablesViewModel() { Tables = tableService.Tables! });
+		return View();
 	}
 }

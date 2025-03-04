@@ -28,8 +28,8 @@
 	@*@(await Html.RenderComponentAsync<Diplomeocy.Components.Layout.Header>(RenderMode.WebAssembly))*@
 	<component type="typeof(Diplomeocy.Components.Layout.Header)" render-mode="ServerPrerendered" />
 
-	<div class="w-full h-[85vh]">
-		<main role="main" class="pb-3 w-full h-[85vh]">
+	<div class="w-full h-[80vh]">
+		<main role="main" class="pb-3 w-full h-full">
 			@RenderBody()
 		</main>
 	</div>

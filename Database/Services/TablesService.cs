@@ -37,6 +37,4 @@ public class TablesService {
 
 		return table;
 	}
-
-	public IEnumerable<Table> UserTables => context.Tables.Where(t => t.Host == userService.CurrentUser!.Id).ToList();
 }

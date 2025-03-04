@@ -80,6 +80,8 @@ app.Use(async (context, next) => {
 });
 
 
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 app.UseRouting();
 app.MapControllers();
 app.MapBlazorHub();

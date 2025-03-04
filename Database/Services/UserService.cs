@@ -1,5 +1,8 @@
 ﻿using Diplomeocy.Database.Models;
 using Diplomeocy.Extensions;
+using Diplomeocy.Web.Exceptions;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Diplomeocy.Database.Services;
 
@@ -24,6 +27,12 @@ public class UserService {
 			} else {
 				session.Remove("CurrentUser");
 			}
+		}
+	}
+
+	public void RequireAuthentication(string? redirectTo = null) {
+		if (CurrentUser is null) {
+			throw new RedirectException(redirectTo ?? "/Auth");
 		}
 	}
 }
