@@ -1,0 +1,15 @@
+------ [logs] ------
+--- [project configuration] ---
+ - Name: 'DiplomeocyWeb'
+ - Version: '1.0.0.0'
+ - Author: 'DiplomeocyWeb'
+ - Build: 'Debug'
+
+
+user=Diplomeocy.Database.Models.User
+user=9
+session-user=-1
+user=9
+session-user=-1
+user=9
+session-user=-1

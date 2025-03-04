@@ -7,6 +7,8 @@ services:
     restart: always
     volumes:
       - ./Database/Data:/var/lib/mysql
+      - ./Database/my.cnf:/etc/mysql/conf.d/init.cnf
+    command: --defaults-file=/etc/mysql/conf.d/init.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: diplomeocy

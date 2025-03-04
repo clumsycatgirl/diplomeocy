@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qx9AHkgZIdk=",
+  "dgSpecHash": "IEDaQwmhmd3Spov7j3Mb5uMqx+4JTXIOT1hR8SIgxZi4SryMplX+F/fvjERuw2bmPXxknUjvN98vjSunrCuN1Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj",
+  "projectFilePath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Vi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "/home/ivy/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/home/ivy/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.7/microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
   ],
   "logs": []
 }

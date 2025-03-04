@@ -1,3 +1,9 @@
+CREATE DATABASE IF NOT EXISTS `diplomeocy`;
+
+CREATE USER IF NOT EXISTS 'hatsunemiku'@'%' IDENTIFIED BY 'MikuMikuForcefemBeam';
+GRANT ALL PRIVILEGES ON diplomeocy.* TO 'hatsunemiku'@'%';
+FLUSH PRIVILEGES;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/

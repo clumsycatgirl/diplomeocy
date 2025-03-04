@@ -5,9 +5,10 @@ namespace Diplomeocy.Database.Services;
 public class TablesService {
 	public List<Table>? Tables { get; private set; } = null;
 
-	private DatabaseContext context;
-	private UserService userService;
-	public void TableService(DatabaseContext context, UserService userService) {
+	private readonly DatabaseContext context;
+	private readonly UserService userService;
+
+	public TablesService(DatabaseContext context, UserService userService) {
 		this.context = context;
 		this.userService = userService;
 	}
@@ -36,4 +37,6 @@ public class TablesService {
 
 		return table;
 	}
+
+	public IEnumerable<Table> UserTables => context.Tables.Where(t => t.Host == userService.CurrentUser!.Id).ToList();
 }

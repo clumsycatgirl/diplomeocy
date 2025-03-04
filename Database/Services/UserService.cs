@@ -15,17 +15,15 @@ public class UserService {
 			httpContextAccessor.HttpContext?.Session?.Get<User>("CurrentUser");
 		set {
 			ISession? session = httpContextAccessor.HttpContext?.Session;
-			if (session is null) return;
+			if (session is null) {
+				return;
+			}
 
 			if (value is not null) {
-				session.Set("CurrentUser", CurrentUser);
+				session.Set("CurrentUser", value);
 			} else {
 				session.Remove("CurrentUser");
 			}
 		}
-	}
-
-	public void SetUser(User? user) {
-		CurrentUser = user;
 	}
 }

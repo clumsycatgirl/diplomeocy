@@ -1,20 +1,20 @@
 {
   "Version": 1,
-  "Hash": "DXC/pyplDRpcARKNmYuIZA9ZllQ/1YHYwl5aZoLxHtE=",
+  "Hash": "AcCc3f9YappfRJp31YvSQHeM5VdASSZcJLAdSzFjpy4=",
   "Source": "Database",
   "BasePath": "_content/Database",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj",
+      "Identity": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
       "Version": 2,
       "Source": "Utilities",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
