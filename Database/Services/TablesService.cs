@@ -30,7 +30,7 @@ public class TablesService {
 		return table;
 	}
 
-	public IEnumerable<Table> Tables => context.Tables.Where(t =>
+	public IEnumerable<Table> Tables => userService.CurrentUser is not null ? context.Tables.Where(t =>
 		t.Host == userService.CurrentUser!.Id
-		|| context.Players.Any(player => player.IdTable == t.Id && player.IdUser == userService.CurrentUser!.Id)).ToList();
+		|| context.Players.Any(player => player.IdTable == t.Id && player.IdUser == userService.CurrentUser!.Id)).ToList() : [];
 }

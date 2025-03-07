@@ -1,33 +1,40 @@
 {
   "format": 1,
   "restore": {
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {}
+    "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Database\\Database.csproj": {}
   },
   "projects": {
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {
+    "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Database\\Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
+        "projectUniqueName": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Database\\Database.csproj",
         "projectName": "Database",
-        "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
-        "packagesPath": "/home/ivy/.nuget/packages/",
-        "outputPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/obj/",
+        "projectPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Database\\Database.csproj",
+        "packagesPath": "C:\\Users\\Vi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Database\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ivy/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Vi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
-                "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj"
+              "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj"
               }
             }
           }
@@ -36,6 +43,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -66,12 +78,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.7, 8.0.7]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -80,26 +86,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
+    "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
-        "packagesPath": "/home/ivy/.nuget/packages/",
-        "outputPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/obj/",
+        "projectPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\Utilities.csproj",
+        "packagesPath": "C:\\Users\\Vi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vi\\Desktop\\code\\c#\\diplomeocy\\Utilities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ivy/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Vi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -112,6 +125,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -134,12 +152,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.7, 8.0.7]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -148,7 +160,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

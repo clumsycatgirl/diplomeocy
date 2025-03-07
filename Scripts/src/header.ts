@@ -47,3 +47,32 @@ window.Diplomeocy.Header.setup = () => {
 		// TODO: show a message of some sort idk idc i want to kms
 	})
 }
+
+window.Diplomeocy.Tables.Sidebar = {
+	setup: function () {
+		const tabButtons = document.querySelectorAll('[data-hs-tab]')
+		const tabPanels = document.querySelectorAll('[role="tabpanel"]')
+
+		tabButtons.forEach((button) => {
+			button.addEventListener('click', function () {
+				const targetTab = document.querySelector(this.getAttribute('data-hs-tab'))
+
+				tabPanels.forEach((panel) => {
+					panel.classList.add('hidden')
+					panel.classList.remove('block')
+				})
+
+				targetTab.classList.remove('hidden')
+				targetTab.classList.add('block')
+
+				tabButtons.forEach((btn) => btn.classList.remove('active'))
+				this.classList.add('active')
+			})
+		})
+
+		// Automatically activate the first tab
+		if (tabButtons.length > 0) {
+			;(tabButtons[0] as HTMLButtonElement).click()
+		}
+	},
+}

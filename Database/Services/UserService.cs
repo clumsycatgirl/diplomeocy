@@ -2,8 +2,6 @@
 using Diplomeocy.Extensions;
 using Diplomeocy.Web.Exceptions;
 
-using Microsoft.AspNetCore.Mvc;
-
 namespace Diplomeocy.Database.Services;
 
 public class UserService {

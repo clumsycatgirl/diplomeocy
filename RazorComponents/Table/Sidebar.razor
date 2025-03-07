@@ -1,6 +1,6 @@
 ﻿<!-- Sidebar -->
 <aside id="tables-sidebar"
-	   class="transition-colors hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:w-[16%] h-full fixed inset-y-0 left-0 z-40 lg:relative lg:flex">
+	   class="transition-colors hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-transform duration-300 lg:translate-x-0 h-full fixed inset-y-0 left-0 z-40 lg:relative lg:flex">
 
 	<!-- Sidebar Content -->
 	<div class="h-full flex flex-col w-full bg-gray-200 transition-colors lg:mx-3 shadow-sm rounded-r-xl lg:rounded-xl dark:bg-gray-900">
@@ -8,7 +8,7 @@
 		<!-- Sidebar Header -->
 		<div class="px-4 md:px-5 pt-4 md:pt-5 pb-3 md:pb-2 flex flex-row justify-between">
 			<h3 class="text-lg font-bold text-gray-800 dark:text-white">
-				My tables 
+				My tables
 			</h3>
 
 			<button id="add-table-btn" @onclick="() => TableService.CreateTable()" type="button" class="text-white font-medium rounded-lg text-sm my-auto text-center">
@@ -20,18 +20,17 @@
 
 		<!-- Scrollable Table List -->
 		<div class="lg:h-[calc(85vh-100px)] overflow-y-auto border-t border-gray-400 dark:border-gray-700 p-4 md:p-5">
-			<nav class="[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-				<div class="hs-accordion-group pb-0 px-2 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
-					<ul class="space-y-1">
-						@foreach (Diplomeocy.Database.Models.Table table in TableService.Tables ?? []) {
-							<li>
-								<button class="flex w-full items-center gap-x-3 py-2 px-2.5 bg-gray-100 text-sm text-gray-700 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-white">
-									@(table.Id)
-								</button>
-							</li>
-						}
-					</ul>
-				</div>
+			<nav class="[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 space-y-1">
+				@foreach (Diplomeocy.Database.Models.Table table in TableService.Tables ?? []) {
+					<button type="button" class="hs-tab-active:bg-white hs-tab-active:shadow-md hs-tab-active:hover:border-transparent text-start hover:bg-gray-300 focus:outline-hidden focus:bg-gray-300 p-4 md:p-5 rounded-xl dark:hs-tab-active:bg-gray-800 dark:hover:bg-gray-950 dark:focus:bg-gray-950 w-full @(table.Id == TableService.Tables!.First().Id ? "active" : "")" id="nav-table-@(table.Id)" data-hs-tab="#table-@(table.Id)" aria-controls="table-@(table.Id)" role="tab">
+						<span class="flex gap-x-6">
+							<span class="grow">
+								<span class="block text-lg font-semibold hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200">1900 - Spring</span>
+								<span class="block mt-1 text-gray-800 dark:hs-tab-active:text-gray-200 dark:text-neutral-200">@(table.Id)</span>
+							</span>
+						</span>
+					</button>
+				}
 			</nav>
 		</div>
 
@@ -46,5 +45,11 @@
 <!-- end table sidebar -->
 
 @code {
-	[Inject] private TablesService TableService { get; set; } = default!;
+	[Inject] private TablesService TableService { get; set; }
+	[Inject] private IJSRuntime JSRuntime { get; set; }
+
+	protected override void OnAfterRender(bool firstRender) {
+		base.OnAfterRender(firstRender);
+		JSRuntime.InvokeVoidAsync("window.Diplomeocy.Tables.Sidebar.setup");
+	}
 }

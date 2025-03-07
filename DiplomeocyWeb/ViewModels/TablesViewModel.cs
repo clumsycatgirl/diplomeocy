@@ -1,7 +1,7 @@
-﻿using Diplomeocy.Database.Models;
+﻿using Diplomeocy.Database.Services;
 
 namespace Diplomeocy.Web.ViewModels;
 
 public class TablesViewModel {
-	public List<Table> Tables { get; set; }
+	public TablesService TablesService { get; set; }
 }

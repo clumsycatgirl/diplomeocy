@@ -28,6 +28,12 @@ export namespace Diplomeocy {
 	export namespace Header {
 		export let setup: (() => void) | undefined
 	}
+
+	export namespace Tables {
+		export namespace Sidebar {
+			export let setup: (() => void) | undefined
+		}
+	}
 }
 
 declare global {

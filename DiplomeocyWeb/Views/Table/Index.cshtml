@@ -1,6 +1,19 @@
-﻿
-<component type="typeof(Diplomeocy.Components.Table.Sidebar)" render-mode="ServerPrerendered" />
+﻿@model Diplomeocy.Web.ViewModels.TablesViewModel
 
+<div class="flex h-full w-full">
+	<div class="w-[16%]">
+		<component type="typeof(Diplomeocy.Components.Table.Sidebar)" render-mode="ServerPrerendered" />
+	</div>
+	<div class="w-[84%] p-6">
+		<div class="p-4 rounded-lg shadow-sm">
+			@foreach (Diplomeocy.Database.Models.Table table in Model.TablesService.Tables) {
+				<div id="table-@(table.Id)" class="@(table.Id == Model.TablesService.Tables.First().Id ? "block" : "hidden")" role="tabpanel">
+					<h4 class="text-lg font-semibold">@table.Id</h4>
+				</div>
+			}
+		</div>
+	</div>
+</div>
 
 @section Scripts {
 	<script src="~/js/tables/index.js" defer></script>

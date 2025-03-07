@@ -22,6 +22,8 @@ public class TableController : Controller {
 	[Route("Tables")]
 	public IActionResult Index() {
 		userService.RequireAuthentication();
-		return View();
+		return View(new TablesViewModel {
+			TablesService = tableService
+		});
 	}
 }
