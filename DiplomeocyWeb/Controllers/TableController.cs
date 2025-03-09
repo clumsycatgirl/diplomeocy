@@ -23,7 +23,8 @@ public class TableController : Controller {
 	public IActionResult Index() {
 		userService.RequireAuthentication();
 		return View(new TablesViewModel {
-			TablesService = tableService
+			TablesService = tableService,
+			Context = context,
 		});
 	}
 }

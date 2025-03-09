@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-using Diplomeocy.Web.Models;
+using Diplomeocy.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 

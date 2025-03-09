@@ -1,4 +1,24 @@
-﻿<h3>@(UserService.CurrentUser?.Username??"unknown")</h3>
+﻿<h3>@(UserService.CurrentUser?.Username ?? "unknown")</h3>
+update database
+<br />
+Players should contain the country always assigned at random for now but we can change that later maybe
+<br />
+We need to keep the orders and stuff so that's also something to add
+<br />
+We basically need to keep the entire state in a more queryable condition cause we're gonna use it a lot more
+<br />
+We also need make the interactive part of the map in the table selection
+<br />
+there's a problem with the map when we change table
+<br />
+
+<br />
+<br />
+have to add the player properly on table creation
+<br />
+have to handle table join
+<br />
+svg uses ids for the regions so that's why it gets fucked in subsequent maps
 
 @code {
 	[Inject] private UserService UserService { get; set; } = default!;

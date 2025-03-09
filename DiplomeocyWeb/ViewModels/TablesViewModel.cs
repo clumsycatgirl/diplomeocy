@@ -1,7 +1,9 @@
-﻿using Diplomeocy.Database.Services;
+﻿using Diplomeocy.Database;
+using Diplomeocy.Database.Services;
 
 namespace Diplomeocy.Web.ViewModels;
 
 public class TablesViewModel {
-	public TablesService TablesService { get; set; }
+	public required TablesService TablesService { get; init; }
+	public required DatabaseContext Context { get; init; }
 }

@@ -1,0 +1,7 @@
+﻿@model Diplomeocy.Web.ViewModels.GameViewModel
+
+@Model.TablesService.CurrentTable!.Id <br />
+@foreach (Diplomeocy.Database.Models.Player player in Model.Players) {
+	@player.User(Model.Context).Username <br />
+}
+
