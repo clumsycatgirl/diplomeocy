@@ -1,7 +1,13 @@
 ﻿@model Diplomeocy.Web.ViewModels.GameViewModel
 
-@Model.TablesService.CurrentTable!.Id <br />
-@foreach (Diplomeocy.Database.Models.Player player in Model.Players) {
-	@player.User(Model.Context).Username <br />
-}
-
+<div class="w-full h-full flex">
+	<div class="w-1/5 h-full">
+		meow
+	</div>
+	<div class="w-auto h-full">
+		<component type="typeof(Diplomeocy.Components.Map)" param-kind="@("map")" render-mode="ServerPrerendered" />
+	</div>
+	<div class="w-auto h-full">
+		meow
+	</div>
+</div>

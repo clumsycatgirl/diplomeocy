@@ -1,6 +1,4 @@
-﻿using Diplomacy.Utils;
-
-using Diplomeocy.Database;
+﻿using Diplomeocy.Database;
 using Diplomeocy.Database.Models;
 using Diplomeocy.Database.Services;
 using Diplomeocy.Extensions;
@@ -47,7 +45,11 @@ public class AuthController : Controller {
 
 		string hashed = Encryption.GetHashString(password!);
 		User? user = await context.Users!.FirstOrDefaultAsync(m => m.Username == username && m.Password == hashed);
-		userService.CurrentUser = user;
+		userService.SetUser(user);
+
+		if (user is not null) {
+			HttpContext.Session.Remove("Theme");
+		}
 
 		return user is null
 			? await context.Users!.FirstOrDefaultAsync(u => u.Username == username) is not null
@@ -97,7 +99,8 @@ public class AuthController : Controller {
 	[HttpGet]
 	[Route("Auth/LogOut")]
 	public IActionResult LogOut() {
-		userService.CurrentUser = null;
+		userService.SetUser(null);
+		HttpContext.Session.Clear();
 		return RedirectToAction("Index", "Home");
 	}
 }

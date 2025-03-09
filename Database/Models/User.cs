@@ -1,4 +1,6 @@
-﻿namespace Diplomeocy.Database.Models;
+﻿using Diplomeocy.Database.Models.Types;
+
+namespace Diplomeocy.Database.Models;
 
 #pragma warning disable CS8618
 public class User {
@@ -6,4 +8,5 @@ public class User {
 	public string Username { get; set; }
 	public string Password { get; set; }
 	public string PathImage { get; set; }
+	public Theme Theme { get; set; }
 }

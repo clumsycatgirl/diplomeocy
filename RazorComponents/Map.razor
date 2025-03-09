@@ -1,0 +1,37 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Env
+
+@code {
+	[Parameter] public string Kind { get; set; } = "";
+	private MarkupString svgMarkup;
+
+	protected override void OnInitialized() {
+		string path = Path.Combine(Env.WebRootPath, $"assets/images/{Kind}.svg");
+
+		if (File.Exists(path)) {
+			string svgContent = File.ReadAllText(path);
+
+			svgContent = AddClassToSvgTag(svgContent, "w-[90%] h-[90%]");
+
+			svgMarkup = (MarkupString)svgContent;
+		} else {
+			svgMarkup = (MarkupString)"<p>Image not found</p>";
+		}
+	}
+
+	private string AddClassToSvgTag(string svgContent, string classes) {
+		int svgTagIndex = svgContent.IndexOf("<svg");
+
+		if (svgTagIndex != -1) {
+			int insertPosition = svgContent.IndexOf(">", svgTagIndex);
+			if (insertPosition != -1) {
+				return svgContent.Insert(insertPosition, $" class=\"{classes}\"");
+			}
+		}
+
+		return svgContent;
+	}
+}
+
+<div class="hidden w-[90%] h-[90%]"></div>
+
+@svgMarkup

@@ -2,8 +2,6 @@ using System.Net;
 
 using Diplomeocy.Web.Exceptions;
 
-using Newtonsoft.Json;
-
 public class ExceptionHandlerMiddleware {
 	private readonly RequestDelegate next;
 	private readonly ILogger<ExceptionHandlerMiddleware> logger;
@@ -29,7 +27,6 @@ public class ExceptionHandlerMiddleware {
 		context.Response.ContentType = "application/json";
 		context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-		var errorDetails = new { message = "An unexpected error occurred. Please try again later." };
-		return context.Response.WriteAsync(JsonConvert.SerializeObject(errorDetails));
+		throw exception;
 	}
 }

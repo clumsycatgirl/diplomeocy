@@ -1,17 +1,11 @@
-CREATE DATABASE IF NOT EXISTS `diplomeocy`;
-
-CREATE USER IF NOT EXISTS 'hatsunemiku'@'%' IDENTIFIED BY 'MikuMikuForcefemBeam';
-GRANT ALL PRIVILEGES ON diplomeocy.* TO 'hatsunemiku'@'%';
-FLUSH PRIVILEGES;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 25, 2024 at 09:36 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: db
+-- Generation Time: Mar 09, 2025 at 11:48 PM
+-- Server version: 8.0.32
+-- PHP Version: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,15 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `DataProtectionKeys`
+--
+
+CREATE TABLE `DataProtectionKeys` (
+  `Id` int NOT NULL,
+  `FriendlyName` varchar(255) DEFAULT NULL,
+  `Xml` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `games`
 --
 
 CREATE TABLE `games` (
-  `Id` int(11) NOT NULL,
-  `IdTable` int(6) NOT NULL,
-  `Moves` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `PlayerCountries` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `State` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
+  `Id` int NOT NULL,
+  `IdTable` int NOT NULL,
+  `Moves` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `PlayerCountries` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `State` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -131,9 +137,9 @@ INSERT INTO `games` (`Id`, `IdTable`, `Moves`, `PlayerCountries`, `State`) VALUE
 --
 
 CREATE TABLE `players` (
-  `Id` int(11) NOT NULL,
-  `IdTable` int(11) NOT NULL,
-  `IdUser` int(11) NOT NULL
+  `Id` int NOT NULL,
+  `IdTable` int NOT NULL,
+  `IdUser` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -525,7 +531,8 @@ INSERT INTO `players` (`Id`, `IdTable`, `IdUser`) VALUES
 (407, 558859, 5),
 (408, 558859, 6),
 (409, 558859, 7),
-(410, 558859, 8);
+(410, 558859, 8),
+(412, 275727, 12);
 
 -- --------------------------------------------------------
 
@@ -534,9 +541,9 @@ INSERT INTO `players` (`Id`, `IdTable`, `IdUser`) VALUES
 --
 
 CREATE TABLE `tables` (
-  `Id` int(6) NOT NULL,
+  `Id` int NOT NULL,
   `Date` date NOT NULL,
-  `Host` int(11) NOT NULL
+  `Host` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -551,12 +558,14 @@ INSERT INTO `tables` (`Id`, `Date`, `Host`) VALUES
 (152537, '2024-05-25', 1),
 (164977, '2024-05-25', 1),
 (178923, '2024-05-25', 1),
+(198823, '2025-03-07', 10),
 (205207, '2024-05-23', 1),
 (226489, '2024-05-24', 1),
 (235261, '2024-05-24', 1),
 (243123, '2024-05-25', 1),
 (252867, '2024-05-25', 1),
 (275458, '2024-05-25', 1),
+(275727, '2025-03-09', 12),
 (279275, '2024-05-25', 1),
 (292775, '2024-05-25', 1),
 (306595, '2024-05-23', 1),
@@ -593,6 +602,7 @@ INSERT INTO `tables` (`Id`, `Date`, `Host`) VALUES
 (585426, '2024-05-25', 1),
 (586606, '2024-05-25', 1),
 (592137, '2024-05-23', 1),
+(593917, '2025-03-07', 10),
 (594292, '2024-05-25', 1),
 (609189, '2024-05-25', 1),
 (610182, '2024-05-25', 1),
@@ -640,27 +650,29 @@ INSERT INTO `tables` (`Id`, `Date`, `Host`) VALUES
 --
 
 CREATE TABLE `users` (
-  `Id` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Surname` varchar(255) NOT NULL,
-  `Username` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `PathImage` varchar(255) NOT NULL
+  `Id` int NOT NULL,
+  `Username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `PathImage` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Theme` enum('Dark','Light') COLLATE utf8mb4_general_ci DEFAULT 'Light'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`Id`, `Name`, `Surname`, `Username`, `Password`, `PathImage`) VALUES
-(1, 'meow', 'meow', 'meow', 'meow', ''),
-(2, 'mr', 'meow', 'meow', 'meow', '/assets/images/kittators/Giorgio.png'),
-(3, 'meow1', 'meow1', 'meow1', 'meow1', '/assets/images/kittators/Kitler.png'),
-(4, 'meow2', 'meow2', 'meow2', 'meow2', '/assets/images/kittators/Leonin.png'),
-(5, 'meow3', 'meow3', 'meow3', 'meow3', '/assets/images/kittators/Churchill.png'),
-(6, 'meow4', 'meow4', 'meow4', 'meow4', '/assets/images/kittators/Elisabetta.png'),
-(7, 'meow5', 'meow5', 'meow5', 'meow5', '/assets/images/kittators/Giorgio.png'),
-(8, 'meow6', 'meow6', 'meow6', 'meow6', '/assets/images/kittators/Meowmed.png');
+INSERT INTO `users` (`Id`, `Username`, `Password`, `PathImage`, `Theme`) VALUES
+(1, 'meow', '806EC396527434CED7ED350A0E7F96EBCECED03C8BA3036E172DA0D3E51B10AF', '', 'Light'),
+(2, 'meow', 'meow', '/assets/images/kittators/Giorgio.png', 'Light'),
+(3, 'meow1', 'meow1', '/assets/images/kittators/Kitler.png', 'Light'),
+(4, 'meow2', 'meow2', '/assets/images/kittators/Leonin.png', 'Light'),
+(5, 'meow3', 'meow3', '/assets/images/kittators/Churchill.png', 'Light'),
+(6, 'meow4', 'meow4', '/assets/images/kittators/Elisabetta.png', 'Light'),
+(7, 'meow5', 'meow5', '/assets/images/kittators/Giorgio.png', 'Light'),
+(8, 'meow6', 'meow6', '/assets/images/kittators/Meowmed.png', 'Light'),
+(10, 'HatsuneMiku3', '806EC396527434CED7ED350A0E7F96EBCECED03C8BA3036E172DA0D3E51B10AF', '/assets/images/kittators/Stalin.png', 'Light'),
+(11, 'HatsuneMiku2', 'F6D46E7B5FEDFEBFCF5D8602640C1DFA48952D3D852756B684D3060E14EF0C4E', '/assets/images/kittators/Elisabetta.png', 'Light'),
+(12, 'HatsuneMiku', '806EC396527434CED7ED350A0E7F96EBCECED03C8BA3036E172DA0D3E51B10AF', '/assets/images/kittators/Stalin.png', 'Light');
 
 --
 -- Indexes for dumped tables
@@ -702,19 +714,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=988834;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=988834;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=413;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

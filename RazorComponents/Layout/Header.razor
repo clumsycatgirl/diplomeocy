@@ -176,7 +176,7 @@
 
 	protected override void OnInitialized() {
 		base.OnInitialized();
-		User = UserService.CurrentUser;
+		User = UserService.CurrentUser?.Value;
 	}
 
 	public string GetLogSignHref() => IsLoggedIn

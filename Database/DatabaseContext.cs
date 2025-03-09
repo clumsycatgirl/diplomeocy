@@ -17,7 +17,14 @@ public class DatabaseContext : DbContext, IDataProtectionKeyContext {
 		base.OnModelCreating(modelBuilder);
 
 		modelBuilder.Entity<Models.Table>()
-					  .Property(table => table.Id)
+		.Property(table => table.Id)
 					  .ValueGeneratedNever();
+
+		modelBuilder.Entity<Models.User>()
+			.Property(p => p.Theme)
+			.HasConversion(
+				v => v.ToString(),
+				v => Enum.Parse<Models.Types.Theme>(v, true)
+			);
 	}
 }

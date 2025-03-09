@@ -24,11 +24,17 @@ public class TablesService {
 
 		Table table = new Table {
 			Id = tableId,
-			Host = userService.CurrentUser?.Id ?? -1,
+			Host = userService.CurrentUser!.Id,
 			Date = DateOnly.FromDateTime(DateTime.Now),
 		};
 
 		context.Tables.Add(table);
+		context.SaveChanges();
+
+		context.Players.Add(new Player {
+			IdTable = table.Id,
+			IdUser = userService.CurrentUser!.Id,
+		});
 		context.SaveChanges();
 
 		return table;
