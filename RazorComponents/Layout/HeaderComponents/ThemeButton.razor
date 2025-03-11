@@ -32,7 +32,6 @@
 		</button>
 	}
 </div>
-@Theme
 
 @code {
 	[Inject] private IHttpContextAccessor HttpContextAccessor { get; set; }
@@ -59,7 +58,6 @@
 			HttpContextAccessor.HttpContext?.Session.Set<byte[]>("Theme", System.Text.Encoding.UTF8.GetBytes(Theme));
 		} else {
 			UserService.CurrentUser.Theme = Enum.Parse<Diplomeocy.Database.Models.Types.Theme>(Theme);
-			UserService.SaveChanges();
 			if (HttpContextAccessor.HttpContext?.Session.Keys.Contains("Theme") == true) {
 				HttpContextAccessor.HttpContext?.Session.Remove("Theme");
 			}
