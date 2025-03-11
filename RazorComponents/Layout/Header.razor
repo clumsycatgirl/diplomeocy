@@ -172,11 +172,8 @@
 	[Inject] private NavigationManager NavigationManager { get; set; }
 	[Inject] private IJSRuntime JSRuntime { get; set; }
 
-	public User? User = null;
-
 	protected override void OnInitialized() {
 		base.OnInitialized();
-		User = UserService.CurrentUser?.Value;
 	}
 
 	public string GetLogSignHref() => IsLoggedIn
@@ -186,7 +183,7 @@
 			: "/Auth");
 	public string GetLogSignText() => !IsLoggedIn ? "Log In" : "Log Out";
 
-	public bool IsLoggedIn => User is not null;
+	public bool IsLoggedIn => UserService.CurrentUser is not null;
 
 	protected override void OnAfterRender(bool firstRender) {
 		base.OnAfterRender(firstRender);

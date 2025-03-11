@@ -32,32 +32,34 @@
 		</button>
 	}
 </div>
+@Theme
 
 @code {
 	[Inject] private IHttpContextAccessor HttpContextAccessor { get; set; }
 	[Inject] private IJSRuntime JSRuntime { get; set; }
 	[Inject] private UserService UserService { get; set; }
 
-	public string Theme { get; set; } = "light";
+	public string Theme { get; set; } = "Light";
 
 	protected override void OnInitialized() {
 		base.OnInitialized();
 
 		if (UserService.CurrentUser is not null) {
-			Theme = UserService.CurrentUser.Theme.ToString().ToLower();
+			Theme = UserService.CurrentUser.Theme.ToString();
 		} else {
 			byte[]? themeFromSession = HttpContextAccessor.HttpContext?.Session.Get<byte[]>("Theme");
-			Theme = themeFromSession is not null ? System.Text.Encoding.UTF8.GetString(themeFromSession) : "light";
+			Theme = themeFromSession is not null ? System.Text.Encoding.UTF8.GetString(themeFromSession) : "Light";
 		}
 	}
 
 	public async void OnClick() {
-		Theme = Theme == "light" ? "dark" : "light";
+		Theme = Theme == "Light" ? "Dark" : "Light";
 
 		if (UserService.CurrentUser is null) {
 			HttpContextAccessor.HttpContext?.Session.Set<byte[]>("Theme", System.Text.Encoding.UTF8.GetBytes(Theme));
 		} else {
-			UserService.CurrentUser.Theme = Enum.Parse<Diplomeocy.Database.Models.Types.Theme>(Theme, true);
+			UserService.CurrentUser.Theme = Enum.Parse<Diplomeocy.Database.Models.Types.Theme>(Theme);
+			UserService.SaveChanges();
 			if (HttpContextAccessor.HttpContext?.Session.Keys.Contains("Theme") == true) {
 				HttpContextAccessor.HttpContext?.Session.Remove("Theme");
 			}
@@ -66,7 +68,7 @@
 		await JSRuntime.InvokeVoidAsync("window.Diplomeocy.updateTheme", Theme);
 	}
 
-	public bool IsLightTheme => Theme == "light";
+	public bool IsLightTheme => Theme == "Light";
 
 	public bool IsDarkTheme => !IsLightTheme;
 }

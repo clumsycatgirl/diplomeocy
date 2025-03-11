@@ -7,7 +7,7 @@ export namespace Diplomeocy {
 	}
 
 	export function updateTheme(theme: string): void {
-		document.documentElement.className = theme
+		document.documentElement.className = theme.toLowerCase()
 	}
 
 	export function reloadHtmx(): void {

@@ -7,7 +7,7 @@ namespace Diplomeocy.Database.Services;
 public class TablesService {
 	private readonly DatabaseContext context;
 	private readonly UserService userService;
-	private IHttpContextAccessor httpContextAccessor;
+	private readonly IHttpContextAccessor httpContextAccessor;
 
 	public TablesService(DatabaseContext context, UserService userService, IHttpContextAccessor httpContextAccessor) {
 		this.context = context;

@@ -1,14 +1,17 @@
 ﻿@{
-	byte[]? themeBytes = ViewContext.HttpContext.Session.Get<byte[]>("Theme");
-	string theme = themeBytes is not null
-		? System.Text.Encoding.UTF8.GetString(themeBytes)
-		: "light";
+	string theme = "Light";
+	if (ViewContext.HttpContext.Session.Keys.Contains("Theme") == true) {
+		byte[]? themeBytes = ViewContext.HttpContext.Session.Get<byte[]>("Theme");
+		theme = System.Text.Encoding.UTF8.GetString(themeBytes);
+	} else if (ViewContext.HttpContext.Session.Keys.Contains("CurrentUser") == true) {
+		theme = ViewContext.HttpContext.Session.Get<Diplomeocy.Database.Models.User>("CurrentUser").Theme.ToString();
+	}
 
 	Context.Response.Headers["Cache-Control"] = "no-store";
 }
 
 <!DOCTYPE html>
-<html lang="en" class="@theme">
+<html lang="en" class="@theme.ToLower()">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

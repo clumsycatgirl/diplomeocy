@@ -45,7 +45,7 @@ public class AuthController : Controller {
 
 		string hashed = Encryption.GetHashString(password!);
 		User? user = await context.Users!.FirstOrDefaultAsync(m => m.Username == username && m.Password == hashed);
-		userService.SetUser(user);
+		userService.CurrentUser = user;
 
 		if (user is not null) {
 			HttpContext.Session.Remove("Theme");
@@ -81,8 +81,8 @@ public class AuthController : Controller {
 			errors.Add(("passwordConfirmation", "Passwords do not match"));
 		}
 
-		if (errors.Any()) {
-			return this.JsonError(errors.ToArray());
+		if (errors.Count != 0) {
+			return this.JsonError([.. errors]);
 		}
 
 		User user = new User {
@@ -99,7 +99,7 @@ public class AuthController : Controller {
 	[HttpGet]
 	[Route("Auth/LogOut")]
 	public IActionResult LogOut() {
-		userService.SetUser(null);
+		userService.CurrentUser = null;
 		HttpContext.Session.Clear();
 		return RedirectToAction("Index", "Home");
 	}
