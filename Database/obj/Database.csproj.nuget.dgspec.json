@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {}
+    "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {}
   },
   "projects": {
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {
+    "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
+        "projectUniqueName": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
         "projectName": "Database",
-        "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
-        "packagesPath": "/home/ivy/.nuget/packages/",
-        "outputPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Database/obj/",
+        "projectPath": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Database/Database.csproj",
+        "packagesPath": "/home/ivys/.nuget/packages/",
+        "outputPath": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Database/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ivy/.nuget/NuGet/NuGet.Config"
+          "/home/ivys/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
-                "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj"
+              "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
+                "projectPath": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj"
               }
             }
           }
@@ -36,7 +36,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -69,7 +75,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.7, 8.0.7]"
+              "version": "[8.0.14, 8.0.14]"
             }
           ],
           "frameworkReferences": {
@@ -80,21 +86,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
+    "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
+        "projectUniqueName": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
-        "packagesPath": "/home/ivy/.nuget/packages/",
-        "outputPath": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/obj/",
+        "projectPath": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
+        "packagesPath": "/home/ivys/.nuget/packages/",
+        "outputPath": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ivy/.nuget/NuGet/NuGet.Config"
+          "/home/ivys/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -112,7 +118,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -137,7 +149,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.7, 8.0.7]"
+              "version": "[8.0.14, 8.0.14]"
             }
           ],
           "frameworkReferences": {
@@ -148,7 +160,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

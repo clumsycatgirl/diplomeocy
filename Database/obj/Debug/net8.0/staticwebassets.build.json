@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "AcCc3f9YappfRJp31YvSQHeM5VdASSZcJLAdSzFjpy4=",
+  "Hash": "qWcUZ5BsfTzOfO/YRj+AfpRX8WP6yNub9YBfKwGlhoM=",
   "Source": "Database",
   "BasePath": "_content/Database",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "/home/ivy/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
+      "Identity": "/home/ivys/Documents/projects/clumsykibty.gay/diplomeocy/Utilities/Utilities.csproj",
       "Version": 2,
       "Source": "Utilities",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,5 +19,6 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

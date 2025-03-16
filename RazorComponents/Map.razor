@@ -1,7 +1,15 @@
 ﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Env
 
+<div class="hidden pl-1 pl-2 pl-3 pl-4 pl-5"></div>
+
+<div class="w-full h-full overflow-hidden">
+	@svgMarkup
+</div>
+
+
 @code {
 	[Parameter] public string Kind { get; set; } = "";
+	[Inject] private IJSRuntime JSRuntime { get; set; }
 	private MarkupString svgMarkup;
 
 	protected override void OnInitialized() {
@@ -10,7 +18,8 @@
 		if (File.Exists(path)) {
 			string svgContent = File.ReadAllText(path);
 
-			svgContent = AddClassToSvgTag(svgContent, "w-[90%] h-[90%]");
+			// svgContent = AddClassToSvgTag(svgContent, "w-[90%] h-[90%]");
+			svgContent = AddClassToSvgTag(svgContent, "w-full h-full pl-1");
 
 			svgMarkup = (MarkupString)svgContent;
 		} else {
@@ -24,14 +33,16 @@
 		if (svgTagIndex != -1) {
 			int insertPosition = svgContent.IndexOf(">", svgTagIndex);
 			if (insertPosition != -1) {
-				return svgContent.Insert(insertPosition, $" class=\"{classes}\"");
+				return svgContent.Insert(insertPosition, $" class=\"{classes}\"").Insert(insertPosition, $" id=\"map\"");
 			}
 		}
 
 		return svgContent;
 	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender && Kind == "map") {
+            await JSRuntime.InvokeVoidAsync("window.Diplomeocy.Game.setupMap");
+        }
+    }
 }
-
-<div class="hidden w-[90%] h-[90%]"></div>
-
-@svgMarkup

@@ -6,15 +6,18 @@
 	</div>
 	<div class="w-[84%] p-4">
 		<div class="p-4 rounded-lg border border-sm border-red w-full h-full flex flex-col">
-			@foreach (Diplomeocy.Database.Models.Table table in Model.TablesService.Tables) {
-				<div id="table-@(table.Id)" class="@(table.Id == Model.TablesService.Tables.First().Id ? "flex" : "hidden") flex-col h-full" role="tabpanel">
+			@{
+				List<Diplomeocy.Database.Models.Table> tables = Model.TablesService.Tables.ToList();
+			}
+			@foreach (Diplomeocy.Database.Models.Table table in tables) {
+				<div id="table-@(table.Id)" class="@(((Model.SelectedTable is not null && Model.SelectedTable.Id == table.Id) || (Model.SelectedTable is null && table.Id == Model.TablesService.Tables.First().Id)) ? "flex" : "hidden") flex-col h-full" role="tabpanel">
 					<!-- title start -->
-					<div class="flex justify-between items-center p-2">
+					<div class="flex justify-between items-center p-2 h-[5%]">
 						<h2 class="text-2xl dark:text-white">1900 - Spring</h2>
 						<h3 class="dark:text-white">@table.Id</h3>
 					</div>
 					<!-- title end -->
-					<div class="flex flex-col h-[90%] w-full border-t">
+					<div class="flex flex-col h-[87.5%] w-full border-t">
 						<!-- content start -->
 						<!-- players list start -->
 						<!-- players list end -->
@@ -164,9 +167,8 @@
 								<div class="h-[90%]"></div>
 								<div class="h-[10%]">
 									<button type="button"
-											class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-gray-900"
-											onclick="window.location.href='/Game?table=@(table.Id)'">
-										Start
+											class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-auto py-2 text-center dark:bg-gray-800 dark:hover:bg-gray-900"
+											onclick="window.location.href='/Game?table=@(table.Id)'">Start
 									</button>
 								</div>
 							</div>
@@ -176,15 +178,19 @@
 					</div>
 					<!-- player footer start -->
 					<div class="w-full h-[7.5%] flex flex-wrap gap-2 border-t">
-						@foreach (Diplomeocy.Database.Models.Player player in table.Players(Model.Context)) {
+						@{
+							List<Diplomeocy.Database.Models.Player> players = table.Players(Model.Context).ToList();
+						}
+						@foreach (Diplomeocy.Database.Models.Player player in players) {
+							Diplomeocy.Database.Models.User user = player.User(Model.Context);
 							<div class="flex flex-1 min-w-[120px] items-center justify-center gap-x-3 p-2">
 								<div class="shrink-0 group block">
 									<div class="flex items-center">
-										<img class="inline-block object-contain size-8 rounded-full" src="~/assets/images/kittators/unknown.png" alt="Avatar">
+										<img class="inline-block object-contain size-8 rounded-full" src="@user.PathImage" alt="Avatar">
 										<div class="ms-3">
-											<h3 class="font-semibold text-gray-800 dark:text-white text-sm">Unknown</h3>
+											<h3 class="font-semibold text-gray-800 dark:text-white text-sm">@user.Username</h3>
 											<div class="flex justify-between">
-												<p class="text-xs font-medium text-gray-400 dark:text-neutral-500">Italy</p>
+												<p class="text-xs font-medium text-gray-400 dark:text-neutral-500">@player.Country</p>
 												<p class="text-xs font-medium text-gray-400 dark:text-neutral-500">0/0</p>
 											</div>
 										</div>

@@ -34,6 +34,7 @@ builder.Services.AddScoped<DatabaseContext>();
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TablesService>();
+builder.Services.AddScoped<PlayerService>();
 
 if (builder.Configuration.GetConnectionString("DefaultConnection") is string connectionString) {
 	builder.Services.AddDbContext<Diplomeocy.Database.DatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
@@ -79,8 +80,8 @@ app.Use(async (context, next) => {
 	await next();
 });
 
-
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+app.UseMiddleware<SessionUserMiddleware>();
 
 app.UseRouting();
 app.MapControllers();

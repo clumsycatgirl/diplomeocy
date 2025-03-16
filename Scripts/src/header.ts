@@ -33,6 +33,7 @@ window.Diplomeocy.Header.setup = () => {
 		}
 	})
 
+	console.log(submitButton)
 	submitButton.on('click', async () => {
 		const tableId = input.val() as string
 		console.log(tableId)
@@ -70,7 +71,6 @@ window.Diplomeocy.Tables.Sidebar = {
 			})
 		})
 
-		// Automatically activate the first tab
 		if (tabButtons.length > 0) {
 			;(tabButtons[0] as HTMLButtonElement).click()
 		}

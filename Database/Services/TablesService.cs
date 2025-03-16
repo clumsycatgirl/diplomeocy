@@ -1,24 +1,27 @@
 ﻿using Diplomeocy.Database.Models;
-using Diplomeocy.Extensions;
 using Diplomeocy.Web.Exceptions;
 
 namespace Diplomeocy.Database.Services;
 
-public class TablesService {
-	private readonly DatabaseContext context;
+public class TablesService : BaseService<Table> {
+	private readonly ILogger<TablesService> logger;
 	private readonly UserService userService;
-	private readonly IHttpContextAccessor httpContextAccessor;
 
-	public TablesService(DatabaseContext context, UserService userService, IHttpContextAccessor httpContextAccessor) {
-		this.context = context;
+	public override required string Key { get; init; } = "CurrentTable";
+	public Table? CurrentTable {
+		get => Value;
+		set => Value = value;
+	}
+
+	public TablesService(ILogger<TablesService> logger, DatabaseContext databaseContext, UserService userService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor, databaseContext) {
+		this.logger = logger;
 		this.userService = userService;
-		this.httpContextAccessor = httpContextAccessor;
 	}
 
 	public Table CreateTable() {
 		Random rng = new Random(Guid.NewGuid().GetHashCode());
 		int tableId = rng.Next(100000, 999999 + 1);
-		while (context.Tables.Any(table => table.Id == tableId)) {
+		while (databaseContext.Tables.Any(table => table.Id == tableId)) {
 			tableId = rng.Next(100000, 999999 + 1);
 		}
 
@@ -28,43 +31,24 @@ public class TablesService {
 			Date = DateOnly.FromDateTime(DateTime.Now),
 		};
 
-		context.Tables.Add(table);
-		context.SaveChanges();
+		databaseContext.Tables.Add(table);
+		databaseContext.SaveChanges();
 
-		context.Players.Add(new Player {
-			IdTable = table.Id,
-			IdUser = userService.CurrentUser!.Id,
-		});
-		context.SaveChanges();
+		logger.LogInformation($"Created table {table.Id} with host player {userService.CurrentUser!.Id}");
 
 		return table;
 	}
 
-	public IEnumerable<Table> Tables => userService.CurrentUser is not null ? context.Tables.Where(t =>
+	public IEnumerable<Table> Tables => userService.CurrentUser is not null ? databaseContext.Tables.Where(t =>
 		t.Host == userService.CurrentUser!.Id
-		|| context.Players.Any(player => player.IdTable == t.Id && player.IdUser == userService.CurrentUser!.Id)).ToList() : [];
+		|| databaseContext.Players.Any(player => player.IdTable == t.Id && player.IdUser == userService.CurrentUser!.Id)).ToList() : [];
 
-	public void RequirePlayerOfTable(int tableId) {
-		userService.RequireAuthentication();
-		Table? table = Tables.FirstOrDefault(t => t.Id == tableId);
-		if (table is null) {
-			throw new RedirectException("/Tables");
+	public void RequireValidTable(int? id = null) {
+		if (id is not null) {
+			CurrentTable = databaseContext.Tables.FirstOrDefault(t => t.Id == id);
 		}
-	}
-
-	public Table? CurrentTable {
-		get => httpContextAccessor.HttpContext?.Session?.Get<Table>("CurrentTable");
-		set {
-			ISession? session = httpContextAccessor.HttpContext?.Session;
-			if (session is null) {
-				return;
-			}
-
-			if (value is not null) {
-				session.Set("CurrentTable", value);
-			} else {
-				session.Remove("CurrentTable");
-			}
+		if (CurrentTable is null) {
+			throw new RedirectException("/Tables");
 		}
 	}
 }

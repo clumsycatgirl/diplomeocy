@@ -34,6 +34,10 @@ export namespace Diplomeocy {
 			export let setup: (() => void) | undefined
 		}
 	}
+
+	export namespace Game {
+		export let setupMap: (() => void) | undefined
+	}
 }
 
 declare global {

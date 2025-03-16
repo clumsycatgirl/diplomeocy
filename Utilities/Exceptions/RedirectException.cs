@@ -1,3 +1,4 @@
+
 namespace Diplomeocy.Web.Exceptions;
 
 public class RedirectException : Exception {

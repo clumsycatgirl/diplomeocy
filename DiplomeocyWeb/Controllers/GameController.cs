@@ -13,19 +13,21 @@ public class GameController : Controller {
 	private readonly DatabaseContext context;
 	private readonly TablesService tablesService;
 	private readonly UserService userService;
+	private readonly PlayerService playerService;
 
-	public GameController(ILogger<GameController> logger, DatabaseContext context, TablesService tablesService, UserService userService) {
+	public GameController(ILogger<GameController> logger, DatabaseContext context, TablesService tablesService, UserService userService, PlayerService playerService) {
 		this.logger = logger;
 		this.context = context;
 		this.tablesService = tablesService;
 		this.userService = userService;
+		this.playerService = playerService;
 	}
 
 	[HttpGet]
 	[Route("/Game")]
 	public IActionResult Index(int table) {
-		userService.RequireAuthentication();
-		tablesService.RequirePlayerOfTable(table);
+		tablesService.RequireValidTable(table);
+		playerService.RequireValidPlayer();
 
 		tablesService.CurrentTable = tablesService.Tables.First(t => t.Id == table);
 

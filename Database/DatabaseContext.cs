@@ -21,10 +21,17 @@ public class DatabaseContext : DbContext, IDataProtectionKeyContext {
 					  .ValueGeneratedNever();
 
 		modelBuilder.Entity<Models.User>()
-			.Property(p => p.Theme)
+			.Property(user => user.Theme)
 			.HasConversion(
-				v => v.ToString(),
-				v => Enum.Parse<Models.Types.Theme>(v, true)
+				theme => theme.ToString(),
+				theme => Enum.Parse<Models.Types.Theme>(theme, true)
+			);
+
+		modelBuilder.Entity<Models.Player>()
+			.Property(p => p.Country)
+			.HasConversion(
+				country => country.ToString(),
+				country => Enum.Parse<Models.Types.Country>(country, true)
 			);
 	}
 }

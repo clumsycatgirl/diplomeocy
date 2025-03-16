@@ -1,16 +1,10 @@
 
-Game/bin
-Game/obj
-
 DiplomeocyWeb/wwwroot/css/styles.css
-DiplomeocyWeb/bin
-DiplomeocyWeb/obj
-
-RazorComponents/bin
-RazorComponents/obj
-
-Scripts/node_modules
 
 Database/Data
 
 **/.vs
+**/.vscode
+**/bin
+**/obj
+**/node_modules
