@@ -40,7 +40,13 @@ window.Diplomeocy.Game.setupMap = () => {
 		}
 	}
 
-	panzoom.on('pan', applyPanBoundaries)
+	window.addEventListener('resize', () => {
+		element.width(container.width())
+		element.height(container.height())
 
+		applyPanBoundaries()
+	})
+
+	panzoom.on('pan', applyPanBoundaries)
 	panzoom.on('zoom', applyPanBoundaries)
 }
