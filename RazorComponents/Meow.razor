@@ -1,41 +1,43 @@
-﻿<h3>@(UserService.CurrentUser?.Username ?? "unknown")</h3>
-update database
-<br />
-Players should contain the country always assigned at random for now but we can change that later maybe
-<br />
-We need to keep the orders and stuff so that's also something to add
-<br />
-We basically need to keep the entire state in a more queryable condition cause we're gonna use it a lot more
-<br />
-We also need make the interactive part of the map in the table selection
-<br />
-there's a problem with the map when we change table
-<br />
-
-<br />
-<br />
-have to add the player properly on table creation
-<br />
-have to handle table join
-<br />
-svg uses ids for the regions so that's why it gets fucked in subsequent maps
-<br />
-also rember to check the session user middleware I don't trust that thang
-
-<br />
-<br />
-<br />
-<h3>current user: @(UserService.CurrentUser?.Username ?? "none")</h3>
-<br />
-<h3>session</h3>
-<br />
-@foreach (string key in httpContextAccessor.HttpContext?.Session.Keys ?? Enumerable.Empty<string>()) {
-	string value = key switch {
-		"CurrentUser" => Newtonsoft.Json.JsonConvert.SerializeObject(httpContextAccessor.HttpContext!.Session!.Get<User>(key)!)!,
-		_ => httpContextAccessor.HttpContext!.Session!.Get(key)!.ToString()!,
-	};
-	<p>Key: @key - Value: @value</p>
-}
+﻿<div class="dark:text-neutral-400">
+	<h3>@(UserService.CurrentUser?.Username ?? "unknown")</h3>
+	update database
+	<br />
+	Players should contain the country always assigned at random for now but we can change that later maybe
+	<br />
+	We need to keep the orders and stuff so that's also something to add
+	<br />
+	We basically need to keep the entire state in a more queryable condition cause we're gonna use it a lot more
+	<br />
+	We also need make the interactive part of the map in the table selection
+	<br />
+	there's a problem with the map when we change table
+	<br />
+	
+	<br />
+	<br />
+	have to add the player properly on table creation
+	<br />
+	have to handle table join
+	<br />
+	svg uses ids for the regions so that's why it gets fucked in subsequent maps
+	<br />
+	also rember to check the session user middleware I don't trust that thang
+	
+	<br />
+	<br />
+	<br />
+	<h3>current user: @(UserService.CurrentUser?.Username ?? "none")</h3>
+	<br />
+	<h3>session</h3>
+	<br />
+	@foreach (string key in httpContextAccessor.HttpContext?.Session.Keys ?? Enumerable.Empty<string>()) {
+		string value = key switch {
+			"CurrentUser" => Newtonsoft.Json.JsonConvert.SerializeObject(httpContextAccessor.HttpContext!.Session!.Get<User>(key)!)!,
+			_ => httpContextAccessor.HttpContext!.Session!.Get(key)!.ToString()!,
+		};
+		<p>Key: @key - Value: @value</p>
+	}
+</div>
 
 @code {
 	[Inject] private IHttpContextAccessor httpContextAccessor { get; set; }

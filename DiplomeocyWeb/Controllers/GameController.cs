@@ -24,7 +24,7 @@ public class GameController : Controller {
 	}
 
 	[HttpGet]
-	[Route("/Game")]
+	[Route("/Game/{table?}")]
 	public IActionResult Index(int table) {
 		tablesService.RequireValidTable(table);
 		playerService.RequireValidPlayer();
