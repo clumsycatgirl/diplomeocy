@@ -1,22 +1,170 @@
 ﻿@model Diplomeocy.Web.ViewModels.GameViewModel
 
 <div class="w-full h-full flex p-4">
-	<div class="w-1/3 h-full bg-gray-200 dark:bg-gray-900 rounded-lg p-4 flex-row">
-		<div class="px-4 md:px-5 pt-4 md:pt-5 pb-3 md:pb-2 flex flex-row justify-between">
+	<div class="w-1/3 h-full bg-gray-200 dark:bg-gray-900 rounded-lg flex flex-col">
+		<div class="h-auto px-4 md:px-5 pt-4 md:pt-5 pb-3 md:pb-2 flex flex-row justify-between">
 			<h3 class="text-lg font-bold text-gray-800 dark:text-white">
-				chat
+				Chat
 			</h3>
 		</div>
-		<div class="w-full h-full flex border-t border-gray-400 dark:border-gray-700">
-			<div class="w-1/5 h-full">
-				
+		<div class="w-full flex flex-1 border-t border-gray-400 dark:border-gray-700">
+			<div class="w-1/5 text-white m-4 border-r border-gray-400 dark:border-gray-700">
+				<button type="button" class="hs-tab-active:bg-white hs-tab-active:shadow-md hs-tab-active:hover:border-transparent text-start hover:bg-gray-300 focus:outline-hidden focus:bg-gray-300 p-4 md:p-5 rounded-xl dark:hs-tab-active:bg-gray-800 dark:hover:bg-gray-950 dark:focus:bg-gray-950 w-[80%] @(true ? "active" : "") hover:bg-gray-300 dark:hover:!bg-gray-950" id="nav-table-" data-hs-tab="#table-" aria-controls="table-" role="tab">
+					<span class="flex gap-x-6">
+						<span class="grow">
+							<span class="block text-lg text-center font-semibold hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200">
+								000000
+							</span>
+						</span>
+					</span>
+				</button>
 			</div>
-			<div class="w-4/5 h-full">
-				<div class="h-[90%] w-full">meow</div>
-				<div class="h-[10%] w-full">meow</div>
+			<div class="w-4/5 flex flex-col">
+				<div class="flex-1 text-white">
+					<!-- message container -->
+					<div class="w-full flex">
+						<!-- left side start -->
+						@* <div class="w-[5%]">
+							<img class="inline-block size-8 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+						</div> *@
+						<!-- left side end -->
+						<!-- right side start -->
+						@* <div class="text-neutral-600 dark:text-gray-200"> *@
+						<div class="w-full flex flex-col">
+							<div>
+								<!-- user name start -->
+								<div class="my-2">
+									<div class="shrink-0 group block">
+										<div class="flex items-center">
+											<img class="inline-block shrink-0 size-8 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+											<div class="ms-3">
+												<h3 class="font-semibold text-gray-800 dark:text-white">@("Player Name")</h3>
+												<p class="text-sm font-medium text-gray-400 dark:text-neutral-500">@("Player Country")</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- user name end -->
+								<!-- message start -->
+								<div class="w-[95%] pt-0 mt-0 flex gap-x-3 relative group rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">
+									<!-- left bar start -->
+									<div class="relative last:after:!hidden after:absolute after:top-0 after:bottom-0 after:start-3.5 after:w-px after:bg-gray-400 dark:after:bg-gray-700 dark:group-hover:after:bg-gray-600">
+										<div class="relative z-10 size-2 flex justify-center items-center"></div>
+									</div>
+									<!-- left bar end -->
+									<div class="grow p-2">
+										<p class="flex gap-x-3 text-neutral-600 dark:text-gray-200">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero accusamus, qui nesciunt laborum quos quisquam inventore dicta consectetur accusantium ea! Consectetur, repellendus illo ad hic esse neque. Est, praesentium ratione.
+										</p>
+									</div>
+									<!-- message text -->
+								</div>
+								<!-- message end -->
+							</div>
+
+							<div>
+								<!-- user name start -->
+								<div class="my-2">
+									<div class="shrink-0 group block">
+										<div class="flex items-center">
+											<img class="inline-block shrink-0 size-8 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+											<div class="ms-3">
+												<h3 class="font-semibold text-gray-800 dark:text-white">@("Player Name")</h3>
+												<p class="text-sm font-medium text-gray-400 dark:text-neutral-500">@("Player Country")</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- user name end -->
+								<!-- message start -->
+								<div class="w-[95%] pt-0 mt-0 flex gap-x-3 relative group rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">
+									<!-- left bar start -->
+									<div class="relative last:after:!hidden after:absolute after:top-0 after:bottom-0 after:start-3.5 after:w-px after:bg-gray-400 dark:after:bg-gray-700 dark:group-hover:after:bg-gray-600">
+										<div class="relative z-10 size-2 flex justify-center items-center"></div>
+									</div>
+									<!-- left bar end -->
+									<div class="grow p-2">
+										<p class="flex gap-x-3 text-neutral-600 dark:text-gray-200">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero accusamus, qui nesciunt laborum quos quisquam inventore dicta consectetur accusantium ea! Consectetur, repellendus illo ad hic esse neque. Est, praesentium ratione.
+										</p>
+									</div>
+									<!-- message text -->
+								</div>
+								<!-- message end -->
+								<!-- message start -->
+								<div class="w-[95%] pt-0 mt-0 flex gap-x-3 relative group rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">
+									<!-- left bar start -->
+									<div class="relative last:after:!hidden after:absolute after:top-0 after:bottom-0 after:start-3.5 after:w-px after:bg-gray-400 dark:after:bg-gray-700 dark:group-hover:after:bg-gray-600">
+										<div class="relative z-10 size-2 flex justify-center items-center"></div>
+									</div>
+									<!-- left bar end -->
+									<div class="grow p-2">
+										<p class="flex gap-x-3 text-neutral-600 dark:text-gray-200">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero accusamus, qui nesciunt laborum quos quisquam inventore dicta consectetur accusantium ea! Consectetur, repellendus illo ad hic esse neque. Est, praesentium ratione.
+										</p>
+									</div>
+									<!-- message text -->
+								</div>
+								<!-- message end -->
+							</div>
+
+							<div>
+								<!-- user name start -->
+								<div class="my-2">
+									<div class="shrink-0 group block">
+										<div class="flex items-center">
+											<img class="inline-block shrink-0 size-8 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+											<div class="ms-3">
+												<h3 class="font-semibold text-gray-800 dark:text-white">@("Player Name")</h3>
+												<p class="text-sm font-medium text-gray-400 dark:text-neutral-500">@("Player Country")</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- user name end -->
+								<!-- message start -->
+								<div class="w-[95%] pt-0 mt-0 flex gap-x-3 relative group rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">
+									<!-- left bar start -->
+									<div class="relative last:after:!hidden after:absolute after:top-0 after:bottom-0 after:start-3.5 after:w-px after:bg-gray-400 dark:after:bg-gray-700 dark:group-hover:after:bg-gray-600">
+										<div class="relative z-10 size-2 flex justify-center items-center"></div>
+									</div>
+									<!-- left bar end -->
+									<div class="grow p-2">
+										<p class="flex gap-x-3 text-neutral-600 dark:text-gray-200">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero accusamus, qui nesciunt laborum quos quisquam inventore dicta consectetur accusantium ea! Consectetur, repellendus illo ad hic esse neque. Est, praesentium ratione.
+										</p>
+									</div>
+									<!-- message text -->
+								</div>
+								<!-- message end -->
+							</div>
+						</div>
+						<!-- right side end -->
+					</div>
+					<!-- message container end -->
+				</div>
+				<div class="h-[10%] text-white align-middle w-[95%]">
+					<div class="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg dark:!border-gray-700">
+						<div class="relative w-full">
+							<div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+								<svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+							</div>
+							<input type="text" id="hero-input" name="hero-input" class="py-1.5 sm:py-2 ps-9 pe-3 block w-full border-transparent rounded-lg sm:text-sm focus:border-transparent focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-950 dark:text-neutral-400 dark:placeholder-neutral-500" placeholder="message '@("000000")'">
+						</div>
+						@* <a class="w-full sm:w-auto whitespace-nowrap py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-md border !border-transparent bg-gray-800 text-white focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none hover:bg-gray-300 focus:outline-hidden focus:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-950 dark:focus:bg-gray-950" href="#" target="_parent">
+							send
+							<svg class="shrink-0 size-3.5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+						</a> *@
+
+						<button type="button" class="w-full sm:w-auto whitespace-nowrap py-2 px-2.5 inline-flex justify-center text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-auto text-center dark:bg-gray-800 dark:hover:bg-gray-950">
+							send
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="w-auto h-full overflow-hidden flex justify-center items-center">
 		<component type="typeof(Diplomeocy.Components.Map)" param-kind="@("map")" render-mode="ServerPrerendered" />
 	</div>
@@ -29,3 +177,4 @@
 	<script src="~/lib/panzoom/dist/panzoom.min.js"></script>
 	<script src="~/js/game/index.js" defer></script>
 }
+ 
