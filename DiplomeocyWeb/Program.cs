@@ -1,4 +1,4 @@
-//using Diplomeocy.Communication.SignalR.Hubs;
+using Diplomeocy.Communication.SignalR.Hubs;
 using Diplomeocy.Database;
 using Diplomeocy.Database.Services;
 
@@ -104,6 +104,6 @@ app.UseRouting();
 app.MapControllers();
 app.MapBlazorHub();
 
-//app.MapHub<ChatHub>(ChatHub.EndPoint);
+app.MapHub<ChatHub>(ChatHub.EndPoint);
 
 app.Run();
