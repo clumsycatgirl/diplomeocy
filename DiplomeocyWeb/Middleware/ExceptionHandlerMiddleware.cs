@@ -17,11 +17,10 @@ public class ExceptionHandlerMiddleware {
 		} catch (RedirectException redirectException) {
 			logger.LogInformation($"Redirecting to {redirectException.RedirectUrl}");
 			httpContext.Response.Redirect(redirectException.RedirectUrl);
+		} catch (Exception ex) {
+			logger.LogError(ex, "An unhandled exception has occurred.");
+			await HandleExceptionAsync(httpContext, ex);
 		}
-		// catch (Exception ex) {
-		// 	logger.LogError(ex, "An unhandled exception has occurred.");
-		// 	await HandleExceptionAsync(httpContext, ex);
-		// }
 	}
 
 	private Task HandleExceptionAsync(HttpContext context, Exception exception) {

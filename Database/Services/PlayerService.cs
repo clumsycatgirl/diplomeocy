@@ -49,8 +49,8 @@ public class PlayerService : BaseService<Player> {
 		userService.RequireAuthentication();
 		tablesService.RequireValidTable();
 
-		CurrentPlayer = databaseContext.Players.FirstOrDefault(p => p.IdTable == tablesService.CurrentTable!.Id && p.IdUser == userService.CurrentUser!.Id);
-		if (CurrentPlayer is null) {
+		Player? player = databaseContext.Players.FirstOrDefault(p => p.IdTable == tablesService.CurrentTable!.Id && p.IdUser == userService.CurrentUser!.Id);
+		if (player is null) {
 			throw new RedirectException("/Tables");
 		}
 	}

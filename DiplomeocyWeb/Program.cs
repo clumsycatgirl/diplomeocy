@@ -1,4 +1,3 @@
-using Diplomeocy.Communication.SignalR.Hubs;
 using Diplomeocy.Database;
 using Diplomeocy.Database.Services;
 
@@ -7,20 +6,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 
-System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorComponents(options => {
-	options.DetailedErrors = true;
-});
-builder.Services.AddServerSideBlazor(options => {
-	options.DetailedErrors = true;
-});
-builder.Services.AddSignalR(options => {
-	options.EnableDetailedErrors = true;
-});
+builder.Services.AddServerSideBlazor();
+builder.Services.AddSignalR();
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
 
@@ -38,6 +29,18 @@ builder.Logging
 	.AddDebug()
 	.AddEventSourceLogger();
 
+builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped<DatabaseContext>();
+
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TablesService>();
+builder.Services.AddScoped<PlayerService>();
+
+if (builder.Configuration.GetConnectionString("DefaultConnection") is string connectionString) {
+	builder.Services.AddDbContext<Diplomeocy.Database.DatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+} else {
+	Console.Error.WriteLine("No connection string found");
+}
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -45,28 +48,6 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAntiforgery();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IHtmlHelper, HtmlHelper>();
-
-builder.Services.AddScoped<HttpClient>();
-builder.Services.AddScoped<DatabaseContext>();
-
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<TablesService>();
-builder.Services.AddScoped<PlayerService>();
-builder.Services.AddScoped<ChannelService>();
-
-builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options => {
-	// options.JsonSerializerOptions.Converters.RemoveAll(x => x.GetType() == typeof(ObjectToInferredTypesConverter));
-});
-
-if (builder.Configuration.GetConnectionString("DefaultConnection") is string connectionString) {
-	builder.Services.AddDbContext<Diplomeocy.Database.DatabaseContext>(options => {
-		options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-		options.EnableSensitiveDataLogging();
-		options.EnableDetailedErrors();
-	});
-} else {
-	Console.Error.WriteLine("No connection string found");
-}
 
 builder.Services.AddCors((CorsOptions options) => {
 	options.AddPolicy("cors", (policy) => policy.AllowAnyOrigin());
@@ -105,7 +86,5 @@ app.UseMiddleware<SessionUserMiddleware>();
 app.UseRouting();
 app.MapControllers();
 app.MapBlazorHub();
-
-app.MapHub<ChatHub>(ChatHub.EndPoint);
 
 app.Run();

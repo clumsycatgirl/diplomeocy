@@ -1,5 +1,8 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+
+using Diplomeocy.Database.Models.Types;
 
 namespace Diplomeocy.Database.Models;
 

@@ -7,14 +7,10 @@ namespace Diplomeocy.Web.Controllers;
 public class HomeController : Controller {
 	private readonly ILogger<HomeController> logger;
 	private readonly UserService userService;
-	private readonly ChannelService channelService;
-	private readonly PlayerService playerService;
 
-	public HomeController(ILogger<HomeController> logger, UserService userService, ChannelService channelService, PlayerService playerService) {
+	public HomeController(ILogger<HomeController> logger, UserService userService) {
 		this.logger = logger;
 		this.userService = userService;
-		this.channelService = channelService;
-		this.playerService = playerService;
 	}
 
 	[HttpGet("/")]
@@ -30,9 +26,6 @@ public class HomeController : Controller {
 		//	Password = "806EC396527434CED7ED350A0E7F96EBCECED03C8BA3036E172DA0D3E51B10AF",
 		//	PathImage = "/assets/images/kittators/Stalin.png",
 		//});
-		// logger.LogInformation(userService.CurrentUser?.Username ?? "unknown");
-
-
-		channelService.JoinChannelAsync("test").Wait();
+		logger.LogInformation(userService.CurrentUser?.Username ?? "unknown");
 	}
 }
