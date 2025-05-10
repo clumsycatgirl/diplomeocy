@@ -8,3 +8,8 @@ Database/Data
 **/bin
 **/obj
 **/node_modules
+
+**/packages
+
+*.pdb
+*.dll

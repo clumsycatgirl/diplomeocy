@@ -12,6 +12,7 @@ public class DatabaseContext : DbContext, IDataProtectionKeyContext {
 	public DbSet<Models.User> Users { get; set; } = default!;
 	public DbSet<Models.Table> Tables { get; set; } = default!;
 	public DbSet<Models.Player> Players { get; set; } = default!;
+	public DbSet<Models.Message> Messages { get; set; } = default!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		base.OnModelCreating(modelBuilder);
