@@ -3,5 +3,5 @@
 public enum MessageType {
 	Join,
 	Leave,
-	SendMessage
+	Data
 }

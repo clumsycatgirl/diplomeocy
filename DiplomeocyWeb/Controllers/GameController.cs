@@ -14,13 +14,15 @@ public class GameController : Controller {
 	private readonly TablesService tablesService;
 	private readonly UserService userService;
 	private readonly PlayerService playerService;
+	private readonly ChannelService channelService;
 
-	public GameController(ILogger<GameController> logger, DatabaseContext context, TablesService tablesService, UserService userService, PlayerService playerService) {
+	public GameController(ILogger<GameController> logger, DatabaseContext context, TablesService tablesService, UserService userService, PlayerService playerService, ChannelService channelService) {
 		this.logger = logger;
 		this.context = context;
 		this.tablesService = tablesService;
 		this.userService = userService;
 		this.playerService = playerService;
+		this.channelService = channelService;
 	}
 
 	[HttpGet]
@@ -31,11 +33,14 @@ public class GameController : Controller {
 
 		tablesService.CurrentTable = tablesService.Tables.First(t => t.Id == table);
 
-		IEnumerable<Player> players = tablesService.CurrentTable.Players(context);
+		List<Player> players = tablesService.CurrentTable.Players(context).ToList();
+
+		channelService.JoinChannel("test");
 
 		return View(new GameViewModel {
 			TablesService = tablesService,
 			Players = players,
+			ChannelService = channelService,
 			Context = context,
 		});
 	}

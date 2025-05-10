@@ -36,6 +36,8 @@ public class TablesService : BaseService<Table> {
 
 		logger.LogInformation($"Created table {table.Id} with host player {userService.CurrentUser!.Id}");
 
+		CurrentTable = table;
+
 		return table;
 	}
 
