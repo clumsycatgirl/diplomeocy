@@ -23,13 +23,12 @@
 
 	<base href="~/" />
 	<component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)"
-			   render-mode="ServerPrerendered" />
+			   render-mode="Server" />
 
 	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="transition-colors duration-200 dark:bg-gray-950 w-full h-full" hx-boost="true">
-	@*@(await Html.RenderComponentAsync<Diplomeocy.Components.Layout.Header>(RenderMode.WebAssembly))*@
-	<component type="typeof(Diplomeocy.Components.Layout.Header)" render-mode="ServerPrerendered" />
+	<component type="typeof(Diplomeocy.Components.Layout.Header)" render-mode="Server" />
 
 	<div class="w-full h-[80vh]">
 		<main role="main" class="pb-3 w-full h-full">

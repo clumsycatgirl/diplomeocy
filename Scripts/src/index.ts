@@ -38,6 +38,10 @@ export namespace Diplomeocy {
 	export namespace Game {
 		export let setupMap: (() => void) | undefined
 	}
+
+	export namespace Chat {
+		export let setup: (() => void) | undefined
+	}
 }
 
 declare global {

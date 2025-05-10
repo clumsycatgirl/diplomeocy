@@ -8,3 +8,5 @@ Database/Data
 **/bin
 **/obj
 **/node_modules
+
+**/packages
