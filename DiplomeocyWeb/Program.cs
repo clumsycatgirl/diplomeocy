@@ -36,7 +36,6 @@ builder.Logging
 	.AddDebug()
 	.AddEventSourceLogger();
 
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
@@ -52,9 +51,9 @@ builder.Services.AddScoped<TablesService>();
 builder.Services.AddScoped<PlayerService>();
 builder.Services.AddScoped<ChannelService>();
 
-builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options => {
-	// options.JsonSerializerOptions.Converters.RemoveAll(x => x.GetType() == typeof(ObjectToInferredTypesConverter));
-});
+//builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options => {
+//	options.JsonSerializerOptions.Converters.RemoveAll(x => x.GetType() == typeof(ObjectToInferredTypesConverter));
+//});
 
 if (builder.Configuration.GetConnectionString("DefaultConnection") is string connectionString) {
 	builder.Services.AddDbContext<Diplomeocy.Database.DatabaseContext>(options => {

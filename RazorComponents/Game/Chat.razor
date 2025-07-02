@@ -1,4 +1,4 @@
-﻿@*@using Microsoft.AspNetCore.SignalR.Client*@
+﻿@using Microsoft.AspNetCore.SignalR.Client
 
 <div class="h-auto px-4 md:px-5 pt-4 md:pt-5 pb-3 md:pb-2 flex flex-row justify-between">
 	<h3 class="text-lg font-bold text-gray-800 dark:text-white">
@@ -118,43 +118,16 @@
 		Players { get; set; }
 	[Inject] PlayerService PlayerService { get; set; }
 
-	//private Microsoft.AspNetCore.SignalR.Client.HubConnection hubConnection;
-
 	private string Group = "000000";
 	private string InputValue = "";
 
 	protected override async Task OnInitializedAsync() {
-		return;
-		//System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
-		//hubConnection = new Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder()
-		//	.WithUrl(Navigation.ToAbsoluteUri(Diplomeocy.Communication.SignalR.Hubs.ChatHub.EndPoint))
-		//	.Build();
-
-		//hubConnection.On("ReceiveMessage", () => {
-		//	InvokeAsync(StateHasChanged);
-		//});
-
-		//await hubConnection.StartAsync();
-
-		//hubConnection.SendAsync("JoinGroup", Newtonsoft.Json.JsonConvert.SerializeObject(new Diplomeocy.Communication.SignalR.Hubs.Messages.ChatMessage {
-		//	Sender = PlayerService.CurrentPlayer.Id.ToString(),
-		//	Action = Communication.SignalR.Hubs.Messages.ChatMessageAction.JoinGroup,
-		//	Group = Group,
-		//	Message = "",
-		//}));
 	}
 
 	private void SendMessage() {
 		if (InputValue == "")
 			return;
 		channelService.SendMessage(Database.Models.Types.MessageType.Data, InputValue);
-		//hubConnection.SendAsync("SendMessage", Newtonsoft.Json.JsonConvert.SerializeObject(new Diplomeocy.Communication.SignalR.Hubs.Messages.ChatMessage {
-		//	Sender = PlayerService.CurrentPlayer.Id.ToString(),
-		//	Action = Communication.SignalR.Hubs.Messages.ChatMessageAction.SendMessage,
-		//	Group = Group,
-		//	Message = InputValue,
-		//})).Wait();
 		InputValue = "";
 	}
 
