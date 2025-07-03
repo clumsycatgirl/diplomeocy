@@ -7,29 +7,43 @@ namespace Diplomeocy.Console.Server;
 
 public class Server {
 	private readonly TcpListener _listener;
+	private Task? _listenerTask = null;
+	private bool _running = true;
 	private readonly SynchronizedList<TcpClient> _clients;
 
-	public static readonly int Port = 65535;
+	public int Port = 65535;
+
+	public event Action? OnStart;
+	public event Action<TcpClient>? OnNewConnection;
 
 	public Server() {
 		_listener = new TcpListener(System.Net.IPAddress.Any, Port);
 		_clients = [];
 	}
 
-	public void Start() {
+	public virtual void Start() {
 		_listener.Start();
+		OnStart?.Invoke();
 
-		Task.Run(async () => {
-			while (true) {
+		_listenerTask = Task.Run(async () => {
+			while (_running) {
 				TcpClient client = await _listener.AcceptTcpClientAsync();
 				_clients.Add(client);
+
+				OnNewConnection?.Invoke(client);
 
 				_ = HandleClientAsync(client);
 			}
 		});
 	}
 
-	public async Task HandleClientAsync(TcpClient client) {
+	public virtual async void Stop() {
+		_running = false;
+		if (_listenerTask is not null) await _listenerTask;
+		_listener.Stop();
+	}
+
+	public virtual async Task HandleClientAsync(TcpClient client) {
 		using NetworkStream stream = client.GetStream();
 		byte[] buffer = new byte[1024];
 		string endpoint = client.Client.RemoteEndPoint?.ToString() ?? "Unknown";

@@ -1,5 +1,7 @@
 ﻿using System.Text;
 
+using Microsoft.AspNetCore.Components.RenderTree;
+
 namespace ClumsyCatGui;
 
 public interface IRenderable {
@@ -7,7 +9,7 @@ public interface IRenderable {
 }
 
 public interface IInputHandler {
-	void HandleInput(ConsoleKeyInfo keyInfo);
+	bool HandleInput(ConsoleKeyInfo keyInfo);
 }
 
 public class Style {
@@ -72,7 +74,15 @@ public class ConsoleRenderer {
 
 	public void Clear() {
 		lock (_lock) {
-			Console.Clear();
+			// Console.Clear();
+			int cursorTop = Console.CursorTop;
+			int cursorLeft = Console.CursorLeft;
+			for (int y = Console.WindowTop; y < Console.WindowTop + Console.WindowHeight; y++) {
+				Console.SetCursorPosition(Console.WindowLeft, y);
+				Console.Write(new string(' ', Console.WindowWidth));
+			}
+
+			Console.SetCursorPosition(cursorLeft, cursorTop);
 		}
 	}
 
@@ -115,6 +125,7 @@ public class ConsoleRenderer {
 }
 
 public abstract class UIComponent : IRenderable, IInputHandler {
+	public string? Id { get; init; } = null;
 	public int X { get; set; }
 	public int Y { get; set; }
 	public int Width { get; set; } = 10;
@@ -125,7 +136,7 @@ public abstract class UIComponent : IRenderable, IInputHandler {
 	public virtual bool IsFocusable => true;
 
 	public virtual void Render(ConsoleRenderer renderer) { }
-	public virtual void HandleInput(ConsoleKeyInfo keyInfo) { }
+	public virtual bool HandleInput(ConsoleKeyInfo keyInfo) { return false; }
 	public virtual void OnResize(int newWidth, int newHeight) { }
 }
 
@@ -149,10 +160,12 @@ public class Button : UIComponent {
 		renderer.DrawText(X, Y, buttonText.Substring(0, Math.Min(buttonText.Length, Width)), styleToUse);
 	}
 
-	public override void HandleInput(ConsoleKeyInfo keyInfo) {
+	public override bool HandleInput(ConsoleKeyInfo keyInfo) {
 		if (keyInfo.Key == ConsoleKey.Enter || keyInfo.Key == ConsoleKey.Spacebar) {
 			OnClickAction?.Invoke();
+			return true;
 		}
+		return false;
 	}
 }
 
@@ -166,10 +179,12 @@ public class Checkbox : UIComponent {
 		renderer.DrawText(X, Y, $"{checkMark} {Label}".PadRight(Width), styleToUse);
 	}
 
-	public override void HandleInput(ConsoleKeyInfo keyInfo) {
+	public override bool HandleInput(ConsoleKeyInfo keyInfo) {
 		if (keyInfo.Key == ConsoleKey.Spacebar || keyInfo.Key == ConsoleKey.Enter) {
 			Checked = !Checked;
+			return true;
 		}
+		return false;
 	}
 }
 
@@ -186,6 +201,8 @@ public class TextBox : UIComponent {
 		}
 	}
 
+	public Func<char, bool>? KeyFilter { get; set; } = null;
+
 	public override void Render(ConsoleRenderer renderer) {
 		Style styleToUse = IsFocused ? ThemeManager.Get("TextboxFocus") : (Style ?? ThemeManager.GetCurrent());
 		string display = _text.ToString();
@@ -199,20 +216,29 @@ public class TextBox : UIComponent {
 		renderer.DrawText(X, Y, display.Substring(0, Math.Min(display.Length, Width)), styleToUse);
 	}
 
-	public override void HandleInput(ConsoleKeyInfo keyInfo) {
+	public override bool HandleInput(ConsoleKeyInfo keyInfo) {
 		if (keyInfo.Key == ConsoleKey.Backspace && _cursorPos > 0) {
 			_text.Remove(_cursorPos - 1, 1);
 			_cursorPos--;
+			return true;
 		} else if (!char.IsControl(keyInfo.KeyChar)) {
+			if (KeyFilter is not null && !KeyFilter.Invoke(keyInfo.KeyChar)) {
+				return false;
+			}
+
 			if (_text.Length < Width) {
 				_text.Insert(_cursorPos, keyInfo.KeyChar);
 				_cursorPos++;
 			}
+			return true;
 		} else if (keyInfo.Key == ConsoleKey.LeftArrow) {
 			_cursorPos = Math.Max(0, _cursorPos - 1);
+			return true;
 		} else if (keyInfo.Key == ConsoleKey.RightArrow) {
 			_cursorPos = Math.Min(_text.Length, _cursorPos + 1);
+			return true;
 		}
+		return false;
 	}
 }
 
@@ -276,8 +302,7 @@ public class Panel : UIComponent {
 		}
 	}
 
-	// Updated HandleInput with proper tab cycling and bubbling
-	public new bool HandleInput(ConsoleKeyInfo keyInfo) {
+	public override bool HandleInput(ConsoleKeyInfo keyInfo) {
 		if (!IsVisible) return false;
 
 		if (Children.Count == 0) return false;
@@ -334,6 +359,14 @@ public class Panel : UIComponent {
 		// If we wrapped around, no more focus inside panel, bubble up
 		return !wrappedAround;
 	}
+
+	public UIComponent? GetById(string id) {
+		return Children.FirstOrDefault((UIComponent c) => c.Id == id);
+	}
+
+	public virtual void Add(UIComponent component) {
+		Children.Add(component);
+	}
 }
 
 public class ScrollPanel : Panel {
@@ -350,9 +383,7 @@ public class ScrollPanel : Panel {
 		int contentHeight = Height - Padding * 2;
 
 		foreach (UIComponent child in Children) {
-			if (child.Style == null) {
-				child.Style = this.Style ?? ThemeManager.GetCurrent();
-			}
+			child.Style ??= this.Style ?? ThemeManager.GetCurrent();
 		}
 
 		int currentY = 0;
@@ -373,7 +404,7 @@ public class ScrollPanel : Panel {
 		}
 
 		// Draw scrollbar
-		if (ScrollbarStyle == null) ScrollbarStyle = ThemeManager.Get("Scrollbar");
+		ScrollbarStyle ??= ThemeManager.Get("Scrollbar");
 		int totalHeight = 0;
 		foreach (var c in Children) totalHeight += c.Height;
 
@@ -390,37 +421,46 @@ public class ScrollPanel : Panel {
 		}
 	}
 
-	public new bool HandleInput(ConsoleKeyInfo keyInfo) {
+	public override bool HandleInput(ConsoleKeyInfo keyInfo) {
 		bool handledInside = base.HandleInput(keyInfo);
 		if (handledInside) return true;
-
-		int contentHeight = Height - Padding * 2;
-		int totalHeight = 0;
-		foreach (var c in Children) totalHeight += c.Height;
 
 		if (keyInfo.Key == ConsoleKey.UpArrow) {
 			_scrollOffset = Math.Max(0, _scrollOffset - 1);
 			return true;
 		} else if (keyInfo.Key == ConsoleKey.DownArrow) {
-			_scrollOffset = Math.Min(totalHeight - contentHeight, _scrollOffset + 1);
+			_scrollOffset = Math.Min(Children.Count - 1, _scrollOffset + 1);
 			return true;
 		}
 
 		return false;
 	}
+
+	public override void Add(UIComponent component) {
+		component.Y = (Children.LastOrDefault()?.Y ?? -1) + 1;
+		Children.Add(component);
+	}
 }
 
 public class UIApp {
 	private ConsoleRenderer _renderer = new ConsoleRenderer();
+	public ConsoleRenderer Renderer => _renderer;
 	private List<UIComponent> _components = new List<UIComponent>();
 	private int _focusIndex = -1;
 	private bool _running = false;
+	public bool Running => _running;
 
-	public void AddComponent(UIComponent component) {
+	public void Add(UIComponent component) {
 		_components.Add(component);
 	}
 
+	public void Add(params UIComponent[] components) {
+		_components.AddRange(components);
+	}
+
 	public void Run() {
+		Console.CursorVisible = false;
+
 		if (_components.Count == 0) return;
 
 		_focusIndex = 0;
@@ -428,13 +468,13 @@ public class UIApp {
 
 		_running = true;
 		while (_running) {
-			_renderer.Clear();
+			Render();
 
-			foreach (var comp in _components) {
-				comp.Render(_renderer);
+			ConsoleKeyInfo key = Console.ReadKey(true);
+
+			if (key.Key == ConsoleKey.Escape) {
+				_running = false;
 			}
-
-			var key = Console.ReadKey(true);
 
 			// Handle Tab and Shift+Tab for focus cycling
 			if (key.Key == ConsoleKey.Tab) {
@@ -453,8 +493,7 @@ public class UIApp {
 			} else {
 				// If focused component is a panel, let it handle input (non-tab keys)
 				UIComponent? currentFocus = _focusIndex >= 0 && _focusIndex < _components.Count ? _components[_focusIndex] : null;
-
-				if (currentFocus != null && currentFocus is Panel currentPanel) {
+				if (currentFocus is not null && currentFocus is Panel currentPanel) {
 					bool handled = currentPanel.HandleInput(key);
 					if (!handled) {
 						currentFocus.HandleInput(key);
@@ -463,6 +502,15 @@ public class UIApp {
 					currentFocus?.HandleInput(key);
 				}
 			}
+		}
+		Console.Clear();
+	}
+
+	public void Render() {
+		_renderer.Clear();
+
+		foreach (UIComponent comp in _components) {
+			comp.Render(_renderer);
 		}
 	}
 
@@ -481,5 +529,22 @@ public class UIApp {
 		} while (!_components[_focusIndex].IsFocusable && _focusIndex != startIndex);
 
 		_components[_focusIndex].IsFocused = true;
+	}
+
+	public T? GetById<T>(string? id) where T : UIComponent {
+		if (id is null) return null;
+
+		foreach (UIComponent component in _components) {
+			if (component.Id == id) return (T?)component;
+
+			if (component is Panel panel && panel.GetById(id) is UIComponent found && found is not null)
+				return (T?)found;
+		}
+
+		return null;
+	}
+
+	public void Stop() {
+		_running = false;
 	}
 }

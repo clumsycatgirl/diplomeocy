@@ -1,13 +1,94 @@
-﻿using ClumsyCatGui;
+﻿using System.Net.Sockets;
+
+using ClumsyCatGui;
+
+using Diplomeocy.Console.Server;
 
 namespace Server;
 
 internal class Program {
-	static void Main(string[] args) {
-		var app = new UIApp();
+	private static void Main(string[] args) {
+		UIApp app = new();
 
-		// Main Panel (layout container)
-		var mainPanel = new Panel {
+		Label portLabel = new Label {
+			X = 2,
+			Y = 1,
+			Text = "Port: ",
+		};
+		TextBox portInput = new TextBox {
+			X = portLabel.X + portLabel.Width + 1,
+			Y = portLabel.Y,
+			Width = 20,
+			Height = 1,
+			Text = "65535",
+			KeyFilter = (char key) => int.TryParse(key.ToString(), out int parsed),
+		};
+
+		Button confirmButton = new Button {
+			X = 2,
+			Y = 2,
+			Width = 10,
+			Height = 1,
+			Text = "Start",
+			OnClickAction = () => {
+				try {
+					ServerApp serverApp = new(int.Parse(portInput.Text));
+					serverApp.Run();
+				} catch (Exception) {
+					ServerApp.Instance.Run();
+					throw;
+				}
+			},
+		};
+		Button exit = new Button {
+			X = 2,
+			Y = 3,
+			Width = 10,
+			Height = 1,
+			Text = "Exit",
+			OnClickAction = app.Stop,
+		};
+
+		Panel main = new Panel {
+			X = 1,
+			Y = 1,
+			Width = Console.WindowWidth - 2,
+			Height = Console.WindowHeight - 2,
+			Title = "CCG Server",
+			Children = [
+				portLabel,
+				portInput,
+				confirmButton,
+				exit,
+			],
+			Style = new Style {
+				Foreground = ConsoleColor.White,
+			},
+		};
+		app.Add(main);
+		app.Run();
+	}
+
+	private static void TestServer() {
+		Diplomeocy.Console.Server.Server server = new Diplomeocy.Console.Server.Server {
+			Port = 65535,
+		};
+		server.OnStart += () => {
+			Console.WriteLine("server started");
+		};
+		server.OnNewConnection += (TcpClient client) => {
+			Console.WriteLine($"new connection from {client.Client.RemoteEndPoint}");
+		};
+
+		server.Start();
+		Console.ReadKey();
+		server.Stop();
+	}
+
+	private static void TestGui() {
+		UIApp app = new();
+
+		Panel mainPanel = new Panel {
 			X = 0,
 			Y = 0,
 			Width = Console.WindowWidth,
@@ -16,13 +97,12 @@ internal class Program {
 			Style = ThemeManager.Get("Border")
 		};
 
-		// Subpage panels for different screens
-		var homePage = new Panel { X = 2, Y = 2, Width = 50, Height = 15, Title = "Home Page" };
-		var settingsPage = new Panel { X = 2, Y = 2, Width = 50, Height = 15, Title = "Settings" };
+		Panel homePage = new Panel { X = 2, Y = 2, Width = 50, Height = 15, Title = "Home Page" };
+		Panel settingsPage = new Panel { X = 2, Y = 2, Width = 50, Height = 15, Title = "Settings" };
 
-		// Add components to Home Page
-		var welcomeLabel = new Label { X = 2, Y = 1, Width = 46, Text = "Welcome to ClumsyCatGui Console UI!" };
-		var gotoSettingsBtn = new Button {
+		Label welcomeLabel = new Label { X = 2, Y = 1, Width = 46, Text = "Welcome to ClumsyCatGui Console UI!" };
+		TextBox input = new TextBox { X = 2, Y = 4, Width = 20, Text = "Input something" };
+		Button gotoSettingsBtn = new Button {
 			X = 2, Y = 3, Width = 20, Text = "Go to Settings",
 			OnClickAction = () => {
 				mainPanel.Children.Clear();
@@ -31,24 +111,23 @@ internal class Program {
 			}
 		};
 		homePage.Children.Add(welcomeLabel);
+		homePage.Children.Add(input);
 		homePage.Children.Add(gotoSettingsBtn);
 
-		// Scroll Panel example inside Home Page
-		var scrollPanel = new ScrollPanel {
+		ScrollPanel scrollPanel = new ScrollPanel {
 			X = 55,
 			Y = 1,
 			Width = 30,
 			Height = 15,
-			Title = "Scrollable List"
+			Title = "Scrollable List",
 		};
 		for (int i = 0; i < 30; i++) {
 			scrollPanel.Children.Add(new Label { X = 1, Y = i, Width = 28, Text = $"Item #{i + 1}" });
 		}
 		homePage.Children.Add(scrollPanel);
 
-		// Add components to Settings Page
-		var checkbox = new Checkbox { X = 2, Y = 1, Width = 30, Label = "Enable Feature X" };
-		var backBtn = new Button {
+		Checkbox checkbox = new Checkbox { X = 2, Y = 1, Width = 30, Label = "Enable Feature X" };
+		Button backBtn = new Button {
 			X = 2, Y = 3, Width = 10, Text = "Back",
 			OnClickAction = () => {
 				mainPanel.Children.Clear();
@@ -59,12 +138,10 @@ internal class Program {
 		settingsPage.Children.Add(checkbox);
 		settingsPage.Children.Add(backBtn);
 
-		// Add initial children to main panel
 		mainPanel.Children.Add(homePage);
 		mainPanel.ResetFocus();
 
-		// Add main panel to app
-		app.AddComponent(mainPanel);
+		app.Add(mainPanel);
 
 		app.Run();
 	}
