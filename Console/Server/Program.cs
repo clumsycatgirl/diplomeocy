@@ -69,22 +69,6 @@ internal class Program {
 		app.Run();
 	}
 
-	private static void TestServer() {
-		Diplomeocy.Console.Server.Server server = new Diplomeocy.Console.Server.Server {
-			Port = 65535,
-		};
-		server.OnStart += () => {
-			Console.WriteLine("server started");
-		};
-		server.OnNewConnection += (TcpClient client) => {
-			Console.WriteLine($"new connection from {client.Client.RemoteEndPoint}");
-		};
-
-		server.Start();
-		Console.ReadKey();
-		server.Stop();
-	}
-
 	private static void TestGui() {
 		UIApp app = new();
 

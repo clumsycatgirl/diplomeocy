@@ -1,12 +1,9 @@
-using System.Net.Sockets;
-using System.Text;
-
 using ClumsyCatGui;
 
 namespace Diplomeocy.Console.Server;
 
 public class ServerApp {
-	public static ServerApp Instance { get; private set; }
+	public static ServerApp? Instance { get; private set; } = null;
 	private readonly Server server;
 	private readonly UIApp app;
 
@@ -19,20 +16,39 @@ public class ServerApp {
 		server.OnStart += () => {
 			Log("Server started");
 		};
-		server.OnNewConnection += (TcpClient client) => {
-			Log($"New connection from {client.Client.RemoteEndPoint}");
+		server.OnNewConnection += (ClientData data) => {
+			Log($"New connection from {data.TcpClient.Client.RemoteEndPoint}");
 
 			Panel clientsContainer = app!.GetById<Panel>("ClientsContainer")!;
 			int index = (clientsContainer.Children.LastOrDefault()?.Y ?? 0) + 1;
 			clientsContainer.Add(new Button {
+				Id = $"btn-{data.Id}",
 				X = 1,
 				Width = clientsContainer.Width - 4,
-				Text = $"({index}) {client.Client.RemoteEndPoint}",
+				Text = $"{data.TcpClient.Client.RemoteEndPoint}",
 				OnClickAction = () => {
-					Log($"({index}) {client.Client.RemoteEndPoint}");
-				}
+					Log($"{data.TcpClient.Client.RemoteEndPoint}");
+				},
 			});
+			clientsContainer.Render(app.Renderer);
+		};
+		server.OnConnectionEnd += (ClientData data) => {
+			Log($"{data.TcpClient.Client.RemoteEndPoint} disconnected");
 
+			Panel clientsContainer = app!.GetById<Panel>("ClientsContainer")!;
+			Button? button = (Button?)clientsContainer.GetById($"btn-{data.Id}");
+
+			if (button is not null) clientsContainer.Children.Remove(button);
+			clientsContainer.Render(app.Renderer);
+		};
+		server.OnMessage += (ClientData data, string message) => {
+			Log($"{data.TcpClient.Client.RemoteEndPoint} sent '{message}'");
+
+			Panel clientsContainer = app!.GetById<Panel>("ClientsContainer")!;
+			Button? button = (Button?)clientsContainer.GetById($"btn-{data.Id}");
+			if (button is null) return;
+
+			button.Text = $"({data.Group}) {data.TcpClient.Client.RemoteEndPoint}";
 			clientsContainer.Render(app.Renderer);
 		};
 
@@ -51,8 +67,6 @@ public class ServerApp {
 		Task.Delay(100);
 
 		server.Start();
-
-		Log("a", "b", "c", "d", "e", "f", "g", "h");
 
 		uiTask.Wait();
 	}
@@ -118,6 +132,7 @@ public class ServerApp {
 			Style = new Style { Foreground = ConsoleColor.Green }
 		};
 		Panel content = new Panel {
+			Id = "Content",
 			X = sidebar.X + sidebar.Width + 1,
 			Y = topbar.Height + 1,
 			Width = System.Console.WindowWidth - sidebar.Width - 3,

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 using Microsoft.AspNetCore.Components.RenderTree;
 
@@ -132,6 +133,7 @@ public abstract class UIComponent : IRenderable, IInputHandler {
 	public int Height { get; set; } = 1;
 	public bool IsFocused { get; set; } = false;
 	public Style? Style { get; set; }
+	public object? Data { get; set; } = null;
 
 	public virtual bool IsFocusable => true;
 
@@ -503,7 +505,9 @@ public class UIApp {
 				}
 			}
 		}
-		Console.Clear();
+
+		System.Console.Clear();
+		Console.CursorVisible = false;
 	}
 
 	public void Render() {
