@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 using Microsoft.AspNetCore.Components.RenderTree;
@@ -50,37 +51,30 @@ public static class ThemeManager {
 public class ConsoleRenderer {
 	private readonly object _lock = new object();
 
-	private ConsoleColor ToBright(ConsoleColor color) {
-		switch (color) {
-			case ConsoleColor.Black:
-				return ConsoleColor.DarkGray;
-			case ConsoleColor.DarkBlue:
-				return ConsoleColor.Blue;
-			case ConsoleColor.DarkGreen:
-				return ConsoleColor.Green;
-			case ConsoleColor.DarkCyan:
-				return ConsoleColor.Cyan;
-			case ConsoleColor.DarkRed:
-				return ConsoleColor.Red;
-			case ConsoleColor.DarkMagenta:
-				return ConsoleColor.Magenta;
-			case ConsoleColor.DarkYellow:
-				return ConsoleColor.Yellow;
-			case ConsoleColor.Gray:
-				return ConsoleColor.White;
-			default:
-				return color;
-		}
-	}
+	private static ConsoleColor ToBright(ConsoleColor color) => color switch {
+		ConsoleColor.Black => ConsoleColor.DarkGray,
+		ConsoleColor.DarkBlue => ConsoleColor.Blue,
+		ConsoleColor.DarkGreen => ConsoleColor.Green,
+		ConsoleColor.DarkCyan => ConsoleColor.Cyan,
+		ConsoleColor.DarkRed => ConsoleColor.Red,
+		ConsoleColor.DarkMagenta => ConsoleColor.Magenta,
+		ConsoleColor.DarkYellow => ConsoleColor.Yellow,
+		ConsoleColor.Gray => ConsoleColor.White,
+		_ => color,
+	};
 
 	public void Clear() {
+		Clear(0, 0, Console.WindowWidth, Console.WindowHeight);
+	}
+
+	public void Clear(int top, int left, int width, int height) {
 		lock (_lock) {
-			// Console.Clear();
 			int cursorTop = Console.CursorTop;
 			int cursorLeft = Console.CursorLeft;
-			for (int y = Console.WindowTop; y < Console.WindowTop + Console.WindowHeight; y++) {
-				Console.SetCursorPosition(Console.WindowLeft, y);
-				Console.Write(new string(' ', Console.WindowWidth));
+
+			for (int y = top; y < top + height; y++) {
+				Console.SetCursorPosition(left, y);
+				Console.Write(new string(' ', width));
 			}
 
 			Console.SetCursorPosition(cursorLeft, cursorTop);
@@ -451,6 +445,7 @@ public class UIApp {
 	private int _focusIndex = -1;
 	private bool _running = false;
 	public bool Running => _running;
+	private Thread _renderingThread;
 
 	public void Add(UIComponent component) {
 		_components.Add(component);
@@ -468,10 +463,11 @@ public class UIApp {
 		_focusIndex = 0;
 		_components[_focusIndex].IsFocused = true;
 
+		_renderingThread = new Thread(RenderingLoop);
+		_renderingThread.Start();
+
 		_running = true;
 		while (_running) {
-			Render();
-
 			ConsoleKeyInfo key = Console.ReadKey(true);
 
 			if (key.Key == ConsoleKey.Escape) {
@@ -506,15 +502,17 @@ public class UIApp {
 			}
 		}
 
-		System.Console.Clear();
+		Console.Clear();
 		Console.CursorVisible = false;
 	}
 
-	public void Render() {
-		_renderer.Clear();
+	public void RenderingLoop() {
+		while (_running) {
+			_renderer.Clear();
 
-		foreach (UIComponent comp in _components) {
-			comp.Render(_renderer);
+			foreach (UIComponent comp in _components) {
+				comp.Render(_renderer);
+			}
 		}
 	}
 
@@ -525,11 +523,7 @@ public class UIApp {
 
 		int startIndex = _focusIndex;
 		do {
-			if (reverse) {
-				_focusIndex = (_focusIndex - 1 + _components.Count) % _components.Count;
-			} else {
-				_focusIndex = (_focusIndex + 1) % _components.Count;
-			}
+			_focusIndex = reverse ? (_focusIndex - 1 + _components.Count) % _components.Count : (_focusIndex + 1) % _components.Count;
 		} while (!_components[_focusIndex].IsFocusable && _focusIndex != startIndex);
 
 		_components[_focusIndex].IsFocused = true;
